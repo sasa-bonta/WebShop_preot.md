@@ -1,0 +1,48 @@
+###############################################################################
+#                          Generated on phpdocker.io                          #
+###############################################################################
+version: "3.1"
+services:
+
+    mailhog:
+      image: mailhog/mailhog:latest
+      container_name: webshop-preot-md-mailhog
+      ports:
+        - "8001:8025"
+
+    redis:
+      image: redis:alpine
+      container_name: webshop-preot-md-redis
+
+    mysql:
+      image: mysql:8.0
+      container_name: webshop-preot-md-mysql
+      working_dir: /application
+      volumes:
+        - .:/application
+      environment:
+        - MYSQL_ROOT_PASSWORD=user_preot.md
+        - MYSQL_DATABASE=preot_md
+        - MYSQL_USER=preot
+        - MYSQL_PASSWORD=admin_preot.md
+      ports:
+        - "8002:3306"
+
+    webserver:
+      image: nginx:alpine
+      container_name: webshop-preot-md-webserver
+      working_dir: /application
+      volumes:
+          - .:/application
+          - ./phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      ports:
+       - "8000:80"
+
+    php-fpm:
+      build: phpdocker/php-fpm
+      container_name: webshop-preot-md-php-fpm
+      working_dir: /application
+      volumes:
+        - .:/application
+        - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.4/fpm/conf.d/99-overrides.ini
+
