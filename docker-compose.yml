@@ -22,7 +22,7 @@ services:
         - .:/application
       environment:
         - MYSQL_ROOT_PASSWORD=user_preot.md
-        - MYSQL_DATABASE=preot.md
+        - MYSQL_DATABASE=preot_md
         - MYSQL_USER=preot
         - MYSQL_PASSWORD=admin_preot.md
       ports:
