@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DefaultController extends AbstractController
 {
     /**
-     * @Route("/", name="index")
+     * @Route("/products", name="index")
      */
     public function index() {
         return $this->render('main/index.html.twig');
