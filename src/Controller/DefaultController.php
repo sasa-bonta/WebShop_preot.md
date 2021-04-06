@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DefaultController extends AbstractController
 {
     /**
-     * @Route("/products", name="index")
+     * @Route("/", name="index")
      */
     public function index() {
         return $this->render('main/index.html.twig');

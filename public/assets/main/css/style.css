@@ -1,0 +1,31 @@
+.footer_content {
+    color: #FFFFFF;
+    position: relative;
+    text-align: center;
+    top: 100px;
+}
+
+.list-group-item {
+    border: none;
+    box-shadow: 0px 0px 50px 6px rgba(0,0,0,0.06);
+}
+
+.product_details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.price {
+    color: #198754;
+}
+
+a.page-link {
+    color: #000!important;
+}
+.page-item.active .page-link {
+    z-index: 0;
+    background: #000!important;
+    color: #fff!important;
+    border-color: black;
+}
+
