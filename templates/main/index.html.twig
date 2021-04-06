@@ -2,26 +2,28 @@
 
 {% block body %}
 
-    <header>
-        {#    Slider HERE    #}
+    <header id="header">
+        {# Slider HERE #}
         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-                <div class="carousel-item active" data-bs-interval="5000">
+                <div class="carousel-item active" data-bs-interval="1000">
                     <img class="img-fluid" src="{{ asset('assets/main/images/1.jpg') }}" width="2000" alt="1">
                 </div>
-                <div class="carousel-item" data-bs-interval="5000">
+                <div class="carousel-item" data-bs-interval="1000">
                     <img class="img-fluid" src="{{ asset('assets/main/images/2.jpg') }}" width="2000" alt="2">
                 </div>
-                <div class="carousel-item" data-bs-interval="5000">
+                <div class="carousel-item" data-bs-interval="1000">
                     <img class="img-fluid" src="{{ asset('assets/main/images/3.jpg') }}" width="2000" alt="3">
                 </div>
             </div>
         </div>
+    </header>
 
-{#        Navigation bar HERE#}
+    {# Navigation bar HERE #}
+    <div id="content">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <div class="navbar-brand">Preoti.md</div>
+                <div class="navbar-brand">Preot.md</div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -41,171 +43,203 @@
                     </ul>
 
                     <form class="d-flex mx-5">
-                        <input class="form-control me-2" type="search" placeholder="Search products here" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <input class="form-control me-2" type="search" placeholder="Search products here"
+                               aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-search" viewBox="0 0 16 16">
                                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                            </svg></button>
+                            </svg>
+                        </button>
                     </form>
-                    <button type="button" class="btn btn-dark me-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-open-fill" viewBox="0 0 16 16">
+                    <button type="button" class="btn btn-dark me-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-door-open-fill" viewBox="0 0 16 16">
                             <path d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
-                        </svg></button>
-                    <button type="button" class="btn btn-light me-2">Sign Up <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
-                            <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-                        </svg></button>
-                    <button type="button" class="btn btn-dark me-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
+                        </svg>
+                    </button>
+                    <button type="button" class="btn btn-light me-2">Sign Up
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+                            <path fill-rule="evenodd"
+                                  d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                        </svg>
+                    </button>
+                    <button type="button" class="btn btn-dark me-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-cart-fill" viewBox="0 0 16 16">
                             <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                        </svg></button>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </nav>
-    </header>
 
-    <div class="container">
-        <div class="row my-5">
-            <div class="col-9">
-                <h1>Newest products:</h1>
-                <label for="sortby">Sort by:</label>
-                <select id="sortby">
-                    <option value="date_desc">date (descending)</option>
-                    <option value="date_asc">date (ascending)</option>
-                    <option value="price_desc">price (descending)</option>
-                    <option value="price_asc">price (ascending)</option>
-                </select>
 
-                <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item m-1">
-                        <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200" alt="1">
-                        <div class="product_details">
-                            <div class="title">ProductTitle</div>
-                            <div class="price">99 $</div>
-                        </div>
-                    </li>
-                    <li class="list-group-item m-1">
-                        <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200" alt="1">
-                        <div class="product_details">
-                            <div class="title">ProductTitle</div>
-                            <div class="price">99 $</div>
-                        </div>
-                    </li>
-                    <li class="list-group-item m-1">
-                        <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200" alt="1">
-                        <div class="product_details">
-                            <div class="title">ProductTitle</div>
-                            <div class="price">99 $</div>
-                        </div>
-                    </li>
-                    <li class="list-group-item m-1">
-                        <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200" alt="1">
-                        <div class="product_details">
-                            <div class="title">ProductTitle</div>
-                            <div class="price">99 $</div>
-                        </div>
-                    </li>
-                </ul>
-                <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item m-1">
-                        <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200" alt="1">
-                        <div class="product_details">
-                            <div class="title">ProductTitle</div>
-                            <div class="price">99 $</div>
-                        </div>
-                    </li>
-                    <li class="list-group-item m-1">
-                        <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200" alt="1">
-                        <div class="product_details">
-                            <div class="title">ProductTitle</div>
-                            <div class="price">99 $</div>
-                        </div>
-                    </li>
-                    <li class="list-group-item m-1">
-                        <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200" alt="1">
-                        <div class="product_details">
-                            <div class="title">ProductTitle</div>
-                            <div class="price">99 $</div>
-                        </div>
-                    </li>
-                    <li class="list-group-item m-1">
-                        <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200" alt="1">
-                        <div class="product_details">
-                            <div class="title">ProductTitle</div>
-                            <div class="price">99 $</div>
-                        </div>
-                    </li>
-                </ul>
-                <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item m-1">
-                        <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200" alt="1">
-                        <div class="product_details">
-                            <div class="title">ProductTitle</div>
-                            <div class="price">99 $</div>
-                        </div>
-                    </li>
-                    <li class="list-group-item m-1">
-                        <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200" alt="1">
-                        <div class="product_details">
-                            <div class="title">ProductTitle</div>
-                            <div class="price">99 $</div>
-                        </div>
-                    </li>
-                    <li class="list-group-item m-1">
-                        <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200" alt="1">
-                        <div class="product_details">
-                            <div class="title">ProductTitle</div>
-                            <div class="price">99 $</div>
-                        </div>
-                    </li>
-                    <li class="list-group-item m-1">
-                        <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200" alt="1">
-                        <div class="product_details">
-                            <div class="title">ProductTitle</div>
-                            <div class="price">99 $</div>
-                        </div>
-                    </li>
-                </ul>
+        <div class="container">
+            <div class="row my-5">
+                <div class="col-9">
+                    <h1>Newest products:</h1>
+                    <label for="sortby">Sort by:</label>
+                    <select id="sortby">
+                        <option value="date_desc">date (descending)</option>
+                        <option value="date_asc">date (ascending)</option>
+                        <option value="price_desc">price (descending)</option>
+                        <option value="price_asc">price (ascending)</option>
+                    </select>
+
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item m-1">
+                            <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200"
+                                 alt="1">
+                            <div class="product_details">
+                                <div class="title">ProductTitle</div>
+                                <div class="price">99 $</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item m-1">
+                            <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200"
+                                 alt="1">
+                            <div class="product_details">
+                                <div class="title">ProductTitle</div>
+                                <div class="price">99 $</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item m-1">
+                            <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200"
+                                 alt="1">
+                            <div class="product_details">
+                                <div class="title">ProductTitle</div>
+                                <div class="price">99 $</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item m-1">
+                            <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200"
+                                 alt="1">
+                            <div class="product_details">
+                                <div class="title">ProductTitle</div>
+                                <div class="price">99 $</div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item m-1">
+                            <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200"
+                                 alt="1">
+                            <div class="product_details">
+                                <div class="title">ProductTitle</div>
+                                <div class="price">99 $</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item m-1">
+                            <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200"
+                                 alt="1">
+                            <div class="product_details">
+                                <div class="title">ProductTitle</div>
+                                <div class="price">99 $</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item m-1">
+                            <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200"
+                                 alt="1">
+                            <div class="product_details">
+                                <div class="title">ProductTitle</div>
+                                <div class="price">99 $</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item m-1">
+                            <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200"
+                                 alt="1">
+                            <div class="product_details">
+                                <div class="title">ProductTitle</div>
+                                <div class="price">99 $</div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item m-1">
+                            <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200"
+                                 alt="1">
+                            <div class="product_details">
+                                <div class="title">ProductTitle</div>
+                                <div class="price">99 $</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item m-1">
+                            <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200"
+                                 alt="1">
+                            <div class="product_details">
+                                <div class="title">ProductTitle</div>
+                                <div class="price">99 $</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item m-1">
+                            <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200"
+                                 alt="1">
+                            <div class="product_details">
+                                <div class="title">ProductTitle</div>
+                                <div class="price">99 $</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item m-1">
+                            <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200"
+                                 alt="1">
+                            <div class="product_details">
+                                <div class="title">ProductTitle</div>
+                                <div class="price">99 $</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-3">
+                    <h2>Categories</h2>
+                    <ul class="list-group">
+                        <li class="list-group-item">category1</li>
+                        <li class="list-group-item">category2</li>
+                        <li class="list-group-item">category3</li>
+                        <li class="list-group-item">category4</li>
+                        <li class="list-group-item">category5</li>
+                        <li class="list-group-item">category6</li>
+                        <li class="list-group-item">category7</li>
+                        <li class="list-group-item">category8</li>
+                        <li class="list-group-item">category9</li>
+                        <li class="list-group-item">category10</li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-3">
-                <h2>Categories</h2>
-                <ul class="list-group">
-                    <li class="list-group-item">category1</li>
-                    <li class="list-group-item">category2</li>
-                    <li class="list-group-item">category3</li>
-                    <li class="list-group-item">category4</li>
-                    <li class="list-group-item">category5</li>
-                    <li class="list-group-item">category6</li>
-                    <li class="list-group-item">category7</li>
-                    <li class="list-group-item">category8</li>
-                    <li class="list-group-item">category9</li>
-                    <li class="list-group-item">category10</li>
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">2 <span class="sr-only"></span></a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
                 </ul>
-            </div>
+            </nav>
         </div>
-        <nav aria-label="...">
-            <ul class="pagination">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">2 <span class="sr-only"></span></a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
+
+        <footer>
+            <div class="footer_content">
+                <p>You can search us on:</p>
+                <div class="social">
+                    <a href="#"><img class="mx-4" src="{{ asset('assets/main/images/social/facebook.png') }}" width="30"
+                                     alt="1"></a>
+                    <a href="#"><img class="mx-4" src="{{ asset('assets/main/images/social/instagram.png') }}"
+                                     width="30"
+                                     alt="2"></a>
+                    <a href="#"><img class="mx-4" src="{{ asset('assets/main/images/social/github.png') }}" width="30"
+                                     alt="3"></a>
+                </div>
+            </div>
+            <img class="img-fluid" src="{{ asset('assets/main/images/footer.jpg') }}" width="2000" alt="3">
+        </footer>
     </div>
-
-    <footer>
-        <div class="footer_content">
-            <p>You can search us on:</p>
-            <div class="social">
-                <a href="#"><img class="mx-4" src="{{ asset('assets/main/images/social/facebook.png') }}" width="30" alt="1"></a>
-                <a href="#"><img class="mx-4" src="{{ asset('assets/main/images/social/instagram.png') }}" width="30" alt="2"></a>
-                <a href="#"><img class="mx-4" src="{{ asset('assets/main/images/social/github.png') }}" width="30" alt="3"></a>
-            </div>
-        </div>
-        <img class="img-fluid" src="{{ asset('assets/main/images/footer.jpg') }}" width="2000" alt="3">
-    </footer>
 {% endblock %}

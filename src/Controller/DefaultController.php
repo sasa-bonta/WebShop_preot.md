@@ -3,11 +3,10 @@
 
 namespace App\Controller;
 
-// http://localhost:8000/products
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+// http://localhost:8000
 class DefaultController extends AbstractController
 {
     /**
