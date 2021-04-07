@@ -7,7 +7,7 @@
 
 .list-group-item {
     border: none;
-    box-shadow: 0px 0px 50px 6px rgba(0,0,0,0.06);
+    box-shadow: 0 0 50px 6px rgba(0,0,0,0.06);
 }
 
 .product_details {
@@ -40,3 +40,8 @@ a.page-link {
     top: 800px;
     background: whitesmoke;
 }
+
+/*#product-header {*/
+/*    position: fixed;*/
+/*    z-index: 1;*/
+/*}*/
