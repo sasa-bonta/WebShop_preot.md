@@ -65,13 +65,57 @@
             </div>
         </nav>
 
-        <div class="product-images">
-            <br><br><br>
-            <h1>Product 1</h1>
-            <br><br><br>
+        <div id="product-images">
+            {# Name #}
+            <br><br>
+            <h1 id="product-name"><b>Product 1</b></h1>
+            <br><br>
             {# Galery #}
+            <div class="custom-container">
+                <img id="expandedImg" style="width:100%" onLoad="javascript:myFunction()">
+                <div id="imgtext"></div>
+            </div>
 
+            <div class="row">
+                <div class="column">
+                    <img src="{{ asset('assets/main/images/product1.jpg') }}" alt="Image 1" style="width:100%"
+                         onclick="myFunction(this);" onload="myFunction(this);">
+                </div>
+                <div class="column">
+                    <img src="{{ asset('assets/main/images/product1.jpg') }}" alt="Image 2" style="width:100%"
+                         onclick="myFunction(this);">
+                </div>
+                <div class="column">
+                    <img src="{{ asset('assets/main/images/product1.jpg') }}" alt="Image 3" style="width:100%"
+                         onclick="myFunction(this);">
+                </div>
+                <div class="column">
+                    <img src="{{ asset('assets/main/images/product1.jpg') }}" alt="Image 4" style="width:100%"
+                         onclick="myFunction(this);">
+                </div>
+            </div>
 
+            <script>
+                function myFunction(imgs) {
+                    var expandImg = document.getElementById("expandedImg");
+                    var imgText = document.getElementById("imgtext");
+                    expandImg.src = imgs.src;
+                    imgText.innerHTML = imgs.alt;
+                    expandImg.parentElement.style.display = "block";
+                }
+            </script>
+            {# Description #}
+            <br><br>
+            <p id="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                et dolore magna aliqua. Nisl tincidunt eget nullam non. Quis hendrerit dolor magna eget est lorem
+                ipsum dolor sit. Volutpat odio facilisis mauris sit amet massa. Commodo odio aenean sed adipiscing
+                diam donec adipiscing tristique. Mi eget mauris pharetra et. Non tellus orci ac auctor augue. Elit at
+                imperdiet dui accumsan sit. Ornare arcu dui vivamus arcu felis. Egestas integer eget aliquet nibh
+                praesent. In hac habitasse platea dictumst quisque sagittis purus. Pulvinar elementum integer enim
+                neque volutpat ac.</p>
+            {# Price #}
+            <br><br>
+            <p id="price"><b>199.99 $</b></p>
         </div>
         {# Footer #}
         <footer>
