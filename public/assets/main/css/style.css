@@ -55,7 +55,12 @@ a.page-link {
 }
 
 #product-name {
-    font-size: 30px;
+    font-size: 50px;
+}
+
+#product-code {
+    font-size: 25px;
+    color: #808080;
 }
 
 /* The grid: Four equal columns that floats next to each other */
