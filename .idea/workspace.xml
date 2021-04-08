@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f78d007e-26cd-4920-85ed-4f8f6e419ac0" name="Default Changelist" comment="Added Product Entity">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="f78d007e-26cd-4920-85ed-4f8f6e419ac0" name="Default Changelist" comment="Added Product table" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -176,7 +174,7 @@
       <workItem from="1617781875834" duration="2337000" />
       <workItem from="1617827154137" duration="4768000" />
       <workItem from="1617881180957" duration="48000" />
-      <workItem from="1617891550920" duration="9681000" />
+      <workItem from="1617891550920" duration="9997000" />
     </task>
     <task id="LOCAL-00001" summary="Should add galery">
       <created>1617827726029</created>
@@ -206,7 +204,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617904958745</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added Product table">
+      <created>1617905769287</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1617905769287</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -230,6 +235,7 @@
     <MESSAGE value="Product-details to review" />
     <MESSAGE value="Added Product code on Product Details page" />
     <MESSAGE value="Added Product Entity" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Product Entity" />
+    <MESSAGE value="Added Product table" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Product table" />
   </component>
 </project>
