@@ -20,6 +20,7 @@ services:
       working_dir: /application
       volumes:
         - .:/application
+        - my-datavolume:/var/lib/mysql
       environment:
         - MYSQL_ROOT_PASSWORD=user_preot.md
         - MYSQL_DATABASE=preot_md
@@ -46,3 +47,5 @@ services:
         - .:/application
         - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.4/fpm/conf.d/99-overrides.ini
 
+volumes:
+  my-datavolume:

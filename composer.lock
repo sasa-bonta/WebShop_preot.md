@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c3954139c86eaf5cbbc7dd242194711",
+    "content-hash": "fffc450a1a6d618b5ed7c218eaa6e4d8",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -7578,6 +7578,10 @@
                 "scaffold",
                 "scaffolding"
             ],
+            "support": {
+                "issues": "https://github.com/symfony/maker-bundle/issues",
+                "source": "https://github.com/symfony/maker-bundle/tree/v1.30.2"
+            },
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
