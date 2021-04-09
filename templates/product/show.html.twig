@@ -43,8 +43,8 @@
     </table>
 
     <a href="{{ path('product_index') }}">back to list</a>
-
-    <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
+    <br>
+    <a href="{{ path('product_edit', {'code': product.code}) }}">edit</a>
 
     {{ include('product/_delete_form.html.twig') }}
 {% endblock %}
