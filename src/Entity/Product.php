@@ -38,6 +38,11 @@ class Product
     private $price;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $img_path;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $created_at;
@@ -96,6 +101,18 @@ class Product
     public function setPrice(float $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getImgPath(): ?string
+    {
+        return $this->img_path;
+    }
+
+    public function setImgPath(string $img_path): self
+    {
+        $this->img_path = $img_path;
 
         return $this;
     }
