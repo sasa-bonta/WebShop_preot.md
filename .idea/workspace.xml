@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f78d007e-26cd-4920-85ed-4f8f6e419ac0" name="Default Changelist" comment="Added image path Product CRUD">
+    <list default="true" id="f78d007e-26cd-4920-85ed-4f8f6e419ac0" name="Default Changelist" comment="New Table product created">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210409011057.php" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/Version20210409012146.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/Product1Type.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ProductUpdateType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/ProductType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ProduceCreateType.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,12 +155,13 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Form" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Form" />
       <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/public/assets/main/images" />
       <recent name="$PROJECT_DIR$/templates/product-details" />
@@ -179,7 +182,8 @@
       <workItem from="1617827154137" duration="4768000" />
       <workItem from="1617881180957" duration="48000" />
       <workItem from="1617891550920" duration="10377000" />
-      <workItem from="1617930136491" duration="1438000" />
+      <workItem from="1617930136491" duration="1492000" />
+      <workItem from="1617964390003" duration="6018000" />
     </task>
     <task id="LOCAL-00001" summary="Should add galery">
       <created>1617827726029</created>
@@ -244,7 +248,21 @@
       <option name="project" value="LOCAL" />
       <updated>1617931084092</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="New Table product created">
+      <created>1617931605122</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1617931605122</updated>
+    </task>
+    <task id="LOCAL-00011" summary="New Table product created">
+      <created>1617931617579</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1617931617579</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -272,6 +290,7 @@
     <MESSAGE value="Added Product table" />
     <MESSAGE value="Added Product CRUD" />
     <MESSAGE value="Added image path Product CRUD" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added image path Product CRUD" />
+    <MESSAGE value="New Table product created" />
+    <option name="LAST_COMMIT_MESSAGE" value="New Table product created" />
   </component>
 </project>

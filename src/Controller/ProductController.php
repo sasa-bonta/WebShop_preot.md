@@ -4,7 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\Product1Type;
+use App\Form\ProductType;
+use App\Form\ProductUpdateTypeType;
 use App\Repository\ProductRepository;
+use DateInterval;
+use DateTime;
+use DateTimeZone;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,11 +36,16 @@ class ProductController extends AbstractController
     public function new(Request $request): Response
     {
         $product = new Product();
-        $form = $this->createForm(Product1Type::class, $product);
+        $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            try {
+                $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
+            } catch (\Exception $e) {
+            }
+            $product->setCreatedAt($dateTime);
             $entityManager->persist($product);
             $entityManager->flush();
 
@@ -63,10 +73,15 @@ class ProductController extends AbstractController
      */
     public function edit(Request $request, Product $product): Response
     {
-        $form = $this->createForm(Product1Type::class, $product);
+        $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
+            } catch (\Exception $e) {
+            }
+            $product->setUpdatedAt($dateTime);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('product_index');
