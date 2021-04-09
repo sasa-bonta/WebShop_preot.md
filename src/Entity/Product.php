@@ -33,6 +33,11 @@ class Product
     private $category;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $description;
+
+    /**
      * @ORM\Column(type="float")
      */
     private $price;
@@ -137,6 +142,18 @@ class Product
     public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
