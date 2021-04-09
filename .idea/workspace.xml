@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f78d007e-26cd-4920-85ed-4f8f6e419ac0" name="Default Changelist" comment="Show by code, edit by code, delete by code work well">
-      <change afterPath="$PROJECT_DIR$/public/assets/main/images/no-image.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/product/show-product-details.html.twig" afterDir="false" />
+    <list default="true" id="f78d007e-26cd-4920-85ed-4f8f6e419ac0" name="Default Changelist" comment="Display product by code (back + front) work well">
+      <change afterPath="$PROJECT_DIR$/public/assets/main/images/ktm.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/main/images/spec.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/product/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +183,7 @@
       <workItem from="1617881180957" duration="48000" />
       <workItem from="1617891550920" duration="10377000" />
       <workItem from="1617930136491" duration="1492000" />
-      <workItem from="1617964390003" duration="10663000" />
+      <workItem from="1617964390003" duration="12171000" />
     </task>
     <task id="LOCAL-00001" summary="Should add galery">
       <created>1617827726029</created>
@@ -292,7 +290,21 @@
       <option name="project" value="LOCAL" />
       <updated>1617974197078</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Display product by code (back + front) work well">
+      <created>1617975839433</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1617975839433</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Display product by code (back + front) work well">
+      <created>1617976070404</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1617976070404</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -325,6 +337,7 @@
     <MESSAGE value="Added Description" />
     <MESSAGE value="Find product by code works :D" />
     <MESSAGE value="Show by code, edit by code, delete by code work well" />
-    <option name="LAST_COMMIT_MESSAGE" value="Show by code, edit by code, delete by code work well" />
+    <MESSAGE value="Display product by code (back + front) work well" />
+    <option name="LAST_COMMIT_MESSAGE" value="Display product by code (back + front) work well" />
   </component>
 </project>
