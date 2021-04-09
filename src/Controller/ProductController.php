@@ -63,7 +63,10 @@ class ProductController extends AbstractController
      */
     public function show(Product $product): Response
     {
-        return $this->render('product/show.html.twig', [
+//        return $this->render('product/show.html.twig', [
+//            'product' => $product,
+//        ]);
+        return $this->render('product/show-product-details.html.twig', [
             'product' => $product,
         ]);
     }
