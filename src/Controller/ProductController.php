@@ -40,6 +40,16 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $repo = $this->getDoctrine()->getRepository(Product::class);
+            # Errors
+//            if ($repo->count(['code'=>$product->getCode()]) > 0) {
+//                # code 400, display alert. Return this
+//                return $this->render('product/new.html.twig', [
+//                    'errors' => ['duplicated code'],
+//                    'product' => $product,
+//                    'form' => $form->createView(),
+//                ]);
+//            }
             $entityManager = $this->getDoctrine()->getManager();
             try {
                 $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));

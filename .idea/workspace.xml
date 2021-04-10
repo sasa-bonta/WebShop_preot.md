@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f78d007e-26cd-4920-85ed-4f8f6e419ac0" name="Default Changelist" comment="Display product by code (back + front) work well">
-      <change afterPath="$PROJECT_DIR$/public/assets/main/images/ktm.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/main/images/spec.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/Version20210409143323.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/product/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/product/product-details.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/product-details.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,7 +157,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/assets/main/images" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../demo_project" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -183,7 +186,9 @@
       <workItem from="1617881180957" duration="48000" />
       <workItem from="1617891550920" duration="10377000" />
       <workItem from="1617930136491" duration="1492000" />
-      <workItem from="1617964390003" duration="12171000" />
+      <workItem from="1617964390003" duration="15659000" />
+      <workItem from="1618045808114" duration="972000" />
+      <workItem from="1618047269253" duration="351000" />
     </task>
     <task id="LOCAL-00001" summary="Should add galery">
       <created>1617827726029</created>
@@ -304,7 +309,21 @@
       <option name="project" value="LOCAL" />
       <updated>1617976070404</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Display product by code (back + front) work well">
+      <created>1617978189237</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1617978189237</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Display product by code (back + front) work well">
+      <created>1617978203795</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1617978203795</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -337,6 +356,7 @@
     <MESSAGE value="Added Description" />
     <MESSAGE value="Find product by code works :D" />
     <MESSAGE value="Show by code, edit by code, delete by code work well" />
+    <MESSAGE value="Added 2 images" />
     <MESSAGE value="Display product by code (back + front) work well" />
     <option name="LAST_COMMIT_MESSAGE" value="Display product by code (back + front) work well" />
   </component>
