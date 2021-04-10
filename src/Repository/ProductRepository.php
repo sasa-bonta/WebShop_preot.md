@@ -19,9 +19,32 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
-    // /**
-    //  * @return Product[] Returns an array of Product objects
-    //  */
+     /**
+      * @return Product[] Returns an array of Product objects
+      */
+
+    public function findByNameCat($name, $category, $orderBy, $limit, $offset)
+    {
+        if (is_null($name)) {
+            $name = '%';
+        }
+        if (is_null($category)) {
+            $category = '%';
+        }
+
+        return $this->createQueryBuilder('p')
+            ->where('p.name LIKE :name')
+            ->setParameter('name','%'.$name.'%')
+            ->andWhere('p.category LIKE :category')
+            ->setParameter('category', $category)
+            ->orderBy('p.'.$orderBy)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     /*
     public function findByExampleField($value)
     {
