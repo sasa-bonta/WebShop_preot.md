@@ -22,7 +22,6 @@ class ProductRepository extends ServiceEntityRepository
      /**
       * @return Product[] Returns an array of Product objects
       */
-
     public function findByNameCat($name, $category, $orderBy, $limit, $offset)
     {
         if (is_null($name)) {
@@ -31,13 +30,15 @@ class ProductRepository extends ServiceEntityRepository
         if (is_null($category)) {
             $category = '%';
         }
-
+        $arr = explode(":", $orderBy, 2);
+        $order = $arr[0];
+        $ascDesk = $arr[1];
         return $this->createQueryBuilder('p')
             ->where('p.name LIKE :name')
             ->setParameter('name','%'.$name.'%')
             ->andWhere('p.category LIKE :category')
             ->setParameter('category', $category)
-            ->orderBy('p.'.$orderBy)
+            ->orderBy('p.'.$order, $ascDesk)
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->getQuery()

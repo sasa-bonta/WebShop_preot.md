@@ -1,0 +1,178 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <header id="header">
+        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="5000">
+                    <img class="img-fluid" src="{{ asset('assets/main/images/1.jpg') }}" width="2000" alt="1">
+                </div>
+                <div class="carousel-item" data-bs-interval="5000">
+                    <img class="img-fluid" src="{{ asset('assets/main/images/2.jpg') }}" width="2000" alt="2">
+                </div>
+                <div class="carousel-item" data-bs-interval="5000">
+                    <img class="img-fluid" src="{{ asset('assets/main/images/3.jpg') }}" width="2000" alt="3">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="content">
+        {% include 'navbar.html.twig' %}
+
+        <div class="container">
+            <div class="row my-5">
+                <div class="col-9">
+                    <table class="table">
+                        <tbody>
+                        {% for product in products %}
+
+                            {% if loop.index0 % 4 == 0 %}
+                                <tr>
+                                <td>
+                                    <a href="../products/{{ product.code }}"
+                                       style="text-decoration: none; color: black">
+                                        <div class="image">
+                                            <img src="{{ asset(product.imgPath) }}" width="200" height="200"
+                                                 alt="Image 1">
+                                        </div>
+                                        <div class="name">
+                                            <b>{{ product.name }}</b>
+                                        </div>
+                                        <div class="price">
+                                            {{ product.price }} $
+                                        </div>
+                                    </a>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <a href="../products/{{ product.code }}"
+                                       style="text-decoration: none; color: black">
+                                        <div class="image">
+                                            <img src="{{ asset(product.imgPath) }}" width="200" height="200"
+                                                 alt="Image 1">
+                                        </div>
+                                        <div class="name">
+                                            <b>{{ product.name }}</b>
+                                        </div>
+                                        <div class="price">
+                                            {{ product.price }} $
+                                        </div>
+                                    </a>
+                                </td>
+                            {% endif %}
+                        {% else %}
+                            <tr>
+                                <td colspan="9">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <nav aria-label="...">
+                        <ul class="pagination">
+
+{#                            {% if limit == 32 %}#}
+{#                                <li class="page-item">#}
+{#                                    <button class="page-link" type="submit" value="1"#}
+{#                                            style="background: none;border: none"#}
+{#                                            onclick="setPage(this.value)">1#}
+{#                                    </button>#}
+{#                                </li>#}
+{#                            {% endif %}#}
+
+
+
+
+{#                            {% if limit == 16 %}#}
+{#                                {% if products|length < 16 %}#}
+
+{#                            {% elseif limit == 32 %}#}
+
+
+
+
+{#                            {% elseif limit == 64 %}#}
+
+{#                            {% elseif limit == 128 %}#}
+
+{#                            {% endif %}#}
+
+
+                            <li class="page-item">
+                                <button id="1" class="page-link" type="submit" value="1"
+                                        style="background: none;border: none"
+                                        onclick="setPage(this.value)">1
+                                </button>
+                            </li>
+                            <li class="page-item">
+                                <button id="2" class="page-link" type="submit" value="2"
+                                        style="background: none;border: none"
+                                        onclick="setPage(this.value)">2
+                                </button>
+                            <li class="page-item">
+                                <button id="3" class="page-link" type="submit" value="3"
+                                        style="background: none;border: none"
+                                        onclick="setPage(this.value)">3
+                                </button>
+                            </li>
+                            <li class="page-item">
+                                <button id="4" class="page-link" type="submit" value="4"
+                                        style="background: none;border: none"
+                                        onclick="setPage(this.value)">4
+                                </button>
+                            </li>
+                        </ul>
+                    </nav>
+
+                </div>
+                <div class="col-3">
+                    <h2>Categories</h2>
+                    <ul class="list-group">
+
+                        <li class="list-group-item">
+                            <button type="submit" value="tools" style="background: none;border: none"
+                                    onclick="setCategory(this.value)">Tools
+                            </button>
+                        </li>
+                        <li class="list-group-item">
+                            <button type="submit" value="supplies" style="background: none;border: none"
+                                    onclick="setCategory(this.value)">Supplies
+                            </button>
+                        </li>
+                        <li class="list-group-item">
+                            <button type="submit" value="cars" style="background: none;border: none"
+                                    onclick="setCategory(this.value)">Cars
+                            </button>
+                        </li>
+                        <li class="list-group-item">
+                            <button type="submit" value="toys" style="background: none;border: none"
+                                    onclick="setCategory(this.value)">Toys
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        {% include 'footer.html.twig' %}
+    </div>
+
+    <script>
+        function setCategory(value) {
+            var urlSearchParams = new URLSearchParams(window.location.search);
+            urlSearchParams.set('category', value);
+            window.location.search = urlSearchParams;
+        }
+
+        function setPage(value) {
+            var urlSearchParams = new URLSearchParams(window.location.search);
+            urlSearchParams.set('page', value);
+            window.location.search = urlSearchParams;
+
+            var element = document.querySelectorAll("button[value=" + value + "]");
+            element.style.transform = "background: black;";
+        }
+    </script>
+{% endblock %}
+

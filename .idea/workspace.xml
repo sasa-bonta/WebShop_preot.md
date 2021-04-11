@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f78d007e-26cd-4920-85ed-4f8f6e419ac0" name="Default Changelist" comment="Product Controller ixed offset">
-      <change afterPath="$PROJECT_DIR$/templates/footer.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/navbar.html.twig" afterDir="false" />
+    <list default="true" id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/migrations/Version20210411131230.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210409124406.php" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/Version20210409124406.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210409143323.php" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/Version20210409143323.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DefaultController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/ProductType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ProductType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/ProductRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ProductRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/main/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/product/product_details.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/product_details.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/navbar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/navbar.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/product-details/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/product-details/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/product/_delete_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/product/_delete_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/product/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/product/_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/product/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/product/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/product/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/product/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/product/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/product/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/product/product_details.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/product/product_details.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/product/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/product/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,7 +31,53 @@
   </component>
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution />
+    <execution>
+      <executable />
+    </execution>
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - @localhost" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - @localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - @localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="preot_md: schema" type="76f4a085:MysqlImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - @localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="preot_md: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="product: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -153,15 +215,21 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../demo_project" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\UNI\Pentalog\WebShop_preot.md\WebShop_preot.md\templates\main" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public/assets/main/images" />
       <recent name="$PROJECT_DIR$/templates/product" />
@@ -169,11 +237,38 @@
       <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/templates/product-details" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-    </key>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="MySQL - @localhost: root" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="MySQL - @localhost: root" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@3d5d5d63" type="9fbbdea:ServiceModel$ServiceNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="MySQL - @localhost: root" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@7f0dc272" type="9fbbdea:ServiceModel$ServiceNode" />
+              </path>
+            </expand>
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="f78d007e-26cd-4920-85ed-4f8f6e419ac0" name="Default Changelist" comment="" />
@@ -411,12 +506,12 @@
                   </entry>
                 </map>
               </option>
+              <option name="COLUMN_ORDER" />
             </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -441,5 +536,55 @@
     <MESSAGE value="Merge remote-tracking branch 'origin/sasa' into sasa" />
     <MESSAGE value="Product Controller ixed offset" />
     <option name="LAST_COMMIT_MESSAGE" value="Product Controller ixed offset" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2630" y="98" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1618146650348">
+      <screen x="1920" y="0" width="1536" height="864" />
+    </state>
+    <state x="2630" y="98" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1618146650348" />
+    <state width="1023" height="350" key="GridCell.Tab.0.bottom" timestamp="1618172015438">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1023" height="350" key="GridCell.Tab.0.bottom/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1618172015438" />
+    <state width="1023" height="609" key="GridCell.Tab.0.bottom/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1618171493195" />
+    <state width="1023" height="350" key="GridCell.Tab.0.center" timestamp="1618172015438">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1023" height="350" key="GridCell.Tab.0.center/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1618172015438" />
+    <state width="1023" height="609" key="GridCell.Tab.0.center/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1618171493194" />
+    <state width="1023" height="350" key="GridCell.Tab.0.left" timestamp="1618172015438">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1023" height="350" key="GridCell.Tab.0.left/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1618172015438" />
+    <state width="1023" height="609" key="GridCell.Tab.0.left/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1618171493194" />
+    <state width="1023" height="350" key="GridCell.Tab.0.right" timestamp="1618172015438">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1023" height="350" key="GridCell.Tab.0.right/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1618172015438" />
+    <state width="1023" height="609" key="GridCell.Tab.0.right/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1618171493194" />
+    <state width="258" height="457" key="HiddenNamespacesPopup" timestamp="1618146704881">
+      <screen x="1920" y="0" width="1536" height="864" />
+    </state>
+    <state width="258" height="457" key="HiddenNamespacesPopup/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1618146704881" />
+    <state x="2401" y="150" key="MultipleFileMergeDialog" timestamp="1618141563902">
+      <screen x="1920" y="0" width="1536" height="864" />
+    </state>
+    <state x="2401" y="150" key="MultipleFileMergeDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1618141563902" />
+    <state x="2199" y="78" key="SettingsEditor" timestamp="1618140850594">
+      <screen x="1920" y="0" width="1536" height="864" />
+    </state>
+    <state x="2199" y="78" key="SettingsEditor/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1618140850594" />
+    <state x="2461" y="148" key="git4idea.branch.GitSmartOperationDialog" timestamp="1618141552283">
+      <screen x="1920" y="0" width="1536" height="864" />
+    </state>
+    <state x="2461" y="148" key="git4idea.branch.GitSmartOperationDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1618141552283" />
+    <state x="510" y="68" key="refactoring.ChangeSignatureDialog" timestamp="1618164566735">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="510" y="68" key="refactoring.ChangeSignatureDialog/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1618164566735" />
+    <state x="430" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1618174328134">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="430" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1618174328134" />
   </component>
 </project>

@@ -1,9 +1,7 @@
 {% extends '/base.html.twig' %}
 
 {% block body %}
-
     <header id="header">
-        {# Slider HERE #}
         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="5000">
@@ -20,129 +18,74 @@
     </header>
 
     <div id="content">
-      {# Navigation bar HERE #}
-      {% include 'navbar.html.twig' %}
+        {% include 'navbar.html.twig' %}
+
         <div class="container">
             <div class="row my-5">
                 <div class="col-9">
-                    <h1>Newest products:</h1>
+                    <table class="table">
+                        <tbody>
+                        {% for product in products %}
 
-                    <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item m-1">
-                            <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200"
-                                 alt="1">
-                            <div class="product_details">
-                                <div class="title">ProductTitle</div>
-                                <div class="price">99 $</div>
-                            </div>
-                        </li>
-                        <li class="list-group-item m-1">
-                            <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200"
-                                 alt="1">
-                            <div class="product_details">
-                                <div class="title">ProductTitle</div>
-                                <div class="price">99 $</div>
-                            </div>
-                        </li>
-                        <li class="list-group-item m-1">
-                            <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200"
-                                 alt="1">
-                            <div class="product_details">
-                                <div class="title">ProductTitle</div>
-                                <div class="price">99 $</div>
-                            </div>
-                        </li>
-                        <li class="list-group-item m-1">
-                            <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200"
-                                 alt="1">
-                            <div class="product_details">
-                                <div class="title">ProductTitle</div>
-                                <div class="price">99 $</div>
-                            </div>
-                        </li>
-                    </ul>
-                    <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item m-1">
-                            <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200"
-                                 alt="1">
-                            <div class="product_details">
-                                <div class="title">ProductTitle</div>
-                                <div class="price">99 $</div>
-                            </div>
-                        </li>
-                        <li class="list-group-item m-1">
-                            <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200"
-                                 alt="1">
-                            <div class="product_details">
-                                <div class="title">ProductTitle</div>
-                                <div class="price">99 $</div>
-                            </div>
-                        </li>
-                        <li class="list-group-item m-1">
-                            <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200"
-                                 alt="1">
-                            <div class="product_details">
-                                <div class="title">ProductTitle</div>
-                                <div class="price">99 $</div>
-                            </div>
-                        </li>
-                        <li class="list-group-item m-1">
-                            <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200"
-                                 alt="1">
-                            <div class="product_details">
-                                <div class="title">ProductTitle</div>
-                                <div class="price">99 $</div>
-                            </div>
-                        </li>
-                    </ul>
-                    <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item m-1">
-                            <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200"
-                                 alt="1">
-                            <div class="product_details">
-                                <div class="title">ProductTitle</div>
-                                <div class="price">99 $</div>
-                            </div>
-                        </li>
-                        <li class="list-group-item m-1">
-                            <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200"
-                                 alt="1">
-                            <div class="product_details">
-                                <div class="title">ProductTitle</div>
-                                <div class="price">99 $</div>
-                            </div>
-                        </li>
-                        <li class="list-group-item m-1">
-                            <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200"
-                                 alt="1">
-                            <div class="product_details">
-                                <div class="title">ProductTitle</div>
-                                <div class="price">99 $</div>
-                            </div>
-                        </li>
-                        <li class="list-group-item m-1">
-                            <img class="img-fluid" src="{{ asset('assets/main/images/product1.jpg') }}" width="200"
-                                 alt="1">
-                            <div class="product_details">
-                                <div class="title">ProductTitle</div>
-                                <div class="price">99 $</div>
-                            </div>
-                        </li>
-                    </ul>
+                            {% if loop.index0 % 4 == 0 %}
+                                <tr>
+                                <td>
+                                    <div class="image">
+                                        <img src="{{ asset(product.imgPath) }}" width="200" height="200" alt="Image 1">
+                                    </div>
+                                    <div class="name">
+                                        <b>{{ product.name }}</b>
+                                    </div>
+                                    <div class="price">
+                                        {{ product.price }} $
+                                    </div>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <div class="image">
+                                        <img src="{{ asset(product.imgPath) }}" width="200" height="200" alt="Image 1">
+                                    </div>
+                                    <div class="name">
+                                        <b>{{ product.name }}</b>
+                                    </div>
+                                    <div class="price">
+                                        {{ product.price }} $
+                                    </div>
+                                </td>
+                            {% endif %}
+                        {% else %}
+                            <tr>
+                                <td colspan="9">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
                 </div>
                 <div class="col-3">
                     <h2>Categories</h2>
                     <ul class="list-group">
-                        <li class="list-group-item">category1</li>
-                        <li class="list-group-item">category2</li>
-                        <li class="list-group-item">category3</li>
-                        <li class="list-group-item">category4</li>
-                        <li class="list-group-item">category5</li>
-                        <li class="list-group-item">category6</li>
-                        <li class="list-group-item">category7</li>
-                        <li class="list-group-item">category8</li>
-                        <li class="list-group-item">category9</li>
-                        <li class="list-group-item">category10</li>
+
+                        <li class="list-group-item">
+                            <button type="submit" value="tools" style="background: none;border: none"
+                                    onclick="setCategory(this.value)">Tools
+                            </button>
+                        </li>
+                        <li class="list-group-item">
+                            <button type="submit" value="supplies" style="background: none;border: none"
+                                    onclick="setCategory(this.value)">Supplies
+                            </button>
+                        </li>
+                        <li class="list-group-item">
+                            <button type="submit" value="cars" style="background: none;border: none"
+                                    onclick="setCategory(this.value)">Cars
+                            </button>
+                        </li>
+                        <li class="list-group-item">
+                            <button type="submit" value="toys" style="background: none;border: none"
+                                    onclick="setCategory(this.value)">Toys
+                            </button>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -165,4 +108,12 @@
 
         {% include 'footer.html.twig' %}
     </div>
+
+    <script>
+        function setCategory(value) {
+            var urlSearchParams = new URLSearchParams(window.location.search);
+            urlSearchParams.set('category', value);
+            window.location.search = urlSearchParams;
+        }
+    </script>
 {% endblock %}

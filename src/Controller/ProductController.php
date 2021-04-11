@@ -7,14 +7,16 @@ use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use DateTime;
 use DateTimeZone;
+use Doctrine\DBAL\Types\TextType;
 use Exception;
+use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/product")
+ * @Route("/products")
  */
 class ProductController extends AbstractController
 {
@@ -27,27 +29,28 @@ class ProductController extends AbstractController
         $name = null;
         $category = null;
         $page = 1;
-        $limit = 10;
-        $orderBy = 'created_at';
+        $limit = 16;
+        $orderBy = 'created_at:ASC';
 
-        if(isset($_GET['name'])) {
+        if (isset($_GET['name'])) {
             $name = $_GET['name'];
         }
-        if(isset($_GET['category'])) {
-            $category =  $_GET['category'];
+        if (isset($_GET['category'])) {
+            $category = $_GET['category'];
         }
-        if(isset($_GET['page'])) {
+        if (isset($_GET['page'])) {
             $page = $_GET['page'];
         }
-        if(isset($_GET['limit'])) {
+        if (isset($_GET['limit'])) {
             $limit = $_GET['limit'];
         }
         if (isset($_GET['order'])) {
             $orderBy = $_GET['order'];
         }
         $offset = ($page - 1) * $limit;
-        return $this->render('product/index.html.twig', [
+        return $this->render('main/product/index.html.twig', [
             'products' => $productRepository->findByNameCat($name, $category, $orderBy, $limit, $offset),
+            'limit' => $limit
         ]);
     }
 
@@ -77,12 +80,12 @@ class ProductController extends AbstractController
             } catch (Exception $e) {
             }
             # Random product generator. To make it work comment all the fields excluding code from ProductType
-//            $categ = ['cars', 'bikes', 'toys', 'notebooks', 'tools'];
-//            $product->setName('product' .rand(0, 30));
-//            $product->setCategory($categ[rand(0,4)]);
-//            $product->setPrice(rand(1, 1601));
-//            $product->setDescription('Lorem ipsum dolor sit amet, consectetuer adipiscing elit. ');
-//            $product->setImgPath('assets/main/images/product1.jpg');
+            $categ = ['cars', 'toys', 'supplies', 'tools'];
+            $product->setName('product' .rand(0, 30));
+            $product->setCategory($categ[rand(0,3)]);
+            $product->setPrice(rand(1, 1601));
+            $product->setDescription('Lorem ipsum dolor sit amet, consectetuer adipiscing elit. ');
+            $product->setImgPath('assets/main/images/product1.jpg');
             $product->setCreatedAt($dateTime);
             $entityManager->persist($product);
             $entityManager->flush();
@@ -90,7 +93,7 @@ class ProductController extends AbstractController
             return $this->redirectToRoute('product_index');
         }
 
-        return $this->render('product/new.html.twig', [
+        return $this->render('main/product/new.html.twig', [
             'product' => $product,
             'form' => $form->createView(),
         ]);
@@ -104,7 +107,7 @@ class ProductController extends AbstractController
 //        return $this->render('product/show.html.twig', [
 //            'product' => $product,
 //        ]);
-        return $this->render('product/product_details.html.twig', [
+        return $this->render('main/product/product_details.html.twig', [
             'product' => $product,
         ]);
     }
@@ -128,7 +131,7 @@ class ProductController extends AbstractController
             return $this->redirectToRoute('product_index');
         }
 
-        return $this->render('product/edit.html.twig', [
+        return $this->render('main/product/edit.html.twig', [
             'product' => $product,
             'form' => $form->createView(),
         ]);
@@ -139,7 +142,7 @@ class ProductController extends AbstractController
      */
     public function delete(Request $request, Product $product): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$product->getCode(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $product->getCode(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($product);
             $entityManager->flush();

@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="../main/product/index.html.twig">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Info</a>
@@ -18,28 +18,29 @@
                     <a class="nav-link" href="#">Contacts</a>
                 </li>
                 <li>
-                    <form class="d-flex mx-5">
-                        <input class="form-control me-2" type="search" placeholder="Search products here"
-                               aria-label="Search" size="60">
+                    <form class="d-flex mx-5" action="{{ path("product_index") }}">
+                        <input class="name form-control me-2" name="name" type="search" placeholder="Search products here"
+                        aria-label="Search" size="30">
+                        <button class="name btn btn-outline-success" type="submit">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                            </svg>
+                        </button>
+                    </form>
                 </li>
-                <button class="btn btn-outline-success" type="submit">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                         class="bi bi-search" viewBox="0 0 16 16">
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                    </svg>
-                </button>
                 <li>
                     <label for="sortby" style="color: white; margin-left: 20px; margin-right: 20px; margin-top: 6px">Sort by:</label>
-                    <select id="sortby">
-                        <option value="date_desc">date (descending)</option>
-                        <option value="date_asc">date (ascending)</option>
-                        <option value="price_desc">price (descending)</option>
-                        <option value="price_asc">price (ascending)</option>
+                    <select id="sortby" onchange="changeSort(this.value)">
+                        <option value="created_at:DESC">date (descending)</option>
+                        <option value="created_at:ASC">date (ascending)</option>
+                        <option value="price:DESC">price (descending)</option>
+                        <option value="price:ASC">price (ascending)</option>
                     </select>
                 </li>
                 <li>
                     <label for="limit" style="color: white; margin-left: 20px; margin-right: 20px; margin-top: 6px">Limit:</label>
-                    <select id="limit">
+                    <select id="limit" name="limit" onchange="changeLimit(this.value)">
                         <option value="16">16</option>
                         <option value="32">32</option>
                         <option value="64">64</option>
@@ -72,3 +73,29 @@
         </div>
     </div>
 </nav>
+
+<script>
+    function changeLimit(value) {
+
+        var urlSearchParams = new URLSearchParams(window.location.search);
+        urlSearchParams.set('limit', value);
+        window.location.search = urlSearchParams;
+
+        /**
+         * @TODO: Change limit option on load
+         */
+        // var limit = document.getElementById("limit");
+        // limit.options[limit.options.selectedIndex].selected = true;
+    }
+
+    function changeSort(value) {
+
+        var urlSearchParams = new URLSearchParams(window.location.search);
+        urlSearchParams.set('order', value);
+        window.location.search = urlSearchParams;
+
+        /**
+         * @TODO: Change order by option on load
+         */
+    }
+</script>
