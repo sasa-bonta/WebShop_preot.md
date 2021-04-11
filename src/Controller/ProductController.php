@@ -45,7 +45,7 @@ class ProductController extends AbstractController
         if (isset($_GET['order'])) {
             $orderBy = $_GET['order'];
         }
-        $offset = ($page - 1) * $limit + 1;
+        $offset = ($page - 1) * $limit;
         return $this->render('product/index.html.twig', [
             'products' => $productRepository->findByNameCat($name, $category, $orderBy, $limit, $offset),
         ]);
