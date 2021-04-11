@@ -17,11 +17,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/products")
+ * @method Exception(string $string)
  */
 class ProductController extends AbstractController
 {
     /**
      * @Route("/", name="product_index", methods={"GET"})
+     * @throws Exception
      */
     public function index(ProductRepository $productRepository): Response
     {
@@ -47,11 +49,22 @@ class ProductController extends AbstractController
         if (isset($_GET['order'])) {
             $orderBy = $_GET['order'];
         }
+        if ($limit <= 0) {
+            throw new Exception('Limit must be positive');
+        }
+        if ($page <= 0) {
+            throw new Exception('Number of page must be positive');
+        }
         $offset = ($page - 1) * $limit;
         return $this->render('main/product/index.html.twig', [
             'products' => $productRepository->findByNameCat($name, $category, $orderBy, $limit, $offset),
+            'length' => $productRepository->countTotalLength($name, $category),
             'limit' => $limit
         ]);
+    }
+
+    function generateRandomString($length = 10) {
+        return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
     }
 
     /**
@@ -82,6 +95,7 @@ class ProductController extends AbstractController
             # Random product generator. To make it work comment all the fields excluding code from ProductType
             $categ = ['cars', 'toys', 'supplies', 'tools'];
             $product->setName('product' .rand(0, 30));
+            $product->setCode($this->generateRandomString());
             $product->setCategory($categ[rand(0,3)]);
             $product->setPrice(rand(1, 1601));
             $product->setDescription('Lorem ipsum dolor sit amet, consectetuer adipiscing elit. ');
