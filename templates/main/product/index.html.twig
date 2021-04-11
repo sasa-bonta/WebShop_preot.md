@@ -1,6 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <style>
+        .pagination {
+            justify-content: center;
+        }
+
+        .page-link {
+            color: black;
+            background: none;
+            border: 1px black solid;
+        }
+
+        .page-link:hover {
+            color: white;
+            background: black;
+        }
+    </style>
     <header id="header">
         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -72,12 +88,10 @@
                     <nav aria-label="...">
                         <ul class="pagination">
 
-                            {% for i in 0..(products|length / limit)|round(0, 'ceil') %}
-                                {% set page = i + 1 %}
+                            {% for i in 1..(length / limit)|round(0,'ceil') %}
                                 <li class="page-item">
-                                    <button class="page-link" type="submit" value="{{ page }}"
-                                            style="background: none; border: none"
-                                            onclick="setPage(this.value)">{{ page }}
+                                    <button class="page-link" type="submit" value="{{ i }}"
+                                            onclick="setPage(this.value)">{{ i }}
                                     </button>
                                 </li>
                             {% endfor %}
@@ -121,6 +135,7 @@
         function setCategory(value) {
             var urlSearchParams = new URLSearchParams(window.location.search);
             urlSearchParams.set('category', value);
+            urlSearchParams.set('page', 1);
             window.location.search = urlSearchParams;
         }
 

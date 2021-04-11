@@ -4,7 +4,9 @@
     <list default="true" id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/preot.md.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/preot.md.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/ProductType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ProductType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/ProductRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ProductRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/main/product/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/product/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/navbar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/navbar.html.twig" afterDir="false" />
     </list>
@@ -15,9 +17,7 @@
   </component>
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution>
-      <executable />
-    </execution>
+    <execution />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -70,7 +70,6 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -235,7 +234,12 @@
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="MySQL - @localhost: root" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@7961ca49" type="9fbbdea:ServiceModel$ServiceNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@3d5d5d63" type="9fbbdea:ServiceModel$ServiceNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="MySQL - @localhost: root" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@7f0dc272" type="9fbbdea:ServiceModel$ServiceNode" />
               </path>
             </expand>
             <select />
@@ -244,13 +248,13 @@
       </list>
     </option>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="" />
+      <changelist id="f78d007e-26cd-4920-85ed-4f8f6e419ac0" name="Default Changelist" comment="" />
       <created>1617781869330</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -265,8 +269,6 @@
       <workItem from="1618047269253" duration="1090000" />
       <workItem from="1618087379323" duration="10890000" />
       <workItem from="1618132059647" duration="1952000" />
-      <workItem from="1618178249384" duration="21000" />
-      <workItem from="1618207905376" duration="11470000" />
     </task>
     <task id="LOCAL-00001" summary="Should add galery">
       <created>1617827726029</created>
@@ -468,7 +470,7 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -487,12 +489,12 @@
                   </entry>
                 </map>
               </option>
-              <option name="COLUMN_ORDER" />
             </State>
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -517,55 +519,5 @@
     <MESSAGE value="Merge remote-tracking branch 'origin/sasa' into sasa" />
     <MESSAGE value="Product Controller ixed offset" />
     <option name="LAST_COMMIT_MESSAGE" value="Product Controller ixed offset" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="2630" y="98" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1618146650348">
-      <screen x="1920" y="0" width="1536" height="864" />
-    </state>
-    <state x="2630" y="98" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1618146650348" />
-    <state width="1023" height="350" key="GridCell.Tab.0.bottom" timestamp="1618172015438">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1023" height="350" key="GridCell.Tab.0.bottom/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1618172015438" />
-    <state width="1023" height="609" key="GridCell.Tab.0.bottom/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1618171493195" />
-    <state width="1023" height="350" key="GridCell.Tab.0.center" timestamp="1618172015438">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1023" height="350" key="GridCell.Tab.0.center/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1618172015438" />
-    <state width="1023" height="609" key="GridCell.Tab.0.center/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1618171493194" />
-    <state width="1023" height="350" key="GridCell.Tab.0.left" timestamp="1618172015438">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1023" height="350" key="GridCell.Tab.0.left/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1618172015438" />
-    <state width="1023" height="609" key="GridCell.Tab.0.left/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1618171493194" />
-    <state width="1023" height="350" key="GridCell.Tab.0.right" timestamp="1618172015438">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1023" height="350" key="GridCell.Tab.0.right/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1618172015438" />
-    <state width="1023" height="609" key="GridCell.Tab.0.right/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1618171493194" />
-    <state width="258" height="457" key="HiddenNamespacesPopup" timestamp="1618146704881">
-      <screen x="1920" y="0" width="1536" height="864" />
-    </state>
-    <state width="258" height="457" key="HiddenNamespacesPopup/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1618146704881" />
-    <state x="2401" y="150" key="MultipleFileMergeDialog" timestamp="1618141563902">
-      <screen x="1920" y="0" width="1536" height="864" />
-    </state>
-    <state x="2401" y="150" key="MultipleFileMergeDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1618141563902" />
-    <state x="2199" y="78" key="SettingsEditor" timestamp="1618140850594">
-      <screen x="1920" y="0" width="1536" height="864" />
-    </state>
-    <state x="2199" y="78" key="SettingsEditor/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1618140850594" />
-    <state x="2461" y="148" key="git4idea.branch.GitSmartOperationDialog" timestamp="1618141552283">
-      <screen x="1920" y="0" width="1536" height="864" />
-    </state>
-    <state x="2461" y="148" key="git4idea.branch.GitSmartOperationDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1618141552283" />
-    <state x="510" y="68" key="refactoring.ChangeSignatureDialog" timestamp="1618164566735">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="510" y="68" key="refactoring.ChangeSignatureDialog/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1618164566735" />
-    <state x="430" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1618174328134">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="430" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1618174328134" />
   </component>
 </project>

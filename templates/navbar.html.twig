@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="{{ path('product_index') }}">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Info</a>
@@ -19,9 +19,8 @@
                 </li>
                 <li>
                     <form class="d-flex mx-5" action="{{ path("product_index") }}">
-                        <input class="name form-control me-2" name="name" type="search"
-                               placeholder="Search products here"
-                               aria-label="Search" size="30">
+                        <input class="name form-control me-2" name="name" type="search" placeholder="Search products here"
+                        aria-label="Search" size="30">
                         <button class="name btn btn-outline-success" type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                  class="bi bi-search" viewBox="0 0 16 16">
@@ -31,11 +30,10 @@
                     </form>
                 </li>
                 <li>
-                    <label for="sortby" style="color: white; margin-left: 20px; margin-right: 20px; margin-top: 6px">Sort
-                        by:</label>
+                    <label for="sortby" style="color: white; margin-left: 20px; margin-right: 20px; margin-top: 6px">Sort by:</label>
                     <select id="sortby" onchange="changeSort(this.value)">
-                        <option value="created_at:ASC" selected="selected">date (ascending)</option>
                         <option value="created_at:DESC">date (descending)</option>
+                        <option value="created_at:ASC">date (ascending)</option>
                         <option value="price:DESC">price (descending)</option>
                         <option value="price:ASC">price (ascending)</option>
                     </select>
@@ -43,10 +41,10 @@
                 <li>
                     <label for="limit" style="color: white; margin-left: 20px; margin-right: 20px; margin-top: 6px">Limit:</label>
                     <select id="limit" name="limit" onchange="changeLimit(this.value)">
-                        <option id="16" value="16" selected="selected">16</option>
-                        <option id="32" value="32">32</option>
-                        <option id="64" value="64">64</option>
-                        <option id="128" value="128">128</option>
+                        <option value="16">16</option>
+                        <option value="32">32</option>
+                        <option value="64">64</option>
+                        <option value="128">128</option>
                     </select>
                 </li>
             </ul>
@@ -80,17 +78,17 @@
     var limit = document.getElementById("limit");
     var order = document.getElementById("sortby");
 
-    limit.value = localStorage.getItem('value');
+    limit.value = localStorage.getItem('limit');
     order.value = localStorage.getItem('order')
-
 
     function changeLimit(value) {
 
         var urlSearchParams = new URLSearchParams(window.location.search);
         urlSearchParams.set('limit', value);
+        urlSearchParams.set('page', 1);
         window.location.search = urlSearchParams;
 
-        localStorage.setItem('value', value);
+        localStorage.setItem('limit', value);
     }
 
     function changeSort(value) {

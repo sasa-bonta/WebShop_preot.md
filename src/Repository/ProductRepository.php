@@ -47,6 +47,29 @@ class ProductRepository extends ServiceEntityRepository
     }
 
 
+    /**
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws \Doctrine\ORM\NoResultException
+     */
+    public function countTotalLength($name, $category)
+    {
+        if (is_null($name)) {
+            $name = '%';
+        }
+        if (is_null($category)) {
+            $category = '%';
+        }
+        return $this->createQueryBuilder('p')
+            ->select('count(p.id)')
+            ->where('p.name LIKE :name')
+            ->setParameter('name','%'.$name.'%')
+            ->andWhere('p.category LIKE :category')
+            ->setParameter('category', $category)
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
+    }
+
     /*
     public function findByExampleField($value)
     {
