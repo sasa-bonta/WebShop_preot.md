@@ -1,6 +1,22 @@
-{% extends '/base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
+    <style>
+        .pagination {
+            justify-content: center;
+        }
+
+        .page-link {
+            color: black;
+            background: none;
+            border: 1px black solid;
+        }
+
+        .page-link:hover {
+            color: white;
+            background: black;
+        }
+    </style>
     <header id="header">
         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -30,27 +46,35 @@
                             {% if loop.index0 % 4 == 0 %}
                                 <tr>
                                 <td>
-                                    <div class="image">
-                                        <img src="{{ asset(product.imgPath) }}" width="200" height="200" alt="Image 1">
-                                    </div>
-                                    <div class="name">
-                                        <b>{{ product.name }}</b>
-                                    </div>
-                                    <div class="price">
-                                        {{ product.price }} $
-                                    </div>
+                                    <a href="../products/{{ product.code }}"
+                                       style="text-decoration: none; color: black">
+                                        <div class="image">
+                                            <img src="{{ asset(product.imgPath) }}" width="200" height="200"
+                                                 alt="Image 1">
+                                        </div>
+                                        <div class="name">
+                                            <b>{{ product.name }}</b>
+                                        </div>
+                                        <div class="price">
+                                            {{ product.price }} $
+                                        </div>
+                                    </a>
                                 </td>
                             {% else %}
                                 <td>
-                                    <div class="image">
-                                        <img src="{{ asset(product.imgPath) }}" width="200" height="200" alt="Image 1">
-                                    </div>
-                                    <div class="name">
-                                        <b>{{ product.name }}</b>
-                                    </div>
-                                    <div class="price">
-                                        {{ product.price }} $
-                                    </div>
+                                    <a href="../products/{{ product.code }}"
+                                       style="text-decoration: none; color: black">
+                                        <div class="image">
+                                            <img src="{{ asset(product.imgPath) }}" width="200" height="200"
+                                                 alt="Image 1">
+                                        </div>
+                                        <div class="name">
+                                            <b>{{ product.name }}</b>
+                                        </div>
+                                        <div class="price">
+                                            {{ product.price }} $
+                                        </div>
+                                    </a>
                                 </td>
                             {% endif %}
                         {% else %}
@@ -60,6 +84,19 @@
                         {% endfor %}
                         </tbody>
                     </table>
+
+                    <nav aria-label="...">
+                        <ul class="pagination">
+
+                            {% for i in 1..(length / limit)|round(0,'ceil') %}
+                                <li class="page-item">
+                                    <button class="page-link" type="submit" value="{{ i }}"
+                                            onclick="setPage(this.value)">{{ i }}
+                                    </button>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
 
                 </div>
                 <div class="col-3">
@@ -89,21 +126,6 @@
                     </ul>
                 </div>
             </div>
-            <nav aria-label="...">
-                <ul class="pagination">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Previous</a>
-                    </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">2 <span class="sr-only"></span></a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav>
         </div>
 
         {% include 'footer.html.twig' %}
@@ -113,7 +135,18 @@
         function setCategory(value) {
             var urlSearchParams = new URLSearchParams(window.location.search);
             urlSearchParams.set('category', value);
+            urlSearchParams.set('page', 1);
             window.location.search = urlSearchParams;
+        }
+
+        function setPage(value) {
+            var urlSearchParams = new URLSearchParams(window.location.search);
+            urlSearchParams.set('page', value);
+            window.location.search = urlSearchParams;
+
+            var element = document.querySelectorAll("button[value=" + value + "]");
+            element.style.transform = "background: black;";
         }
     </script>
 {% endblock %}
+

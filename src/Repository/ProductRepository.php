@@ -22,7 +22,6 @@ class ProductRepository extends ServiceEntityRepository
      /**
       * @return Product[] Returns an array of Product objects
       */
-
     public function findByNameCat($name, $category, $orderBy, $limit, $offset)
     {
         if (is_null($name)) {
@@ -34,17 +33,40 @@ class ProductRepository extends ServiceEntityRepository
         $arr = explode(":", $orderBy, 2);
         $order = $arr[0];
         $ascDesk = $arr[1];
-
         return $this->createQueryBuilder('p')
-            ->where('LOWER(p.name) LIKE LOWER(:name)')
+            ->where('p.name LIKE :name')
             ->setParameter('name','%'.$name.'%')
-            ->andWhere('LOWER(p.category) LIKE LOWER(:category)')
+            ->andWhere('p.category LIKE :category')
             ->setParameter('category', $category)
             ->orderBy('p.'.$order, $ascDesk)
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult()
+            ;
+    }
+
+
+    /**
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws \Doctrine\ORM\NoResultException
+     */
+    public function countTotalLength($name, $category)
+    {
+        if (is_null($name)) {
+            $name = '%';
+        }
+        if (is_null($category)) {
+            $category = '%';
+        }
+        return $this->createQueryBuilder('p')
+            ->select('count(p.id)')
+            ->where('p.name LIKE :name')
+            ->setParameter('name','%'.$name.'%')
+            ->andWhere('p.category LIKE :category')
+            ->setParameter('category', $category)
+            ->getQuery()
+            ->getSingleScalarResult()
             ;
     }
 
