@@ -78,8 +78,16 @@
     var limit = document.getElementById("limit");
     var order = document.getElementById("sortby");
 
+    if (window.location.href === 'http://localhost:8000/products/') {
+        limit.value = localStorage.getItem('limit');
+        order.value = localStorage.getItem('order');
+
+        localStorage.setItem('limit', '16');
+        localStorage.setItem('order', 'created_at:DESC');
+    }
+
     limit.value = localStorage.getItem('limit');
-    order.value = localStorage.getItem('order')
+    order.value = localStorage.getItem('order');
 
     function changeLimit(value) {
 
