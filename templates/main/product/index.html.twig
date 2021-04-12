@@ -72,56 +72,15 @@
                     <nav aria-label="...">
                         <ul class="pagination">
 
-{#                            {% if limit == 32 %}#}
-{#                                <li class="page-item">#}
-{#                                    <button class="page-link" type="submit" value="1"#}
-{#                                            style="background: none;border: none"#}
-{#                                            onclick="setPage(this.value)">1#}
-{#                                    </button>#}
-{#                                </li>#}
-{#                            {% endif %}#}
-
-
-
-
-{#                            {% if limit == 16 %}#}
-{#                                {% if products|length < 16 %}#}
-
-{#                            {% elseif limit == 32 %}#}
-
-
-
-
-{#                            {% elseif limit == 64 %}#}
-
-{#                            {% elseif limit == 128 %}#}
-
-{#                            {% endif %}#}
-
-
-                            <li class="page-item">
-                                <button id="1" class="page-link" type="submit" value="1"
-                                        style="background: none;border: none"
-                                        onclick="setPage(this.value)">1
-                                </button>
-                            </li>
-                            <li class="page-item">
-                                <button id="2" class="page-link" type="submit" value="2"
-                                        style="background: none;border: none"
-                                        onclick="setPage(this.value)">2
-                                </button>
-                            <li class="page-item">
-                                <button id="3" class="page-link" type="submit" value="3"
-                                        style="background: none;border: none"
-                                        onclick="setPage(this.value)">3
-                                </button>
-                            </li>
-                            <li class="page-item">
-                                <button id="4" class="page-link" type="submit" value="4"
-                                        style="background: none;border: none"
-                                        onclick="setPage(this.value)">4
-                                </button>
-                            </li>
+                            {% for i in 0..(products|length / limit)|round(0, 'ceil') %}
+                                {% set page = i + 1 %}
+                                <li class="page-item">
+                                    <button class="page-link" type="submit" value="{{ page }}"
+                                            style="background: none; border: none"
+                                            onclick="setPage(this.value)">{{ page }}
+                                    </button>
+                                </li>
+                            {% endfor %}
                         </ul>
                     </nav>
 
