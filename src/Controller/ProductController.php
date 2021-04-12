@@ -28,7 +28,7 @@ class ProductController extends AbstractController
         $category = null;
         $page = 1;
         $limit = 10;
-        $orderBy = 'created_at';
+        $orderBy = 'created_at:ASC';
 
         if(isset($_GET['name'])) {
             $name = $_GET['name'];

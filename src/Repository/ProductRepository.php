@@ -31,13 +31,16 @@ class ProductRepository extends ServiceEntityRepository
         if (is_null($category)) {
             $category = '%';
         }
+        $arr = explode(":", $orderBy, 2);
+        $order = $arr[0];
+        $ascDesk = $arr[1];
 
         return $this->createQueryBuilder('p')
-            ->where('p.name LIKE :name')
+            ->where('LOWER(p.name) LIKE LOWER(:name)')
             ->setParameter('name','%'.$name.'%')
-            ->andWhere('p.category LIKE :category')
+            ->andWhere('LOWER(p.category) LIKE LOWER(:category)')
             ->setParameter('category', $category)
-            ->orderBy('p.'.$orderBy)
+            ->orderBy('p.'.$order, $ascDesk)
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->getQuery()

@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f78d007e-26cd-4920-85ed-4f8f6e419ac0" name="Default Changelist" comment="Product Controller ixed offset">
-      <change afterPath="$PROJECT_DIR$/templates/footer.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/navbar.html.twig" afterDir="false" />
+    <list default="true" id="f78d007e-26cd-4920-85ed-4f8f6e419ac0" name="Default Changelist" comment="Product index optimization. Modified navbar">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/product/product_details.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/product_details.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/ProductRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ProductRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +188,8 @@
       <workItem from="1618045808114" duration="972000" />
       <workItem from="1618047269253" duration="1090000" />
       <workItem from="1618087379323" duration="10890000" />
-      <workItem from="1618132059647" duration="1952000" />
+      <workItem from="1618132059647" duration="2382000" />
+      <workItem from="1618163573517" duration="3971000" />
     </task>
     <task id="LOCAL-00001" summary="Should add galery">
       <created>1617827726029</created>
@@ -388,7 +387,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618132311027</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Product index optimization. Modified navbar">
+      <created>1618134280062</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1618134280062</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -440,6 +446,7 @@
     <MESSAGE value="Merge remote-tracking branch 'origin/sasa' into sasa&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Controller/ProductController.php" />
     <MESSAGE value="Merge remote-tracking branch 'origin/sasa' into sasa" />
     <MESSAGE value="Product Controller ixed offset" />
-    <option name="LAST_COMMIT_MESSAGE" value="Product Controller ixed offset" />
+    <MESSAGE value="Product index optimization. Modified navbar" />
+    <option name="LAST_COMMIT_MESSAGE" value="Product index optimization. Modified navbar" />
   </component>
 </project>
