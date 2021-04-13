@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="Merge remote-tracking branch 'origin/ion' into sasa">
+    <list default="true" id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="solved bug with setting name after category. (form was guilty)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DefaultController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/ProductType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ProductType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ProductRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ProductRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/navbar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/navbar.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,10 +61,11 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="sasa" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -269,6 +267,8 @@
       <workItem from="1618132059647" duration="1952000" />
       <workItem from="1618239763828" duration="2520000" />
       <workItem from="1618298985334" duration="1197000" />
+      <workItem from="1618327083908" duration="959000" />
+      <workItem from="1618354442801" duration="1027000" />
     </task>
     <task id="LOCAL-00001" summary="Should add galery">
       <created>1617827726029</created>
@@ -473,7 +473,56 @@
       <option name="project" value="LOCAL" />
       <updated>1618224988790</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Merge remote-tracking branch 'origin/sasa'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <created>1618303513054</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1618303513054</updated>
+    </task>
+    <task id="LOCAL-00031" summary="search">
+      <created>1618324253287</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1618324253287</updated>
+    </task>
+    <task id="LOCAL-00032" summary="search">
+      <created>1618324270924</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1618324270924</updated>
+    </task>
+    <task id="LOCAL-00033" summary="search">
+      <created>1618325043844</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1618325043844</updated>
+    </task>
+    <task id="LOCAL-00034" summary="setName deletes other parameters">
+      <created>1618325094267</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1618325094267</updated>
+    </task>
+    <task id="LOCAL-00035" summary="setName deletes other parameters">
+      <created>1618325168350</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1618325168350</updated>
+    </task>
+    <task id="LOCAL-00036" summary="setName deletes other parameters">
+      <created>1618331659601</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1618331659601</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -505,8 +554,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Ion's main page" />
-    <MESSAGE value="Should add galery" />
     <MESSAGE value="Product-details to review" />
     <MESSAGE value="Added Product code on Product Details page" />
     <MESSAGE value="Added Product Entity" />
@@ -527,6 +574,11 @@
     <MESSAGE value="Product Controller ixed offset" />
     <MESSAGE value="Merged master" />
     <MESSAGE value="Merge remote-tracking branch 'origin/ion' into sasa" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/ion' into sasa" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/sasa'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
+    <MESSAGE value="Bug category-&gt;page not yet resolved" />
+    <MESSAGE value="search" />
+    <MESSAGE value="setName deletes other parameters" />
+    <MESSAGE value="solved bug with setting name after category. (form was guilty)" />
+    <option name="LAST_COMMIT_MESSAGE" value="solved bug with setting name after category. (form was guilty)" />
   </component>
 </project>
