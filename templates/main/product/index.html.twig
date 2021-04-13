@@ -87,14 +87,15 @@
 
                     <nav aria-label="...">
                         <ul class="pagination">
-
-                            {% for i in 1..(length / limit)|round(0,'ceil') %}
-                                <li class="page-item">
-                                    <button class="page-link" type="submit" value="{{ i }}"
-                                            onclick="setPage(this.value)">{{ i }}
-                                    </button>
-                                </li>
-                            {% endfor %}
+                            {% if length > 0 %}
+                                {% for i in 1..(length / limit)|round(0,'ceil') %}
+                                    <li class="page-item">
+                                        <button class="page-link" type="submit" value="{{ i }}"
+                                                onclick="setPage(this.value)">{{ i }}
+                                        </button>
+                                    </li>
+                                {% endfor %}
+                            {% endif %}
                         </ul>
                     </nav>
 

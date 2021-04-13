@@ -22,7 +22,7 @@ class ProductRepository extends ServiceEntityRepository
      /**
       * @return Product[] Returns an array of Product objects
       */
-    public function findByNameCat($name, $category, $orderBy, $limit, $offset)
+    public function search($name, $category, $orderBy, $limit, $offset)
     {
         if (is_null($name)) {
             $name = '%';
