@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="solved bug with setting name after category. (form was guilty)">
+    <list default="true" id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="Merge branch 'sasa'">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210409124406.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210409143323.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DefaultController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProductDetailsController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Product.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Repository/ProductRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ProductRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/product-details/index.html.twig" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +72,6 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -271,6 +276,8 @@
       <workItem from="1618327083908" duration="959000" />
       <workItem from="1618354442801" duration="1027000" />
       <workItem from="1618355884688" duration="562000" />
+      <workItem from="1618480584848" duration="833000" />
+      <workItem from="1618497271784" duration="1045000" />
     </task>
     <task id="LOCAL-00001" summary="Should add galery">
       <created>1617827726029</created>
@@ -531,7 +538,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618355649128</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Merge branch 'sasa'">
+      <created>1618356629743</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1618356629743</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -563,8 +577,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Product-details to review" />
-    <MESSAGE value="Added Product code on Product Details page" />
     <MESSAGE value="Added Product Entity" />
     <MESSAGE value="Added Product table" />
     <MESSAGE value="Added Product CRUD" />
@@ -588,6 +600,8 @@
     <MESSAGE value="search" />
     <MESSAGE value="setName deletes other parameters" />
     <MESSAGE value="solved bug with setting name after category. (form was guilty)" />
-    <option name="LAST_COMMIT_MESSAGE" value="solved bug with setting name after category. (form was guilty)" />
+    <MESSAGE value="modified search" />
+    <MESSAGE value="Merge branch 'sasa'" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'sasa'" />
   </component>
 </project>

@@ -58,7 +58,7 @@ class ProductController extends AbstractController
         $offset = ($page - 1) * $limit;
         return $this->render('main/product/index.html.twig', [
             'products' => $productRepository->search($name, $category, $orderBy, $limit, $offset),
-            'length' => $productRepository->countTotalLength($name, $category),
+            'length' => $productRepository->countTotal($name, $category),
             'limit' => $limit
         ]);
     }

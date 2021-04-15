@@ -45,17 +45,17 @@ class Product
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $img_path;
+    private $imgPath;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updated_at;
+    private $updatedAt;
 
     public function getId(): ?int
     {
@@ -112,36 +112,36 @@ class Product
 
     public function getImgPath(): ?string
     {
-        return $this->img_path;
+        return $this->imgPath;
     }
 
-    public function setImgPath(string $img_path): self
+    public function setImgPath(string $imgPath): self
     {
-        $this->img_path = $img_path;
+        $this->imgPath = $imgPath;
 
         return $this;
     }
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

@@ -60,7 +60,7 @@ class ProductRepository extends ServiceEntityRepository
      * @throws \Doctrine\ORM\NonUniqueResultException
      * @throws \Doctrine\ORM\NoResultException
      */
-    public function countTotalLength($name, $category)
+    public function countTotal($name, $category)
     {
         if (is_null($name)) {
             $name = '%';
