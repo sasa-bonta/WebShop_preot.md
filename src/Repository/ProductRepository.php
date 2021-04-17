@@ -2,10 +2,10 @@
 
 namespace App\Repository;
 
+use App\SearchCriteria;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Exception;
 
 /**
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
@@ -23,57 +23,47 @@ class ProductRepository extends ServiceEntityRepository
     /**
      * @return Product[] Returns an array of Product objects
      */
-    public function search($name, $category, $orderBy, $limit, $offset)
+    public function search(SearchCriteria $searchCriteria)
     {
-        $arr = explode(":", $orderBy, 2);
-        $order = $arr[0];
-        $ascDesk = $arr[1];
-        # добавь проверку $order и $ascDesc, потому что если поля не существует или $ascDesc будет
-        # иметь другое значение ты получишь ошибку
-        if ($order !== 'created_at' and $order !== 'price') {
-            throw new Exception('Unregistered order by');
-        }
-        if ($ascDesk !== 'ASC' and $ascDesk !== 'DESC') {
-            throw new Exception('Impossible sorting type');
-        }
+        $offset = ($searchCriteria->getPage() - 1) * $searchCriteria->getLimit();
         $query = $this->createQueryBuilder('p');
-        if ($name !== null) {
+        if ($searchCriteria->getName() !== null) {
             $query = $query
                 ->where('p.name LIKE :name')
-                ->setParameter('name', '%' . $name . '%'); # на самом деле это должно быть name% вместо %name%
+                ->setParameter('name', '%' . $searchCriteria->getName() . '%');
         }
-        if ($category !== null) {
+        if ($searchCriteria->getCategory() !== null) {
             $query = $query
                 ->andWhere('p.category LIKE :category')
-                ->setParameter('category', $category);
+                ->setParameter('category', $searchCriteria->getCategory());
         }
         return $query
-            ->orderBy('p.' . $order, $ascDesk)
+            ->orderBy('p.' . $searchCriteria->getOrder(), $searchCriteria->getAscDesc())
             ->setFirstResult($offset)
-            ->setMaxResults($limit)
+            ->setMaxResults($searchCriteria->getLimit())
             ->getQuery()
             ->getResult();
     }
-
 
     /**
      * @throws \Doctrine\ORM\NonUniqueResultException
      * @throws \Doctrine\ORM\NoResultException
      */
-    public function countTotal($name, $category)
+    public function countTotal(SearchCriteria $searchCriteria)
     {
-        if (is_null($name)) {
-            $name = '%';
+        $query = $this->createQueryBuilder('p')
+            ->select('count(p.id)');
+        if ($searchCriteria->getName() !== null) {
+            $query = $query
+                ->where('p.name LIKE :name')
+                ->setParameter('name', '%' . $searchCriteria->getName() . '%');
         }
-        if (is_null($category)) {
-            $category = '%';
+        if ($searchCriteria->getCategory() !== null) {
+            $query = $query
+                ->andWhere('p.category LIKE :category')
+                ->setParameter('category', $searchCriteria->getCategory());
         }
-        return $this->createQueryBuilder('p')
-            ->select('count(p.id)')
-            ->where('p.name LIKE :name')
-            ->setParameter('name', '%' . $name . '%')
-            ->andWhere('p.category LIKE :category')
-            ->setParameter('category', $category)
+        return $query
             ->getQuery()
             ->getSingleScalarResult();
     }

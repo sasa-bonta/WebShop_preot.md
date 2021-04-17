@@ -40,11 +40,8 @@ class DefaultController extends AbstractController
             $orderBy = $request->query->get('order');
         }
         # Catch and display errors
-//        if ($limit <= 0) {
+//        if ($limit <= 0 or $page <= 0) {
 //            throw new Exception('Limit must be positive');
-//        }
-//        if ($page <= 0) {
-//            throw new Exception('Number of page must be positive');
 //        }
         $offset = ($page - 1) * $limit;
         return $this->render('main/product/index.html.twig', [

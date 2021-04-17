@@ -1,0 +1,20 @@
+{# templates/bundles/TwigBundle/Exception/error404.html.twig #}
+{% extends '../../../base.html.twig' %}
+
+{% block title %}Product{% endblock %}
+
+{% block body %}
+    <header>
+        {# Slider HERE #}
+        <img class="img-fluid" src="{{ asset('assets/main/images/header-image.jpg') }}" width="2000" alt="1">
+    </header>
+
+    <div>
+        {# Navigation bar HERE #}
+        {% include '../../../navbar.html.twig' %}
+        <img src="{{ asset('assets/main/images/404.jpg') }}" alt="Image 2"
+             style="width:800px; padding-top: 50px; display: block; margin-left: auto; margin-right: auto;">
+        {# Footer #}
+        {% include '../../../footer.html.twig' %}
+    </div>
+{% endblock %}

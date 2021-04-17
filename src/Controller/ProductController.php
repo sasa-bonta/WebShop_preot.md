@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
+use App\SearchCriteria;
 use DateTime;
 use DateTimeZone;
 use Exception;
@@ -19,52 +20,55 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProductController extends AbstractController
 {
+    public function getParameter(string $param)
+    {
+        $request = Request::createFromGlobals();
+        $request->getPathInfo();
+        if ($request->query->get($param)) {
+            return $request->query->get($param);
+        } else {
+            return null;
+        }
+    }
+
     /**
      * @Route("/", name="product_index", methods={"GET"})
      * @throws Exception
      */
     public function index(ProductRepository $productRepository): Response
     {
-        // http://localhost:8000/product/?name=product&category=tools&page=1&limit=2&order=price
-        $name = null;
-        $category = null;
-        $page = 1;
-        $limit = 16;
-        $orderBy = 'created_at:ASC';
-        $request = Request::createFromGlobals();
-        $request->getPathInfo();
+        // http://localhost:8000/products/?name=product&category=tools&page=1&limit=2&order=price
+        $name = $this->getParameter('name');
+        $category = $this->getParameter('category');
 
-        if ($request->query->get('name')) {
-            $name = $request->query->get('name');
+        $page = $this->getParameter('page');
+        if (is_null($page)) $page = 1;
+        $limit = $this->getParameter('limit');
+        if (is_null($limit)) $limit = 16;
+        $orderBy = $this->getParameter('order');
+        if (is_null($orderBy)) $orderBy = 'created_at:ASC';
+
+        $arr = explode(":", $orderBy, 2);
+        $order = $arr[0];
+        $ascDesc = $arr[1];
+
+        try {
+            $searchCriteria = new SearchCriteria($name, $category, $page, $limit, $order, $ascDesc);
+        } catch (Exception $e) {
+            return $this->render('bad_request400.html.twig');
         }
-        if ($request->query->get('category')) {
-            $category = $request->query->get('category');
-        }
-        if ($request->query->get('page')) {
-            $page = $request->query->get('page');
-        }
-        if ($request->query->get('limit')) {
-            $limit = $request->query->get('limit');
-        }
-        if ($request->query->get('order')) {
-            $orderBy = $request->query->get('order');
-        }
-        if ($limit <= 0) {
-            throw new Exception('Limit must be positive');
-        }
-        if ($page <= 0) {
-            throw new Exception('Number of page must be positive');
-        }
-        $offset = ($page - 1) * $limit;
+
         return $this->render('main/product/index.html.twig', [
-            'products' => $productRepository->search($name, $category, $orderBy, $limit, $offset),
-            'length' => $productRepository->countTotal($name, $category),
-            'limit' => $limit
+            'products' => $productRepository->search($searchCriteria),
+            'length' => $productRepository->countTotal($searchCriteria),
+            'limit' => $searchCriteria->getLimit()
         ]);
+
     }
 
-    function generateRandomString($length = 10) {
-        return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
+    function generateRandomString($length = 10)
+    {
+        return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
     }
 
     /**
@@ -88,10 +92,7 @@ class ProductController extends AbstractController
 //                ]);
 //            }
             $entityManager = $this->getDoctrine()->getManager();
-            try {
-                $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
-            } catch (Exception $e) {
-            }
+            $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
             # Random product generator. To make it work comment all the fields excluding code from ProductType
 //            $categ = ['cars', 'toys', 'supplies', 'tools'];
 //            $product->setName('product' .rand(0, 30));
@@ -118,9 +119,6 @@ class ProductController extends AbstractController
      */
     public function show(Product $product): Response
     {
-//        return $this->render('product/show.html.twig', [
-//            'product' => $product,
-//        ]);
         return $this->render('main/product/product_details.html.twig', [
             'product' => $product,
         ]);
@@ -161,7 +159,6 @@ class ProductController extends AbstractController
             $entityManager->remove($product);
             $entityManager->flush();
         }
-
         return $this->redirectToRoute('product_index');
     }
 }
