@@ -55,7 +55,7 @@ class ProductController extends AbstractController
         try {
             $searchCriteria = new SearchCriteria($name, $category, $page, $limit, $order, $ascDesc);
         } catch (Exception $e) {
-            return $this->render('bad_request400.html.twig');
+            return $this->render('bad_request400.twig');
         }
 
         return $this->render('main/product/index.html.twig', [
@@ -133,10 +133,7 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            try {
-                $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
-            } catch (Exception $e) {
-            }
+            $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
             $product->setUpdatedAt($dateTime);
             $this->getDoctrine()->getManager()->flush();
 
