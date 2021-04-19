@@ -12,6 +12,7 @@ use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -20,34 +21,19 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProductController extends AbstractController
 {
-    public function getParameter(string $param)
-    {
-        $request = Request::createFromGlobals();
-        $request->getPathInfo();
-        if ($request->query->get($param)) {
-            return $request->query->get($param);
-        } else {
-            return null;
-        }
-    }
-
     /**
      * @Route("/", name="product_index", methods={"GET"})
      * @throws Exception
      */
-    public function index(ProductRepository $productRepository): Response
+    public function index(ProductRepository $productRepository, Request $request): Response
     {
         // http://localhost:8000/products/?name=product&category=tools&page=1&limit=2&order=price
-        $name = $this->getParameter('name');
-        $category = $this->getParameter('category');
 
-        $page = $this->getParameter('page');
-        if (is_null($page)) $page = 1;
-        $limit = $this->getParameter('limit');
-        if (is_null($limit)) $limit = 16;
-        $orderBy = $this->getParameter('order');
-        if (is_null($orderBy)) $orderBy = 'created_at:ASC';
-
+        $name = $request->query->get('name');
+        $category = $request->query->get('category');
+        $page = $request->query->get('page', 1);
+        $limit = $request->query->get('limit', 16);
+        $orderBy = $request->query->get('order', 'created_at:ASC');
         $arr = explode(":", $orderBy, 2);
         $order = $arr[0];
         $ascDesc = $arr[1];
@@ -55,7 +41,7 @@ class ProductController extends AbstractController
         try {
             $searchCriteria = new SearchCriteria($name, $category, $page, $limit, $order, $ascDesc);
         } catch (Exception $e) {
-            return $this->render('bad_request400.twig');
+            throw new BadRequestHttpException("400");
         }
 
         return $this->render('main/product/index.html.twig', [

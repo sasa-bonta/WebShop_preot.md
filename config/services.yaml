@@ -20,10 +20,6 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
             - '../src/Tests/'
-    # This listener handles only 404 errors in PROD mode
-    App\EventListener\ExceptionListener:
-        tags:
-            - { name: kernel.event_listener, event: kernel.exception }
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
