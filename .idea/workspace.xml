@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210411131230.php" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/Version20210411131230.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openapi.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/openapi.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/UserType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UserType.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,6 +185,28 @@
       <recent name="D:\UNI\Pentalog\WebShop_preot.md\WebShop_preot.md" />
     </key>
   </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="MySQL - @localhost: root" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="MySQL - @localhost: root" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@304b834f" type="9fbbdea:ServiceModel$ServiceNode" />
+              </path>
+            </expand>
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -193,7 +218,11 @@
       <option name="presentableId" value="Default" />
       <updated>1618398678845</updated>
       <workItem from="1618398681664" duration="22000" />
-      <workItem from="1618500627713" duration="7429000" />
+      <workItem from="1618500627713" duration="7545000" />
+      <workItem from="1618563007881" duration="25000" />
+      <workItem from="1618836857198" duration="8506000" />
+      <workItem from="1618909582728" duration="38000" />
+      <workItem from="1618923619903" duration="50000" />
     </task>
     <servers />
   </component>
@@ -201,18 +230,42 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="2281" y="94" key="#YAML" timestamp="1618923669188">
+      <screen x="1920" y="0" width="1536" height="864" />
+    </state>
+    <state x="2281" y="94" key="#YAML/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1618923669188" />
+    <state x="570" y="151" key="#com.intellij.ide.util.MemberChooser" timestamp="1618841892726">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="570" y="151" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1618841892726" />
     <state x="549" y="190" key="FileChooserDialogImpl" timestamp="1618398701591">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="549" y="190" key="FileChooserDialogImpl/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1618398701591" />
+    <state width="1023" height="354" key="GridCell.Tab.0.bottom" timestamp="1618849528922">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1023" height="354" key="GridCell.Tab.0.bottom/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1618849528922" />
+    <state width="1023" height="354" key="GridCell.Tab.0.center" timestamp="1618849528922">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1023" height="354" key="GridCell.Tab.0.center/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1618849528922" />
+    <state width="1023" height="354" key="GridCell.Tab.0.left" timestamp="1618849528922">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1023" height="354" key="GridCell.Tab.0.left/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1618849528922" />
+    <state width="1023" height="354" key="GridCell.Tab.0.right" timestamp="1618849528922">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1023" height="354" key="GridCell.Tab.0.right/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1618849528922" />
     <state x="481" y="150" key="MultipleFileMergeDialog" timestamp="1618514705892">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="481" y="150" key="MultipleFileMergeDialog/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1618514705892" />
-    <state x="492" y="267" key="NewPhpClassDialog" timestamp="1618512066676">
+    <state x="492" y="267" key="NewPhpClassDialog" timestamp="1618838740726">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="492" y="267" key="NewPhpClassDialog/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1618512066676" />
+    <state x="492" y="267" key="NewPhpClassDialog/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1618838740726" />
     <state x="557" y="148" key="git4idea.branch.GitSmartOperationDialog" timestamp="1618514697980">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
