@@ -33,6 +33,15 @@ class ProductController extends AbstractController
         $category = $request->query->get('category');
         $page = $request->query->get('page', 1);
         $limit = $request->query->get('limit', 16);
+        switch ($limit) {
+            case 16:
+            case 32:
+            case 64:
+            case 128:
+                break;
+            default:
+                throw new BadRequestHttpException("400");
+        }
         $orderBy = $request->query->get('order', 'created_at:ASC');
         $arr = explode(":", $orderBy, 2);
         $order = $arr[0];
@@ -44,12 +53,16 @@ class ProductController extends AbstractController
             throw new BadRequestHttpException("400");
         }
 
+        $length = $productRepository->countTotal($searchCriteria);
+        if ($page > ceil($length / $limit)) {
+            throw new BadRequestHttpException("400");
+        }
+
         return $this->render('main/product/index.html.twig', [
             'products' => $productRepository->search($searchCriteria),
-            'length' => $productRepository->countTotal($searchCriteria),
+            'length' => $length,
             'limit' => $searchCriteria->getLimit()
         ]);
-
     }
 
     function generateRandomString($length = 10)

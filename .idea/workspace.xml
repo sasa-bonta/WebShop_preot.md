@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="I'm trying to add custom 404">
-      <change afterPath="$PROJECT_DIR$/templates/bundles/TwigBundle/Exception/error400.html.twig" afterDir="false" />
+    <list default="true" id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="Error 400 &amp; 404. Optimized getting parameters">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EventListener/ExceptionListener.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bundles/TwigBundle/Exception/error404.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bundles/TwigBundle/Exception/error404.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bad_request400.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/not_found404.html.twig" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -282,7 +280,8 @@
       <workItem from="1618599865241" duration="4469000" />
       <workItem from="1618692390972" duration="4432000" />
       <workItem from="1618736299024" duration="2153000" />
-      <workItem from="1618846209943" duration="4365000" />
+      <workItem from="1618846209943" duration="5483000" />
+      <workItem from="1618984575334" duration="4673000" />
     </task>
     <task id="LOCAL-00001" summary="Should add galery">
       <created>1617827726029</created>
@@ -557,7 +556,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618696483543</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Error 400 &amp; 404. Optimized getting parameters">
+      <created>1618850794724</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1618850794724</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -589,7 +595,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added Product table" />
     <MESSAGE value="Added Product CRUD" />
     <MESSAGE value="Added image path Product CRUD" />
     <MESSAGE value="New Table product created" />
@@ -614,6 +619,7 @@
     <MESSAGE value="modified search" />
     <MESSAGE value="Merge branch 'sasa'" />
     <MESSAGE value="class SearchCriteria.php, added bad_request400.html.twig" />
-    <option name="LAST_COMMIT_MESSAGE" value="class SearchCriteria.php, added bad_request400.html.twig" />
+    <MESSAGE value="Error 400 &amp; 404. Optimized getting parameters" />
+    <option name="LAST_COMMIT_MESSAGE" value="Error 400 &amp; 404. Optimized getting parameters" />
   </component>
 </project>
