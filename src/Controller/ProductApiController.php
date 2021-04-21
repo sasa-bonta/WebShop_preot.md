@@ -10,8 +10,12 @@ use App\Repository\ProductRepository;
 use App\SearchCriteria;
 use DateTime;
 use DateTimeZone;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -121,15 +125,11 @@ class ProductApiController extends AbstractController
     }
 
     /**
-     * @Route("/{code}", name="productApi_delete", methods={"POST"})
+     * @Route("/{code}", name="productApi_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Product $product): Response
+    public function delete(Product $product, ProductRepository $productRepository): JsonResponse
     {
-        if ($this->isCsrfTokenValid('delete' . $product->getCode(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($product);
-            $entityManager->flush();
-        }
-        return $this->redirectToRoute('product_index');
+        $productRepository->delete($product);
+        return new JsonResponse(['status' => 'Product #' .$product->getCode() .' deleted']);
     }
 }

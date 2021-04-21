@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="Redirect from / to /products">
-      <change afterPath="$PROJECT_DIR$/src/Controller/ProductApiController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/productApi/_delete_form.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/productApi/_form.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/productApi/edit.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/productApi/index.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/productApi/new.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/productApi/product_details.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/productApi/show.html.twig" afterDir="false" />
+    <list default="true" id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="Get paginated products api. Get product by code api. Edit product /product/{code}/edit repaired">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/product/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/product/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProductApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductApiController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/ProductRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ProductRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -287,7 +280,7 @@
       <workItem from="1618692390972" duration="4432000" />
       <workItem from="1618736299024" duration="2153000" />
       <workItem from="1618846209943" duration="5483000" />
-      <workItem from="1618984575334" duration="9704000" />
+      <workItem from="1618984575334" duration="15250000" />
     </task>
     <task id="LOCAL-00001" summary="Should add galery">
       <created>1617827726029</created>
@@ -583,7 +576,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618990533122</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Get paginated products api. Get product by code api. Edit product /product/{code}/edit repaired">
+      <created>1618998382769</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1618998382769</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -615,7 +615,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="New Table product created" />
     <MESSAGE value="Created at and Updated at works well" />
     <MESSAGE value="Added Description" />
     <MESSAGE value="Find product by code works :D" />
@@ -640,6 +639,7 @@
     <MESSAGE value="Error 400 &amp; 404. Optimized getting parameters" />
     <MESSAGE value="Verifying if page isn't bigger that last page and if limit corresponds with limit from input" />
     <MESSAGE value="Redirect from / to /products" />
-    <option name="LAST_COMMIT_MESSAGE" value="Redirect from / to /products" />
+    <MESSAGE value="Get paginated products api. Get product by code api. Edit product /product/{code}/edit repaired" />
+    <option name="LAST_COMMIT_MESSAGE" value="Get paginated products api. Get product by code api. Edit product /product/{code}/edit repaired" />
   </component>
 </project>

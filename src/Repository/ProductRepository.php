@@ -6,6 +6,7 @@ use App\SearchCriteria;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 
 /**
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
@@ -26,6 +27,7 @@ class ProductRepository extends ServiceEntityRepository
     public function search(SearchCriteria $searchCriteria)
     {
         $offset = ($searchCriteria->getPage() - 1) * $searchCriteria->getLimit();
+
         $query = $this->createQueryBuilder('p');
         if ($searchCriteria->getName() !== null) {
             $query = $query
@@ -68,6 +70,15 @@ class ProductRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
+    /**
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Doctrine\ORM\ORMException
+     */
+    public function delete(Product $product)
+    {
+        $this->getEntityManager()->remove($product);
+        $this->getEntityManager()->flush();
+    }
     /*
     public function findByExampleField($value)
     {
