@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="Verifying if page isn't bigger that last page and if limit corresponds with limit from input">
+    <list default="true" id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="Redirect from / to /products">
+      <change afterPath="$PROJECT_DIR$/src/Controller/ProductApiController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/productApi/_delete_form.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/productApi/_form.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/productApi/edit.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/productApi/index.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/productApi/new.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/productApi/product_details.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/productApi/show.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/product/_delete_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/_delete_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/product/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/product/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/product/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/product/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/product/product_details.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/product_details.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/product/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/product/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/product/edit.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -204,25 +206,25 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/bundles/TwigBundle/Exception" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/productApi" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/productApi" />
       <recent name="$PROJECT_DIR$/templates/bundles/TwigBundle/Exception" />
       <recent name="$PROJECT_DIR$/public/assets/main/images" />
       <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/templates/product" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/main" />
+      <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$/templates/bundles/TwigBundle/Exception" />
       <recent name="$PROJECT_DIR$/src" />
-      <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$/src/Controller" />
-      <recent name="D:\UNI\Pentalog\WebShop_preot.md\WebShop_preot.md\templates\main" />
     </key>
   </component>
   <component name="ServiceViewManager">
@@ -285,7 +287,7 @@
       <workItem from="1618692390972" duration="4432000" />
       <workItem from="1618736299024" duration="2153000" />
       <workItem from="1618846209943" duration="5483000" />
-      <workItem from="1618984575334" duration="5749000" />
+      <workItem from="1618984575334" duration="9704000" />
     </task>
     <task id="LOCAL-00001" summary="Should add galery">
       <created>1617827726029</created>
@@ -574,7 +576,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618989326932</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Redirect from / to /products">
+      <created>1618990533122</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1618990533122</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -606,7 +615,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added image path Product CRUD" />
     <MESSAGE value="New Table product created" />
     <MESSAGE value="Created at and Updated at works well" />
     <MESSAGE value="Added Description" />
@@ -631,6 +639,7 @@
     <MESSAGE value="class SearchCriteria.php, added bad_request400.html.twig" />
     <MESSAGE value="Error 400 &amp; 404. Optimized getting parameters" />
     <MESSAGE value="Verifying if page isn't bigger that last page and if limit corresponds with limit from input" />
-    <option name="LAST_COMMIT_MESSAGE" value="Verifying if page isn't bigger that last page and if limit corresponds with limit from input" />
+    <MESSAGE value="Redirect from / to /products" />
+    <option name="LAST_COMMIT_MESSAGE" value="Redirect from / to /products" />
   </component>
 </project>
