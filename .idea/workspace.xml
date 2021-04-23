@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="Get paginated products api. Get product by code api. Edit product /product/{code}/edit repaired">
+    <list default="true" id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="Api delete">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ProductApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductApiController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ProductRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ProductRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -280,7 +280,9 @@
       <workItem from="1618692390972" duration="4432000" />
       <workItem from="1618736299024" duration="2153000" />
       <workItem from="1618846209943" duration="5483000" />
-      <workItem from="1618984575334" duration="15250000" />
+      <workItem from="1618984575334" duration="17980000" />
+      <workItem from="1619100898483" duration="425000" />
+      <workItem from="1619161192863" duration="3035000" />
     </task>
     <task id="LOCAL-00001" summary="Should add galery">
       <created>1617827726029</created>
@@ -583,7 +585,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618998382769</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Api delete">
+      <created>1619011960668</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1619011960668</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -615,7 +624,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Created at and Updated at works well" />
     <MESSAGE value="Added Description" />
     <MESSAGE value="Find product by code works :D" />
     <MESSAGE value="Show by code, edit by code, delete by code work well" />
@@ -640,6 +648,7 @@
     <MESSAGE value="Verifying if page isn't bigger that last page and if limit corresponds with limit from input" />
     <MESSAGE value="Redirect from / to /products" />
     <MESSAGE value="Get paginated products api. Get product by code api. Edit product /product/{code}/edit repaired" />
-    <option name="LAST_COMMIT_MESSAGE" value="Get paginated products api. Get product by code api. Edit product /product/{code}/edit repaired" />
+    <MESSAGE value="Api delete" />
+    <option name="LAST_COMMIT_MESSAGE" value="Api delete" />
   </component>
 </project>

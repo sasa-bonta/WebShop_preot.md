@@ -60,38 +60,34 @@ class ProductApiController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="productApi_new", methods={"GET","POST"})
+     * @Route("/new", name="productApi_new", methods={"POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request): JsonResponse
     {
+        $parameters = json_decode($request->getContent(), true);
+//        var_dump($parameters);
         $product = new Product();
-        $form = $this->createForm(ProductType::class, $product);
-        $form->handleRequest($request);
+        $entityManager = $this->getDoctrine()->getManager();
+        $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
+        $product->setCode($parameters['code']);
+        $product->setName($parameters['name']);
+        $product->setCategory($parameters['category']);
+        $product->setPrice($parameters['price']);
+        $product->setImgPath($parameters['imgPath']);
+        $product->setDescription($parameters['description']);
+        $product->setCreatedAt($dateTime);
+        $entityManager->persist($product);
+        $entityManager->flush();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            # Errors solve later
-//            $repo = $this->getDoctrine()->getRepository(Product::class);
-//            if ($repo->count(['code'=>$product->getCode()]) > 0) {
-//                # code 400, display alert. Return this
-//                return $this->render('product/new.html.twig', [
-//                    'errors' => ['duplicated code'],
-//                    'product' => $product,
-//                    'form' => $form->createView(),
-//                ]);
-//            }
-            $entityManager = $this->getDoctrine()->getManager();
-            $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
-            $product->setCreatedAt($dateTime);
-            $entityManager->persist($product);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('product_index');
-        }
-
-        return $this->render('main/product/new.html.twig', [
-            'product' => $product,
-            'form' => $form->createView(),
-        ]);
+        return new JsonResponse(['status' => '201',
+            'id' => $product->getId(),
+            'code' => $product->getCode(),
+            'name' => $product->getName(),
+            'category' => $product->getCategory(),
+            'price' => $product->getPrice(),
+            'image' => $product->getImgPath(),
+            'description' => $product->getDescription(),
+            'created at' => $product->getCreatedAt()]);
     }
 
     /**
@@ -130,6 +126,6 @@ class ProductApiController extends AbstractController
     public function delete(Product $product, ProductRepository $productRepository): JsonResponse
     {
         $productRepository->delete($product);
-        return new JsonResponse(['status' => 'Product #' .$product->getCode() .' deleted']);
+        return new JsonResponse(['status' => 'Product #' . $product->getCode() . ' deleted']);
     }
 }
