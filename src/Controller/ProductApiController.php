@@ -5,16 +5,12 @@ namespace App\Controller;
 
 
 use App\Entity\Product;
-use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use App\SearchCriteria;
 use DateTime;
 use DateTimeZone;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -65,7 +61,6 @@ class ProductApiController extends AbstractController
     public function new(Request $request): JsonResponse
     {
         $parameters = json_decode($request->getContent(), true);
-//        var_dump($parameters);
         $product = new Product();
         $entityManager = $this->getDoctrine()->getManager();
         $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
