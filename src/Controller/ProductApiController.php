@@ -79,7 +79,7 @@ class ProductApiController extends AbstractController
         $entityManager->persist($product);
         $entityManager->flush();
 
-        return new JsonResponse(['status' => '201',
+        return new JsonResponse(['status' => '201 Created',
             'id' => $product->getId(),
             'code' => $product->getCode(),
             'name' => $product->getName(),
@@ -99,25 +99,34 @@ class ProductApiController extends AbstractController
     }
 
     /**
-     * @Route("/{code}/edit", name="productApi_edit", methods={"GET","POST"})
+     * @Route("/{code}", name="productApi_edit", methods={"PUT"})
      */
-    public function edit(Request $request, Product $product): Response
+    public function edit(Request $request, Product $product, ProductRepository $productRepository): JsonResponse
     {
-        $form = $this->createForm(ProductType::class, $product);
-        $form->handleRequest($request);
+        $parameters = json_decode($request->getContent(), true);
+//        var_dump($parameters);
+        $product = $productRepository->findOneBy(array('code' => $parameters['code']));
+        $entityManager = $this->getDoctrine()->getManager();
+        $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
+        $product->setName($parameters['name']);
+        $product->setCategory($parameters['category']);
+        $product->setPrice($parameters['price']);
+        $product->setImgPath($parameters['imgPath']);
+        $product->setDescription($parameters['description']);
+        $product->setUpdatedAt($dateTime);
+        $entityManager->persist($product);
+        $entityManager->flush();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
-            $product->setUpdatedAt($dateTime);
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('product_index');
-        }
-
-        return $this->render('productApi/edit.html.twig', [
-            'product' => $product,
-            'form' => $form->createView(),
-        ]);
+        return new JsonResponse(['status' => '202 Updated',
+            'id' => $product->getId(),
+            'code' => $product->getCode(),
+            'name' => $product->getName(),
+            'category' => $product->getCategory(),
+            'price' => $product->getPrice(),
+            'image' => $product->getImgPath(),
+            'description' => $product->getDescription(),
+            'created at' => $product->getCreatedAt(),
+            'updated at' => $product->getUpdatedAt()]);
     }
 
     /**
