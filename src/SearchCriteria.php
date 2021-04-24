@@ -4,6 +4,10 @@
 namespace App;
 
 
+use App\Exceptions\InvalidLimitException;
+use App\Exceptions\InvalidPageException;
+use App\Exceptions\NonexistentOrderByColumn;
+use App\Exceptions\NonexistentOrderingType;
 use Exception;
 
 class SearchCriteria
@@ -24,22 +28,22 @@ class SearchCriteria
         $this->name = $name;
         $this->category = $category;
         if ($page <= 0) {
-            throw new Exception("Page must be positive");
+            throw new InvalidPageException("Page must be positive");
         } else {
             $this->page = $page;
         }
         if ($limit <= 0) {
-            throw new Exception("Limit must be positive");
+            throw new InvalidLimitException("Limit must be positive");
         } else {
             $this->limit = $limit;
         }
         if ($order !== 'created_at' and $order !== 'price') {
-            throw new Exception("Nonexistent column name");
+            throw new NonexistentOrderByColumn("Nonexistent column name");
         } else {
             $this->order = $order;
         }
         if ($ascDesc !== 'ASC' and $ascDesc !== 'DESC') {
-            throw new Exception("Nonexistent sort order");
+            throw new NonexistentOrderingType("Nonexistent sort order");
         } else {
             $this->ascDesc = $ascDesc;
         }

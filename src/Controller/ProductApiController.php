@@ -5,6 +5,10 @@ namespace App\Controller;
 
 
 use App\Entity\Product;
+use App\Exceptions\InvalidLimitException;
+use App\Exceptions\InvalidPageException;
+use App\Exceptions\NonexistentOrderByColumn;
+use App\Exceptions\NonexistentOrderingType;
 use App\Repository\ProductRepository;
 use App\SearchCriteria;
 use DateTime;
@@ -34,7 +38,7 @@ class ProductApiController extends AbstractController
         $page = $request->query->get('page', 1);
         $limit = $request->query->get('limit', 16);
         if ($limit > 100) {
-            throw new BadRequestHttpException("400");
+            return $this->json(array('code' => 400, 'message' => 'limit must be < 100>'));
         }
         $orderBy = $request->query->get('order', 'created_at:ASC');
         $arr = explode(":", $orderBy, 2);
@@ -43,13 +47,19 @@ class ProductApiController extends AbstractController
 
         try {
             $searchCriteria = new SearchCriteria($name, $category, $page, $limit, $order, $ascDesc);
-        } catch (Exception $e) {
-            throw new BadRequestHttpException("400");
+        } catch (InvalidPageException $e) {
+            return $this->json(array('code' => 400, 'message' => 'page must be positive'));
+        } catch (InvalidLimitException $e) {
+            return $this->json(array('code' => 400, 'message' => 'limit must be positive'));
+        } catch (NonexistentOrderByColumn $e) {
+            return $this->json(array('code' => 400, 'message' => 'nonexistent column name'));
+        } catch (NonexistentOrderingType $e) {
+            return $this->json(array('code' => 400, 'message' => 'nonexistent sort order'));
         }
 
         $length = $productRepository->countTotal($searchCriteria);
         if ($page > ceil($length / $limit)) {
-            throw new BadRequestHttpException("400");
+            return $this->json(array('code' => 400, 'message' => 'page limit exceeded'));
         }
 
         return $this->json($productRepository->search($searchCriteria));
