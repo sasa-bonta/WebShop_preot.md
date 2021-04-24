@@ -18,7 +18,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -84,21 +83,14 @@ class ProductApiController extends AbstractController
         $entityManager->persist($product);
         $entityManager->flush();
 
-        return new JsonResponse(['status' => '201 Created',
-            'id' => $product->getId(),
-            'code' => $product->getCode(),
-            'name' => $product->getName(),
-            'category' => $product->getCategory(),
-            'price' => $product->getPrice(),
-            'image' => $product->getImgPath(),
-            'description' => $product->getDescription(),
-            'created at' => $product->getCreatedAt()]);
+        return new JsonResponse(['code' => 201,
+            'message' => 'new product created']);
     }
 
     /**
      * @Route("/{code}", name="productApi_show", methods={"GET"})
      */
-    public function show(Product $product): Response
+    public function show(ProductRepository $productRepository, Product $product): Response
     {
         return $this->json($product);
     }
@@ -109,7 +101,6 @@ class ProductApiController extends AbstractController
     public function edit(Request $request, Product $product, ProductRepository $productRepository): JsonResponse
     {
         $parameters = json_decode($request->getContent(), true);
-//        var_dump($parameters);
         $product = $productRepository->findOneBy(array('code' => $parameters['code']));
         $entityManager = $this->getDoctrine()->getManager();
         $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
@@ -122,16 +113,8 @@ class ProductApiController extends AbstractController
         $entityManager->persist($product);
         $entityManager->flush();
 
-        return new JsonResponse(['status' => '202 Updated',
-            'id' => $product->getId(),
-            'code' => $product->getCode(),
-            'name' => $product->getName(),
-            'category' => $product->getCategory(),
-            'price' => $product->getPrice(),
-            'image' => $product->getImgPath(),
-            'description' => $product->getDescription(),
-            'created at' => $product->getCreatedAt(),
-            'updated at' => $product->getUpdatedAt()]);
+        return new JsonResponse(['code' => 201,
+            'message' => 'product updated']);
     }
 
     /**
@@ -140,6 +123,7 @@ class ProductApiController extends AbstractController
     public function delete(Product $product, ProductRepository $productRepository): JsonResponse
     {
         $productRepository->delete($product);
-        return new JsonResponse(['status' => 'Product #' . $product->getCode() . ' deleted']);
+        return new JsonResponse(['code' => 200,
+            'message' => 'product deleted']);
     }
 }
