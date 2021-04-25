@@ -76,7 +76,7 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             # Errors solve later
 //            $repo = $this->getDoctrine()->getRepository(Product::class);
-//            if ($repo->count(['code'=>$product->getCode()]) > 0) {
+//            if ($repo->count(['code'=> $product->getCode()]) > 0) {
 //                # code 400, display alert. Return this
 //                return $this->render('product/new.html.twig', [
 //                    'errors' => ['duplicated code'],

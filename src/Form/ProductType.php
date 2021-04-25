@@ -4,8 +4,11 @@ namespace App\Form;
 
 use App\Entity\Product;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Positive;
 
 class ProductType extends AbstractType
 {
@@ -14,11 +17,22 @@ class ProductType extends AbstractType
         $builder
             ->add('code')
             ->add('name')
-            ->add('category')
+            ->add('category', ChoiceType::class, [
+                'choices' => [
+                    'Tools' => 'tools',
+                    'Supplies' => 'supplies',
+                    'Cars' => 'cars',
+                    'Toys' => 'toys',
+                ],])
             ->add('description')
-            ->add('price')
-            ->add('img_path')
-        ;
+            ->add('price', NumberType::class, [
+                'mapped' => false,
+                'constraints' => [new Positive()],
+            ])
+            ->add('img_path', null, [
+                'required' => false,
+                'empty_data' => '/assets/main/images/no-image.png',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
