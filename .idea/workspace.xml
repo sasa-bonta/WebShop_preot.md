@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="Admin crud pagination">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="Errors for admin pages: create, update">
       <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/ProductType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ProductType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/product/list_of_products.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/product/list_of_products.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/navbar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/navbar.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/product/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/product/edit.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -291,21 +287,7 @@
       <workItem from="1619100898483" duration="425000" />
       <workItem from="1619161192863" duration="6870000" />
       <workItem from="1619258048308" duration="9809000" />
-      <workItem from="1619328060249" duration="17959000" />
-    </task>
-    <task id="LOCAL-00004" summary="Added Product Entity">
-      <created>1617904958745</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1617904958745</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Added Product table">
-      <created>1617905769287</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1617905769287</updated>
+      <workItem from="1619328060249" duration="18260000" />
     </task>
     <task id="LOCAL-00006" summary="Added Product CRUD">
       <created>1617905975319</created>
@@ -636,7 +618,21 @@
       <option name="project" value="LOCAL" />
       <updated>1619343692241</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="Fixed bug search by name from products details page">
+      <created>1619350165055</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1619350165055</updated>
+    </task>
+    <task id="LOCAL-00054" summary="Errors for admin pages: create, update">
+      <created>1619350343373</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1619350343373</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -668,8 +664,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Merge remote-tracking branch 'origin/sasa' into sasa&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Controller/ProductController.php" />
-    <MESSAGE value="Merge remote-tracking branch 'origin/sasa' into sasa" />
     <MESSAGE value="Product Controller ixed offset" />
     <MESSAGE value="Merged master" />
     <MESSAGE value="Merge remote-tracking branch 'origin/ion' into sasa" />
@@ -693,6 +687,8 @@
     <MESSAGE value="Admin crud pages" />
     <MESSAGE value="Admin crud navbar works" />
     <MESSAGE value="Admin crud pagination" />
-    <option name="LAST_COMMIT_MESSAGE" value="Admin crud pagination" />
+    <MESSAGE value="Fixed bug search by name from products details page" />
+    <MESSAGE value="Errors for admin pages: create, update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Errors for admin pages: create, update" />
   </component>
 </project>
