@@ -1,6 +1,24 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
+    <style>
+        .pagination {
+            justify-content: center;
+        }
+
+        .page-link {
+            color: black;
+            background: none;
+            border: 1px black solid;
+        }
+
+        .page-link:hover {
+            color: white;
+            background: black;
+        }
+    </style>
+
     {% include 'admin/admin_header.html.twig' %}
     <br>
     <h1 align="center">Products list</h1>
@@ -40,6 +58,21 @@
                     {% endfor %}
                     </tbody>
                 </table>
+
+                <nav aria-label="...">
+                    <ul class="pagination">
+                        {% if length > 0 %}
+                            {% for i in 1..(length / limit)|round(0,'ceil') %}
+                                <li class="page-item">
+                                    <button class="page-link" type="submit" value="{{ i }}"
+                                            onclick="setPage(this.value)">{{ i }}
+                                    </button>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </nav>
+
             </div>
 
             <div class="col-3">
