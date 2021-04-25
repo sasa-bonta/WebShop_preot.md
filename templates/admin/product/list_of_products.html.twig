@@ -2,37 +2,92 @@
 
 {% block body %}
     {% include 'admin/admin_header.html.twig' %}
+    <br>
+    <h1 align="center">Products list</h1>
+    <div class="container">
+        <div class="row my-3">
+            <div class="col-9">
+                <table class="table table-striped table-condensed">
+                    <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Created at</th>
+                        <th>Updated at</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for product in products %}
+                        <tr>
+                            <td>{{ product.code }}</td>
+                            <td>{{ product.name }}</td>
+                            <td>{{ product.category }}</td>
+                            <td>{{ product.price }}</td>
+                            <td>{{ product.createdAt|date('d-m-Y') }}</td>
+                            <td>{{ product.updatedAt ? product.updatedAt|date('Y-m-d') : '---' }}</td>
+                            <td>
+                                <a href="{{ path('product_show_detailed', { 'code': product.code }) }}">
+                                    <button class="btn btn-success">Show</button>
+                                </a>
+                                <a href="{{ path('product_edit', { 'code': product.code }) }}">
+                                    <button class="btn btn-warning">edit</button>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
 
-    <h1>Products list</h1>
+            <div class="col-3">
+                <h2>Categories</h2>
+                <ul class="list-group">
 
-    <table class="table table-striped table-condensed">
-        <thead>
-        <tr>
-            <th>Code</th>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Created at</th>
-            <th>Updated at</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for product in products %}
-            <tr>
-                <td>{{ product.code }}</td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.category }}</td>
-                <td>{{ product.createdAt|date('d-m-Y') }}</td>
-                <td>{{ product.updatedAt ? product.updatedAt|date('Y-m-d') : '---' }}</td>
-                <td>
-                    <a href="{{ path('product_show_detailed', { 'code': product.code }) }}"><button class="btn btn-success">Show</button></a>
-                    <a href="{{ path('product_edit', { 'code': product.code }) }}"><button class="btn btn-warning">edit</button></a>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
+                    <li class="list-group-item">
+                        <button type="submit" value="tools" style="background: none;border: none"
+                                onclick="setCategory(this.value)">Tools
+                        </button>
+                    </li>
+                    <li class="list-group-item">
+                        <button type="submit" value="supplies" style="background: none;border: none"
+                                onclick="setCategory(this.value)">Supplies
+                        </button>
+                    </li>
+                    <li class="list-group-item">
+                        <button type="submit" value="cars" style="background: none;border: none"
+                                onclick="setCategory(this.value)">Cars
+                        </button>
+                    </li>
+                    <li class="list-group-item">
+                        <button type="submit" value="toys" style="background: none;border: none"
+                                onclick="setCategory(this.value)">Toys
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <a href="{{ path('product_new') }}" class="btn btn-primary">Add new product</a>
 
+
+    <script>
+        function setCategory(value) {
+            var urlSearchParams = new URLSearchParams(window.location.search);
+            urlSearchParams.set('category', value);
+            urlSearchParams.set('page', 1);
+            window.location.search = urlSearchParams;
+        }
+
+        function setPage(value) {
+            var urlSearchParams = new URLSearchParams(window.location.search);
+            urlSearchParams.set('page', value);
+            window.location.search = urlSearchParams;
+
+            var element = document.querySelectorAll("button[value=" + value + "]");
+            element.style.transform = "background: black;";
+        }
+    </script>
 {% endblock %}

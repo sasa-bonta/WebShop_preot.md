@@ -33,14 +33,8 @@ class AdminController extends AbstractController
         $category = $request->query->get('category');
         $page = $request->query->get('page', 1);
         $limit = $request->query->get('limit', 16);
-        switch ($limit) {
-            case 16:
-            case 32:
-            case 64:
-            case 128:
-                break;
-            default:
-                throw new BadRequestHttpException("400");
+        if ($limit > 120) {
+            throw new BadRequestHttpException("400");
         }
         $orderBy = $request->query->get('order', 'created_at:ASC');
         $arr = explode(":", $orderBy, 2);

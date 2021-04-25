@@ -4,24 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="Api products responses">
-      <change afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/admin_header.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/crud_base.thml.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/navbar-admin.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/product/_form.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/product/list_of_products.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/product/new.html.twig" afterDir="false" />
+    <list default="true" id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="Admin crud pages">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/product/_delete_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/product/_delete_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/product/_form.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/product/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/product/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/product/new.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/product/product_details.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/product/product_details.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/product/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/product/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/navbar-admin.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/navbar-admin.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/product/list_of_products.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/product/list_of_products.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/navbar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/navbar.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -303,14 +290,7 @@
       <workItem from="1619100898483" duration="425000" />
       <workItem from="1619161192863" duration="6870000" />
       <workItem from="1619258048308" duration="9809000" />
-      <workItem from="1619328060249" duration="9114000" />
-    </task>
-    <task id="LOCAL-00001" summary="Should add galery">
-      <created>1617827726029</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1617827726029</updated>
+      <workItem from="1619328060249" duration="11247000" />
     </task>
     <task id="LOCAL-00002" summary="Product-details to review">
       <created>1617831804428</created>
@@ -648,7 +628,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619261412679</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Admin crud pages">
+      <created>1619341262508</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1619341262509</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -680,7 +667,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Display product by code (back + front) work well" />
     <MESSAGE value="Commented products" />
     <MESSAGE value="PHP $_REQUEST. Filter by name &amp; cat. Pagination. Order by" />
     <MESSAGE value="Merge remote-tracking branch 'origin/sasa' into sasa&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Controller/ProductController.php" />
@@ -705,6 +691,7 @@
     <MESSAGE value="Api update new Product" />
     <MESSAGE value="Api products search products exceptions" />
     <MESSAGE value="Api products responses" />
-    <option name="LAST_COMMIT_MESSAGE" value="Api products responses" />
+    <MESSAGE value="Admin crud pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="Admin crud pages" />
   </component>
 </project>
