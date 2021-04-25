@@ -58,7 +58,7 @@
             <p id="description">{{ product.description }}</p>
             {# Price #}
             <br><br>
-            <p id="price"><b>{{ product.price }} $</b></p>
+            <p id="price"><b>{{ product.price | number_format(2) }} $</b></p>
         </div>
         {# Footer #}
         {% include 'footer.html.twig' %}

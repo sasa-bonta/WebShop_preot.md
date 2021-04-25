@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="Errors for admin pages: create, update">
-      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/product/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/product/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/ProductType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ProductType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/product/list_of_products.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/product/list_of_products.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/product/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/product/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/product/product_details.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/product/product_details.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -287,14 +290,8 @@
       <workItem from="1619100898483" duration="425000" />
       <workItem from="1619161192863" duration="6870000" />
       <workItem from="1619258048308" duration="9809000" />
-      <workItem from="1619328060249" duration="18260000" />
-    </task>
-    <task id="LOCAL-00006" summary="Added Product CRUD">
-      <created>1617905975319</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1617905975319</updated>
+      <workItem from="1619328060249" duration="18289000" />
+      <workItem from="1619350934468" duration="312000" />
     </task>
     <task id="LOCAL-00007" summary="Added Product CRUD">
       <created>1617905989128</created>
@@ -632,7 +629,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619350343373</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="Errors for admin pages: create, update">
+      <created>1619350388992</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1619350388992</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

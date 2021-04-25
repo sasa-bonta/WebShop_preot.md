@@ -43,7 +43,7 @@
                             <td>{{ product.code }}</td>
                             <td>{{ product.name }}</td>
                             <td>{{ product.category }}</td>
-                            <td>{{ product.price }}</td>
+                            <td>{{ product.price| number_format(2) }}</td>
                             <td>{{ product.createdAt|date('d-m-Y') }}</td>
                             <td>{{ product.updatedAt ? product.updatedAt|date('Y-m-d') : '---' }}</td>
                             <td>
