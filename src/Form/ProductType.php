@@ -26,7 +26,6 @@ class ProductType extends AbstractType
                 ],])
             ->add('description')
             ->add('price', NumberType::class, [
-                'mapped' => false,
                 'constraints' => [new Positive()],
             ])
             ->add('img_path', null, [
