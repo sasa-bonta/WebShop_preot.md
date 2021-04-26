@@ -115,7 +115,7 @@
 
     function setName() {
         var inputVal = document.getElementById("myInput").value;
-        var urlSearchParams = new URL('http://localhost:8000/products/');
+        var urlSearchParams = new URL('http://localhost:8000/admin/products/');
         urlSearchParams.searchParams.set('name', inputVal);
         urlSearchParams.searchParams.set('page', 1);
         window.location.replace(urlSearchParams);

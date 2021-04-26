@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="Errors for admin pages: create, update">
+    <list default="true" id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="Price displayed ever with 2 decimals. On create/update decimals are rounded.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/ProductType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ProductType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/product/list_of_products.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/product/list_of_products.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/product/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/product/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/product/product_details.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/product/product_details.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/admin_header.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/admin_header.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/navbar-admin.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/navbar_admin_products.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -291,14 +289,8 @@
       <workItem from="1619161192863" duration="6870000" />
       <workItem from="1619258048308" duration="9809000" />
       <workItem from="1619328060249" duration="18289000" />
-      <workItem from="1619350934468" duration="312000" />
-    </task>
-    <task id="LOCAL-00007" summary="Added Product CRUD">
-      <created>1617905989128</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1617905989128</updated>
+      <workItem from="1619350934468" duration="423000" />
+      <workItem from="1619438372942" duration="2139000" />
     </task>
     <task id="LOCAL-00008" summary="Added image path Product CRUD">
       <created>1617931077008</created>
@@ -636,7 +628,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619350388992</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="Price displayed ever with 2 decimals. On create/update decimals are rounded.">
+      <created>1619351349918</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1619351349919</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -668,7 +667,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Product Controller ixed offset" />
     <MESSAGE value="Merged master" />
     <MESSAGE value="Merge remote-tracking branch 'origin/ion' into sasa" />
     <MESSAGE value="Merge remote-tracking branch 'origin/sasa'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
@@ -693,6 +691,7 @@
     <MESSAGE value="Admin crud pagination" />
     <MESSAGE value="Fixed bug search by name from products details page" />
     <MESSAGE value="Errors for admin pages: create, update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Errors for admin pages: create, update" />
+    <MESSAGE value="Price displayed ever with 2 decimals. On create/update decimals are rounded." />
+    <option name="LAST_COMMIT_MESSAGE" value="Price displayed ever with 2 decimals. On create/update decimals are rounded." />
   </component>
 </project>
