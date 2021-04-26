@@ -20,7 +20,9 @@ class UserFixtures extends Fixture
     {
         $user = new User();
         $user->setEmail('admin@mediaforce.com');
-        $user->setPassword($this->encoder->encodePassword($user,'some'));
+        $user->setUsername('admin');
+        $user->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
+        $user->setPassword($this->encoder->encodePassword($user,'admin'));
         $manager->persist($user);
 
         $manager->flush();

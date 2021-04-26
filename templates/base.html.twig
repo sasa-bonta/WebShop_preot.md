@@ -22,6 +22,12 @@
         {% endblock %}
     </head>
     <body>
+
+        {% block header %}
+        <header>
+            <img class="img-fluid" src="{{ asset('assets/main/images/header-image.jpg') }}" width="2000" alt="1">
+        </header>
+        {% endblock %}
         {% block body %}{% endblock %}
     </body>
 </html>

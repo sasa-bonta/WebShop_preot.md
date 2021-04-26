@@ -84,7 +84,7 @@ class AdminController extends AbstractController
 //            $product->setPrice(rand(1, 1601));
 //            $product->setDescription('Lorem ipsum dolor sit amet, consectetuer adipiscing elit. ');
 //            $product->setImgPath('assets/main/images/product1.jpg');
-            $product->setCreatedAt($dateTime);
+//            $product->setCreatedAt($dateTime);
             $entityManager->persist($product);
             $entityManager->flush();
 
