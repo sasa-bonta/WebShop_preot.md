@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="ion's commit to master">
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210415160125.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210419134237.php" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/Version20210426132209.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/show.html.twig" afterDir="false" />
-    </list>
+    <list default="true" id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="Create new user password error" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -298,13 +289,6 @@
       <workItem from="1619328060249" duration="18289000" />
       <workItem from="1619350934468" duration="423000" />
       <workItem from="1619438372942" duration="2139000" />
-    </task>
-    <task id="LOCAL-00008" summary="Added image path Product CRUD">
-      <created>1617931077008</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1617931077008</updated>
     </task>
     <task id="LOCAL-00009" summary="Added image path Product CRUD">
       <created>1617931084092</created>
@@ -642,7 +626,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619351349919</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="Create new user password error">
+      <created>1619448410149</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1619448410149</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -674,7 +665,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Merged master" />
     <MESSAGE value="Merge remote-tracking branch 'origin/ion' into sasa" />
     <MESSAGE value="Merge remote-tracking branch 'origin/sasa'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
     <MESSAGE value="Bug category-&gt;page not yet resolved" />
@@ -699,6 +689,7 @@
     <MESSAGE value="Fixed bug search by name from products details page" />
     <MESSAGE value="Errors for admin pages: create, update" />
     <MESSAGE value="Price displayed ever with 2 decimals. On create/update decimals are rounded." />
-    <option name="LAST_COMMIT_MESSAGE" value="Price displayed ever with 2 decimals. On create/update decimals are rounded." />
+    <MESSAGE value="Create new user password error" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create new user password error" />
   </component>
 </project>
