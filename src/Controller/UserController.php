@@ -20,6 +20,7 @@ class UserController extends AbstractController
      */
     public function index(UserRepository $userRepository): Response
     {
+        var_dump($userRepository->findAll());
         return $this->render('user/index.html.twig', [
             'users' => $userRepository->findAll(),
         ]);
@@ -39,13 +40,20 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+
             return $this->redirectToRoute('user_index');
         }
+        var_dump($user);
 
-        return $this->render('user/new.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
+        return $this->render(
+            'user/new.html.twig',
+            ['form' => $form->createView()]
+        );
+//        return $this->render(
+//            'user/new.html.twig', [
+//            'user' => $user,
+//            'form' => $form->createView(),
+//        ]);
     }
 
     /**
