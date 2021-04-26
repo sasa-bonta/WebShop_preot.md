@@ -38,7 +38,7 @@ class DefaultController extends AbstractController
         }
         $offset = ($page - 1) * $limit;
         return $this->render('main/index.html.twig', [
-            'products' => $productRepository->findByNameCat($name, $category, $orderBy, $limit, $offset),
+            'products' => $productRepository->search($name, $category, $orderBy, $limit, $offset),
         ]);
     }
 }

@@ -7,9 +7,7 @@ use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use DateTime;
 use DateTimeZone;
-use Doctrine\DBAL\Types\TextType;
 use Exception;
-use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,21 +31,23 @@ class ProductController extends AbstractController
         $page = 1;
         $limit = 16;
         $orderBy = 'created_at:ASC';
+        $request = Request::createFromGlobals();
+        $request->getPathInfo();
 
-        if (isset($_GET['name'])) {
-            $name = $_GET['name'];
+        if ($request->query->get('name')) {
+            $name = $request->query->get('name');
         }
-        if (isset($_GET['category'])) {
-            $category = $_GET['category'];
+        if ($request->query->get('category')) {
+            $category = $request->query->get('category');
         }
-        if (isset($_GET['page'])) {
-            $page = $_GET['page'];
+        if ($request->query->get('page')) {
+            $page = $request->query->get('page');
         }
-        if (isset($_GET['limit'])) {
-            $limit = $_GET['limit'];
+        if ($request->query->get('limit')) {
+            $limit = $request->query->get('limit');
         }
-        if (isset($_GET['order'])) {
-            $orderBy = $_GET['order'];
+        if ($request->query->get('order')) {
+            $orderBy = $request->query->get('order');
         }
         if ($limit <= 0) {
             throw new Exception('Limit must be positive');
@@ -57,7 +57,7 @@ class ProductController extends AbstractController
         }
         $offset = ($page - 1) * $limit;
         return $this->render('main/product/index.html.twig', [
-            'products' => $productRepository->findByNameCat($name, $category, $orderBy, $limit, $offset),
+            'products' => $productRepository->search($name, $category, $orderBy, $limit, $offset),
             'length' => $productRepository->countTotalLength($name, $category),
             'limit' => $limit
         ]);
@@ -93,13 +93,13 @@ class ProductController extends AbstractController
             } catch (Exception $e) {
             }
             # Random product generator. To make it work comment all the fields excluding code from ProductType
-            $categ = ['cars', 'toys', 'supplies', 'tools'];
-            $product->setName('product' .rand(0, 30));
-            $product->setCode($this->generateRandomString());
-            $product->setCategory($categ[rand(0,3)]);
-            $product->setPrice(rand(1, 1601));
-            $product->setDescription('Lorem ipsum dolor sit amet, consectetuer adipiscing elit. ');
-            $product->setImgPath('assets/main/images/product1.jpg');
+//            $categ = ['cars', 'toys', 'supplies', 'tools'];
+//            $product->setName('product' .rand(0, 30));
+//            $product->setCode($this->generateRandomString());
+//            $product->setCategory($categ[rand(0,3)]);
+//            $product->setPrice(rand(1, 1601));
+//            $product->setDescription('Lorem ipsum dolor sit amet, consectetuer adipiscing elit. ');
+//            $product->setImgPath('assets/main/images/product1.jpg');
             $product->setCreatedAt($dateTime);
             $entityManager->persist($product);
             $entityManager->flush();
