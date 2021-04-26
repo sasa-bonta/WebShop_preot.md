@@ -4,6 +4,7 @@
 
 {% block body %}
     <header>
+        {# Slider HERE #}
         <img class="img-fluid" src="{{ asset('assets/main/images/header-image.jpg') }}" width="2000" alt="1">
     </header>
 
@@ -58,7 +59,7 @@
             <p id="description">{{ product.description }}</p>
             {# Price #}
             <br><br>
-            <p id="price"><b>{{ product.price | number_format(2) }} $</b></p>
+            <p id="price"><b>{{ product.price }} $</b></p>
         </div>
         {# Footer #}
         {% include 'footer.html.twig' %}

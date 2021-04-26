@@ -1,0 +1,20 @@
+{% extends 'admin/crud_base.thml.twig' %}
+
+{% block title %}Edit Product{% endblock %}
+
+{% block content %}
+
+    <h1 align="center">Edit Product</h1>
+    <br>
+    {{ include('admin/product/_form.html.twig') }}
+
+    <p align="center">
+        <a href="{{ path('product_list') }}">
+            <button class="btn btn-success">Back to list</button>
+        </a>
+    </p>
+    <p align="center">
+        {{ include('admin/product/_delete_form.html.twig') }}
+    </p>
+
+{% endblock %}

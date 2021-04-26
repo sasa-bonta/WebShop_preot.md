@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <br>
+    <p align="center">
+        <button class="btn btn-success" type="submit">{{ button_label|default('Save') }}</button>
+    </p>
+    <p align="center">
+        <button class="btn btn-warning" type="reset">{{ button_label|default('Reset') }}</button>
+    </p>
+    <br>
+{{ form_end(form) }}

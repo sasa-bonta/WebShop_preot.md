@@ -50,12 +50,12 @@ class Product
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    private $created_at;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updatedAt;
+    private $updated_at;
 
     public function getId(): ?int
     {
@@ -124,24 +124,24 @@ class Product
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->createdAt;
+        return $this->created_at;
     }
 
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->createdAt = $createdAt;
+        $this->created_at = $createdAt;
 
         return $this;
     }
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->updatedAt;
+        return $this->updated_at;
     }
 
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
-        $this->updatedAt = $updatedAt;
+        $this->updated_at = $updatedAt;
 
         return $this;
     }

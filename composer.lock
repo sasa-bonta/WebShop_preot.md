@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "42cdcbf93b86fa15b8952ee4aadad86b",
+    "content-hash": "05ed54c505d6656ec9d77f5ee08ffbe8",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -6658,9 +6658,6 @@
             ],
             "description": "Provides tools to validate values",
             "homepage": "https://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/validator/tree/v5.2.6"
-            },
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -7927,7 +7924,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.2.5",
+        "php": ">=7.4",
         "ext-ctype": "*",
         "ext-iconv": "*"
     },

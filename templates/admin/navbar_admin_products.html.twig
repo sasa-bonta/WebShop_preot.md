@@ -1,3 +1,7 @@
+{# <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height: 60px"> #}
+
+{# </nav> #}
+
 <style>
     .navbar-nav {
         float: none;
@@ -23,15 +27,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ path('product_index') }}">Home</a>
+                    <a class="nav-link active" aria-current="page" href="{{ path('product_list') }}">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Info</a>
+                    <a class="nav-link" href="#">Users</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contacts</a>
-                </li>
-                <li style="width: 500px">
+                <li style="width: 350px">
                     <form class="d-flex mx-5" onsubmit="setName(); return false">
                         <input class="name form-control me-2" id="myInput" name="name" type="text"
                                placeholder="Search products here"
@@ -57,32 +58,21 @@
                 <li>
                     <label for="limit" style="color: white; margin-left: 20px; margin-right: 20px; margin-top: 6px">Limit:</label>
                     <select id="limit" name="limit" onchange="changeLimit(this.value)">
-                        <option value="16">16</option>
-                        <option value="32">32</option>
-                        <option value="64">64</option>
-                        <option value="128">128</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="40">40</option>
+                        <option value="80">80</option>
+                        <option value="120">120</option>
                     </select>
                 </li>
             </ul>
-            <button type="button" class="btn btn-dark me-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                     class="bi bi-door-open-fill" viewBox="0 0 16 16">
-                    <path d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
-                </svg>
-            </button>
-            <button type="button" class="btn btn-light me-2">Sign Up
+            <button type="button" class="btn btn-light me-2">Sign Out
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
                           d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
                     <path fill-rule="evenodd"
                           d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-                </svg>
-            </button>
-            <button type="button" class="btn btn-dark me-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                     class="bi bi-cart-fill" viewBox="0 0 16 16">
-                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                 </svg>
             </button>
         </div>
@@ -93,8 +83,16 @@
     var limit = document.getElementById("limit");
     var order = document.getElementById("sortby");
 
+    if (window.location.href === 'http://localhost:8000/products/') {
+        limit.value = localStorage.getItem('limit');
+        order.value = localStorage.getItem('order');
+
+        localStorage.setItem('limit', '10');
+        localStorage.setItem('order', 'created_at:DESC');
+    }
+
     limit.value = localStorage.getItem('limit');
-    order.value = localStorage.getItem('order')
+    order.value = localStorage.getItem('order');
 
     function changeLimit(value) {
 
@@ -117,7 +115,7 @@
 
     function setName() {
         var inputVal = document.getElementById("myInput").value;
-        var urlSearchParams = new URL('http://localhost:8000/products/');
+        var urlSearchParams = new URL('http://localhost:8000/admin/products/');
         urlSearchParams.searchParams.set('name', inputVal);
         urlSearchParams.searchParams.set('page', 1);
         window.location.replace(urlSearchParams);
