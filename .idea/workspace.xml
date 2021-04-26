@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="Create new user password error" />
+    <list default="true" id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="Create new user password error">
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -289,13 +291,6 @@
       <workItem from="1619328060249" duration="18289000" />
       <workItem from="1619350934468" duration="423000" />
       <workItem from="1619438372942" duration="2139000" />
-    </task>
-    <task id="LOCAL-00009" summary="Added image path Product CRUD">
-      <created>1617931084092</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1617931084092</updated>
     </task>
     <task id="LOCAL-00010" summary="New Table product created">
       <created>1617931605122</created>
@@ -633,7 +628,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619448410149</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="Create new user password error">
+      <created>1619451025512</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1619451025512</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
