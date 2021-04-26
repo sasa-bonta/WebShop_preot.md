@@ -1,12 +1,34 @@
 openapi: "3.0.0"
 info:
-  version: 1.0.0
+  version: 1.1.0
   title: Simple store
   license:
     name: MIT
 servers:
   - url: http://localhost/api/v1
 paths:
+  /login:
+    post:
+      summary: Obtain token to access api endpoints
+      operationId: login
+      tags:
+        - products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Credentials'
+      responses:
+        '201':
+          description: Null response
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
   /products:
     get:
       summary: Search products (paginated)
@@ -54,6 +76,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+              examples:
+                SearchLimitError:
+                  value:
+                    code : 525
+                    message : "Search limit cannot exceed 100 items."
     post:
       summary: Create a product
       operationId: createProduct
@@ -283,6 +310,16 @@ paths:
 
 components:
   schemas:
+    Credentials:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      required:
+        - password
+        - username
     Order:
       type: object
       properties:
@@ -323,8 +360,6 @@ components:
         currency:
           type: string
         details:
-            # if cash then null, else object
-          nullable: true
           $ref:  "#/components/schemas/CreditCardDetails"
 
     CreditCardDetails:
@@ -400,7 +435,15 @@ components:
           type: string
         category:
           type: string
-        price: 
+        description:
+          type: string
+        availableAmount:
+          type: number
+        productImages:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProductImage"
+        price:
           type: number
           format: float
         created_at:
@@ -437,6 +480,17 @@ components:
           type: integer
           format: int32
           minimum: 1
+
+    ProductImage:
+      type: object
+      properties:
+        description:
+          type: string
+        path:
+          type: string
+      required:
+        - description
+        - path
 
     Error:
       type: object
