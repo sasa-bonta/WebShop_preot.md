@@ -4,21 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="in_array">
-      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/crud_base.thml.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/crud_base.thml.twig" afterDir="false" />
+    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="Design crud users">
       <change beforePath="$PROJECT_DIR$/templates/admin/navbar_admin_products.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/navbar_admin_products.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/product/_delete_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/product/_delete_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/product/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/product/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/product/list_of_products.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/product/list_of_products.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/product/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/product/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/_delete_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/_delete_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/product/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/product/show.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/user/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -305,13 +293,6 @@
       <workItem from="1619328060249" duration="18289000" />
       <workItem from="1619350934468" duration="423000" />
       <workItem from="1619438372942" duration="2139000" />
-    </task>
-    <task id="LOCAL-00008" summary="Added image path Product CRUD">
-      <created>1617931077008</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1617931077008</updated>
     </task>
     <task id="LOCAL-00009" summary="Added image path Product CRUD">
       <created>1617931084092</created>
@@ -649,7 +630,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619351349919</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="Design crud users">
+      <created>1619477720689</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1619477720689</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -681,7 +669,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Merged master" />
     <MESSAGE value="Merge remote-tracking branch 'origin/ion' into sasa" />
     <MESSAGE value="Merge remote-tracking branch 'origin/sasa'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
     <MESSAGE value="Bug category-&gt;page not yet resolved" />
@@ -706,6 +693,7 @@
     <MESSAGE value="Fixed bug search by name from products details page" />
     <MESSAGE value="Errors for admin pages: create, update" />
     <MESSAGE value="Price displayed ever with 2 decimals. On create/update decimals are rounded." />
-    <option name="LAST_COMMIT_MESSAGE" value="Price displayed ever with 2 decimals. On create/update decimals are rounded." />
+    <MESSAGE value="Design crud users" />
+    <option name="LAST_COMMIT_MESSAGE" value="Design crud users" />
   </component>
 </project>
