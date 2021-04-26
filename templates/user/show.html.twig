@@ -1,8 +1,8 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/crud_base.thml.twig' %}
 
-{% block title %}User{% endblock %}
+{% block title %} User {% endblock %}
 
-{% block body %}
+{% block content %}
     <h1>User</h1>
 
     <table class="table">
@@ -26,9 +26,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('user_index') }}">back to list</a>
+    <a href="{{ path('user_index') }}"><button class="btn btn-success">Back to list</button></a>
 
-    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+    <a href="{{ path('user_edit', {'id': user.id}) }}"><button class="btn btn-success">Edit</button></a>
 
     {{ include('user/_delete_form.html.twig') }}
 {% endblock %}

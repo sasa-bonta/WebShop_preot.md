@@ -27,10 +27,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{{ path('product_index') }}">Main page</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ path('product_list') }}">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Users</a>
+                    <a class="nav-link" href="{{ path('user_index') }}">Users</a>
                 </li>
                 <li style="width: 350px">
                     <form class="d-flex mx-5" onsubmit="setName(); return false">

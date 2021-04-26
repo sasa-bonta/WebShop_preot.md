@@ -1,13 +1,18 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/crud_base.thml.twig' %}
 
-{% block title %}Edit User{% endblock %}
+{% block title %} Edit User {% endblock %}
 
-{% block body %}
-    <h1>Edit User</h1>
+{% block content %}
+    <h1 align="center">Edit User</h1>
 
     {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('user_index') }}">back to list</a>
-
-    {{ include('user/_delete_form.html.twig') }}
+    <p align="center">
+        <a href="{{ path('user_index') }}">
+            <button class="btn btn-primary">Back to list</button>
+        </a>
+    </p>
+    <p align="center">
+        {{ include('user/_delete_form.html.twig') }}
+    </p>
 {% endblock %}

@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %} Products {% endblock %}
+
 {% block body %}
 
     <style>
@@ -51,7 +53,7 @@
                                     <button class="btn btn-success">Show</button>
                                 </a>
                                 <a href="{{ path('product_edit', { 'code': product.code }) }}">
-                                    <button class="btn btn-warning">edit</button>
+                                    <button class="btn btn-warning">Edit</button>
                                 </a>
                             </td>
                         </tr>
@@ -106,6 +108,7 @@
         </div>
     </div>
 
+    {% include 'footer.html.twig' %}
 
     <script>
         function setCategory(value) {

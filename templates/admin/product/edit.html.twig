@@ -10,11 +10,8 @@
 
     <p align="center">
         <a href="{{ path('product_list') }}">
-            <button class="btn btn-success">Back to list</button>
+            <button class="btn btn-primary">Back to list</button>
         </a>
     </p>
-    <p align="center">
-        {{ include('admin/product/_delete_form.html.twig') }}
-    </p>
-
+    {{ include('admin/product/_delete_form.html.twig') }}
 {% endblock %}

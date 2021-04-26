@@ -1,37 +1,113 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User index{% endblock %}
+{% block title %} User index {% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
+    <style>
+        .pagination {
+            justify-content: center;
+        }
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.username }}</td>
-                <td>{{ user.email }}</td>
-                <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        .page-link {
+            color: black;
+            background: none;
+            border: 1px black solid;
+        }
 
-    <a href="{{ path('user_new') }}">Create new</a>
+        .page-link:hover {
+            color: white;
+            background: black;
+        }
+    </style>
+
+    {% include 'admin/admin_header.html.twig' %}
+    <br>
+    <h1 align="center">User index</h1>
+    <div class="container">
+        <div class="row my-3">
+            <div class="col-9">
+                <table class="table table-striped table-condensed">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                <a href="{{ path('user_show', {'id': user.id}) }}">
+                                    <button class="btn btn-success">Show</button>
+                                </a>
+                                <a href="{{ path('user_edit', {'id': user.id}) }}">
+                                    <button class="btn btn-warning">Edit</button>
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <a href="{{ path('user_new') }}" class="btn btn-primary">Create new</a>
+
+            </div>
+            <div class="col-3">
+                <h2>Categories</h2>
+                <ul class="list-group">
+
+                    <li class="list-group-item">
+                        <button type="submit" value="tools" style="background: none;border: none"
+                                onclick="setCategory(this.value)">Tools
+                        </button>
+                    </li>
+                    <li class="list-group-item">
+                        <button type="submit" value="supplies" style="background: none;border: none"
+                                onclick="setCategory(this.value)">Supplies
+                        </button>
+                    </li>
+                    <li class="list-group-item">
+                        <button type="submit" value="cars" style="background: none;border: none"
+                                onclick="setCategory(this.value)">Cars
+                        </button>
+                    </li>
+                    <li class="list-group-item">
+                        <button type="submit" value="toys" style="background: none;border: none"
+                                onclick="setCategory(this.value)">Toys
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    {% include 'footer.html.twig' %}
+
+    <script>
+        function setCategory(value) {
+            var urlSearchParams = new URLSearchParams(window.location.search);
+            urlSearchParams.set('category', value);
+            urlSearchParams.set('page', 1);
+            window.location.search = urlSearchParams;
+        }
+
+        function setPage(value) {
+            var urlSearchParams = new URLSearchParams(window.location.search);
+            urlSearchParams.set('page', value);
+            window.location.search = urlSearchParams;
+
+            var element = document.querySelectorAll("button[value=" + value + "]");
+            element.style.transform = "background: black;";
+        }
+    </script>
+
 {% endblock %}
