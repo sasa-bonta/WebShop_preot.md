@@ -5,9 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="Design crud users">
+      <change afterPath="$PROJECT_DIR$/src/UserSearchCriteria.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/navbar_admin_users.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/admin_header.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/admin_header.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/crud_base.thml.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/crud_base.thml.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/index.html.twig" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/admin/navbar_admin_products.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/navbar_admin_products.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/product/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/product/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/product/list_of_products.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/product/list_of_products.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/product/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/product/new.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/admin/product/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/product/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/_delete_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/user/_delete_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/user/_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/user/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/user/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/user/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/user/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +215,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="DatabaseDriversLRU" value="mysql&#10;cassandra" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -211,19 +228,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/templates/admin" />
-      <recent name="$PROJECT_DIR$/templates/admin/product" />
-      <recent name="$PROJECT_DIR$/templates" />
-      <recent name="$PROJECT_DIR$/templates/main" />
-      <recent name="$PROJECT_DIR$/templates/bundles/TwigBundle/Exception" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\UNI\Pentalog\WebShop_preot.md\src\Form" />
       <recent name="$PROJECT_DIR$/public/assets" />
       <recent name="$PROJECT_DIR$/templates/productApi" />
       <recent name="$PROJECT_DIR$/templates/bundles/TwigBundle/Exception" />
       <recent name="$PROJECT_DIR$/public/assets/main/images" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/main/product" />
+      <recent name="$PROJECT_DIR$/templates/admin" />
+      <recent name="$PROJECT_DIR$/templates/admin/product" />
+      <recent name="$PROJECT_DIR$/templates" />
+      <recent name="$PROJECT_DIR$/templates/main" />
     </key>
   </component>
   <component name="ServiceViewManager">
@@ -253,13 +270,13 @@
       </list>
     </option>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="Merge remote-tracking branch 'origin/ion' into sasa" />
+      <changelist id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="Design crud users" />
       <created>1617781869330</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -293,13 +310,7 @@
       <workItem from="1619328060249" duration="18289000" />
       <workItem from="1619350934468" duration="423000" />
       <workItem from="1619438372942" duration="2139000" />
-    </task>
-    <task id="LOCAL-00009" summary="Added image path Product CRUD">
-      <created>1617931084092</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1617931084092</updated>
+      <workItem from="1619526964883" duration="11660000" />
     </task>
     <task id="LOCAL-00010" summary="New Table product created">
       <created>1617931605122</created>
@@ -637,7 +648,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619477720689</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="Design crud users">
+      <created>1619478150817</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1619478150817</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

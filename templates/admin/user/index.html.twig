@@ -19,20 +19,27 @@
             background: black;
         }
     </style>
-
     {% include 'admin/admin_header.html.twig' %}
+    {% include 'admin/navbar_admin_users.html.twig' %}
+
     <br>
     <h1 align="center">User index</h1>
     <div class="container">
+
+
+
         <div class="row my-3">
-            <div class="col-9">
+            <div class="col-2">
+            </div>
+            <div class="col-8">
                 <table class="table table-striped table-condensed">
                     <thead>
                     <tr>
                         <th>Id</th>
                         <th>Username</th>
                         <th>Email</th>
-                        <th>actions</th>
+{#                         <th>Roles</th>#}
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -41,6 +48,7 @@
                             <td>{{ user.id }}</td>
                             <td>{{ user.username }}</td>
                             <td>{{ user.email }}</td>
+{#                             <td>{{ dump(user.roles) }}</td>#}
                             <td>
                                 <a href="{{ path('user_show', {'id': user.id}) }}">
                                     <button class="btn btn-success">Show</button>
@@ -60,32 +68,23 @@
 
                 <a href="{{ path('user_new') }}" class="btn btn-primary">Create new</a>
 
-            </div>
-            <div class="col-3">
-                <h2>Categories</h2>
-                <ul class="list-group">
+                <nav aria-label="...">
+                    <ul class="pagination">
+                        {% if length > 0 %}
+                            {% for i in 1..(length / limit)|round(0,'ceil') %}
+                                <li class="page-item">
+                                    <button class="page-link" type="submit" value="{{ i }}"
+                                            onclick="setPage(this.value)">{{ i }}
+                                    </button>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </nav>
 
-                    <li class="list-group-item">
-                        <button type="submit" value="tools" style="background: none;border: none"
-                                onclick="setCategory(this.value)">Tools
-                        </button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="submit" value="supplies" style="background: none;border: none"
-                                onclick="setCategory(this.value)">Supplies
-                        </button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="submit" value="cars" style="background: none;border: none"
-                                onclick="setCategory(this.value)">Cars
-                        </button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="submit" value="toys" style="background: none;border: none"
-                                onclick="setCategory(this.value)">Toys
-                        </button>
-                    </li>
-                </ul>
+            </div>
+            <div class="col-2">
+
             </div>
         </div>
     </div>

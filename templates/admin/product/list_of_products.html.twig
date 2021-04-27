@@ -2,6 +2,8 @@
 
 {% block title %} Products {% endblock %}
 
+{% block navbar %} {% include 'admin/admin_header.html.twig' %} {% endblock %}
+
 {% block body %}
 
     <style>
@@ -22,6 +24,7 @@
     </style>
 
     {% include 'admin/admin_header.html.twig' %}
+    {% include 'admin/navbar_admin_products.html.twig' %}
     <br>
     <h1 align="center">Products list</h1>
     <div class="container">

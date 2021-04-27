@@ -2,10 +2,12 @@
 
 {% block title %} New User {% endblock %}
 
+{% block navbar %} {% include 'admin/navbar_admin_users.html.twig' %} {% endblock %}
+
 {% block content %}
     <h1>Create new User</h1>
 
-    {{ include('user/_form.html.twig') }}
+    {{ include('admin/user/_form.html.twig') }}
 
     <p align="center">
         <a href="{{ path('user_index') }}">

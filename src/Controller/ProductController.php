@@ -3,11 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Product;
-use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use App\SearchCriteria;
-use DateTime;
-use DateTimeZone;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
