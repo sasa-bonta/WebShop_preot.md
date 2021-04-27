@@ -5,16 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Form/RegisterType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/Version20210427144826.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/UserType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UserType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Security/LoginFormAuthenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/LoginFormAuthenticator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/navbar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/navbar.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +53,13 @@
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="preot_md: schema" type="76f4a085:MysqlImplModel$Schema" />
         <item name="product: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - @localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="preot_md: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="user: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
     </expand>
     <select />
@@ -248,12 +248,12 @@
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="MySQL - @localhost: root" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@3d5d5d63" type="9fbbdea:ServiceModel$ServiceNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@55cdde0b" type="9fbbdea:ServiceModel$ServiceNode" />
               </path>
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="MySQL - @localhost: root" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@7f0dc272" type="9fbbdea:ServiceModel$ServiceNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@774e2324" type="9fbbdea:ServiceModel$ServiceNode" />
               </path>
             </expand>
             <select />
@@ -268,7 +268,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e030daec-7bf6-4d4f-bc24-ae994033cce9" name="Default Changelist" comment="Merge remote-tracking branch 'origin/ion' into sasa" />
+      <changelist id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="" />
       <created>1617781869330</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -302,6 +302,9 @@
       <workItem from="1619328060249" duration="18289000" />
       <workItem from="1619350934468" duration="423000" />
       <workItem from="1619438372942" duration="2139000" />
+      <workItem from="1619533459825" duration="474000" />
+      <workItem from="1619534405600" duration="16000" />
+      <workItem from="1619534477738" duration="565000" />
     </task>
     <task id="LOCAL-00008" summary="Added image path Product CRUD">
       <created>1617931077008</created>
@@ -650,7 +653,7 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -706,6 +709,22 @@
     <option name="LAST_COMMIT_MESSAGE" value="Price displayed ever with 2 decimals. On create/update decimals are rounded." />
   </component>
   <component name="WindowStateProjectService">
+    <state width="1023" height="224" key="GridCell.Tab.0.bottom" timestamp="1619534766607">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1023" height="224" key="GridCell.Tab.0.bottom/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1619534766607" />
+    <state width="1023" height="224" key="GridCell.Tab.0.center" timestamp="1619534766606">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1023" height="224" key="GridCell.Tab.0.center/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1619534766606" />
+    <state width="1023" height="224" key="GridCell.Tab.0.left" timestamp="1619534766606">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1023" height="224" key="GridCell.Tab.0.left/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1619534766606" />
+    <state width="1023" height="224" key="GridCell.Tab.0.right" timestamp="1619534766606">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1023" height="224" key="GridCell.Tab.0.right/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1619534766606" />
     <state x="550" y="148" key="git4idea.branch.GitSmartOperationDialog" timestamp="1619453763979">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
