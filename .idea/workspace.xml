@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="User show password hidden">
+    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="User displays roles">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/user/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/user/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/user/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/user/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/ProductType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ProductType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/RegisterType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/RegisterType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/UserType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UserType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -293,21 +297,8 @@
       <workItem from="1619328060249" duration="18289000" />
       <workItem from="1619350934468" duration="423000" />
       <workItem from="1619438372942" duration="2139000" />
-      <workItem from="1619526964883" duration="13396000" />
-    </task>
-    <task id="LOCAL-00013" summary="Added Description">
-      <created>1617972878501</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1617972878501</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Find product by code works :D">
-      <created>1617973573087</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1617973573087</updated>
+      <workItem from="1619526964883" duration="13485000" />
+      <workItem from="1619556778722" duration="2681000" />
     </task>
     <task id="LOCAL-00015" summary="Show by code, edit by code, delete by code work well">
       <created>1617974197078</created>
@@ -638,7 +629,21 @@
       <option name="project" value="LOCAL" />
       <updated>1619548306885</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="User displays roles">
+      <created>1619549062548</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1619549062548</updated>
+    </task>
+    <task id="LOCAL-00063" summary="User displays roles">
+      <created>1619549119015</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1619549119015</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -670,7 +675,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Bug category-&gt;page not yet resolved" />
     <MESSAGE value="search" />
     <MESSAGE value="setName deletes other parameters" />
     <MESSAGE value="solved bug with setting name after category. (form was guilty)" />
@@ -695,6 +699,7 @@
     <MESSAGE value="Design crud users" />
     <MESSAGE value="User navbar, user search, pagination" />
     <MESSAGE value="User show password hidden" />
-    <option name="LAST_COMMIT_MESSAGE" value="User show password hidden" />
+    <MESSAGE value="User displays roles" />
+    <option name="LAST_COMMIT_MESSAGE" value="User displays roles" />
   </component>
 </project>

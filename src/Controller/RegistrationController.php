@@ -29,9 +29,8 @@ class RegistrationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            // space for sending an email to user if registration succeded
 
-            return $this->redirectToRoute('user_index');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render(
