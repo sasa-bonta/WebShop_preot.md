@@ -35,7 +35,7 @@ class UserController extends AbstractController
         if($limit > 100){
             throw new BadRequestHttpException("400");
         }
-        $orderBy = $request->query->get('order', 'username:ASC');
+        $orderBy = $request->query->get('order', 'email:ASC');
         $arr = explode(":", $orderBy, 2);
         $order = $arr[0];
         $ascDesc = $arr[1];
