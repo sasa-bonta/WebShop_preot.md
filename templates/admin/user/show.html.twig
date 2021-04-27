@@ -21,6 +21,14 @@
             <th>Email</th>
             <td>{{ user.email }}</td>
         </tr>
+        <tr>
+            <th>Roles</th>
+            <td>
+                {% for role in user.roles %}
+                    {{ role | replace ({'ROLE_' : ' '}) }}
+                {% endfor %}
+            </td>
+        </tr>
         </tbody>
     </table>
 
