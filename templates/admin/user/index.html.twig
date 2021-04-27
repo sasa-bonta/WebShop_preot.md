@@ -27,7 +27,6 @@
     <div class="container">
 
 
-
         <div class="row my-3">
             <div class="col-2">
             </div>
@@ -38,7 +37,7 @@
                         <th>Id</th>
                         <th>Username</th>
                         <th>Email</th>
-{#                         <th>Roles</th>#}
+                        <th>Roles</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -48,7 +47,11 @@
                             <td>{{ user.id }}</td>
                             <td>{{ user.username }}</td>
                             <td>{{ user.email }}</td>
-{#                             <td>{{ dump(user.roles) }}</td>#}
+                            <td>
+                                {% for role in user.roles %}
+                                    {{ role | replace ({'ROLE_' : ' '}) }}
+                                {% endfor %}
+                            </td>
                             <td>
                                 <a href="{{ path('user_show', {'id': user.id}) }}">
                                     <button class="btn btn-success">Show</button>
