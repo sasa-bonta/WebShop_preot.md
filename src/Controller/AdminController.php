@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Entity\Product;
+use App\Entity\User;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use DateTime;
@@ -67,13 +68,28 @@ class AdminController extends AbstractController
     /**
      * @Route("/new", name="product_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ProductRepository $repo): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            # Errors existent Nickname and/or Email
+            $errors = [];
+            $repo = $this->getDoctrine()->getRepository(Product::class);
+            if ($repo->count(['code' => $product->getCode()]) > 0) {
+                array_push($errors, "This code already exists");
+            }
+            if (!empty($errors)) {
+                return $this->render('admin/product/new.html.twig', [
+                    'errors' => $errors,
+                    'product' => $product,
+                    'form' => $form->createView(),
+                ]);
+            }
+
             $entityManager = $this->getDoctrine()->getManager();
             $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
             # Random product generator. To make it work comment all the fields from ProductType
@@ -116,6 +132,21 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            # Errors existent Nickname and/or Email
+            $errors = [];
+            $repo = $this->getDoctrine()->getRepository(Product::class);
+            if ($repo->count(['code' => $product->getCode()]) > 0) {
+                array_push($errors, "This code already exists");
+            }
+            if (!empty($errors)) {
+                return $this->render('admin/product/edit.html.twig', [
+                    'errors' => $errors,
+                    'product' => $product,
+                    'form' => $form->createView(),
+                ]);
+            }
+
             $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
             $product->setUpdatedAt($dateTime);
             $this->getDoctrine()->getManager()->flush();

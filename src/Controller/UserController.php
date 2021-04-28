@@ -63,19 +63,34 @@ class UserController extends AbstractController
     /**
      * @Route("/new", name="user_new", methods={"GET","POST"})
      */
-    public function new(Request $request, UserPasswordEncoderInterface $encoder): Response
+    public function new(Request $request, UserPasswordEncoderInterface $encoder, UserRepository $repo): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword($encoder->encodePassword($user, $form->get('plainPassword')->getData()));
 
+            # Errors existent Nickname and/or Email
+            $errors = [];
+            $repo = $this->getDoctrine()->getRepository(User::class);
+            if ($repo->count(['username' => $user->getUsername()]) > 0) {
+                array_push($errors, "This nickname already exists");
+            }
+            if ($repo->count(['email' => $user->getEmail()]) > 0) {
+                array_push($errors, "This e-mail address already exists");
+            }
+            if (!empty($errors)) {
+                return $this->render('admin/user/new.html.twig', [
+                    'errors' => $errors,
+                    'user' => $user,
+                    'form' => $form->createView(),
+                ]);
+            }
+
+            $user->setPassword($encoder->encodePassword($user, $form->get('plainPassword')->getData()));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-
 
             return $this->redirectToRoute('user_index');
         }
@@ -105,8 +120,25 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
 
+            # Errors existent Nickname and/or Email
+            $errors = [];
+            $repo = $this->getDoctrine()->getRepository(User::class);
+            if ($repo->count(['username' => $user->getUsername()]) > 1) {
+                array_push($errors, "This nickname already exists");
+            }
+            if ($repo->count(['email' => $user->getEmail()]) > 1) {
+                array_push($errors, "This e-mail address already exists");
+            }
+            if (!empty($errors)) {
+                return $this->render('admin/user/edit.html.twig', [
+                    'errors' => $errors,
+                    'user' => $user,
+                    'form' => $form->createView(),
+                ]);
+            }
+
+            $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('user_index');
         }
 
