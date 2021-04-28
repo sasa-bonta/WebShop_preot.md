@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/migrations/Version20210427144826.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +72,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="feature/teamred-27" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -709,25 +707,9 @@
     <option name="LAST_COMMIT_MESSAGE" value="Price displayed ever with 2 decimals. On create/update decimals are rounded." />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1023" height="224" key="GridCell.Tab.0.bottom" timestamp="1619534766607">
+    <state x="310" y="31" key="CommitChangelistDialog2" timestamp="1619624144939">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1023" height="224" key="GridCell.Tab.0.bottom/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1619534766607" />
-    <state width="1023" height="224" key="GridCell.Tab.0.center" timestamp="1619534766606">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1023" height="224" key="GridCell.Tab.0.center/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1619534766606" />
-    <state width="1023" height="224" key="GridCell.Tab.0.left" timestamp="1619534766606">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1023" height="224" key="GridCell.Tab.0.left/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1619534766606" />
-    <state width="1023" height="224" key="GridCell.Tab.0.right" timestamp="1619534766606">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1023" height="224" key="GridCell.Tab.0.right/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1619534766606" />
-    <state x="550" y="148" key="git4idea.branch.GitSmartOperationDialog" timestamp="1619453763979">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="550" y="148" key="git4idea.branch.GitSmartOperationDialog/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1619453763979" />
+    <state x="310" y="31" key="CommitChangelistDialog2/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1619624144939" />
   </component>
 </project>
