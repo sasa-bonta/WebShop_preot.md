@@ -136,7 +136,7 @@ class AdminController extends AbstractController
             # Errors existent Nickname and/or Email
             $errors = [];
             $repo = $this->getDoctrine()->getRepository(Product::class);
-            if ($repo->count(['code' => $product->getCode()]) > 0) {
+            if ($repo->count(['code' => $product->getCode()]) > 1) {
                 array_push($errors, "This code already exists");
             }
             if (!empty($errors)) {
