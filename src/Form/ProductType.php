@@ -22,7 +22,7 @@ class ProductType extends AbstractType
                     'Tools' => 'tools',
                     'Supplies' => 'supplies',
                     'Cars' => 'cars',
-                    'Toys' => 'toys',z
+                    'Toys' => 'toys',
                 ],])
             ->add('description')
             ->add('price', NumberType::class, [
