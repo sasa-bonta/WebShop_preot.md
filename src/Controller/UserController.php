@@ -27,12 +27,12 @@ class UserController extends AbstractController
     /**
      * @Route("/", name="user_index", methods={"GET"})
      */
-    public function index(Request  $request, UserRepository $userRepository): Response
+    public function index(Request $request, UserRepository $userRepository): Response
     {
         $param = $request->query->get('search');
         $page = $request->query->get('page', 1);
         $limit = $request->query->get('limit', 16);
-        if($limit > 100){
+        if ($limit > 100) {
             throw new BadRequestHttpException("400");
         }
         $orderBy = $request->query->get('order', 'email:ASC');
@@ -74,7 +74,7 @@ class UserController extends AbstractController
             $errors = [];
             $repo = $this->getDoctrine()->getRepository(User::class);
             $plainPassword = $form->get('plainPassword')->getData();
-            if(empty($plainPassword)) {
+            if (empty($plainPassword)) {
                 array_push($errors, "The password must not be empty");
             }
             if ($repo->count(['username' => $user->getUsername()]) > 0) {
@@ -121,12 +121,13 @@ class UserController extends AbstractController
     public function edit(Request $request, User $user, UserPasswordEncoderInterface $encoder): Response
     {
         $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
+        $origNick = $user->getUsername();
         $originalPassword = $user->getPassword();
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $plainPassword = $form->get('plainPassword')->getData();
-            if(!empty($plainPassword)) {
+            if (!empty($plainPassword)) {
                 $user->setPassword($encoder->encodePassword($user, $form->get('plainPassword')->getData()));
             } else {
                 $user->setPassword($originalPassword);
@@ -134,7 +135,7 @@ class UserController extends AbstractController
             # Errors existent Nickname and/or Email
             $errors = [];
             $repo = $this->getDoctrine()->getRepository(User::class);
-            if ($repo->count(['username' => $user->getUsername()]) > 1) {
+            if ($repo->count(['username' => $user->getUsername()]) > 0 and $form->get('username')->getData() !== $origNick) {
                 array_push($errors, "This nickname already exists");
             }
             if ($repo->count(['email' => $user->getEmail()]) > 1) {
