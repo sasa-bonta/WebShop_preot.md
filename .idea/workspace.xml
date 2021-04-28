@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="">
+    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="When editing, if password is null the old password remains">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/UserType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UserType.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -304,20 +302,6 @@
       <workItem from="1619533459825" duration="474000" />
       <workItem from="1619534405600" duration="16000" />
       <workItem from="1619534477738" duration="565000" />
-    </task>
-    <task id="LOCAL-00008" summary="Added image path Product CRUD">
-      <created>1617931077008</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1617931077008</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Added image path Product CRUD">
-      <created>1617931084092</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1617931084092</updated>
     </task>
     <task id="LOCAL-00010" summary="New Table product created">
       <created>1617931605122</created>
@@ -648,7 +632,21 @@
       <option name="project" value="LOCAL" />
       <updated>1619351349919</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="When editing, if password is null the old password remains">
+      <created>1619627494261</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1619627494261</updated>
+    </task>
+    <task id="LOCAL-00058" summary="When editing, if password is null the old password remains">
+      <created>1619628082116</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1619628082116</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -680,7 +678,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Merged master" />
     <MESSAGE value="Merge remote-tracking branch 'origin/ion' into sasa" />
     <MESSAGE value="Merge remote-tracking branch 'origin/sasa'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
     <MESSAGE value="Bug category-&gt;page not yet resolved" />
@@ -705,12 +702,7 @@
     <MESSAGE value="Fixed bug search by name from products details page" />
     <MESSAGE value="Errors for admin pages: create, update" />
     <MESSAGE value="Price displayed ever with 2 decimals. On create/update decimals are rounded." />
-    <option name="LAST_COMMIT_MESSAGE" value="Price displayed ever with 2 decimals. On create/update decimals are rounded." />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="310" y="31" key="CommitChangelistDialog2" timestamp="1619624144939">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="310" y="31" key="CommitChangelistDialog2/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1619624144939" />
+    <MESSAGE value="When editing, if password is null the old password remains" />
+    <option name="LAST_COMMIT_MESSAGE" value="When editing, if password is null the old password remains" />
   </component>
 </project>

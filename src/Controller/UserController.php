@@ -73,6 +73,10 @@ class UserController extends AbstractController
             # Errors existent Nickname and/or Email
             $errors = [];
             $repo = $this->getDoctrine()->getRepository(User::class);
+            $plainPassword = $form->get('plainPassword')->getData();
+            if(empty($plainPassword)) {
+                array_push($errors, "The password must not be empty");
+            }
             if ($repo->count(['username' => $user->getUsername()]) > 0) {
                 array_push($errors, "This nickname already exists");
             }
