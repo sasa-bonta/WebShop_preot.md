@@ -1,11 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Products {% endblock %}
-
-{% block navbar %} {% include 'admin/admin_header.html.twig' %} {% endblock %}
+{% block title %} User index {% endblock %}
 
 {% block body %}
-
     <style>
         a {
             text-decoration: none;
@@ -25,49 +22,57 @@
             background: black;
         }
     </style>
-
     {% include 'admin/admin_header.html.twig' %}
-    {% include 'admin/navbar_admin_products.html.twig' %}
+    {% include 'admin/navbar_admin_users.html.twig' %}
+
     <br>
-    <h1 align="center">Products list</h1>
+    <h1 align="center">User index</h1>
     <div class="container">
+
+
         <div class="row my-3">
-            <div class="col-9">
+            <div class="col-2">
+            </div>
+            <div class="col-8">
                 <table class="table table-striped table-condensed">
                     <thead>
                     <tr>
-                        <th>Code</th>
-                        <th>Name</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Created at</th>
-                        <th>Updated at</th>
+                        <th>Id</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Roles</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {% for product in products %}
+                    {% for user in users %}
                         <tr>
-                            <td>{{ product.code }}</td>
-                            <td>{{ product.name }}</td>
-                            <td>{{ product.category }}</td>
-                            <td>{{ product.price| number_format(2) }}</td>
-                            <td>{{ product.createdAt|date('d-m-Y') }}</td>
-                            <td>{{ product.updatedAt ? product.updatedAt|date('Y-m-d') : '---' }}</td>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
                             <td>
-                                <a href="{{ path('product_show_detailed', { 'code': product.code }) }}">
+                                {% for role in user.roles %}
+                                    {{ role | replace ({'ROLE_' : ' '}) }}
+                                {% endfor %}
+                            </td>
+                            <td>
+                                <a href="{{ path('user_show', {'id': user.id}) }}">
                                     <button class="btn btn-success">Show</button>
                                 </a>
-                                <a href="{{ path('product_edit', { 'code': product.code }) }}">
+                                <a href="{{ path('user_edit', {'id': user.id}) }}">
                                     <button class="btn btn-warning">Edit</button>
                                 </a>
                             </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6">no records found</td>
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
 
-                <a href="{{ path('product_new') }}" class="btn btn-primary">Add new product</a>
+                <a href="{{ path('user_new') }}" class="btn btn-primary">Create new</a>
 
                 <nav aria-label="...">
                     <ul class="pagination">
@@ -84,32 +89,8 @@
                 </nav>
 
             </div>
+            <div class="col-2">
 
-            <div class="col-3">
-                <h2>Categories</h2>
-                <ul class="list-group">
-
-                    <li class="list-group-item">
-                        <button type="submit" value="tools" style="background: none;border: none"
-                                onclick="setCategory(this.value)">Tools
-                        </button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="submit" value="supplies" style="background: none;border: none"
-                                onclick="setCategory(this.value)">Supplies
-                        </button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="submit" value="cars" style="background: none;border: none"
-                                onclick="setCategory(this.value)">Cars
-                        </button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="submit" value="toys" style="background: none;border: none"
-                                onclick="setCategory(this.value)">Toys
-                        </button>
-                    </li>
-                </ul>
             </div>
         </div>
     </div>
@@ -133,4 +114,5 @@
             element.style.transform = "background: black;";
         }
     </script>
+
 {% endblock %}

@@ -1,8 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/crud_base.thml.twig' %}
 
 {% block title %}Log in!{% endblock %}
 
-{% block body %}
+{% block navbar %} {% include 'navbar.html.twig' %} {% endblock %}
+
+{% block content %}
     <form method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -14,7 +16,7 @@
             </div>
         {% endif %}
 
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <h1 class="h3 mb-3 font-weight-normal" align="center">Please sign in</h1>
         <label for="inputUsername">Username</label>
         <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required
                autofocus>
@@ -22,22 +24,23 @@
         <input type="password" name="password" id="inputPassword" class="form-control" required>
 
         <input type="hidden" name="_csrf_token"
-               value="{{ csrf_token('authenticate') }}"
-        >
+               value="{{ csrf_token('authenticate') }}">
 
 
-        {#        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.#}
-        {#        See https://symfony.com/doc/current/security/remember_me.html#}
+        {# Uncomment this section and add a remember_me option below your firewall to activate remember me functionality. #}
+        {# See https://symfony.com/doc/current/security/remember_me.html #}
 
-        {#        <div class="checkbox mb-3">#}
-        {#            <label>#}
-        {#                <input type="checkbox" name="_remember_me"> Remember me#}
-        {#            </label>#}
-        {#        </div>#}
+        {# <div class="checkbox mb-3"> #}
+        {# <label> #}
+        {# <input type="checkbox" name="_remember_me"> Remember me #}
+        {# </label> #}
+        {# </div> #}
 
-
-        <button class="btn btn-lg btn-primary" type="submit">
-            Sign in
-        </button>
+        <br>
+        <p align="center">
+            <button class="btn btn-lg btn-primary" type="submit">
+                Sign in
+            </button>
+        </p>
     </form>
 {% endblock %}

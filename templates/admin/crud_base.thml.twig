@@ -22,9 +22,12 @@
     {% endblock %}
 </head>
 <body>
+
 {% include 'admin/admin_header.html.twig' %}
+
+{% block navbar %}{% endblock %}
 <br><br>
-<div class="container" style="height: 800px">
+<div class="container">
     <div class="row">
         <div class="col-3">
             {# 2 columns #}
@@ -37,5 +40,6 @@
         </div>
     </div>
 </div>
+{% include 'footer.html.twig' %}
 </body>
 </html>

@@ -2,6 +2,8 @@
 
 {% block title %}Product{% endblock %}
 
+{% block navbar %} {% include 'admin/navbar_admin_products.html.twig' %} {% endblock %}
+
 {% block content %}
 
     <h1 align="center">Product</h1>
@@ -48,7 +50,7 @@
     </table>
     <p align="center">
         <a href="{{ path('product_list') }}">
-            <button class="btn btn-success">Back to list</button>
+            <button class="btn btn-primary">Back to list</button>
         </a>
     </p>
     <br>

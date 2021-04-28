@@ -1,11 +1,11 @@
 {% extends 'admin/crud_base.thml.twig' %}
 
-{% block title %}New Product{% endblock %}
+{% block title %} New User {% endblock %}
 
-{% block navbar %} {% include 'admin/navbar_admin_products.html.twig' %} {% endblock %}
+{% block navbar %} {% include 'admin/navbar_admin_users.html.twig' %} {% endblock %}
 
 {% block content %}
-    <h1 align="center">Create new Product</h1>
+    <h1 align="center">Create new User</h1>
     <br>
 
     {% if errors is defined and errors is not null %}
@@ -16,12 +16,11 @@
         </div>
     {% endif %}
 
-    {{ include('admin/product/_form.html.twig') }}
+    {{ include('admin/user/_form.html.twig') }}
 
     <p align="center">
-        <a href="{{ path('product_list') }}">
+        <a href="{{ path('user_index') }}">
             <button class="btn btn-primary">back to list</button>
         </a>
     </p>
-
 {% endblock %}
