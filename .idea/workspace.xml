@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="v1">
-      <change afterPath="$PROJECT_DIR$/public/assets/main/images/403.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/TwigBundle/Exception/error403.html.twig" afterDir="false" />
+    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bundles/TwigBundle/Exception/error400.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bundles/TwigBundle/Exception/error400.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,7 +14,9 @@
   </component>
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution />
+    <execution>
+      <executable />
+    </execution>
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -53,6 +52,13 @@
         <item name="preot_md: schema" type="76f4a085:MysqlImplModel$Schema" />
         <item name="product: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - @localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="preot_md: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="user: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
     </expand>
     <select />
   </component>
@@ -66,7 +72,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="feature/teamred-27" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -199,7 +205,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="DatabaseDriversLRU" value="mysql&#10;cassandra" />
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -212,19 +218,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/admin" />
+      <recent name="$PROJECT_DIR$/templates/admin/product" />
+      <recent name="$PROJECT_DIR$/templates" />
+      <recent name="$PROJECT_DIR$/templates/main" />
+      <recent name="$PROJECT_DIR$/templates/bundles/TwigBundle/Exception" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\UNI\Pentalog\WebShop_preot.md\src\Form" />
       <recent name="$PROJECT_DIR$/public/assets" />
       <recent name="$PROJECT_DIR$/templates/productApi" />
       <recent name="$PROJECT_DIR$/templates/bundles/TwigBundle/Exception" />
       <recent name="$PROJECT_DIR$/public/assets/main/images" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/templates/main/product" />
-      <recent name="$PROJECT_DIR$/templates/admin" />
-      <recent name="$PROJECT_DIR$/templates/admin/product" />
-      <recent name="$PROJECT_DIR$/templates" />
-      <recent name="$PROJECT_DIR$/templates/main" />
     </key>
   </component>
   <component name="ServiceViewManager">
@@ -240,12 +246,12 @@
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="MySQL - @localhost: root" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@3d5d5d63" type="9fbbdea:ServiceModel$ServiceNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@55cdde0b" type="9fbbdea:ServiceModel$ServiceNode" />
               </path>
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="MySQL - @localhost: root" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@7f0dc272" type="9fbbdea:ServiceModel$ServiceNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@774e2324" type="9fbbdea:ServiceModel$ServiceNode" />
               </path>
             </expand>
             <select />
@@ -254,13 +260,13 @@
       </list>
     </option>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="Design crud users" />
+      <changelist id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="" />
       <created>1617781869330</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -294,11 +300,100 @@
       <workItem from="1619328060249" duration="18289000" />
       <workItem from="1619350934468" duration="423000" />
       <workItem from="1619438372942" duration="2139000" />
-      <workItem from="1619526964883" duration="13485000" />
-      <workItem from="1619556778722" duration="2977000" />
-      <workItem from="1619592456271" duration="6034000" />
-      <workItem from="1619607698248" duration="752000" />
-      <workItem from="1619617302312" duration="2764000" />
+      <workItem from="1619533459825" duration="474000" />
+      <workItem from="1619534405600" duration="16000" />
+      <workItem from="1619534477738" duration="565000" />
+    </task>
+    <task id="LOCAL-00008" summary="Added image path Product CRUD">
+      <created>1617931077008</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1617931077008</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Added image path Product CRUD">
+      <created>1617931084092</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1617931084092</updated>
+    </task>
+    <task id="LOCAL-00010" summary="New Table product created">
+      <created>1617931605122</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1617931605122</updated>
+    </task>
+    <task id="LOCAL-00011" summary="New Table product created">
+      <created>1617931617579</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1617931617579</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Created at and Updated at works well">
+      <created>1617971450580</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1617971450581</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Added Description">
+      <created>1617972878501</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1617972878501</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Find product by code works :D">
+      <created>1617973573087</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1617973573087</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Show by code, edit by code, delete by code work well">
+      <created>1617974197078</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1617974197078</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Display product by code (back + front) work well">
+      <created>1617975839433</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1617975839433</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Display product by code (back + front) work well">
+      <created>1617976070404</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1617976070404</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Display product by code (back + front) work well">
+      <created>1617978189237</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1617978189237</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Display product by code (back + front) work well">
+      <created>1617978203795</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1617978203795</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Commented products">
+      <created>1618047674033</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1618047674033</updated>
     </task>
     <task id="LOCAL-00021" summary="Commented products">
       <created>1618047688940</created>
@@ -552,102 +647,11 @@
       <option name="project" value="LOCAL" />
       <updated>1619351349919</updated>
     </task>
-    <task id="LOCAL-00057" summary="Design crud users">
-      <created>1619477720689</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1619477720689</updated>
-    </task>
-    <task id="LOCAL-00058" summary="Design crud users">
-      <created>1619478150817</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1619478150817</updated>
-    </task>
-    <task id="LOCAL-00059" summary="User navbar, user search, pagination">
-      <created>1619547392820</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1619547392820</updated>
-    </task>
-    <task id="LOCAL-00060" summary="User navbar, user search, pagination">
-      <created>1619548103823</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1619548103823</updated>
-    </task>
-    <task id="LOCAL-00061" summary="User show password hidden">
-      <created>1619548306885</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1619548306885</updated>
-    </task>
-    <task id="LOCAL-00062" summary="User displays roles">
-      <created>1619549062548</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1619549062548</updated>
-    </task>
-    <task id="LOCAL-00063" summary="User displays roles">
-      <created>1619549119015</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1619549119015</updated>
-    </task>
-    <task id="LOCAL-00064" summary="Password min length">
-      <created>1619559695280</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1619559695280</updated>
-    </task>
-    <task id="LOCAL-00065" summary="Password min length">
-      <created>1619594369910</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1619594369910</updated>
-    </task>
-    <task id="LOCAL-00066" summary="Errors. Product duplicated code(new, edit). User duplicated nick-email (register, new, edit, log in)">
-      <created>1619604562972</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1619604562972</updated>
-    </task>
-    <task id="LOCAL-00067" summary="Errors. Product duplicated code(new, edit). User duplicated nick-email (register, new, edit, log in)">
-      <created>1619604611354</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1619604611354</updated>
-    </task>
-    <task id="LOCAL-00068" summary="v1">
-      <created>1619611007451</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1619611007451</updated>
-    </task>
-    <task id="LOCAL-00069" summary="v1">
-      <created>1619624443162</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1619624443163</updated>
-    </task>
-    <option name="localTasksCounter" value="70" />
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -666,15 +670,22 @@
                   </entry>
                 </map>
               </option>
+              <option name="COLUMN_ORDER" />
             </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Merged master" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/ion' into sasa" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/sasa'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
+    <MESSAGE value="Bug category-&gt;page not yet resolved" />
+    <MESSAGE value="search" />
+    <MESSAGE value="setName deletes other parameters" />
+    <MESSAGE value="solved bug with setting name after category. (form was guilty)" />
     <MESSAGE value="modified search" />
     <MESSAGE value="Merge branch 'sasa'" />
     <MESSAGE value="class SearchCriteria.php, added bad_request400.html.twig" />
@@ -693,13 +704,12 @@
     <MESSAGE value="Fixed bug search by name from products details page" />
     <MESSAGE value="Errors for admin pages: create, update" />
     <MESSAGE value="Price displayed ever with 2 decimals. On create/update decimals are rounded." />
-    <MESSAGE value="Design crud users" />
-    <MESSAGE value="User navbar, user search, pagination" />
-    <MESSAGE value="User show password hidden" />
-    <MESSAGE value="User displays roles" />
-    <MESSAGE value="Password min length" />
-    <MESSAGE value="Errors. Product duplicated code(new, edit). User duplicated nick-email (register, new, edit, log in)" />
-    <MESSAGE value="v1" />
-    <option name="LAST_COMMIT_MESSAGE" value="v1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Price displayed ever with 2 decimals. On create/update decimals are rounded." />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="310" y="31" key="CommitChangelistDialog2" timestamp="1619624144939">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="310" y="31" key="CommitChangelistDialog2/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1619624144939" />
   </component>
 </project>
