@@ -122,6 +122,7 @@ class UserController extends AbstractController
     {
         $form = $this->createForm(UserType::class, $user);
         $origNick = $user->getUsername();
+        $origEmail = $user->getEmail();
         $originalPassword = $user->getPassword();
         $form->handleRequest($request);
 
@@ -138,7 +139,7 @@ class UserController extends AbstractController
             if ($repo->count(['username' => $user->getUsername()]) > 0 and $form->get('username')->getData() !== $origNick) {
                 array_push($errors, "This nickname already exists");
             }
-            if ($repo->count(['email' => $user->getEmail()]) > 1) {
+            if ($repo->count(['email' => $user->getEmail()]) > 0 and $form->get('username')->getData() !== $origEmail) {
                 array_push($errors, "This e-mail address already exists");
             }
             if (!empty($errors)) {

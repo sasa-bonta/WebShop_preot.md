@@ -76,7 +76,7 @@ class AdminController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            # Errors existent Nickname and/or Email
+            # Errors existent code
             $errors = [];
             $repo = $this->getDoctrine()->getRepository(Product::class);
             if ($repo->count(['code' => $product->getCode()]) > 0) {
@@ -129,14 +129,15 @@ class AdminController extends AbstractController
     public function edit(Request $request, Product $product): Response
     {
         $form = $this->createForm(ProductType::class, $product);
+        $origCode = $product->getCode();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            # Errors existent Nickname and/or Email
+            # Errors existent code
             $errors = [];
             $repo = $this->getDoctrine()->getRepository(Product::class);
-            if ($repo->count(['code' => $product->getCode()]) > 1) {
+            if ($repo->count(['code' => $product->getCode()]) > 0 and $form->get('code')->getData() !== $origCode) {
                 array_push($errors, "This code already exists");
             }
             if (!empty($errors)) {
