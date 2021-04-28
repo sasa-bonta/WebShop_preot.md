@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="Errors. Product duplicated code(new, edit). User duplicated nick-email (register, new, edit, log in)">
+    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="v1">
+      <change afterPath="$PROJECT_DIR$/public/assets/main/images/403.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/TwigBundle/Exception/error403.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bundles/TwigBundle/Exception/error400.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bundles/TwigBundle/Exception/error400.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -294,14 +297,8 @@
       <workItem from="1619526964883" duration="13485000" />
       <workItem from="1619556778722" duration="2977000" />
       <workItem from="1619592456271" duration="6034000" />
-      <workItem from="1619607698248" duration="656000" />
-    </task>
-    <task id="LOCAL-00019" summary="Display product by code (back + front) work well">
-      <created>1617978203795</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1617978203795</updated>
+      <workItem from="1619607698248" duration="752000" />
+      <workItem from="1619617302312" duration="2463000" />
     </task>
     <task id="LOCAL-00020" summary="Commented products">
       <created>1618047674033</created>
@@ -639,7 +636,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619604611354</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="v1">
+      <created>1619611007451</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1619611007451</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -671,7 +675,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="solved bug with setting name after category. (form was guilty)" />
     <MESSAGE value="modified search" />
     <MESSAGE value="Merge branch 'sasa'" />
     <MESSAGE value="class SearchCriteria.php, added bad_request400.html.twig" />
@@ -696,6 +699,7 @@
     <MESSAGE value="User displays roles" />
     <MESSAGE value="Password min length" />
     <MESSAGE value="Errors. Product duplicated code(new, edit). User duplicated nick-email (register, new, edit, log in)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Errors. Product duplicated code(new, edit). User duplicated nick-email (register, new, edit, log in)" />
+    <MESSAGE value="v1" />
+    <option name="LAST_COMMIT_MESSAGE" value="v1" />
   </component>
 </project>
