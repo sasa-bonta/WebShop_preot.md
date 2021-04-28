@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/api/products")
+ * @Route("/api/v1/products")
  * @method Exception(string $string)
  */
 class ProductApiController extends AbstractController

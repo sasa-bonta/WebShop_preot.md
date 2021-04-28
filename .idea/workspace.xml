@@ -4,18 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="Password min length">
+    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="Errors. Product duplicated code(new, edit). User duplicated nick-email (register, new, edit, log in)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210426132209.php" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/Version20210428085908.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/product/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/product/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/user/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/user/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/user/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/user/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -303,21 +293,8 @@
       <workItem from="1619438372942" duration="2139000" />
       <workItem from="1619526964883" duration="13485000" />
       <workItem from="1619556778722" duration="2977000" />
-      <workItem from="1619592456271" duration="5507000" />
-    </task>
-    <task id="LOCAL-00017" summary="Display product by code (back + front) work well">
-      <created>1617976070404</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1617976070404</updated>
-    </task>
-    <task id="LOCAL-00018" summary="Display product by code (back + front) work well">
-      <created>1617978189237</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1617978189237</updated>
+      <workItem from="1619592456271" duration="6034000" />
+      <workItem from="1619607698248" duration="656000" />
     </task>
     <task id="LOCAL-00019" summary="Display product by code (back + front) work well">
       <created>1617978203795</created>
@@ -648,7 +625,21 @@
       <option name="project" value="LOCAL" />
       <updated>1619594369910</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="Errors. Product duplicated code(new, edit). User duplicated nick-email (register, new, edit, log in)">
+      <created>1619604562972</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1619604562972</updated>
+    </task>
+    <task id="LOCAL-00067" summary="Errors. Product duplicated code(new, edit). User duplicated nick-email (register, new, edit, log in)">
+      <created>1619604611354</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1619604611354</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -680,7 +671,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="setName deletes other parameters" />
     <MESSAGE value="solved bug with setting name after category. (form was guilty)" />
     <MESSAGE value="modified search" />
     <MESSAGE value="Merge branch 'sasa'" />
@@ -705,6 +695,7 @@
     <MESSAGE value="User show password hidden" />
     <MESSAGE value="User displays roles" />
     <MESSAGE value="Password min length" />
-    <option name="LAST_COMMIT_MESSAGE" value="Password min length" />
+    <MESSAGE value="Errors. Product duplicated code(new, edit). User duplicated nick-email (register, new, edit, log in)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Errors. Product duplicated code(new, edit). User duplicated nick-email (register, new, edit, log in)" />
   </component>
 </project>
