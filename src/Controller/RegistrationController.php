@@ -14,6 +14,24 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class RegistrationController extends AbstractController
 {
+    function checkData(User $user, UserRepository $repo): array
+    {
+        $errors = [];
+        if ($repo->count(['username' => $user->getUsername()]) > 0) {
+            $errors["nick"] = "This nickname already exists";
+        }
+        if (mb_strlen($user->getUsername()) < 1 or mb_strlen($user->getUsername()) > 30) {
+            $errors["nick"] = "The nickname should contain from 1 to 30 characters";
+        }
+        if ($repo->count(['email' => $user->getEmail()]) > 0) {
+            $errors["email"] = "This e-mail address already exists";
+        }
+        if (mb_strlen($user->getPlainPassword()) < 8 or mb_strlen($user->getPlainPassword() > 255)) {
+            $errors["pass1"] = "The password should contain from 8 to 255 characters";
+        }
+        return $errors;
+    }
+
     /**
      * @Route("/register", name="user_registration")
      */
@@ -21,19 +39,23 @@ class RegistrationController extends AbstractController
     {
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
-
         $form->handleRequest($request);
+        $errors = [];
+        # catching errors
+        if (!$form->isValid()) {
+            $form->getErrors();
+            $errors = $this->checkData($user, $repo);
+            $errors["pass2"] = "The passwords don't match";
+            return $this->render('registration/register.html.twig', [
+                'errors' => $errors,
+                'user' => $user,
+                'form' => $form->createView(),
+            ]);
+        }
         if ($form->isSubmitted() && $form->isValid()) {
-
-            # Errors existent Nickname and/or Email
-            $errors = [];
             $repo = $this->getDoctrine()->getRepository(User::class);
-            if ($repo->count(['username' => $user->getUsername()]) > 0) {
-                array_push($errors, "This nickname already exists");
-            }
-            if ($repo->count(['email' => $user->getEmail()]) > 0) {
-                array_push($errors, "This e-mail address already exists");
-            }
+            $errors = $this->checkData($user, $repo);
+
             if (!empty($errors)) {
                 return $this->render('registration/register.html.twig', [
                     'errors' => $errors,

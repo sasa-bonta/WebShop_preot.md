@@ -6,22 +6,43 @@
 
 {% block content %}
 
-    {% if errors is defined and errors is not null %}
-        <div class="alert alert-danger">
-            {% for error in errors %}
-                <li>{{ error }}</li>
-            {% endfor %}
-        </div>
-    {% endif %}
+    {# {% if errors is defined and errors is not null %} #}
+    {# <div class="alert alert-danger"> #}
+    {# {% for error in errors %} #}
+    {# <li>{{ error }}</li> #}
+    {# {% endfor %} #}
+    {# </div> #}
+    {# {% endif %} #}
 
     {{ form_start(form) }}
     <br>
+    {% if errors.nick is defined and errors.nick is not null %}
+        <div class="alert alert-danger">
+            <li>{{ errors.nick }}</li>
+        </div>
+    {% endif %}
     {{ form_row(form.username) }}
     <br>
+    {% if errors.email is defined and errors.email is not null %}
+        <div class="alert alert-danger">
+            <li>{{ errors.email }}</li>
+        </div>
+    {% endif %}
     {{ form_row(form.email) }}
     <br>
+    {% if errors.pass1 is defined and errors.pass1 is not null %}
+        <div class="alert alert-danger">
+            <li>{{ errors.pass1 }}</li>
+        </div>
+    {% endif %}
     {{ form_row(form.plainPassword.first) }}
     <br>
+    {% if errors.pass2 is defined and errors.pass2 is not null %}
+        <div class="alert alert-danger">
+            <li>{{ errors.pass2 }}</li>
+        </div>
+    {% endif %}
+    {{form_errors(form.plainPassword) }}
     {{ form_row(form.plainPassword.second) }}
     <p align="center">
         <button type="submit" class="btn btn-success">Register!</button>
