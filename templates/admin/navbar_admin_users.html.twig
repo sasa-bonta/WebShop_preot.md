@@ -92,16 +92,20 @@
     var limit = document.getElementById("limit");
     var order = document.getElementById("sortby");
 
-    if (window.location.href === 'http://localhost:8000/products/') {
-        limit.value = localStorage.getItem('limit');
-        order.value = localStorage.getItem('order');
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
 
-        localStorage.setItem('limit', '10');
-        localStorage.setItem('order', 'created_at:DESC');
+    if (urlParams.has("limit")) {
+        limit.value = urlParams.get("limit");
+    } else {
+        limit.value = 10;
     }
 
-    limit.value = localStorage.getItem('limit');
-    order.value = localStorage.getItem('order');
+    if (urlParams.has("order")) {
+        order.value = urlParams.get("order");
+    } else {
+        order.value = "email:ASC";
+    }
 
     function changeLimit(value) {
 
