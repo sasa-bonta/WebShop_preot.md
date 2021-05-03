@@ -42,7 +42,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
         $errors = [];
         # catching errors
-        if (!$form->isValid()) {
+        if ($form->isSubmitted() && !$form->isValid()) {
             $form->getErrors();
             $errors = $this->checkData($user, $repo);
             $errors["pass2"] = "The passwords don't match";
