@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="Added products">
+    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="Edit the email remains">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -302,14 +301,8 @@
       <workItem from="1619533459825" duration="474000" />
       <workItem from="1619534405600" duration="16000" />
       <workItem from="1619534477738" duration="565000" />
-      <workItem from="1619705665448" duration="2041000" />
-    </task>
-    <task id="LOCAL-00015" summary="Show by code, edit by code, delete by code work well">
-      <created>1617974197078</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1617974197078</updated>
+      <workItem from="1619705665448" duration="4616000" />
+      <workItem from="1619791938447" duration="2216000" />
     </task>
     <task id="LOCAL-00016" summary="Display product by code (back + front) work well">
       <created>1617975839433</created>
@@ -647,7 +640,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619644887096</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="Edit the email remains">
+      <created>1619709859288</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1619709859288</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -679,7 +679,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="solved bug with setting name after category. (form was guilty)" />
     <MESSAGE value="modified search" />
     <MESSAGE value="Merge branch 'sasa'" />
     <MESSAGE value="class SearchCriteria.php, added bad_request400.html.twig" />
@@ -704,6 +703,7 @@
     <MESSAGE value="Merge branch 'master' into feature/teamred-27&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
     <MESSAGE value="Product edit displays error" />
     <MESSAGE value="Added products" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added products" />
+    <MESSAGE value="Edit the email remains" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edit the email remains" />
   </component>
 </project>
