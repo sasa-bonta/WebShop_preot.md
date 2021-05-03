@@ -110,8 +110,20 @@
     var limit = document.getElementById("limit");
     var order = document.getElementById("sortby");
 
-    limit.value = localStorage.getItem('limit');
-    order.value = localStorage.getItem('order')
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    if (urlParams.has("limit")) {
+        limit.value = urlParams.get("limit");
+    } else {
+        limit.value = 16;
+    }
+
+    if (urlParams.has("order")) {
+        order.value = urlParams.get("order");
+    } else {
+        order.value = "created_at:DESC";
+    }
 
     function changeLimit(value) {
 

@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="Edit the email remains">
-      <change beforePath="$PROJECT_DIR$/templates/admin/user/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/user/show.html.twig" afterDir="false" />
+    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="sasa superuser">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/navbar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/navbar.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -303,14 +304,7 @@
       <workItem from="1619534477738" duration="565000" />
       <workItem from="1619705665448" duration="4616000" />
       <workItem from="1619791938447" duration="2216000" />
-      <workItem from="1620028934205" duration="311000" />
-    </task>
-    <task id="LOCAL-00017" summary="Display product by code (back + front) work well">
-      <created>1617976070404</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1617976070404</updated>
+      <workItem from="1620028934205" duration="1110000" />
     </task>
     <task id="LOCAL-00018" summary="Display product by code (back + front) work well">
       <created>1617978189237</created>
@@ -648,7 +642,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620029134342</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="sasa superuser">
+      <created>1620029343760</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1620029343760</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -680,7 +681,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="modified search" />
     <MESSAGE value="Merge branch 'sasa'" />
     <MESSAGE value="class SearchCriteria.php, added bad_request400.html.twig" />
     <MESSAGE value="Error 400 &amp; 404. Optimized getting parameters" />
@@ -705,6 +705,7 @@
     <MESSAGE value="Product edit displays error" />
     <MESSAGE value="Added products" />
     <MESSAGE value="Edit the email remains" />
-    <option name="LAST_COMMIT_MESSAGE" value="Edit the email remains" />
+    <MESSAGE value="sasa superuser" />
+    <option name="LAST_COMMIT_MESSAGE" value="sasa superuser" />
   </component>
 </project>
