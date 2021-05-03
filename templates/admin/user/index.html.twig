@@ -59,9 +59,11 @@
                                 <a href="{{ path('user_show', {'id': user.id}) }}">
                                     <button class="btn btn-success">Show</button>
                                 </a>
+                                {% if user.username != 'sasa' %}
                                 <a href="{{ path('user_edit', {'id': user.id}) }}">
                                     <button class="btn btn-warning">Edit</button>
                                 </a>
+                                {% endif %}
                             </td>
                         </tr>
                     {% else %}
