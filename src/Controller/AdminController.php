@@ -19,18 +19,26 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Route("/admin/products")
+ * @Route("/admin")
  */
 class AdminController extends AbstractController
 {
     /**
-     * @Route("/", name="product_list", methods={"GET"})
+     * @Route("/", name="admin_main", methods={"GET"})
+     */
+    public function main(): Response
+    {
+        return $this->redirectToRoute('product_list');
+    }
+
+    /**
+     * @Route("/products", name="product_list", methods={"GET"})
      */
     public function list(ProductRepository $productRepository, Request $request): Response
     {
         // http://localhost:8000/admin/products/
 
-       $name = $request->query->get('name');
+        $name = $request->query->get('name');
         $category = $request->query->get('category');
         $page = $request->query->get('page', 1);
         $limit = $request->query->get('limit', 16);
@@ -66,7 +74,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="product_new", methods={"GET","POST"})
+     * @Route("/products/new", name="product_new", methods={"GET","POST"})
      */
     public function new(Request $request, ProductRepository $repo): Response
     {
@@ -114,7 +122,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/{code}", name="product_show_detailed", methods={"GET"})
+     * @Route("/products/{code}", name="product_show_detailed", methods={"GET"})
      */
     public function show(Product $product): Response
     {
@@ -124,7 +132,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/{code}/edit", name="product_edit", methods={"GET","POST"})
+     * @Route("/products/{code}/edit", name="product_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Product $product): Response
     {
@@ -162,7 +170,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/{code}", name="product_delete", methods={"POST"})
+     * @Route("/products/{code}", name="product_delete", methods={"POST"})
      */
     public function delete(Request $request, Product $product): Response
     {

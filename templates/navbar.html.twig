@@ -156,10 +156,10 @@
             urlSearchParams.searchParams.set("page", 1);
             window.location.replace(urlSearchParams);
         } else {
-        urlSearchParams = new URLSearchParams(window.location.search);
-        urlSearchParams.set("name", inputVal);
-        urlSearchParams.set("page", 1);
-        window.location.search = urlSearchParams;
-    }
+            urlSearchParams = new URLSearchParams(window.location.search);
+            urlSearchParams.set("name", inputVal);
+            urlSearchParams.set("page", 1);
+            window.location.search = urlSearchParams;
+        }
     }
 </script>

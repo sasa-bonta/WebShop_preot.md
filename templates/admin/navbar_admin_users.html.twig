@@ -36,10 +36,8 @@
                     <a class="nav-link" href="{{ path('user_index') }}">Users</a>
                 </li>
                 <li style="width: 500px">
-
                     <form class="d-flex mx-5" onsubmit="setCriteria(); return false">
-
-                        <input class="name form-control me-2" id="search" name="name" type="text"
+                        <input class="name form-control me-2" id="myInput" name="name" type="text"
                                placeholder="Search Nick or E-mail"
                                aria-label="Search" size="30">
 
@@ -50,12 +48,11 @@
                             </svg>
                         </button>
                     </form>
-
                 </li>
                 <li>
-                    <label for="sortby" style="color: white; margin-left: 20px; margin-right: 20px; margin-top: 6px">Sort
+                    <label for="sortBy" style="color: white; margin-left: 20px; margin-right: 20px; margin-top: 6px">Sort
                         by:</label>
-                    <select id="sortby" onchange="changeSort(this.value)">
+                    <select id="sortBy" onchange="changeSort(this.value)">
                         <option value="email:ASC">email (ascending)</option>
                         <option value="email:DESC">email (descending)</option>
                         <option value="username:ASC">nick (ascending)</option>
@@ -90,7 +87,7 @@
 
 <script>
     var limit = document.getElementById("limit");
-    var order = document.getElementById("sortby");
+    var order = document.getElementById("sortBy");
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -127,10 +124,18 @@
     }
 
     function setCriteria() {
-        var inputVal = document.getElementById("search").value;
-        var urlSearchParams = new URL('http://localhost:8000/admin/users/');
-        urlSearchParams.searchParams.set('search', inputVal);
-        urlSearchParams.searchParams.set('page', 1);
-        window.location.replace(urlSearchParams);
+        var inputVal = document.getElementById("myInput").value;
+        var urlSearchParams;
+        if (window.location.origin + window.location.pathname !== "http://localhost:8000/admin/users/") {
+            urlSearchParams = new URL("http://localhost:8000/admin/users/");
+            urlSearchParams.searchParams.set("search", inputVal);
+            urlSearchParams.searchParams.set("page", 1);
+            window.location.replace(urlSearchParams);
+        } else {
+            urlSearchParams = new URLSearchParams(window.location.search);
+            urlSearchParams.set("search", inputVal);
+            urlSearchParams.set("page", 1);
+            window.location.search = urlSearchParams;
+        }
     }
 </script>

@@ -49,9 +49,9 @@
                     </form>
                 </li>
                 <li>
-                    <label for="sortby" style="color: white; margin-left: 20px; margin-right: 20px; margin-top: 6px">Sort
+                    <label for="sortBy" style="color: white; margin-left: 20px; margin-right: 20px; margin-top: 6px">Sort
                         by:</label>
-                    <select id="sortby" onchange="changeSort(this.value)">
+                    <select id="sortBy" onchange="changeSort(this.value)">
                         <option value="created_at:DESC">date (descending)</option>
                         <option value="created_at:ASC">date (ascending)</option>
                         <option value="price:DESC">price (descending)</option>
@@ -86,7 +86,7 @@
 
 <script>
     var limit = document.getElementById("limit");
-    var order = document.getElementById("sortby");
+    var order = document.getElementById("sortBy");
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -124,9 +124,17 @@
 
     function setName() {
         var inputVal = document.getElementById("myInput").value;
-        var urlSearchParams = new URL('http://localhost:8000/admin/products/');
-        urlSearchParams.searchParams.set('name', inputVal);
-        urlSearchParams.searchParams.set('page', 1);
-        window.location.replace(urlSearchParams);
+        var urlSearchParams;
+        if (window.location.origin + window.location.pathname !== "http://localhost:8000/admin/products/") {
+            urlSearchParams = new URL("http://localhost:8000/admin/products/");
+            urlSearchParams.searchParams.set("name", inputVal);
+            urlSearchParams.searchParams.set("page", 1);
+            window.location.replace(urlSearchParams);
+        } else {
+            urlSearchParams = new URLSearchParams(window.location.search);
+            urlSearchParams.set("name", inputVal);
+            urlSearchParams.set("page", 1);
+            window.location.search = urlSearchParams;
+        }
     }
 </script>
