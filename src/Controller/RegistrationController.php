@@ -55,7 +55,6 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $repo = $this->getDoctrine()->getRepository(User::class);
             $errors = $this->checkData($user, $repo);
-
             if (!empty($errors)) {
                 return $this->render('registration/register.html.twig', [
                     'errors' => $errors,
@@ -63,7 +62,6 @@ class RegistrationController extends AbstractController
                     'form' => $form->createView(),
                 ]);
             }
-
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
             $entityManager = $this->getDoctrine()->getManager();
