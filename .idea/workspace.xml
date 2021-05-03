@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="sasa superuser">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/navbar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/navbar.html.twig" afterDir="false" />
-    </list>
+    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="Set current order and limit navbar.html.twig" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -75,6 +72,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -304,21 +302,7 @@
       <workItem from="1619534477738" duration="565000" />
       <workItem from="1619705665448" duration="4616000" />
       <workItem from="1619791938447" duration="2216000" />
-      <workItem from="1620028934205" duration="1110000" />
-    </task>
-    <task id="LOCAL-00018" summary="Display product by code (back + front) work well">
-      <created>1617978189237</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1617978189237</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Display product by code (back + front) work well">
-      <created>1617978203795</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1617978203795</updated>
+      <workItem from="1620028934205" duration="1413000" />
     </task>
     <task id="LOCAL-00020" summary="Commented products">
       <created>1618047674033</created>
@@ -649,7 +633,21 @@
       <option name="project" value="LOCAL" />
       <updated>1620029343760</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="Set current order and limit navbar.html.twig">
+      <created>1620030258538</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1620030258538</updated>
+    </task>
+    <task id="LOCAL-00068" summary="Set current order and limit navbar.html.twig">
+      <created>1620030309927</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1620030309927</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -681,7 +679,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Merge branch 'sasa'" />
     <MESSAGE value="class SearchCriteria.php, added bad_request400.html.twig" />
     <MESSAGE value="Error 400 &amp; 404. Optimized getting parameters" />
     <MESSAGE value="Verifying if page isn't bigger that last page and if limit corresponds with limit from input" />
@@ -706,6 +703,7 @@
     <MESSAGE value="Added products" />
     <MESSAGE value="Edit the email remains" />
     <MESSAGE value="sasa superuser" />
-    <option name="LAST_COMMIT_MESSAGE" value="sasa superuser" />
+    <MESSAGE value="Set current order and limit navbar.html.twig" />
+    <option name="LAST_COMMIT_MESSAGE" value="Set current order and limit navbar.html.twig" />
   </component>
 </project>
