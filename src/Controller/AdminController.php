@@ -81,11 +81,21 @@ class AdminController extends AbstractController
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
-
+        $errors = [];
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $repo = $this->getDoctrine()->getRepository(Product::class);
+            if ($repo->count(['code' => $product->getCode()]) > 0) {
+                array_push($errors, "This code already exists");
+            }
+            if (!empty($errors)) {
+                return $this->render('admin/product/new.html.twig', [
+                    'errors' => $errors,
+                    'product' => $product,
+                    'form' => $form->createView(),
+                ]);
+            }
+        }
         if ($form->isSubmitted() && $form->isValid()) {
-
-            # Errors existent code
-            $errors = [];
             $repo = $this->getDoctrine()->getRepository(Product::class);
             if ($repo->count(['code' => $product->getCode()]) > 0) {
                 array_push($errors, "This code already exists");
@@ -139,11 +149,22 @@ class AdminController extends AbstractController
         $form = $this->createForm(ProductType::class, $product);
         $origCode = $product->getCode();
         $form->handleRequest($request);
-
+        $errors = [];
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $repo = $this->getDoctrine()->getRepository(Product::class);
+            if ($repo->count(['code' => $product->getCode()]) > 0 and $form->get('code')->getData() !== $origCode) {
+                array_push($errors, "This code already exists");
+            }
+            if (!empty($errors)) {
+                return $this->render('admin/product/edit.html.twig', [
+                    'errors' => $errors,
+                    'product' => $product,
+                    'form' => $form->createView(),
+                ]);
+            }
+        }
         if ($form->isSubmitted() && $form->isValid()) {
 
-            # Errors existent code
-            $errors = [];
             $repo = $this->getDoctrine()->getRepository(Product::class);
             if ($repo->count(['code' => $product->getCode()]) > 0 and $form->get('code')->getData() !== $origCode) {
                 array_push($errors, "This code already exists");
