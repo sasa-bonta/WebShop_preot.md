@@ -4,16 +4,22 @@
 <h5>Username</h5>
 {% if errors.nick is defined and errors.nick is not null %}
     <div class="alert alert-danger">
-        <li>{{ errors.nick }}</li>
+            <span class="d-block">
+                <span class="form-error-icon badge badge-danger text-uppercase">Error</span>
+                <span class="form-error-message">{{ errors.nick }}</span>
+            </span>
     </div>
 {% endif %}
     {{ form_widget(form.username) }}
 
 <br>
 <h5>E-mail</h5>
-{% if errors.email is defined and errors.nick is not null %}
+{% if errors.email is defined and errors.email is not null %}
     <div class="alert alert-danger">
-        <li>{{ errors.email }}</li>
+            <span class="d-block">
+                <span class="form-error-icon badge badge-danger text-uppercase">Error</span>
+                <span class="form-error-message">{{ errors.email }}</span>
+            </span>
     </div>
 {% endif %}
     {{ form_widget(form.email) }}
@@ -22,7 +28,10 @@
 <h5>Password</h5>
 {% if errors.pass is defined and errors.pass is not null %}
     <div class="alert alert-danger">
-        <li>{{ errors.pass }}</li>
+            <span class="d-block">
+                <span class="form-error-icon badge badge-danger text-uppercase">Error</span>
+                <span class="form-error-message">{{ errors.pass }}</span>
+            </span>
     </div>
 {% endif %}
 {% if form_errors(form.plainPassword.first) %}

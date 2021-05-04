@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="Registration errors above fields">
+    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="Registration, new user, update user errors">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/UserType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UserType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/admin/user/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/user/_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -310,14 +309,7 @@
       <workItem from="1619791938447" duration="2216000" />
       <workItem from="1620028934205" duration="21418000" />
       <workItem from="1620070004493" duration="6084000" />
-      <workItem from="1620114107824" duration="11455000" />
-    </task>
-    <task id="LOCAL-00031" summary="search">
-      <created>1618324253287</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1618324253287</updated>
+      <workItem from="1620114107824" duration="13145000" />
     </task>
     <task id="LOCAL-00032" summary="search">
       <created>1618324270924</created>
@@ -655,7 +647,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620121805416</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="Registration, new user, update user errors">
+      <created>1620127531131</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1620127531131</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -687,7 +686,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Api delete" />
     <MESSAGE value="Api create new Product" />
     <MESSAGE value="Api update new Product" />
     <MESSAGE value="Api products search products exceptions" />
@@ -712,6 +710,7 @@
     <MESSAGE value="Name doesn't change category" />
     <MESSAGE value="Redirect from /admin -&gt; /admin/products" />
     <MESSAGE value="Registration errors above fields" />
-    <option name="LAST_COMMIT_MESSAGE" value="Registration errors above fields" />
+    <MESSAGE value="Registration, new user, update user errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="Registration, new user, update user errors" />
   </component>
 </project>
