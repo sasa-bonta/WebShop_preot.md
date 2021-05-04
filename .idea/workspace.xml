@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="Product new, edit errors">
-      <change beforePath="$PROJECT_DIR$/templates/admin/navbar_admin_products.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/navbar_admin_products.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/navbar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/navbar.html.twig" afterDir="false" />
-    </list>
+    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="Set name after category navbar_admin_products.html.twig" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -307,21 +304,7 @@
       <workItem from="1619791938447" duration="2216000" />
       <workItem from="1620028934205" duration="21418000" />
       <workItem from="1620070004493" duration="6084000" />
-      <workItem from="1620114107824" duration="17366000" />
-    </task>
-    <task id="LOCAL-00034" summary="setName deletes other parameters">
-      <created>1618325094267</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1618325094267</updated>
-    </task>
-    <task id="LOCAL-00035" summary="setName deletes other parameters">
-      <created>1618325168350</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1618325168350</updated>
+      <workItem from="1620114107824" duration="17720000" />
     </task>
     <task id="LOCAL-00036" summary="setName deletes other parameters">
       <created>1618331659601</created>
@@ -652,7 +635,21 @@
       <option name="project" value="LOCAL" />
       <updated>1620135614111</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="Set name after category">
+      <created>1620136036796</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1620136036796</updated>
+    </task>
+    <task id="LOCAL-00084" summary="Set name after category navbar_admin_products.html.twig">
+      <created>1620136095033</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1620136095034</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -684,8 +681,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Api update new Product" />
-    <MESSAGE value="Api products search products exceptions" />
     <MESSAGE value="Api products responses" />
     <MESSAGE value="Admin crud pages" />
     <MESSAGE value="Admin crud navbar works" />
@@ -709,6 +704,8 @@
     <MESSAGE value="Registration errors above fields" />
     <MESSAGE value="Registration, new user, update user errors" />
     <MESSAGE value="Product new, edit errors" />
-    <option name="LAST_COMMIT_MESSAGE" value="Product new, edit errors" />
+    <MESSAGE value="Set name after category" />
+    <MESSAGE value="Set name after category navbar_admin_products.html.twig" />
+    <option name="LAST_COMMIT_MESSAGE" value="Set name after category navbar_admin_products.html.twig" />
   </component>
 </project>
