@@ -109,7 +109,7 @@
 <script>
     var limit = document.getElementById("limit");
     var order = document.getElementById("sortBy");
-    var name = document.getElementById("myInput");
+    // var name = document.getElementById("myInput");
 
     const urlParams = new URLSearchParams(window.location.search);
 
@@ -133,7 +133,6 @@
     // }
 
     function changeLimit(value) {
-
         var urlSearchParams = new URLSearchParams(window.location.search);
         urlSearchParams.set("limit", value);
         urlSearchParams.set("page", 1);
@@ -141,7 +140,6 @@
     }
 
     function changeSort(value) {
-
         var urlSearchParams = new URLSearchParams(window.location.search);
         urlSearchParams.set("order", value);
         window.location.search = urlSearchParams;

@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="Registration, new user, update user errors">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/product/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/product/_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/product/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/product/new.html.twig" afterDir="false" />
+    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="Product new, edit errors">
+      <change beforePath="$PROJECT_DIR$/templates/admin/navbar_admin_products.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/navbar_admin_products.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/navbar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/navbar.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -309,14 +307,7 @@
       <workItem from="1619791938447" duration="2216000" />
       <workItem from="1620028934205" duration="21418000" />
       <workItem from="1620070004493" duration="6084000" />
-      <workItem from="1620114107824" duration="16920000" />
-    </task>
-    <task id="LOCAL-00033" summary="search">
-      <created>1618325043844</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1618325043844</updated>
+      <workItem from="1620114107824" duration="17366000" />
     </task>
     <task id="LOCAL-00034" summary="setName deletes other parameters">
       <created>1618325094267</created>
@@ -654,7 +645,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620129172160</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="Product new, edit errors">
+      <created>1620135614111</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1620135614111</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -686,7 +684,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Api create new Product" />
     <MESSAGE value="Api update new Product" />
     <MESSAGE value="Api products search products exceptions" />
     <MESSAGE value="Api products responses" />
@@ -711,6 +708,7 @@
     <MESSAGE value="Redirect from /admin -&gt; /admin/products" />
     <MESSAGE value="Registration errors above fields" />
     <MESSAGE value="Registration, new user, update user errors" />
-    <option name="LAST_COMMIT_MESSAGE" value="Registration, new user, update user errors" />
+    <MESSAGE value="Product new, edit errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="Product new, edit errors" />
   </component>
 </project>

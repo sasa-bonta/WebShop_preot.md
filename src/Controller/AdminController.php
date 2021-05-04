@@ -32,7 +32,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/products", name="product_list", methods={"GET"})
+     * @Route("/products/", name="product_list", methods={"GET"})
      */
     public function list(ProductRepository $productRepository, Request $request): Response
     {

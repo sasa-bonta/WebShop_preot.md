@@ -88,8 +88,7 @@
     var limit = document.getElementById("limit");
     var order = document.getElementById("sortBy");
 
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
+    const urlParams = new URLSearchParams(window.location.search);
 
     if (urlParams.has("limit")) {
         limit.value = urlParams.get("limit");
@@ -104,22 +103,16 @@
     }
 
     function changeLimit(value) {
-
         var urlSearchParams = new URLSearchParams(window.location.search);
-        urlSearchParams.set('limit', value);
-        urlSearchParams.set('page', 1);
+        urlSearchParams.set("limit", value);
+        urlSearchParams.set("page", 1);
         window.location.search = urlSearchParams;
-
-        localStorage.setItem('limit', value);
     }
 
     function changeSort(value) {
-
         var urlSearchParams = new URLSearchParams(window.location.search);
-        urlSearchParams.set('order', value);
+        urlSearchParams.set("order", value);
         window.location.search = urlSearchParams;
-
-        localStorage.setItem('order', value);
     }
 
     function setName() {
