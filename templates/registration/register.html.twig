@@ -6,41 +6,47 @@
 
 {% block content %}
 
+    <h1 align="center">Registration</h1>
+
     {{ form_start(form) }}
 
     <br>
+    <h5>Username</h5>
     {% if errors.nick is defined and errors.nick is not null %}
         <div class="alert alert-danger">
             <li>{{ errors.nick }}</li>
         </div>
     {% endif %}
-    {{ form_row(form.username) }}
+    {{ form_widget(form.username) }}
 
     <br>
-    {% if errors.email is defined and errors.email is not null %}
+    <h5>E-mail</h5>
+    {% if errors.email is defined and errors.nick is not null %}
         <div class="alert alert-danger">
             <li>{{ errors.email }}</li>
         </div>
     {% endif %}
-    {{ form_row(form.email) }}
+    {{ form_widget(form.email) }}
 
     <br>
-    {% if errors.pass1 is defined and errors.pass1 is not null %}
+    <h5>Password</h5>
+    {% if form_errors(form.plainPassword.first) %}
         <div class="alert alert-danger">
-            <li>{{ errors.pass1 }}</li>
+            {{ form_errors(form.plainPassword.first) }}
         </div>
     {% endif %}
-    {{ form_row(form.plainPassword.first) }}
+    {{ form_widget(form.plainPassword.first) }}
 
     <br>
-    {% if errors.pass2 is defined and errors.pass2 is not null %}
+    <h5>Repeat Password</h5>
+    {% if form_errors(form.plainPassword.second) %}
         <div class="alert alert-danger">
-            <li>{{ errors.pass2 }}</li>
+            {{ form_errors(form.plainPassword.second) }}
         </div>
     {% endif %}
-    {{form_errors(form.plainPassword) }}
-    {{ form_row(form.plainPassword.second) }}
+    {{ form_widget(form.plainPassword.second) }}
 
+    <br>
     <p align="center">
         <button type="submit" class="btn btn-success">Register!</button>
     </p>

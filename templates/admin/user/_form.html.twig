@@ -1,6 +1,42 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+
 <br>
+{% if errors.nick is defined and errors.nick is not null %}
+    <div class="alert alert-danger">
+        <li>{{ errors.nick }}</li>
+    </div>
+{% endif %}
+{{ form_row(form.username) }}
+
+<br>
+{% if errors.email is defined and errors.email is not null %}
+    <div class="alert alert-danger">
+        <li>{{ errors.email }}</li>
+    </div>
+{% endif %}
+{{ form_row(form.email) }}
+
+<br>
+{% if errors.pass1 is defined and errors.pass1 is not null %}
+    <div class="alert alert-danger">
+        <li>{{ errors.pass1 }}</li>
+    </div>
+{% endif %}
+{{ form_row(form.plainPassword) }}
+
+<br>
+{% if errors.pass2 is defined and errors.pass2 is not null %}
+    <div class="alert alert-danger">
+        <li>{{ errors.pass2 }}</li>
+    </div>
+{% endif %}
+    {{ form_row(form.password) }}
+
+
+{{ form_row(form.roles) }}
+
+<br>
+
 <p align="center">
     <button class="btn btn-success" type="submit">{{ button_label|default('Save') }}</button>
 </p>

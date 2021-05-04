@@ -68,20 +68,26 @@ class UserController extends AbstractController
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
+        # catching errors
+        $pass1 = $form->get('plainPassword')->getData();
+        $pass2 = $form->get('password')->getData();
         if ($form->isSubmitted() && $form->isValid()) {
-
-            # Errors existent Nickname and/or Email
-            $errors = [];
             $repo = $this->getDoctrine()->getRepository(User::class);
-            $plainPassword = $form->get('plainPassword')->getData();
-            if (empty($plainPassword)) {
-                array_push($errors, "The password must not be empty");
-            }
+            $errors = [];
             if ($repo->count(['username' => $user->getUsername()]) > 0) {
-                array_push($errors, "This nickname already exists");
+                $errors["nick"] = "This nickname already exists";
+            }
+            if (mb_strlen($user->getUsername()) < 1 or mb_strlen($user->getUsername()) > 30) {
+                $errors["nick"] = "The nickname should contain from 1 to 30 characters";
             }
             if ($repo->count(['email' => $user->getEmail()]) > 0) {
-                array_push($errors, "This e-mail address already exists");
+                $errors["email"] = "This e-mail address already exists";
+            }
+            if (mb_strlen($pass1) < 8 or mb_strlen($pass1) > 255 or mb_strlen($pass2) < 8 or mb_strlen($pass2) > 255) {
+                $errors["pass1"] = "The password should contain from 8 to 255 characters";
+            }
+            if ($pass1 !== $pass2) {
+                $errors["pass2"] = "The passwords don't match";
             }
             if (!empty($errors)) {
                 return $this->render('admin/user/new.html.twig', [
@@ -127,21 +133,29 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $plainPassword = $form->get('plainPassword')->getData();
-            if (!empty($plainPassword)) {
-                $user->setPassword($encoder->encodePassword($user, $form->get('plainPassword')->getData()));
+            $pass1 = $form->get('plainPassword')->getData();
+            $pass2 = $form->get('password')->getData();
+            if ($pass1 !== null && $pass2 !== null) {
+                if (mb_strlen($pass1) < 8 or mb_strlen($pass1) > 255 or mb_strlen($pass2) < 8 or mb_strlen($pass2) > 255) {
+                    $errors["pass1"] = "The password should contain from 8 to 255 characters";
+                }
+                if ($pass1 !== $pass2) {
+                    $errors["pass2"] = "The passwords don't match";
+                }
+                if (!empty($errors)) {
+                    $user->setPassword($encoder->encodePassword($user, $form->get('plainPassword')->getData()));
+                }
             } else {
                 $user->setPassword($originalPassword);
             }
-            # Errors existent Nickname and/or Email
-            $errors = [];
             $repo = $this->getDoctrine()->getRepository(User::class);
             if ($repo->count(['username' => $user->getUsername()]) > 0 and $form->get('username')->getData() !== $origNick) {
-                array_push($errors, "This nickname already exists");
+                $errors["nick"] = "This nickname already exists";
             }
             if ($repo->count(['email' => $user->getEmail()]) > 0 and $form->get('email')->getData() !== $origEmail) {
-                array_push($errors, "This e-mail address already exists");
+                $errors["email"] = "This e-mail address already exists";
             }
+
             if (!empty($errors)) {
                 return $this->render('admin/user/edit.html.twig', [
                     'errors' => $errors,

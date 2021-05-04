@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
 
 class RegisterType extends AbstractType
 {
@@ -22,7 +23,10 @@ class RegisterType extends AbstractType
                 'type' => PasswordType::class,
                 'first_options' => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password'),
-                'error_bubbling' => true,
+                'constraints' => new Length([
+                    'min' => 8,
+                    'max' => 255
+                ])
             ]);
     }
 
