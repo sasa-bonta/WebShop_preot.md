@@ -8,9 +8,11 @@ use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
 
 class UserType extends AbstractType
 {
@@ -19,11 +21,15 @@ class UserType extends AbstractType
         $builder
             ->add('username', TextType::class)
             ->add('email', EmailType::class)
-            ->add('plainPassword', PasswordType::class, [
+            ->add('plainPassword', RepeatedType::class, [
+                'type' => PasswordType::class,
                 'required' => false,
-            ])
-            ->add('password', PasswordType::class, [
-                'required' => false,
+                'first_options' => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),
+                'constraints' => new Length([
+                    'min' => 8,
+                    'max' => 255
+                ])
             ])
             ->add('roles', ChoiceType::class, [
                 'choices' => [

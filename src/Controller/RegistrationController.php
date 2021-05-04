@@ -14,25 +14,40 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class RegistrationController extends AbstractController
 {
+    function checkData(User $user): array
+    {
+        # Errors existent Nickname and/or Email
+        $errors = [];
+        $repo = $this->getDoctrine()->getRepository(User::class);
+        if ($repo->count(['username' => $user->getUsername()]) > 0) {
+            $errors['nick'] = "This nickname already exists";
+        }
+        if ($repo->count(['email' => $user->getEmail()]) > 0) {
+            $errors['email'] = "This e-mail address already exists";
+        }
+        return $errors;
+    }
+
     /**
      * @Route("/register", name="user_registration")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, UserRepository $repo)
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
-
         $form->handleRequest($request);
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $errors = $this->checkData($user);
+            if (!empty($errors)) {
+                return $this->render('registration/register.html.twig', [
+                    'errors' => $errors,
+                    'user' => $user,
+                    'form' => $form->createView(),
+                ]);
+            }
+        }
         if ($form->isSubmitted() && $form->isValid()) {
-            # Errors existent Nickname and/or Email
-            $errors = [];
-            $repo = $this->getDoctrine()->getRepository(User::class);
-            if ($repo->count(['username' => $user->getUsername()]) > 0) {
-               $errors['nick'] = "This nickname already exists";
-            }
-            if ($repo->count(['email' => $user->getEmail()]) > 0) {
-               $errors['email'] = "This e-mail address already exists";
-            }
+            $errors = $this->checkData($user);
             if (!empty($errors)) {
                 return $this->render('registration/register.html.twig', [
                     'errors' => $errors,
