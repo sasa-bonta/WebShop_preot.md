@@ -91,6 +91,7 @@ class RegistrationController extends AbstractController
             $email->context(['signedUrl' => $signatureComponents->getSignedUrl()]);
             $this->mailer->send($email);
 
+            $this->addFlash('check', 'Confirm your email. The link is in message');
             return $this->redirectToRoute('app_login');
         }
 
