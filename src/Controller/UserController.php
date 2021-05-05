@@ -101,7 +101,7 @@ class UserController extends AbstractController
                     'form' => $form->createView(),
                 ]);
             }
-
+            $user->setActivated(true);
             $user->setPassword($encoder->encodePassword($user, $form->get('plainPassword')->getData()));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);

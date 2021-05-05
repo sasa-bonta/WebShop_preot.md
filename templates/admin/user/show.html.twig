@@ -22,6 +22,15 @@
             <td>{{ user.email }}</td>
         </tr>
         <tr>
+            <th>Activated</th>
+            <td>{% if user.activated == 1 %}
+                    true
+                {% else %}
+                    false
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
             <th>Roles</th>
             <td>
                 {% for role in user.roles %}
@@ -39,11 +48,11 @@
     </p>
     <br>
     {% if user.username != 'sasa' %}
-    <p align="center">
-        <a href="{{ path('user_edit', {'id': user.id}) }}">
-            <button class="btn btn-success">Edit</button>
-        </a>
-    </p>
-    {{ include('admin/user/_delete_form.html.twig') }}
+        <p align="center">
+            <a href="{{ path('user_edit', {'id': user.id}) }}">
+                <button class="btn btn-success">Edit</button>
+            </a>
+        </p>
+        {{ include('admin/user/_delete_form.html.twig') }}
     {% endif %}
 {% endblock %}
