@@ -116,7 +116,7 @@ class ProductApiController extends AbstractController
     /**
      * @Route("/{code}", name="productApi_show", defaults={"_format":"json"},methods={"GET"})
      */
-    public function show(ProductRepository $productRepository, Product $product): Response
+    public function show(Product $product): Response
     {
         return $this->json($product);
     }
@@ -165,7 +165,7 @@ class ProductApiController extends AbstractController
     }
 
     /**
-     * @Route("/{code}", name="productApi_delete", methods={"DELETE"})
+     * @Route("/{code}", name="productApi_delete", defaults={"_format":"json"}, methods={"DELETE"})
      */
     public function delete(Product $product, ProductRepository $productRepository): JsonResponse
     {
