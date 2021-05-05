@@ -3,13 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Exceptions\InvalidLimitException;
-use App\Exceptions\InvalidPageException;
-use App\Exceptions\NonexistentOrderByColumn;
-use App\Exceptions\NonexistentOrderingType;
 use App\Form\UserType;
+use Exception;
 use App\Repository\UserRepository;
-use App\SearchCriteria;
 use App\UserSearchCriteria;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,7 +28,7 @@ class UserController extends AbstractController
         $param = $request->query->get('search');
         $page = $request->query->get('page', 1);
         $limit = $request->query->get('limit', 16);
-        if ($limit > 100) {
+        if ($limit > 120) {
             throw new BadRequestHttpException("400");
         }
         $orderBy = $request->query->get('order', 'email:ASC');
