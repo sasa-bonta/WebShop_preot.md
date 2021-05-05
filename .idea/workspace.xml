@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="Set name after category navbar_admin_products.html.twig">
+    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="After search name is saved ura!!!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/navbar_admin_products.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/navbar_admin_products.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/navbar_admin_users.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/navbar_admin_users.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/navbar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/navbar.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -308,14 +310,7 @@
       <workItem from="1620028934205" duration="21418000" />
       <workItem from="1620070004493" duration="6084000" />
       <workItem from="1620114107824" duration="19693000" />
-      <workItem from="1620193608235" duration="353000" />
-    </task>
-    <task id="LOCAL-00037" summary="solved bug with setting name after category. (form was guilty)">
-      <created>1618355649128</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1618355649128</updated>
+      <workItem from="1620193608235" duration="1091000" />
     </task>
     <task id="LOCAL-00038" summary="Merge branch 'sasa'">
       <created>1618356629743</created>
@@ -653,7 +648,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620136221920</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="After search name is saved ura!!!">
+      <created>1620194221131</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1620194221132</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -685,7 +687,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Api products responses" />
     <MESSAGE value="Admin crud pages" />
     <MESSAGE value="Admin crud navbar works" />
     <MESSAGE value="Admin crud pagination" />
@@ -710,6 +711,7 @@
     <MESSAGE value="Product new, edit errors" />
     <MESSAGE value="Set name after category" />
     <MESSAGE value="Set name after category navbar_admin_products.html.twig" />
-    <option name="LAST_COMMIT_MESSAGE" value="Set name after category navbar_admin_products.html.twig" />
+    <MESSAGE value="After search name is saved ura!!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="After search name is saved ura!!!" />
   </component>
 </project>

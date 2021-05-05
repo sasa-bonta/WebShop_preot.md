@@ -85,8 +85,9 @@
 </nav>
 
 <script>
-    var limit = document.getElementById("limit");
-    var order = document.getElementById("sortBy");
+    const limit = document.getElementById("limit");
+    const order = document.getElementById("sortBy");
+    const name = document.getElementById("myInput");
 
     const urlParams = new URLSearchParams(window.location.search);
 
@@ -100,6 +101,10 @@
         order.value = urlParams.get("order");
     } else {
         order.value = "created_at:DESC";
+    }
+
+    if (urlParams.has("name")) {
+        name.value = urlParams.get("name");
     }
 
     function changeLimit(value) {

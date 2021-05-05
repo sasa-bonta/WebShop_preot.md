@@ -86,11 +86,11 @@
 </nav>
 
 <script>
-    var limit = document.getElementById("limit");
-    var order = document.getElementById("sortBy");
+    const limit = document.getElementById("limit");
+    const order = document.getElementById("sortBy");
+    const name = document.getElementById("myInput");
 
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
+    const urlParams = new URLSearchParams(window.location.search);
 
     if (urlParams.has("limit")) {
         limit.value = urlParams.get("limit");
@@ -102,6 +102,10 @@
         order.value = urlParams.get("order");
     } else {
         order.value = "email:ASC";
+    }
+
+    if (urlParams.has("search")) {
+        name.value = urlParams.get("search");
     }
 
     function changeLimit(value) {
