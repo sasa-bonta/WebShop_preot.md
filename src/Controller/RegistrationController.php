@@ -88,10 +88,11 @@ class RegistrationController extends AbstractController
             $email->to($user->getEmail());
             $email->from("service@preot.md");
             $email->htmlTemplate('registration/confirmation_email.html.twig');
-            $email->context(['signedUrl' => $signatureComponents->getSignedUrl()]);
+            $email->context(['signedUrl' => $signatureComponents->getSignedUrl(),
+                'name' => $user->getUsername()]);
             $this->mailer->send($email);
 
-            $this->addFlash('check', 'Confirm your email. The link is in message');
+            $this->addFlash('check', 'Activation message has been sent to: ' .$user->getEmail());
             return $this->redirectToRoute('app_login');
         }
 
