@@ -107,9 +107,9 @@
 </nav>
 
 <script>
-    var limit = document.getElementById("limit");
-    var order = document.getElementById("sortBy");
-    // var name = document.getElementById("myInput");
+    const limit = document.getElementById("limit");
+    const order = document.getElementById("sortBy");
+    const name = document.getElementById("myInput");
 
     const urlParams = new URLSearchParams(window.location.search);
 
@@ -126,11 +126,9 @@
     }
 
     // This doesn't work. Why???
-    // if (urlParams.has("name")) {
-    //     name.value = urlParams.get("name");
-    //     console.log(urlParams.get("name"));
-    //     console.log(name.value);
-    // }
+    if (urlParams.has("name")) {
+        name.value = urlParams.get("name");
+    }
 
     function changeLimit(value) {
         var urlSearchParams = new URLSearchParams(window.location.search);
