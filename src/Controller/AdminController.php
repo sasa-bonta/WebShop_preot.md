@@ -63,6 +63,7 @@ class AdminController extends AbstractController
 
         return $this->render('admin/product/list_of_products.html.twig', [
             'products' => $productRepository->search($searchCriteria),
+            'categories' => $productRepository->getCategories(),
             'length' => $length,
             'limit' => $searchCriteria->getLimit()
         ]);

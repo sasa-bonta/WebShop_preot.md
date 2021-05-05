@@ -78,6 +78,16 @@ class ProductRepository extends ServiceEntityRepository
         $this->getEntityManager()->remove($product);
         $this->getEntityManager()->flush();
     }
+
+    public function getCategories(): array
+    {
+        $categories = $this
+            ->createQueryBuilder('p')
+            ->select("DISTINCT p.category")
+            ->getQuery()
+            ->getResult();
+        return array_column($categories, 'category');
+    }
     /*
     public function findByExampleField($value)
     {

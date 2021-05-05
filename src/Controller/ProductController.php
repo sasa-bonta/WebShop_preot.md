@@ -51,6 +51,7 @@ class ProductController extends AbstractController
 
         return $this->render('main/product/index.html.twig', [
             'products' => $productRepository->search($searchCriteria),
+            'categories' => $productRepository->getCategories(),
             'length' => $length,
             'limit' => $searchCriteria->getLimit()
         ]);
