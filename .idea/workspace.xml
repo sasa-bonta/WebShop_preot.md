@@ -5,11 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="When editing, if password is null the old password remains">
-      <change afterPath="$PROJECT_DIR$/preot_md_product (1).csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/UserEditType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210411131230.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210427144826.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210428085908.php" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/Version20210504133943.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProductApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductApiController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/ProductType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ProductType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/product/list_of_products.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/product/list_of_products.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/product/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/product/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/product/product_details.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/product/product_details.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -305,7 +311,9 @@
       <workItem from="1619706801750" duration="3313000" />
       <workItem from="1619965384838" duration="228000" />
       <workItem from="1619986177776" duration="14000" />
-      <workItem from="1620133534679" duration="646000" />
+      <workItem from="1620133534679" duration="2816000" />
+      <workItem from="1620199573415" duration="121000" />
+      <workItem from="1620210549367" duration="275000" />
     </task>
     <task id="LOCAL-00010" summary="New Table product created">
       <created>1617931605122</created>
@@ -710,6 +718,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="When editing, if password is null the old password remains" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="570" y="151" key="#com.intellij.ide.util.MemberChooser" timestamp="1620135195937">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="570" y="151" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1620135195937" />
     <state x="549" y="165" key="FileChooserDialogImpl" timestamp="1619706470022">
       <screen x="0" y="0" width="1536" height="864" />
     </state>

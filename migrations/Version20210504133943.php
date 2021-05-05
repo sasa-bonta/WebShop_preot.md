@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210428085908 extends AbstractMigration
+final class Version20210504133943 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -20,14 +20,14 @@ final class Version20210428085908 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649F85E0677 ON user (username)');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649E7927C74 ON user (email)');
+        $this->addSql('ALTER TABLE product ADD available_amount INT NOT NULL');
+        $this->addSql('ALTER TABLE product RENAME INDEX product_code_uindex TO UNIQ_D34A04AD77153098');
     }
 
     public function down(Schema $schema) : void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP INDEX UNIQ_8D93D649F85E0677 ON user');
-        $this->addSql('DROP INDEX UNIQ_8D93D649E7927C74 ON user');
+        $this->addSql('ALTER TABLE product DROP available_amount');
+        $this->addSql('ALTER TABLE product RENAME INDEX uniq_d34a04ad77153098 TO product_code_uindex');
     }
 }

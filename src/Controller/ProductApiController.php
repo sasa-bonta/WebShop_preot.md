@@ -80,6 +80,7 @@ class ProductApiController extends AbstractController
         $product->setImgPath($parameters['imgPath']);
         $product->setDescription($parameters['description']);
         $product->setCreatedAt($dateTime);
+        $product->setAvailableAmount($parameters['availableAmount']);
         $entityManager->persist($product);
         $entityManager->flush();
 
@@ -110,6 +111,7 @@ class ProductApiController extends AbstractController
         $product->setImgPath($parameters['imgPath']);
         $product->setDescription($parameters['description']);
         $product->setUpdatedAt($dateTime);
+        $product->setAvailableAmount($parameters['availableAmount']);
         $entityManager->persist($product);
         $entityManager->flush();
 

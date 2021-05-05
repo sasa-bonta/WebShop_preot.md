@@ -30,7 +30,7 @@ class AdminController extends AbstractController
     {
         // http://localhost:8000/admin/products/
 
-       $name = $request->query->get('name');
+        $name = $request->query->get('name');
         $category = $request->query->get('category');
         $page = $request->query->get('page', 1);
         $limit = $request->query->get('limit', 16);
