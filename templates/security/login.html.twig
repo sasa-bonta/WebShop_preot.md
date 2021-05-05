@@ -19,17 +19,17 @@
         <h1 class="h3 mb-3 font-weight-normal" align="center">Please sign in</h1>
         {% for message in app.flashes('check') %}
             <div class="alert-danger">
-                <h5>{{ message }}</h5>
+                <li><h4>{{ message }}</h4></li>
             </div>
         {% endfor %}
         {% for message in app.flashes('verify_email_error') %}
             <div class="alert-warning">
-                <h5>{{ message }}</h5>
+                <li><h4>{{ message }}</h4></li>
             </div>
         {% endfor %}
         {% for message in app.flashes('success') %}
             <div class="alert-success">
-                <h5>{{ message }}</h5>
+                <li><h4>{{ message }}</h4></li>
             </div>
         {% endfor %}
         <label for="inputUsername">Username</label>
