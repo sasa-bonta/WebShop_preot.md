@@ -17,7 +17,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -26,18 +25,27 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProductApiController extends AbstractController
 {
+    private function makeResponse400($message): JsonResponse
+    {
+        $response = new JsonResponse();
+        $response->setStatusCode(JsonResponse::HTTP_BAD_REQUEST);
+        $data = ["status" => 400, "description" => "bad request","message" => $message];
+        $response->setData($data);
+        return $response;
+    }
+
     /**
      * @Route("/", name="productApi_index", methods={"GET"})
      * @throws Exception
      */
-    public function index(ProductRepository $productRepository, Request $request): Response
+    public function index(ProductRepository $productRepository, Request $request): JsonResponse
     {
         $name = $request->query->get('name');
         $category = $request->query->get('category');
         $page = $request->query->get('page', 1);
         $limit = $request->query->get('limit', 16);
         if ($limit > 100) {
-            return $this->json(array('code' => 400, 'message' => 'limit must be < 100>'));
+            return $this->makeResponse400("the limit must be <= 100");
         }
         $orderBy = $request->query->get('order', 'created_at:ASC');
         $arr = explode(":", $orderBy, 2);
@@ -47,30 +55,21 @@ class ProductApiController extends AbstractController
         try {
             $searchCriteria = new SearchCriteria($name, $category, $page, $limit, $order, $ascDesc);
         } catch (InvalidPageException $e) {
-            return $this->json(array('code' => 400, 'message' => 'page must be positive'));
+            return $this->makeResponse400("page must be positive");
         } catch (InvalidLimitException $e) {
-            return $this->json(array('code' => 400, 'message' => 'limit must be positive'));
+            return $this->makeResponse400("limit must be positive");
         } catch (NonexistentOrderByColumn $e) {
-            return $this->json(array('code' => 400, 'message' => 'nonexistent column name'));
+            return $this->makeResponse400("nonexistent column name");
         } catch (NonexistentOrderingType $e) {
-            return $this->json(array('code' => 400, 'message' => 'nonexistent sort order'));
+            return $this->makeResponse400("nonexistent sort order");
         }
 
         $length = $productRepository->countTotal($searchCriteria);
         if ($page > ceil($length / $limit)) {
-            return $this->json(array('code' => 400, 'message' => 'page limit exceeded'));
+            return $this->makeResponse400("page limit exceeded");
         }
 
         return $this->json($productRepository->search($searchCriteria));
-    }
-
-    private function makeResponse400($message): JsonResponse
-    {
-        $response = new JsonResponse();
-        $response->setStatusCode(JsonResponse::HTTP_BAD_REQUEST);
-        $data = ["code" => 400, "description" => "bad request","message" => $message];
-        $response->setData($data);
-        return $response;
     }
 
     /**
@@ -86,14 +85,12 @@ class ProductApiController extends AbstractController
 
         if (empty($parameters['code']) or empty($parameters['name']) or empty($parameters['category']) or empty($parameters['price']) or empty($parameters['description'])) {
             return $this->makeResponse400("some parameter is missing");
-        }
-
-        if ($repo->count(['code' => $parameters['code']]) > 0) {
+        } elseif ($repo->count(['code' => $parameters['code']]) > 0) {
             return $this->makeResponse400("this code already exists");
         } elseif (!is_float($parameters['price'])){
             return $this->makeResponse400("the price is not float");
         } else {
-            $data = ["code" => 201, "description" => "created","message" => "new product is created"];
+            $data = ["status" => 201, "description" => "created","message" => "new product is created"];
         }
 
         if (empty($parameters['imgPath'])) {
@@ -117,7 +114,7 @@ class ProductApiController extends AbstractController
     }
 
     /**
-     * @Route("/{code}", name="productApi_show", methods={"GET"})
+     * @Route("/{code}", name="productApi_show", defaults={"_format":"json"},methods={"GET"})
      */
     public function show(ProductRepository $productRepository, Product $product): Response
     {
@@ -125,14 +122,34 @@ class ProductApiController extends AbstractController
     }
 
     /**
-     * @Route("/{code}", name="productApi_edit", methods={"PUT"})
+     * @Route("/{code}", name="productApi_edit", defaults={"_format":"json"}, methods={"PUT"})
      */
-    public function edit(Request $request, Product $product, ProductRepository $productRepository): JsonResponse
+    public function edit(Request $request, Product $product, ProductRepository $repo): JsonResponse
     {
+        $response = new JsonResponse();
         $parameters = json_decode($request->getContent(), true);
-        $product = $productRepository->findOneBy(array('code' => $parameters['code']));
+
+        if ($repo->findOneBy(array('code' => $parameters['code'])) === null) {
+            $response->setStatusCode(JsonResponse::HTTP_NO_CONTENT);
+            $data = ["status" => 204, "description" => "no content","message" => "the product with this code doesn't exist"];
+            $response->setData($data);
+            return $response;
+        }
+
         $entityManager = $this->getDoctrine()->getManager();
         $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
+
+        if (empty($parameters['code']) or empty($parameters['name']) or empty($parameters['category']) or empty($parameters['price']) or empty($parameters['description'])) {
+            return $this->makeResponse400("some parameter is missing");
+        } elseif ($repo->count(['code' => $parameters['code']]) > 0 and $parameters['code'] !== $product->getCode()) {
+            return $this->makeResponse400("this code already exists");
+        } elseif (!is_float($parameters['price'])){
+            return $this->makeResponse400("the price is not float");
+        } else {
+            $data = ["status" => 200, "description" => "ok","message" => "the product is updated"];
+        }
+
+        $product->setCode($parameters['code']);
         $product->setName($parameters['name']);
         $product->setCategory($parameters['category']);
         $product->setPrice($parameters['price']);
@@ -142,8 +159,9 @@ class ProductApiController extends AbstractController
         $entityManager->persist($product);
         $entityManager->flush();
 
-        return new JsonResponse(['code' => 201,
-            'message' => 'product updated']);
+        $response->setStatusCode(JsonResponse::HTTP_OK);
+        $response->setData($data);
+        return $response;
     }
 
     /**
@@ -152,7 +170,9 @@ class ProductApiController extends AbstractController
     public function delete(Product $product, ProductRepository $productRepository): JsonResponse
     {
         $productRepository->delete($product);
-        return new JsonResponse(['code' => 200,
-            'message' => 'product deleted']);
+        $response->setStatusCode(JsonResponse::HTTP_OK);
+        $data = ["status" => 200, "description" => "ok","message" => "the product is deleted"];
+        $response->setData($data);
+        return $response;
     }
 }
