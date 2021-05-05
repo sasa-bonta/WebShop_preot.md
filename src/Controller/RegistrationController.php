@@ -14,7 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class RegistrationController extends AbstractController
 {
-    function checkData(User $user): array
+    private function checkData(User $user): array
     {
         # Errors existent Nickname and/or Email
         $errors = [];

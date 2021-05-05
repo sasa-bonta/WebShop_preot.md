@@ -68,11 +68,6 @@ class AdminController extends AbstractController
         ]);
     }
 
-    function generateRandomString($length = 10)
-    {
-        return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
-    }
-
     /**
      * @Route("/products/new", name="product_new", methods={"GET","POST"})
      */
@@ -110,14 +105,6 @@ class AdminController extends AbstractController
 
             $entityManager = $this->getDoctrine()->getManager();
             $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
-            # Random product generator. To make it work comment all the fields from ProductType
-//            $categ = ['cars', 'toys', 'supplies', 'tools'];
-//            $product->setName('product' .rand(0, 30));
-//            $product->setCode($this->generateRandomString());
-//            $product->setCategory($categ[rand(0,3)]);
-//            $product->setPrice(rand(1, 1601));
-//            $product->setDescription('Lorem ipsum dolor sit amet, consectetuer adipiscing elit. ');
-//            $product->setImgPath('assets/main/images/product1.jpg');
             $product->setCreatedAt($dateTime);
             $entityManager->persist($product);
             $entityManager->flush();

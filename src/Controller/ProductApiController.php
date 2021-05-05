@@ -3,7 +3,6 @@
 
 namespace App\Controller;
 
-
 use App\Entity\Product;
 use App\Exceptions\InvalidLimitException;
 use App\Exceptions\InvalidPageException;
@@ -18,6 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -64,27 +64,56 @@ class ProductApiController extends AbstractController
         return $this->json($productRepository->search($searchCriteria));
     }
 
-    /**
-     * @Route("/new", name="productApi_new", methods={"POST"})
-     */
-    public function new(Request $request): JsonResponse
+    private function makeResponse400($message): JsonResponse
     {
+        $response = new JsonResponse();
+        $response->setStatusCode(JsonResponse::HTTP_BAD_REQUEST);
+        $data = ["code" => 400, "description" => "bad request","message" => $message];
+        $response->setData($data);
+        return $response;
+    }
+
+    /**
+     * @Route("/new", name="productApi_new", defaults={"_format":"json"}, methods={"POST"})
+     */
+    public function new(Request $request, ProductRepository $repo): JsonResponse
+    {
+        $response = new JsonResponse();
         $parameters = json_decode($request->getContent(), true);
         $product = new Product();
         $entityManager = $this->getDoctrine()->getManager();
         $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
+
+        if (empty($parameters['code']) or empty($parameters['name']) or empty($parameters['category']) or empty($parameters['price']) or empty($parameters['description'])) {
+            return $this->makeResponse400("some parameter is missing");
+        }
+
+        if ($repo->count(['code' => $parameters['code']]) > 0) {
+            return $this->makeResponse400("this code already exists");
+        } elseif (!is_float($parameters['price'])){
+            return $this->makeResponse400("the price is not float");
+        } else {
+            $data = ["code" => 201, "description" => "created","message" => "new product is created"];
+        }
+
+        if (empty($parameters['imgPath'])) {
+            $product->setImgPath("/assets/main/images/no-image.png");
+        } else {
+            $product->setImgPath($parameters['imgPath']);
+        }
+
         $product->setCode($parameters['code']);
         $product->setName($parameters['name']);
         $product->setCategory($parameters['category']);
         $product->setPrice($parameters['price']);
-        $product->setImgPath($parameters['imgPath']);
         $product->setDescription($parameters['description']);
         $product->setCreatedAt($dateTime);
         $entityManager->persist($product);
         $entityManager->flush();
 
-        return new JsonResponse(['code' => 201,
-            'message' => 'new product created']);
+        $response->setStatusCode(JsonResponse::HTTP_CREATED);
+        $response->setData($data);
+        return $response;
     }
 
     /**

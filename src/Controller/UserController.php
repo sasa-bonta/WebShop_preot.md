@@ -56,7 +56,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    function checkDataNewUser(User $user): array
+    private function checkDataNewUser(User $user): array
     {
         # Errors existent Nickname and/or Email
         $errors = [];

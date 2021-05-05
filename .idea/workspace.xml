@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="After search name is saved navbar, products navbar, users navbar" />
+    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="Users bug limit &gt; 120">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProductApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductApiController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -305,14 +311,7 @@
       <workItem from="1620028934205" duration="21418000" />
       <workItem from="1620070004493" duration="6084000" />
       <workItem from="1620114107824" duration="19693000" />
-      <workItem from="1620193608235" duration="1457000" />
-    </task>
-    <task id="LOCAL-00040" summary="Error 400 &amp; 404. Optimized getting parameters">
-      <created>1618850794724</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1618850794724</updated>
+      <workItem from="1620193608235" duration="4992000" />
     </task>
     <task id="LOCAL-00041" summary="Verifying if page isn't bigger that last page and if limit corresponds with limit from input">
       <created>1618989326932</created>
@@ -650,7 +649,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620194805817</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="Users bug limit &gt; 120">
+      <created>1620195087795</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1620195087795</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -682,7 +688,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Admin crud pagination" />
     <MESSAGE value="Fixed bug search by name from products details page" />
     <MESSAGE value="Errors for admin pages: create, update" />
     <MESSAGE value="Price displayed ever with 2 decimals. On create/update decimals are rounded." />
@@ -707,6 +712,7 @@
     <MESSAGE value="After search name is saved ura!!!" />
     <MESSAGE value="After search name is saved navbar, navbar products, users navbar" />
     <MESSAGE value="After search name is saved navbar, products navbar, users navbar" />
-    <option name="LAST_COMMIT_MESSAGE" value="After search name is saved navbar, products navbar, users navbar" />
+    <MESSAGE value="Users bug limit &gt; 120" />
+    <option name="LAST_COMMIT_MESSAGE" value="Users bug limit &gt; 120" />
   </component>
 </project>
