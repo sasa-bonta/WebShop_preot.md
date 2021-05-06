@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="Product apis">
-      <change afterPath="$PROJECT_DIR$/src/CheckUserService.php" afterDir="false" />
+    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="User register and new duplication function fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/RegisterType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/RegisterType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/user/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/user/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/user/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/user/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -315,14 +312,7 @@
       <workItem from="1620114107824" duration="19693000" />
       <workItem from="1620193608235" duration="8398000" />
       <workItem from="1620277316915" duration="2082000" />
-      <workItem from="1620299311962" duration="18856000" />
-    </task>
-    <task id="LOCAL-00054" summary="Errors for admin pages: create, update">
-      <created>1619350343373</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1619350343373</updated>
+      <workItem from="1620299311962" duration="20469000" />
     </task>
     <task id="LOCAL-00055" summary="Errors for admin pages: create, update">
       <created>1619350388992</created>
@@ -660,7 +650,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620316200529</updated>
     </task>
-    <option name="localTasksCounter" value="103" />
+    <task id="LOCAL-00103" summary="User register and new duplication function fixed">
+      <created>1620318896737</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1620318896737</updated>
+    </task>
+    <option name="localTasksCounter" value="104" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -692,7 +689,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Product edit displays error" />
     <MESSAGE value="Added products" />
     <MESSAGE value="Edit the email remains" />
     <MESSAGE value="sasa superuser" />
@@ -717,6 +713,7 @@
     <MESSAGE value="Email confirmation. Flash messages displayed" />
     <MESSAGE value="Product create, product new flashes" />
     <MESSAGE value="Product apis" />
-    <option name="LAST_COMMIT_MESSAGE" value="Product apis" />
+    <MESSAGE value="User register and new duplication function fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="User register and new duplication function fixed" />
   </component>
 </project>

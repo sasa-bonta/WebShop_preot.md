@@ -52,11 +52,7 @@
                             <td>{{ user.id }}</td>
                             <td>{{ user.username }}</td>
                             <td>{{ user.email }}</td>
-                            <td>{% if user.activated == 1 %}
-                                    true
-                                {% else %}
-                                    false
-                                {% endif %}
+                            <td>{{ user.activated ? 'true' : 'false' }}
                             </td>
                             <td>
                                 {% for role in user.roles %}
