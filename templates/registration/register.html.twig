@@ -12,14 +12,14 @@
 
     <br>
     <h5>Username</h5>
-    {% if errors.nick is defined and errors.nick is not null %}
-        <div class="alert alert-danger">
-            <span class="d-block">
+    {% for message in app.flashes('nick') %}
+        <div class="alert-danger">
+           <span class="d-block">
                 <span class="form-error-icon badge badge-danger text-uppercase">Error</span>
-                <span class="form-error-message">{{ errors.nick }}</span>
+                <span class="form-error-message">{{ message }}</span>
             </span>
         </div>
-    {% endif %}
+    {% endfor %}
     {{ form_widget(form.username) }}
 
     <br>

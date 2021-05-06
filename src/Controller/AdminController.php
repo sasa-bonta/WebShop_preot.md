@@ -5,7 +5,6 @@ namespace App\Controller;
 
 
 use App\Entity\Product;
-use App\Entity\User;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use DateTime;
@@ -36,7 +35,6 @@ class AdminController extends AbstractController
      */
     public function list(ProductRepository $productRepository, Request $request): Response
     {
-        // http://localhost:8000/admin/products/
 
         $name = $request->query->get('name');
         $category = $request->query->get('category');
