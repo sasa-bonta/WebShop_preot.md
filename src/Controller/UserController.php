@@ -21,8 +21,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class UserController extends AbstractController
 {
-    private CheckUserService $checkUser;
-
     /**
      * @Route("/", name="user_index", methods={"GET"})
      */
@@ -59,16 +57,30 @@ class UserController extends AbstractController
         ]);
     }
 
+    function checkData(User $user): array
+    {
+        # Errors existent Nickname and/or Email
+        $errors = [];
+        $repo = $this->getDoctrine()->getRepository(User::class);
+        if ($repo->count(['username' => $user->getUsername()]) > 0) {
+            $errors['nick'] = "This nickname already exists";
+        }
+        if ($repo->count(['email' => $user->getEmail()]) > 0) {
+            $errors['email'] = "This e-mail address already exists";
+        }
+        return $errors;
+    }
+
     /**
      * @Route("/new", name="user_new", methods={"GET","POST"})
      */
-    public function new(Request $request, UserPasswordEncoderInterface $encoder, UserRepository $repo): Response
+    public function new(Request $request, UserPasswordEncoderInterface $encoder): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && !$form->isValid()) {
-            $errors = $this->checkUser->checkData($user);
+            $errors = $this->checkData($user);
             if (!empty($errors)) {
                 return $this->render('admin/user/new.html.twig', [
                     'errors' => $errors,
@@ -82,7 +94,7 @@ class UserController extends AbstractController
             if (empty($plainPassword)) {
                 $errors['pass'] = "The password must not be empty";
             }
-            $errors = $this->checkUser->checkData($user);
+            $errors = $this->checkData($user);
             if (!empty($errors)) {
                 return $this->render('admin/user/new.html.twig', [
                     'errors' => $errors,
