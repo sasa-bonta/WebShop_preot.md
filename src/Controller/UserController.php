@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\CheckUserService;
 use App\Entity\User;
 use App\Form\UserType;
 use Exception;
@@ -20,6 +21,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class UserController extends AbstractController
 {
+    private CheckUserService $checkUser;
+
     /**
      * @Route("/", name="user_index", methods={"GET"})
      */
@@ -56,20 +59,6 @@ class UserController extends AbstractController
         ]);
     }
 
-    private function checkDataNewUser(User $user): array
-    {
-        # Errors existent Nickname and/or Email
-        $errors = [];
-        $repo = $this->getDoctrine()->getRepository(User::class);
-        if ($repo->count(['username' => $user->getUsername()]) > 0) {
-            $errors['nick'] = "This nickname already exists";
-        }
-        if ($repo->count(['email' => $user->getEmail()]) > 0) {
-            $errors['email'] = "This e-mail address already exists";
-        }
-        return $errors;
-    }
-
     /**
      * @Route("/new", name="user_new", methods={"GET","POST"})
      */
@@ -79,7 +68,7 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && !$form->isValid()) {
-            $errors = $this->checkDataNewUser($user);
+            $errors = $this->checkUser->checkData($user);
             if (!empty($errors)) {
                 return $this->render('admin/user/new.html.twig', [
                     'errors' => $errors,
@@ -93,7 +82,7 @@ class UserController extends AbstractController
             if (empty($plainPassword)) {
                 $errors['pass'] = "The password must not be empty";
             }
-            $errors = $this->checkDataNewUser($user);
+            $errors = $this->checkUser->checkData($user);
             if (!empty($errors)) {
                 return $this->render('admin/user/new.html.twig', [
                     'errors' => $errors,
