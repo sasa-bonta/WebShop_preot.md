@@ -6,23 +6,58 @@
 
 {% block content %}
 
-    {% if errors is defined and errors is not null %}
-        <div class="alert alert-danger">
-            {% for error in errors %}
-                <li>{{ error }}</li>
-            {% endfor %}
-        </div>
-    {% endif %}
+    <h1 align="center">Registration</h1>
 
     {{ form_start(form) }}
+
     <br>
-    {{ form_row(form.username) }}
+    <h5>Username</h5>
+    {% if errors.nick is defined and errors.nick is not null %}
+        <div class="alert alert-danger">
+            <span class="d-block">
+                <span class="form-error-icon badge badge-danger text-uppercase">Error</span>
+                <span class="form-error-message">{{ errors.nick }}</span>
+            </span>
+        </div>
+    {% endif %}
+    {% if form_errors(form.username) %}
+        <div class="alert alert-danger">
+            {{ form_errors(form.username) }}
+        </div>
+    {% endif %}
+    {{ form_widget(form.username) }}
+
     <br>
-    {{ form_row(form.email) }}
+    <h5>E-mail</h5>
+    {% if errors.email is defined and errors.email is not null %}
+        <div class="alert alert-danger">
+            <span class="d-block">
+                <span class="form-error-icon badge badge-danger text-uppercase">Error</span>
+                <span class="form-error-message">{{ errors.email }}</span>
+            </span>
+        </div>
+    {% endif %}
+    {{ form_widget(form.email) }}
+
     <br>
-    {{ form_row(form.plainPassword.first) }}
+    <h5>Password</h5>
+    {% if form_errors(form.plainPassword.first) %}
+        <div class="alert alert-danger">
+            {{ form_errors(form.plainPassword.first) }}
+        </div>
+    {% endif %}
+    {{ form_widget(form.plainPassword.first) }}
+
     <br>
-    {{ form_row(form.plainPassword.second) }}
+    <h5>Repeat Password</h5>
+    {% if form_errors(form.plainPassword.second) %}
+        <div class="alert alert-danger">
+            {{ form_errors(form.plainPassword.second) }}
+        </div>
+    {% endif %}
+    {{ form_widget(form.plainPassword.second) }}
+
+    <br>
     <p align="center">
         <button type="submit" class="btn btn-success">Register!</button>
     </p>

@@ -1,11 +1,48 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <br>
-    <p align="center">
-        <button class="btn btn-success" type="submit">{{ button_label|default('Save') }}</button>
-    </p>
-    <p align="center">
-        <button class="btn btn-warning" type="reset">{{ button_label|default('Reset') }}</button>
-    </p>
-    <br>
+
+<br>
+<h5>Code</h5>
+{% for message in app.flashes('code') %}
+    <div class="alert-danger">
+           <span class="d-block">
+                <span class="form-error-icon badge badge-danger text-uppercase">Error</span>
+                <span class="form-error-message">{{ message }}</span>
+            </span>
+    </div>
+{% endfor %}
+{{ form_widget(form.code) }}
+
+<br>
+<h5>Name</h5>
+{{ form_widget(form.name) }}
+
+<br>
+<h5>Category</h5>
+{{ form_widget(form.category) }}
+
+<br>
+<h5>Description</h5>
+{{ form_widget(form.description) }}
+
+<br>
+<h5>Price</h5>
+{% if form_errors(form.price) %}
+    <div class="alert alert-danger">
+        {{ form_errors(form.price) }}
+    </div>
+{% endif %}
+{{ form_widget(form.price) }}
+
+<br>
+<h5>Image Path</h5>
+{{ form_widget(form.img_path) }}
+
+<br>
+<p align="center">
+    <button class="btn btn-success" type="submit">{{ button_label|default('Save') }}</button>
+</p>
+<p align="center">
+    <button class="btn btn-warning" type="reset">{{ button_label|default('Reset') }}</button>
+</p>
+<br>
 {{ form_end(form) }}

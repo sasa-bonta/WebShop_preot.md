@@ -2,14 +2,11 @@
 
 namespace App\Controller;
 
+use App\CheckUserService;
 use App\Entity\User;
-use App\Exceptions\InvalidLimitException;
-use App\Exceptions\InvalidPageException;
-use App\Exceptions\NonexistentOrderByColumn;
-use App\Exceptions\NonexistentOrderingType;
 use App\Form\UserType;
+use Exception;
 use App\Repository\UserRepository;
-use App\SearchCriteria;
 use App\UserSearchCriteria;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,7 +29,7 @@ class UserController extends AbstractController
         $param = $request->query->get('search');
         $page = $request->query->get('page', 1);
         $limit = $request->query->get('limit', 16);
-        if ($limit > 100) {
+        if ($limit > 120) {
             throw new BadRequestHttpException("400");
         }
         $orderBy = $request->query->get('order', 'email:ASC');
@@ -60,29 +57,30 @@ class UserController extends AbstractController
         ]);
     }
 
+    function checkData(User $user): array
+    {
+        # Errors existent Nickname and/or Email
+        $errors = [];
+        $repo = $this->getDoctrine()->getRepository(User::class);
+        if ($repo->count(['username' => $user->getUsername()]) > 0) {
+            $errors['nick'] = "This nickname already exists";
+        }
+        if ($repo->count(['email' => $user->getEmail()]) > 0) {
+            $errors['email'] = "This e-mail address already exists";
+        }
+        return $errors;
+    }
+
     /**
      * @Route("/new", name="user_new", methods={"GET","POST"})
      */
-    public function new(Request $request, UserPasswordEncoderInterface $encoder, UserRepository $repo): Response
+    public function new(Request $request, UserPasswordEncoderInterface $encoder): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            # Errors existent Nickname and/or Email
-            $errors = [];
-            $repo = $this->getDoctrine()->getRepository(User::class);
-            $plainPassword = $form->get('plainPassword')->getData();
-            if (empty($plainPassword)) {
-                array_push($errors, "The password must not be empty");
-            }
-            if ($repo->count(['username' => $user->getUsername()]) > 0) {
-                array_push($errors, "This nickname already exists");
-            }
-            if ($repo->count(['email' => $user->getEmail()]) > 0) {
-                array_push($errors, "This e-mail address already exists");
-            }
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $errors = $this->checkData($user);
             if (!empty($errors)) {
                 return $this->render('admin/user/new.html.twig', [
                     'errors' => $errors,
@@ -90,7 +88,21 @@ class UserController extends AbstractController
                     'form' => $form->createView(),
                 ]);
             }
-
+        }
+        if ($form->isSubmitted() && $form->isValid()) {
+            $plainPassword = $form->get('plainPassword')->getData();
+            if (empty($plainPassword)) {
+                $errors['pass'] = "The password must not be empty";
+            }
+            $errors = $this->checkData($user);
+            if (!empty($errors)) {
+                return $this->render('admin/user/new.html.twig', [
+                    'errors' => $errors,
+                    'user' => $user,
+                    'form' => $form->createView(),
+                ]);
+            }
+            $user->setActivated(true);
             $user->setPassword($encoder->encodePassword($user, $form->get('plainPassword')->getData()));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
@@ -115,6 +127,20 @@ class UserController extends AbstractController
         ]);
     }
 
+    function checkDataEditUser(User $user, $origNick, $origEmail, $form): array
+    {
+        # Errors existent Nickname and/or Email
+        $errors = [];
+        $repo = $this->getDoctrine()->getRepository(User::class);
+        if ($repo->count(['username' => $user->getUsername()]) > 0 and $form->get('username')->getData() !== $origNick) {
+            $errors['nick'] = "This nickname already exists";
+        }
+        if ($repo->count(['email' => $user->getEmail()]) > 0 and $form->get('email')->getData() !== $origEmail) {
+            $errors['email'] = "This e-mail address already exists";
+        }
+        return $errors;
+    }
+
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
@@ -126,6 +152,16 @@ class UserController extends AbstractController
         $originalPassword = $user->getPassword();
         $form->handleRequest($request);
 
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $errors = $this->checkDataEditUser($user, $origNick, $origEmail, $form);
+            if (!empty($errors)) {
+                return $this->render('admin/user/edit.html.twig', [
+                    'errors' => $errors,
+                    'user' => $user,
+                    'form' => $form->createView(),
+                ]);
+            }
+        }
         if ($form->isSubmitted() && $form->isValid()) {
             $plainPassword = $form->get('plainPassword')->getData();
             if (!empty($plainPassword)) {
@@ -133,15 +169,7 @@ class UserController extends AbstractController
             } else {
                 $user->setPassword($originalPassword);
             }
-            # Errors existent Nickname and/or Email
-            $errors = [];
-            $repo = $this->getDoctrine()->getRepository(User::class);
-            if ($repo->count(['username' => $user->getUsername()]) > 0 and $form->get('username')->getData() !== $origNick) {
-                array_push($errors, "This nickname already exists");
-            }
-            if ($repo->count(['email' => $user->getEmail()]) > 0 and $form->get('username')->getData() !== $origEmail) {
-                array_push($errors, "This e-mail address already exists");
-            }
+            $errors = $this->checkDataEditUser($user, $origNick, $origEmail, $form);
             if (!empty($errors)) {
                 return $this->render('admin/user/edit.html.twig', [
                     'errors' => $errors,
@@ -163,7 +191,8 @@ class UserController extends AbstractController
     /**
      * @Route("/{id}", name="user_delete", methods={"POST"})
      */
-    public function delete(Request $request, User $user): Response
+    public
+    function delete(Request $request, User $user): Response
     {
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();

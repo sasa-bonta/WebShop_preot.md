@@ -8,14 +8,6 @@
     <h1 align="center">Edit User</h1>
     <br>
 
-    {% if errors is defined and errors is not null %}
-        <div class="alert alert-danger">
-            {% for error in errors %}
-                <li>{{ error }}</li>
-            {% endfor %}
-        </div>
-    {% endif %}
-
     {{ include('admin/user/_form.html.twig') }}
 
     <p align="center">

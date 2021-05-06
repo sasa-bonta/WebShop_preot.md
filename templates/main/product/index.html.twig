@@ -103,27 +103,14 @@
                 <div class="col-3">
                     <h2>Categories</h2>
                     <ul class="list-group">
-
-                        <li class="list-group-item">
-                            <button type="submit" value="tools" style="background: none;border: none"
-                                    onclick="setCategory(this.value)">Tools
-                            </button>
-                        </li>
-                        <li class="list-group-item">
-                            <button type="submit" value="supplies" style="background: none;border: none"
-                                    onclick="setCategory(this.value)">Supplies
-                            </button>
-                        </li>
-                        <li class="list-group-item">
-                            <button type="submit" value="cars" style="background: none;border: none"
-                                    onclick="setCategory(this.value)">Cars
-                            </button>
-                        </li>
-                        <li class="list-group-item">
-                            <button type="submit" value="toys" style="background: none;border: none"
-                                    onclick="setCategory(this.value)">Toys
-                            </button>
-                        </li>
+                        {% for category in categories %}
+                            <li class="list-group-item">
+                                <button type="submit" value="{{ category | lower }}"
+                                        style="background: none;border: none"
+                                        onclick="setCategory(this.value)">{{ category | capitalize }}
+                                </button>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>

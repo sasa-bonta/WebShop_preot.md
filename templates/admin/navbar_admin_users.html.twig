@@ -36,10 +36,8 @@
                     <a class="nav-link" href="{{ path('user_index') }}">Users</a>
                 </li>
                 <li style="width: 500px">
-
                     <form class="d-flex mx-5" onsubmit="setCriteria(); return false">
-
-                        <input class="name form-control me-2" id="search" name="name" type="text"
+                        <input class="name form-control me-2" id="myInput" name="name" type="text"
                                placeholder="Search Nick or E-mail"
                                aria-label="Search" size="30">
 
@@ -50,12 +48,11 @@
                             </svg>
                         </button>
                     </form>
-
                 </li>
                 <li>
-                    <label for="sortby" style="color: white; margin-left: 20px; margin-right: 20px; margin-top: 6px">Sort
+                    <label for="sortBy" style="color: white; margin-left: 20px; margin-right: 20px; margin-top: 6px">Sort
                         by:</label>
-                    <select id="sortby" onchange="changeSort(this.value)">
+                    <select id="sortBy" onchange="changeSort(this.value)">
                         <option value="email:ASC">email (ascending)</option>
                         <option value="email:DESC">email (descending)</option>
                         <option value="username:ASC">nick (ascending)</option>
@@ -89,28 +86,33 @@
 </nav>
 
 <script>
-    var limit = document.getElementById("limit");
-    var order = document.getElementById("sortby");
+    const limit = document.getElementById("limit");
+    const order = document.getElementById("sortBy");
+    const name = document.getElementById("myInput");
 
-    if (window.location.href === 'http://localhost:8000/products/') {
-        limit.value = localStorage.getItem('limit');
-        order.value = localStorage.getItem('order');
+    const urlParams = new URLSearchParams(window.location.search);
 
-        localStorage.setItem('limit', '10');
-        localStorage.setItem('order', 'created_at:DESC');
+    if (urlParams.has("limit")) {
+        limit.value = urlParams.get("limit");
+    } else {
+        limit.value = 10;
     }
 
-    limit.value = localStorage.getItem('limit');
-    order.value = localStorage.getItem('order');
+    if (urlParams.has("order")) {
+        order.value = urlParams.get("order");
+    } else {
+        order.value = "email:ASC";
+    }
+
+    if (urlParams.has("search")) {
+        name.value = urlParams.get("search");
+    }
 
     function changeLimit(value) {
-
         var urlSearchParams = new URLSearchParams(window.location.search);
         urlSearchParams.set('limit', value);
         urlSearchParams.set('page', 1);
         window.location.search = urlSearchParams;
-
-        localStorage.setItem('limit', value);
     }
 
     function changeSort(value) {
@@ -118,15 +120,21 @@
         var urlSearchParams = new URLSearchParams(window.location.search);
         urlSearchParams.set('order', value);
         window.location.search = urlSearchParams;
-
-        localStorage.setItem('order', value);
     }
 
     function setCriteria() {
-        var inputVal = document.getElementById("search").value;
-        var urlSearchParams = new URL('http://localhost:8000/admin/users/');
-        urlSearchParams.searchParams.set('search', inputVal);
-        urlSearchParams.searchParams.set('page', 1);
-        window.location.replace(urlSearchParams);
+        var inputVal = document.getElementById("myInput").value;
+        var urlSearchParams;
+        if (window.location.origin + window.location.pathname !== "http://localhost:8000/admin/users/") {
+            urlSearchParams = new URL("http://localhost:8000/admin/users/");
+            urlSearchParams.searchParams.set("search", inputVal);
+            urlSearchParams.searchParams.set("page", 1);
+            window.location.replace(urlSearchParams);
+        } else {
+            urlSearchParams = new URLSearchParams(window.location.search);
+            urlSearchParams.set("search", inputVal);
+            urlSearchParams.set("page", 1);
+            window.location.search = urlSearchParams;
+        }
     }
 </script>

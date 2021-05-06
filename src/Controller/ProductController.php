@@ -45,12 +45,13 @@ class ProductController extends AbstractController
         }
 
         $length = $productRepository->countTotal($searchCriteria);
-        if ($page > ceil($length / $limit) and $length / $limit !== 0) {
+        if ($page > ceil($length / $limit) && $page > 1) {
             throw new BadRequestHttpException("400");
         }
 
         return $this->render('main/product/index.html.twig', [
             'products' => $productRepository->search($searchCriteria),
+            'categories' => $productRepository->getCategories(),
             'length' => $length,
             'limit' => $searchCriteria->getLimit()
         ]);

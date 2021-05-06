@@ -7,6 +7,7 @@
         a {
             text-decoration: none;
         }
+
         .pagination {
             justify-content: center;
         }
@@ -40,6 +41,7 @@
                         <th>Id</th>
                         <th>Username</th>
                         <th>Email</th>
+                        <th>Activated</th>
                         <th>Roles</th>
                         <th>Actions</th>
                     </tr>
@@ -50,6 +52,8 @@
                             <td>{{ user.id }}</td>
                             <td>{{ user.username }}</td>
                             <td>{{ user.email }}</td>
+                            <td>{{ user.activated ? 'true' : 'false' }}
+                            </td>
                             <td>
                                 {% for role in user.roles %}
                                     {{ role | replace ({'ROLE_' : ' '}) }}
@@ -59,9 +63,11 @@
                                 <a href="{{ path('user_show', {'id': user.id}) }}">
                                     <button class="btn btn-success">Show</button>
                                 </a>
-                                <a href="{{ path('user_edit', {'id': user.id}) }}">
-                                    <button class="btn btn-warning">Edit</button>
-                                </a>
+                                {% if user.username != 'sasa' %}
+                                    <a href="{{ path('user_edit', {'id': user.id}) }}">
+                                        <button class="btn btn-warning">Edit</button>
+                                    </a>
+                                {% endif %}
                             </td>
                         </tr>
                     {% else %}

@@ -1,6 +1,65 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+
 <br>
+<h5>Username</h5>
+{% if errors.nick is defined and errors.nick is not null %}
+    <div class="alert alert-danger">
+            <span class="d-block">
+                <span class="form-error-icon badge badge-danger text-uppercase">Error</span>
+                <span class="form-error-message">{{ errors.nick }}</span>
+            </span>
+    </div>
+{% endif %}
+    {% if form_errors(form.username) %}
+        <div class="alert alert-danger">
+            {{ form_errors(form.username) }}
+        </div>
+    {% endif %}
+    {{ form_widget(form.username) }}
+
+<br>
+<h5>E-mail</h5>
+{% if errors.email is defined and errors.email is not null %}
+    <div class="alert alert-danger">
+            <span class="d-block">
+                <span class="form-error-icon badge badge-danger text-uppercase">Error</span>
+                <span class="form-error-message">{{ errors.email }}</span>
+            </span>
+    </div>
+{% endif %}
+    {{ form_widget(form.email) }}
+
+<br>
+<h5>Password</h5>
+{% if errors.pass is defined and errors.pass is not null %}
+    <div class="alert alert-danger">
+            <span class="d-block">
+                <span class="form-error-icon badge badge-danger text-uppercase">Error</span>
+                <span class="form-error-message">{{ errors.pass }}</span>
+            </span>
+    </div>
+{% endif %}
+{% if form_errors(form.plainPassword.first) %}
+    <div class="alert alert-danger">
+        {{ form_errors(form.plainPassword.first) }}
+    </div>
+{% endif %}
+    {{ form_widget(form.plainPassword.first) }}
+
+<br>
+<h5>Repeat Password</h5>
+{% if form_errors(form.plainPassword.second) %}
+    <div class="alert alert-danger">
+        {{ form_errors(form.plainPassword.second) }}
+    </div>
+{% endif %}
+    {{ form_widget(form.plainPassword.second) }}
+
+<br>
+{{ form_row(form.roles) }}
+
+<br>
+
 <p align="center">
     <button class="btn btn-success" type="submit">{{ button_label|default('Save') }}</button>
 </p>
