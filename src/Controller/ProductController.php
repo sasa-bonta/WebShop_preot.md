@@ -45,7 +45,7 @@ class ProductController extends AbstractController
         }
 
         $length = $productRepository->countTotal($searchCriteria);
-        if ($page > ceil($length / $limit) and $length / $limit !== 0) {
+        if ($page > ceil($length / $limit) && $page > 1) {
             throw new BadRequestHttpException("400");
         }
 

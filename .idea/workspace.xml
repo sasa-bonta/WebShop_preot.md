@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="Email confirmation. Flash messages displayed">
+    <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="Product create, product new flashes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210505133942.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210505134027.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/product/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/product/_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProductApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductApiController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/ProductType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ProductType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SearchCriteria.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SearchCriteria.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -314,14 +314,7 @@
       <workItem from="1620114107824" duration="19693000" />
       <workItem from="1620193608235" duration="8398000" />
       <workItem from="1620277316915" duration="2082000" />
-      <workItem from="1620299311962" duration="684000" />
-    </task>
-    <task id="LOCAL-00051" summary="Admin crud navbar works">
-      <created>1619343482193</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1619343482193</updated>
+      <workItem from="1620299311962" duration="15556000" />
     </task>
     <task id="LOCAL-00052" summary="Admin crud pagination">
       <created>1619343692241</created>
@@ -659,7 +652,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620234934383</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="Product create, product new flashes">
+      <created>1620300214002</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1620300214003</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -691,7 +691,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="User edit name bugfix" />
     <MESSAGE value="Merge branch 'master' into feature/teamred-27&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
     <MESSAGE value="Product edit displays error" />
     <MESSAGE value="Added products" />
@@ -716,6 +715,7 @@
     <MESSAGE value="Auto categories" />
     <MESSAGE value="Email confirmation" />
     <MESSAGE value="Email confirmation. Flash messages displayed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Email confirmation. Flash messages displayed" />
+    <MESSAGE value="Product create, product new flashes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Product create, product new flashes" />
   </component>
 </project>
