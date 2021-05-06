@@ -6,9 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="Email confirmation. Flash messages displayed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration/confirmation_email.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/confirmation_email.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210505133942.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210505134027.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/product/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/product/_form.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -312,20 +313,8 @@
       <workItem from="1620070004493" duration="6084000" />
       <workItem from="1620114107824" duration="19693000" />
       <workItem from="1620193608235" duration="8398000" />
-    </task>
-    <task id="LOCAL-00049" summary="Api products responses">
-      <created>1619261412679</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1619261412679</updated>
-    </task>
-    <task id="LOCAL-00050" summary="Admin crud pages">
-      <created>1619341262508</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1619341262509</updated>
+      <workItem from="1620277316915" duration="2082000" />
+      <workItem from="1620299311962" duration="684000" />
     </task>
     <task id="LOCAL-00051" summary="Admin crud navbar works">
       <created>1619343482193</created>
@@ -656,7 +645,21 @@
       <option name="project" value="LOCAL" />
       <updated>1620234076956</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="Email confirmation. Flash messages displayed">
+      <created>1620234799855</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1620234799855</updated>
+    </task>
+    <task id="LOCAL-00099" summary="Email confirmation. Flash messages displayed">
+      <created>1620234934383</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1620234934383</updated>
+    </task>
+    <option name="localTasksCounter" value="100" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

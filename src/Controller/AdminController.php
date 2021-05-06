@@ -77,28 +77,23 @@ class AdminController extends AbstractController
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
-        $errors = [];
+        $repo = $this->getDoctrine()->getRepository(Product::class);
         if ($form->isSubmitted() && !$form->isValid()) {
-            $repo = $this->getDoctrine()->getRepository(Product::class);
             if ($repo->count(['code' => $product->getCode()]) > 0) {
-                array_push($errors, "This code already exists");
+                $this->addFlash('code', "This code already exists");
             }
-            if (!empty($errors)) {
-                return $this->render('admin/product/new.html.twig', [
-                    'errors' => $errors,
-                    'product' => $product,
-                    'form' => $form->createView(),
-                ]);
-            }
+
+            return $this->render('admin/product/new.html.twig', [
+                'product' => $product,
+                'form' => $form->createView(),
+            ]);
+
         }
         if ($form->isSubmitted() && $form->isValid()) {
-            $repo = $this->getDoctrine()->getRepository(Product::class);
             if ($repo->count(['code' => $product->getCode()]) > 0) {
-                array_push($errors, "This code already exists");
-            }
-            if (!empty($errors)) {
+                $this->addFlash('code', "This code already exists");
+
                 return $this->render('admin/product/new.html.twig', [
-                    'errors' => $errors,
                     'product' => $product,
                     'form' => $form->createView(),
                 ]);
@@ -137,29 +132,23 @@ class AdminController extends AbstractController
         $form = $this->createForm(ProductType::class, $product);
         $origCode = $product->getCode();
         $form->handleRequest($request);
-        $errors = [];
+        $repo = $this->getDoctrine()->getRepository(Product::class);
         if ($form->isSubmitted() && !$form->isValid()) {
-            $repo = $this->getDoctrine()->getRepository(Product::class);
             if ($repo->count(['code' => $product->getCode()]) > 0 and $form->get('code')->getData() !== $origCode) {
-                array_push($errors, "This code already exists");
-            }
-            if (!empty($errors)) {
+                $this->addFlash('code', "This code already exists");
+
                 return $this->render('admin/product/edit.html.twig', [
-                    'errors' => $errors,
                     'product' => $product,
                     'form' => $form->createView(),
                 ]);
             }
         }
-        if ($form->isSubmitted() && $form->isValid()) {
 
-            $repo = $this->getDoctrine()->getRepository(Product::class);
+        if ($form->isSubmitted() && $form->isValid()) {
             if ($repo->count(['code' => $product->getCode()]) > 0 and $form->get('code')->getData() !== $origCode) {
-                array_push($errors, "This code already exists");
-            }
-            if (!empty($errors)) {
+                $this->addFlash('code', "This code already exists");
+
                 return $this->render('admin/product/edit.html.twig', [
-                    'errors' => $errors,
                     'product' => $product,
                     'form' => $form->createView(),
                 ]);
@@ -172,16 +161,15 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('product_list');
         }
 
-        return $this->render('admin/product/edit.html.twig', [
-            'product' => $product,
-            'form' => $form->createView(),
-        ]);
+        return $this->render('admin/product/edit.html.twig', ['product' => $product,
+            'form' => $form->createView(),]);
     }
 
     /**
      * @Route("/products/{code}", name="product_delete", methods={"POST"})
      */
-    public function delete(Request $request, Product $product): Response
+    public
+    function delete(Request $request, Product $product): Response
     {
         if ($this->isCsrfTokenValid('delete' . $product->getCode(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
