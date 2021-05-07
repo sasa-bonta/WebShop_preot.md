@@ -58,7 +58,7 @@ class Product
     private $updated_at;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", options={"default" : 0})
      */
     private $availableAmount;
 

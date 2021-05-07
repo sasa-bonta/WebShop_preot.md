@@ -38,7 +38,7 @@ class ProductType extends AbstractType
                 'required' => false,
                 'empty_data' => '/assets/main/images/no-image.png',
             ])
-            ->add('availableAmount');
+            ->add('availableAmount'); # @todo verification positive integer
     }
 
     public function configureOptions(OptionsResolver $resolver)

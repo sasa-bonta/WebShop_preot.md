@@ -34,6 +34,15 @@
 {{ form_widget(form.price) }}
 
 <br>
+<h5>Available amount</h5>
+{% if form_errors(form.availableAmount) %}
+    <div class="alert alert-danger">
+        {{ form_errors(form.availableAmount) }}
+    </div>
+{% endif %}
+{{ form_widget(form.availableAmount) }}
+
+<br>
 <h5>Image Path</h5>
 {{ form_widget(form.img_path) }}
 
