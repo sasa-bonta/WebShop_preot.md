@@ -37,7 +37,8 @@ class ProductType extends AbstractType
             ->add('img_path', null, [
                 'required' => false,
                 'empty_data' => '/assets/main/images/no-image.png',
-            ]);
+            ])
+            ->add('availableAmount');
     }
 
     public function configureOptions(OptionsResolver $resolver)

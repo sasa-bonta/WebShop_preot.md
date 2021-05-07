@@ -42,6 +42,7 @@
                         <th>Price</th>
                         <th>Created at</th>
                         <th>Updated at</th>
+                        <th>Available Amount</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -54,6 +55,7 @@
                             <td>{{ product.price| number_format(2) }}</td>
                             <td>{{ product.createdAt|date('d-m-Y') }}</td>
                             <td>{{ product.updatedAt ? product.updatedAt|date('Y-m-d') : '---' }}</td>
+                            <td>{{ product.availableAmount }}</td>
                             <td>
                                 <a href="{{ path('product_show_detailed', { 'code': product.code }) }}">
                                     <button class="btn btn-success">Show</button>
