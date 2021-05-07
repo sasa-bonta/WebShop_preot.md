@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Product;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -38,7 +39,11 @@ class ProductType extends AbstractType
                 'required' => false,
                 'empty_data' => '/assets/main/images/no-image.png',
             ])
-            ->add('availableAmount'); # @todo verification positive integer
+            ->add('availableAmount', IntegerType::class, [
+                'required' => false,
+                'empty_data' => 0,
+                'constraints' => [new Positive()],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
