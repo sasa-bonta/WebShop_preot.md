@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Image index{% endblock %}
+
+{% block body %}
+    <style>
+        a {
+            text-decoration: none;
+        }
+
+        .pagination {
+            justify-content: center;
+        }
+
+        .page-link {
+            color: black;
+            background: none;
+            border: 1px black solid;
+        }
+
+        .page-link:hover {
+            color: white;
+            background: black;
+        }
+    </style>
+    {% include 'admin/admin_header.html.twig' %}
+    {% include 'admin/navbar_admin_users.html.twig' %}
+
+    <br>
+    <h1 align="center">Image index</h1>
+
+    <div class="container">
+        <div class="row my-3">
+            <div class="col-2">
+            </div>
+            <div class="col-8">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Tags</th>
+                        <th>Path</th>
+                        <th>Description</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for image in images %}
+                        <tr>
+                            <td>{{ image.id }}</td>
+                            <td>{{ image.tags }}</td>
+                            <td>{{ image.path }}</td>
+                            <td>{{ image.description }}</td>
+                            <td>
+                                <a href="{{ path('image_show', {'id': image.id}) }}">
+                                    <button class="btn btn-success">Show</button>
+                                </a>
+                                <a href="{{ path('image_edit', {'id': image.id}) }}">
+                                    <button class="btn btn-warning">Edit</button>
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <a href="{{ path('image_new') }}" class="btn btn-primary">Create new</a>
+
+            </div>
+            <div class="col-2">
+
+            </div>
+        </div>
+    </div>
+
+    {% include 'footer.html.twig' %}
+
+{% endblock %}
