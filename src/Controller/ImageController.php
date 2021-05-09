@@ -45,10 +45,6 @@ class ImageController extends AbstractController
             $tags = mb_strtolower($image->getTags());
             $errors = [];
 
-            if (preg_match('/[^a-zа-я0-9]/', $tags)) {
-                array_push($errors, "The tags must contain only characters and digits");
-            }
-
             $tags = explode(',', $tags);
             $trimmedTags = [];
             foreach ($tags as $tag) {
@@ -60,6 +56,9 @@ class ImageController extends AbstractController
             foreach ($trimmedTags as $tag) {
                 if (mb_strlen($tag) > 12 || mb_strlen($tag) < 2) {
                     array_push($errors, "The length of each tag must be from 2 to 12 characters");
+                }
+                if (preg_match('/[^a-zа-я0-9]/', $tag)) {
+                    array_push($errors, "The tags must contain only characters and digits");
                 }
             }
 

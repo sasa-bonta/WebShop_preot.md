@@ -52,7 +52,11 @@
                             <td>
                                 <img src="{{ asset(fullImagePath) }}" alt="" height="30px" width="30px">
                             </td>
-                            <td>{{ image.tags }}</td>
+                            <td>
+                                {% for tag in image.tags %}}
+                                    {{ tag }}
+                                {% endfor %}
+                            </td>
                             <td>{{ image.path }}</td>
                             <td>{{ image.description }}</td>
                             <td>
