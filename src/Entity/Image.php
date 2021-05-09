@@ -37,8 +37,13 @@ class Image
         return $this->id;
     }
 
+    public function getTags(): ?string
+    {
+        return $this->tags;
+    }
+
     // get tags: json -> array
-    public function getTags(): ?array
+    public function getTagsArray(): ?array
     {
         return json_decode($this->tags);
     }

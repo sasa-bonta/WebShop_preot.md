@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Image;
+use App\Form\ImageEditType;
 use App\Form\ImageType;
 use App\Repository\ImageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,7 +30,7 @@ class ImageController extends AbstractController
         ]);
     }
 
-    private function addImage($form, $slugger, Image $image): Image
+    private function addImagePath($form, $slugger): string
     {
         $imageFile = $form->get('path')->getData();
         $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
@@ -48,8 +49,21 @@ class ImageController extends AbstractController
         }
         // updates the 'brochureFilename' property to store the PDF file name
         // instead of its contents
-        $image->setPath($newFilename);
-        return $image;
+        return $newFilename;
+    }
+
+    private function checkTags(Image $image): array
+    {
+        $errors = [];
+        foreach ($image->getTagsArray() as $tag) {
+            if (mb_strlen($tag) > 12 || mb_strlen($tag) < 2) {
+                array_push($errors, "The length of each tag must be from 2 to 12 characters");
+            }
+            if (preg_match('/[^a-zа-я0-9]/', $tag)) {
+                array_push($errors, "The tags must contain only characters and digits");
+            }
+        }
+        return $errors;
     }
 
     /**
@@ -65,15 +79,7 @@ class ImageController extends AbstractController
             /** @var UploadedFile $imageFile */
 
             // Check tags
-            $errors = [];
-            foreach ($image->getTags() as $tag) {
-                if (mb_strlen($tag) > 12 || mb_strlen($tag) < 2) {
-                    array_push($errors, "The length of each tag must be from 2 to 12 characters");
-                }
-                if (preg_match('/[^a-zа-я0-9]/', $tag)) {
-                    array_push($errors, "The tags must contain only characters and digits");
-                }
-            }
+           $errors = $this->checkTags($image);
 
             if (!empty($errors)) {
                 return $this->render('admin/image/new.html.twig', [
@@ -84,13 +90,12 @@ class ImageController extends AbstractController
             }
 
             // Add tags
-            $image->setTagsFromArray($image->getTags());
+            $image->setTagsFromArray($image->getTagsArray());
             // Add image
-            $image = $this->addImage($form, $slugger, $image);
+            $image->setPath($this->addImagePath($form, $slugger));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($image);
             $entityManager->flush();
-
             return $this->redirectToRoute('image_index');
         }
 
@@ -113,16 +118,26 @@ class ImageController extends AbstractController
     /**
      * @Route("/{id}/edit", name="image_edit", methods={"GET","POST"})
      */
-    # @fixme edit image
-    public function edit(Request $request, Image $image): Response
+    public function edit(Request $request, Image $image, SluggerInterface $slugger): Response
     {
         $origPath = $image->getPath();
-        $form = $this->createForm(ImageType::class, $image);
+        $form = $this->createForm(ImageEditType::class, $image);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if (empty($image->getPath())) {
+
+            $errors = $this->checkTags($image);
+            if (!empty($errors)) {
+                return $this->render('admin/image/edit.html.twig', [
+                    'errors' => $errors,
+                    'image' => $image,
+                    'form' => $form->createView(),
+                ]);
+            }
+            if ($image->getPath() === '# % & { } \\ / $ ! \' \" : @ < > * ? + ` | =') {
                 $image->setPath($origPath);
+            } else {
+                $image->setPath($this->addImagePath($form, $slugger));
             }
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('image_index');
