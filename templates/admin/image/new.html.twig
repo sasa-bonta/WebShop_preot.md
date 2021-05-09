@@ -7,17 +7,6 @@
 {% block content %}
     <h1 align="center">Create new Image</h1>
 
-    {% if errors is defined and errors is not null %}
-        {% for error in errors %}
-            <div class="alert alert-danger">
-            <span class="d-block">
-                <span class="form-error-icon badge badge-danger text-uppercase">Error</span>
-                <span class="form-error-message">{{ error }}</span>
-            </span>
-            </div>
-        {% endfor %}
-    {% endif %}
-
     {{ include('admin/image/_form.html.twig') }}
 
     <p align="center">
