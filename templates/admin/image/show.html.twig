@@ -23,6 +23,14 @@
             <td>{{ image.path }}</td>
         </tr>
         <tr>
+            <th>Image</th>
+            <td>
+                {% set fullImagePath = 'assets/main/images/gallery/' %}
+                {% set fullImagePath = fullImagePath ~ image.path %}
+                <img src="{{ asset(fullImagePath) }}" alt="" height="300px">
+            </td>
+        </tr>
+        <tr>
             <th>Description</th>
             <td>{{ image.description }}</td>
         </tr>

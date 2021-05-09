@@ -37,17 +37,21 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>Id</th>
+                        <th>Photo</th>
                         <th>Tags</th>
-                        <th>Path</th>
+                        <th>File Name</th>
                         <th>Description</th>
                         <th>actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for image in images %}
+                        {% set fullImagePath = 'assets/main/images/gallery/' %}
+                        {% set fullImagePath = fullImagePath ~ image.path %}
                         <tr>
-                            <td>{{ image.id }}</td>
+                            <td>
+                                <img src="{{ asset(fullImagePath) }}" alt="" height="30px" width="30px">
+                            </td>
                             <td>{{ image.tags }}</td>
                             <td>{{ image.path }}</td>
                             <td>{{ image.description }}</td>
