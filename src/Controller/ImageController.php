@@ -23,7 +23,6 @@ class ImageController extends AbstractController
     /**
      * @Route("/", name="image_index", methods={"GET"})
      */
-    // @fixme display tags
     public function index(ImageRepository $imageRepository): Response
     {
         return $this->render('admin/image/index.html.twig', [
@@ -109,7 +108,6 @@ class ImageController extends AbstractController
     /**
      * @Route("/{id}", name="image_show", methods={"GET"})
      */
-    // @fixme display tags
     public function show(Image $image): Response
     {
         return $this->render('admin/image/show.html.twig', [
@@ -120,8 +118,6 @@ class ImageController extends AbstractController
     /**
      * @Route("/{id}/edit", name="image_edit", methods={"GET","POST"})
      */
-    // @fixme edit tags
-    // @fixme display tags
     public function edit(Request $request, Image $image, SluggerInterface $slugger): Response
     {
         $origPath = $image->getPath();
