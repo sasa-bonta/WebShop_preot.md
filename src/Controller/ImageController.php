@@ -7,7 +7,6 @@ use App\Form\ImageType;
 use App\Repository\ImageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,6 +29,29 @@ class ImageController extends AbstractController
         ]);
     }
 
+    private function addImage($form, $slugger, Image $image): Image
+    {
+        $imageFile = $form->get('path')->getData();
+        $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+        // this is needed to safely include the file name as part of the URL
+        $safeFilename = $slugger->slug($originalFilename);
+        $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+        // Move the file to the directory where brochures are stored
+        try {
+            $gallery = $this->getParameter('gallery_path');
+            $imageFile->move(
+                $gallery,
+                $newFilename
+            );
+        } catch (FileException $e) {
+            throw new BadRequestHttpException($e->getMessage());
+        }
+        // updates the 'brochureFilename' property to store the PDF file name
+        // instead of its contents
+        $image->setPath($newFilename);
+        return $image;
+    }
+
     /**
      * @Route("/new", name="image_new", methods={"GET","POST"})
      */
@@ -42,18 +64,9 @@ class ImageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $imageFile */
 
-            $tags = mb_strtolower($image->getTags());
+            // Check tags
             $errors = [];
-
-            $tags = explode(',', $tags);
-            $trimmedTags = [];
-            foreach ($tags as $tag) {
-                $tag = ltrim($tag);
-                $tag = rtrim($tag);
-                array_push($trimmedTags, $tag);
-            }
-
-            foreach ($trimmedTags as $tag) {
+            foreach ($image->getTags() as $tag) {
                 if (mb_strlen($tag) > 12 || mb_strlen($tag) < 2) {
                     array_push($errors, "The length of each tag must be from 2 to 12 characters");
                 }
@@ -70,25 +83,10 @@ class ImageController extends AbstractController
                 ]);
             }
 
-            $imageFile = $form->get('path')->getData();
-            $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-            // this is needed to safely include the file name as part of the URL
-            $safeFilename = $slugger->slug($originalFilename);
-            $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
-            // Move the file to the directory where brochures are stored
-            try {
-                $gallery = $this->getParameter('gallery_path');
-                $imageFile->move(
-                    $gallery,
-                    $newFilename
-                );
-            } catch (FileException $e) {
-                throw new BadRequestHttpException($e->getMessage());
-            }
-            // updates the 'brochureFilename' property to store the PDF file name
-            // instead of its contents
-            $image->setTags(json_encode($trimmedTags));
-            $image->setPath($newFilename);
+            // Add tags
+            $image->setTagsFromArray($image->getTags());
+            // Add image
+            $image = $this->addImage($form, $slugger, $image);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($image);
             $entityManager->flush();
@@ -118,15 +116,15 @@ class ImageController extends AbstractController
     # @fixme edit image
     public function edit(Request $request, Image $image): Response
     {
-//        $gallery = $this->getParameter('gallery_path');
-//        $image->setPath($gallery .$image->getPath());
-//        $image->setPath(new File($image->getPath()));
+        $origPath = $image->getPath();
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if (empty($image->getPath())) {
+                $image->setPath($origPath);
+            }
             $this->getDoctrine()->getManager()->flush();
-
             return $this->redirectToRoute('image_index');
         }
 

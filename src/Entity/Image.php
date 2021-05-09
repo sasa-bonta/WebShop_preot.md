@@ -37,15 +37,30 @@ class Image
         return $this->id;
     }
 
-    public function getTags(): ?string
+    // get tags: json -> array
+    public function getTags(): ?array
     {
-        return $this->tags;
+        return json_decode($this->tags);
     }
 
+    // set tags: "csv" -> array -> json
     public function setTags(string $tags): self
     {
-        $this->tags = $tags;
+        $tags = strtolower($tags);
+        $tags = explode(',', $tags);
+        $trimmedTags = [];
+        foreach ($tags as $tag) {
+            $tag = ltrim($tag);
+            $tag = rtrim($tag);
+            array_push($trimmedTags, $tag);
+        }
+        $this->tags = json_encode($trimmedTags);
+        return $this;
+    }
 
+    public function setTagsFromArray(array $tags): self
+    {
+        $this->tags = json_encode($tags);
         return $this;
     }
 

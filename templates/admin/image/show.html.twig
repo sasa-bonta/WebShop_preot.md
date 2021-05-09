@@ -16,7 +16,11 @@
         </tr>
         <tr>
             <th>Tags</th>
-            <td>{{ image.tags }}</td>
+            <td>
+                {% for tag in image.tags %}
+                    {{ tag }}
+                {% endfor %}
+            </td>
         </tr>
         <tr>
             <th>Path</th>
