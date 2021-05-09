@@ -37,7 +37,7 @@ class Image
         return $this->id;
     }
 
-    // returns tag1, tag2, tag3
+    // returns: tag1, tag2, tag3
     public function getTags(): ?string
     {
         return str_replace(["[", "]", "\""], " ", $this->tags);
