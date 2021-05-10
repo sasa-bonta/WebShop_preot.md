@@ -25,6 +25,7 @@ class ImageEditType extends AbstractType
                 'required' => false,
                 'empty_data' => '# % & { } \\ / $ ! \' \" : @ < > * ? + ` | =',
                 'data_class' => null,
+                'attr' =>  ['accept' => ".png,.jpg,.jpeg"]
             ])
             ->add('description');
     }

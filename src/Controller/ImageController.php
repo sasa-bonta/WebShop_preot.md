@@ -23,6 +23,8 @@ class ImageController extends AbstractController
     /**
      * @Route("/", name="image_index", methods={"GET"})
      */
+    // @todo pagination
+    // @todo search criteria
     public function index(ImageRepository $imageRepository): Response
     {
         return $this->render('admin/image/index.html.twig', [

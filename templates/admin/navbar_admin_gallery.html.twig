@@ -33,15 +33,15 @@
                     <a class="nav-link" aria-current="page" href="{{ path('product_list') }}">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ path('user_index') }}">Users</a>
+                    <a class="nav-link" href="{{ path('user_index') }}">Users</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('image_index') }}">Gallery</a>
+                    <a class="nav-link active" href="{{ path('image_index') }}">Gallery</a>
                 </li>
                 <li style="width: 500px">
                     <form class="d-flex mx-5" onsubmit="setCriteria(); return false">
                         <input class="name form-control me-2" id="myInput" name="name" type="text"
-                               placeholder="Search Nick or E-mail"
+                               placeholder="Search tag"
                                aria-label="Search" size="30">
 
                         <button class="name btn btn-outline-success" type="submit">
@@ -128,8 +128,8 @@
     function setCriteria() {
         var inputVal = document.getElementById("myInput").value;
         var urlSearchParams;
-        if (window.location.origin + window.location.pathname !== "http://localhost:8000/admin/users/") {
-            urlSearchParams = new URL("http://localhost:8000/admin/users/");
+        if (window.location.origin + window.location.pathname !== "http://localhost:8000/admin/gallery/") {
+            urlSearchParams = new URL("http://localhost:8000/admin/gallery/");
             urlSearchParams.searchParams.set("search", inputVal);
             urlSearchParams.searchParams.set("page", 1);
             window.location.replace(urlSearchParams);

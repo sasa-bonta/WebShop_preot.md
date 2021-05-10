@@ -19,7 +19,9 @@ class ImageType extends AbstractType
                     'placeholder' => 'Separate tags with commas'
                 )
             ])
-            ->add('path', FileType::class)
+            ->add('path', FileType::class, [
+                'attr' =>  ['accept' => ".png,.jpg,.jpeg"]
+            ])
             ->add('description');
     }
 
