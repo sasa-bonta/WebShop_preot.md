@@ -24,8 +24,6 @@ class ImageController extends AbstractController
     /**
      * @Route("/", name="image_index", methods={"GET"})
      */
-    // @todo pagination
-    // @todo search criteria
     public function index(ImageRepository $imageRepository, Request $request): Response
     {
         $tag = $request->query->get('search');
