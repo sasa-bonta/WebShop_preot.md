@@ -74,6 +74,20 @@
 
                 <a href="{{ path('image_new') }}" class="btn btn-primary">Create new</a>
 
+                <nav aria-label="...">
+                    <ul class="pagination">
+                        {% if length > 0 %}
+                            {% for i in 1..(length / limit)|round(0,'ceil') %}
+                                <li class="page-item">
+                                    <button class="page-link" type="submit" value="{{ i }}"
+                                            onclick="setPage(this.value)">{{ i }}
+                                    </button>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </nav>
+
             </div>
             <div class="col-2">
 
@@ -82,5 +96,16 @@
     </div>
 
     {% include 'footer.html.twig' %}
+
+    <script>
+        function setPage(value) {
+            var urlSearchParams = new URLSearchParams(window.location.search);
+            urlSearchParams.set('page', value);
+            window.location.search = urlSearchParams;
+
+            var element = document.querySelectorAll("button[value=" + value + "]");
+            element.style.transform = "background: black;";
+        }
+    </script>
 
 {% endblock %}

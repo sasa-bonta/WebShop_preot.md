@@ -39,7 +39,7 @@ class AdminController extends AbstractController
         $name = $request->query->get('name');
         $category = $request->query->get('category');
         $page = $request->query->get('page', 1);
-        $limit = $request->query->get('limit', 16);
+        $limit = $request->query->get('limit', 10);
         if ($limit > 120) {
             throw new BadRequestHttpException("400");
         }
@@ -51,12 +51,12 @@ class AdminController extends AbstractController
         try {
             $searchCriteria = new SearchCriteria($name, $category, $page, $limit, $order, $ascDesc);
         } catch (Exception $e) {
-            throw new BadRequestHttpException("400");
+            throw new BadRequestHttpException($e->getMessage());
         }
 
         $length = $productRepository->countTotal($searchCriteria);
         if ($page > ceil($length / $limit)) {
-            throw new BadRequestHttpException("400");
+            throw new BadRequestHttpException("Page limit exceed");
         }
 
         return $this->render('admin/product/list_of_products.html.twig', [

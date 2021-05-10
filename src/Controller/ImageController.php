@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Image;
 use App\Form\ImageEditType;
 use App\Form\ImageType;
+use App\ImageSearchCriteria;
 use App\Repository\ImageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -16,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**
- * @Route("/admin/galery")
+ * @Route("/admin/gallery")
  */
 class ImageController extends AbstractController
 {
@@ -25,10 +26,34 @@ class ImageController extends AbstractController
      */
     // @todo pagination
     // @todo search criteria
-    public function index(ImageRepository $imageRepository): Response
+    public function index(ImageRepository $imageRepository, Request $request): Response
     {
+        $tag = $request->query->get('search');
+        $page = $request->query->get('page', 1);
+        $limit = $request->query->get('limit', 10);
+        if ($limit > 120) {
+            throw new BadRequestHttpException("400");
+        }
+        $orderBy = $request->query->get('order', 'id:DESC');
+        $arr = explode(":", $orderBy, 2);
+        $order = $arr[0];
+        $ascDesc = $arr[1];
+
+        try {
+            $searchImage = new ImageSearchCriteria($tag, $page, $limit, $order, $ascDesc);
+        } catch (Exception $e) {
+            throw new BadRequestHttpException($e->getMessage());
+        }
+
+        $length = $imageRepository->countTotal($searchImage);
+        if ($page > ceil($length / $limit) and $length / $limit !== 0) {
+            throw new BadRequestHttpException("Page limit exceed");
+        }
+
         return $this->render('admin/image/index.html.twig', [
-            'images' => $imageRepository->findAll(),
+            'images' => $imageRepository->search($searchImage),
+            'length' => $length,
+            'limit' => $searchImage->getLimit()
         ]);
     }
 
