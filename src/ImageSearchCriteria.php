@@ -43,7 +43,7 @@ class ImageSearchCriteria
         } else {
             $this->order = $order;
         }
-        if ($ascDesc !== 'ASC' and $ascDesc !== 'DESC') {
+        if ($ascDesc !== 'ASC' && $ascDesc !== 'DESC') {
             throw new NonexistentOrderingType("Nonexistent sort order");
         } else {
             $this->ascDesc = $ascDesc;

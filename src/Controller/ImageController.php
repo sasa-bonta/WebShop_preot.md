@@ -44,7 +44,7 @@ class ImageController extends AbstractController
         }
 
         $length = $imageRepository->countTotal($searchImage);
-        if ($page > ceil($length / $limit) and $length / $limit !== 0) {
+        if ($page > ceil($length / $limit) && $length / $limit !== 0) {
             throw new BadRequestHttpException("Page limit exceed");
         }
 
@@ -55,7 +55,7 @@ class ImageController extends AbstractController
         ]);
     }
 
-    private function addImagePath($form, $slugger): string
+    private function uploadImageWithSecureName($form, $slugger): string
     {
         $imageFile = $form->get('path')->getData();
         $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
@@ -117,7 +117,7 @@ class ImageController extends AbstractController
             // Add tags
             $image->setTagsFromArray($image->getTagsArray());
             // Add image
-            $image->setPath($this->addImagePath($form, $slugger));
+            $image->setPath($this->uploadImageWithSecureName($form, $slugger));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($image);
             $entityManager->flush();
@@ -162,7 +162,7 @@ class ImageController extends AbstractController
             if ($image->getPath() === '# % & { } \\ / $ ! \' \" : @ < > * ? + ` | =') {
                 $image->setPath($origPath);
             } else {
-                $image->setPath($this->addImagePath($form, $slugger));
+                $image->setPath($this->uploadImageWithSecureName($form, $slugger));
             }
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('image_index');

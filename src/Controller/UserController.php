@@ -44,7 +44,7 @@ class UserController extends AbstractController
         }
 
         $length = $userRepository->countTotal($searchUser);
-        if ($page > ceil($length / $limit) and $length / $limit !== 0) {
+        if ($page > ceil($length / $limit) && $length / $limit !== 0) {
             throw new BadRequestHttpException("Page limit exceed");
         }
 
@@ -130,10 +130,10 @@ class UserController extends AbstractController
         # Errors existent Nickname and/or Email
         $errors = [];
         $repo = $this->getDoctrine()->getRepository(User::class);
-        if ($repo->count(['username' => $user->getUsername()]) > 0 and $form->get('username')->getData() !== $origNick) {
+        if ($repo->count(['username' => $user->getUsername()]) > 0 && $form->get('username')->getData() !== $origNick) {
             $errors['nick'] = "This nickname already exists";
         }
-        if ($repo->count(['email' => $user->getEmail()]) > 0 and $form->get('email')->getData() !== $origEmail) {
+        if ($repo->count(['email' => $user->getEmail()]) > 0 && $form->get('email')->getData() !== $origEmail) {
             $errors['email'] = "This e-mail address already exists";
         }
         return $errors;

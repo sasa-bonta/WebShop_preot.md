@@ -132,7 +132,7 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
         $repo = $this->getDoctrine()->getRepository(Product::class);
         if ($form->isSubmitted() && !$form->isValid()) {
-            if ($repo->count(['code' => $product->getCode()]) > 0 and $form->get('code')->getData() !== $origCode) {
+            if ($repo->count(['code' => $product->getCode()]) > 0 && $form->get('code')->getData() !== $origCode) {
                 $this->addFlash('code', "This code already exists");
 
                 return $this->render('admin/product/edit.html.twig', [
@@ -143,7 +143,7 @@ class AdminController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($repo->count(['code' => $product->getCode()]) > 0 and $form->get('code')->getData() !== $origCode) {
+            if ($repo->count(['code' => $product->getCode()]) > 0 && $form->get('code')->getData() !== $origCode) {
                 $this->addFlash('code', "This code already exists");
 
                 return $this->render('admin/product/edit.html.twig', [
