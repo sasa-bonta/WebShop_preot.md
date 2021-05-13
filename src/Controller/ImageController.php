@@ -55,6 +55,16 @@ class ImageController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/fragment", name="gallery_fragment", methods={"GET"})
+     */
+    public function temp(ImageRepository $imageRepository): Response
+    {
+        return $this->render('admin/image/gallery_fragment.html.twig', [
+            'images' => $imageRepository->findAll()
+        ]);
+    }
+
     private function uploadImageWithSecureName($form, $slugger): string
     {
         $imageFile = $form->get('path')->getData();
