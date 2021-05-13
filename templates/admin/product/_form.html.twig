@@ -37,7 +37,9 @@
 <h5>Image Path</h5>
 {{ form_widget(form.img_path) }}
 
+<br>
 <button id="addImage" type="button">Add image</button>
+<br>
 <div class="gallery-fragment" id="gallery-fragment"></div>
 
 <br>
@@ -57,7 +59,6 @@
     let $ = jQuery;
 
     $("#addImage").on('click', function () {
-        // alert('hi')
         fetch("{{ path("gallery_fragment")}}")
             .then(function (response){
                 response
@@ -69,6 +70,12 @@
             .catch(function (){
                 console.log("You died.")
             });
+    });
+
+    $(document).on('click', function (e) {
+        if (e.target.id !== 'gallery-fragment' && $(e.target).closest('#gallery-fragment').length === 0) {
+            $('#gallery-fragment').empty();
+        }
     });
 
 </script>
