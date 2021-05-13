@@ -6,9 +6,7 @@
     <thead>
     <tr>
         <th>Photo</th>
-        <th>Tags</th>
         <th>File Name</th>
-        <th>Description</th>
     </tr>
     </thead>
     <tbody>
@@ -19,9 +17,7 @@
             <td>
                 <img src="{{ asset(fullImagePath) }}" alt="" height="30px" width="30px">
             </td>
-            <td>{{ image.tags }}</td>
             <td>{{ image.path }}</td>
-            <td>{{ image.description }}</td>
         </tr>
     {% else %}
         <tr>

@@ -37,7 +37,8 @@
 <h5>Image Path</h5>
 {{ form_widget(form.img_path) }}
 
-<button id="addImage">Add image</button>
+<button id="addImage" type="button">Add image</button>
+<div class="gallery-fragment" id="gallery-fragment"></div>
 
 <br>
 <p align="center">
@@ -50,28 +51,24 @@
 {{ form_end(form) }}
 
 
-<div class="gallery-fragment"></div>
 
 
 <script>
     let $ = jQuery;
 
-    $("#addImage").click(displayFragment())
+    $("#addImage").on('click', function () {
+        // alert('hi')
+        fetch("{{ path("gallery_fragment")}}")
+            .then(function (response){
+                response
+                    .text()
+                    .then(function (result){
+                        $('#gallery-fragment').append(result)
+                    });
+            })
+            .catch(function (){
+                console.log("You died.")
+            });
+    });
 
-
-    function displayFragment() {
-
-    }
-
-    fetch("{{ path("in")}}")
-        .then(function (response){
-            response
-                .text()
-                .then(function (result){
-                    $('#cart').append(result)
-                });
-        })
-        .catch(function (){
-            console.log("You died.")
-        });
 </script>
