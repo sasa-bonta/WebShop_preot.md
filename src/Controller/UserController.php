@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\CheckUserService;
 use App\Entity\User;
 use App\Form\UserType;
 use Exception;
@@ -56,7 +57,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    private function checkDataNewUser(User $user): array
+    function checkData(User $user): array
     {
         # Errors existent Nickname and/or Email
         $errors = [];
@@ -73,13 +74,13 @@ class UserController extends AbstractController
     /**
      * @Route("/new", name="user_new", methods={"GET","POST"})
      */
-    public function new(Request $request, UserPasswordEncoderInterface $encoder, UserRepository $repo): Response
+    public function new(Request $request, UserPasswordEncoderInterface $encoder): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && !$form->isValid()) {
-            $errors = $this->checkDataNewUser($user);
+            $errors = $this->checkData($user);
             if (!empty($errors)) {
                 return $this->render('admin/user/new.html.twig', [
                     'errors' => $errors,
@@ -93,7 +94,7 @@ class UserController extends AbstractController
             if (empty($plainPassword)) {
                 $errors['pass'] = "The password must not be empty";
             }
-            $errors = $this->checkDataNewUser($user);
+            $errors = $this->checkData($user);
             if (!empty($errors)) {
                 return $this->render('admin/user/new.html.twig', [
                     'errors' => $errors,

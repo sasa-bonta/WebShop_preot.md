@@ -1,3 +1,7 @@
+a {
+    text-decoration: none;
+}
+
 .footer_content {
     color: #FFFFFF;
     position: relative;
@@ -54,6 +58,12 @@ a.page-link {
     font-size: 40px;
 }
 
+#avail {
+    font-size: 30px;
+    font-weight: bold;
+    font-style: italic;
+    color: darkred;
+}
 #product-name {
     font-size: 50px;
 }
@@ -102,7 +112,33 @@ a.page-link {
     font-size: 20px;
 }
 
-.cart-table {
-    margin: 10px auto;
-    width: 50%;
+/*Shopping cart widget*/
+
+.cart-widget {
+    position: relative;
+}
+.shopping-cart {
+    margin: 0 10px;
+}
+
+.shopping-cart-oppened {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    width: 700px;
+    height: 350px;
+    background: white;
+    right: 10px;
+    bottom: -359px;
+    box-shadow: 0 0 50px 6px rgba(0,0,0,0.06);
+    padding: 20px;
+}
+
+.empty-cart {
+    margin: 100px auto;
+    text-align: center;
+}
+
+.go-to-cart-btn {
+    float: right;
 }

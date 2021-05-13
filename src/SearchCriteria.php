@@ -25,28 +25,29 @@ class SearchCriteria
      */
     public function __construct($name, $category, $page, $limit, $order, $ascDesc)
     {
-        $this->name = $name;
-        $this->category = $category;
+
         if ($page <= 0) {
             throw new InvalidPageException("Page must be positive");
-        } else {
-            $this->page = $page;
         }
         if ($limit <= 0) {
             throw new InvalidLimitException("Limit must be positive");
-        } else {
-            $this->limit = $limit;
+        }
+        if ($limit > 128) {
+            throw new InvalidLimitException("Limit must be <= 128");
         }
         if ($order !== 'created_at' and $order !== 'price') {
             throw new NonexistentOrderByColumn("Nonexistent column name");
-        } else {
-            $this->order = $order;
         }
+
         if ($ascDesc !== 'ASC' and $ascDesc !== 'DESC') {
             throw new NonexistentOrderingType("Nonexistent sort order");
-        } else {
-            $this->ascDesc = $ascDesc;
         }
+        $this->ascDesc = $ascDesc;
+        $this->name = $name;
+        $this->category = $category;
+        $this->page = $page;
+        $this->limit = $limit;
+        $this->order = $order;
     }
 
     public function getName()

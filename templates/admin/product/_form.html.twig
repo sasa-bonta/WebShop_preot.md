@@ -2,16 +2,14 @@
 
 <br>
 <h5>Code</h5>
-{% if errors is defined and errors is not null %}
-    {% for error in errors %}
-        <div class="alert alert-danger">
-            <span class="d-block">
+{% for message in app.flashes('code') %}
+    <div class="alert-danger">
+           <span class="d-block">
                 <span class="form-error-icon badge badge-danger text-uppercase">Error</span>
-                <span class="form-error-message">{{ error }}</span>
+                <span class="form-error-message">{{ message }}</span>
             </span>
-        </div>
-    {% endfor %}
-{% endif %}
+    </div>
+{% endfor %}
 {{ form_widget(form.code) }}
 
 <br>
@@ -34,6 +32,15 @@
     </div>
 {% endif %}
 {{ form_widget(form.price) }}
+
+<br>
+<h5>Available amount</h5>
+{% if form_errors(form.availableAmount) %}
+    <div class="alert alert-danger">
+        {{ form_errors(form.availableAmount) }}
+    </div>
+{% endif %}
+{{ form_widget(form.availableAmount) }}
 
 <br>
 <h5>Image Path</h5>

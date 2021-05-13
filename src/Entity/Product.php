@@ -57,6 +57,11 @@ class Product
      */
     private $updated_at;
 
+    /**
+     * @ORM\Column(type="integer", options={"default" : 0})
+     */
+    private $availableAmount;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -108,6 +113,22 @@ class Product
         $this->price = $price;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAvailableAmount()
+    {
+        return $this->availableAmount;
+    }
+
+    /**
+     * @param mixed $availableAmount
+     */
+    public function setAvailableAmount($availableAmount): void
+    {
+        $this->availableAmount = $availableAmount;
     }
 
     public function getImgPath(): ?string

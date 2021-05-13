@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\CheckUserService;
 use App\Entity\User;
 use App\Form\RegisterType;
 use App\Repository\UserRepository;
@@ -29,7 +30,7 @@ class RegistrationController extends AbstractController
         $this->mailer = $mailer;
     }
 
-    private function checkData(User $user): array
+    function checkData(User $user): array
     {
         # Errors existent Nickname and/or Email
         $errors = [];

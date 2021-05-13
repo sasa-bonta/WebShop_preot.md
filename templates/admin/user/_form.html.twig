@@ -10,6 +10,11 @@
             </span>
     </div>
 {% endif %}
+    {% if form_errors(form.username) %}
+        <div class="alert alert-danger">
+            {{ form_errors(form.username) }}
+        </div>
+    {% endif %}
     {{ form_widget(form.username) }}
 
 <br>
