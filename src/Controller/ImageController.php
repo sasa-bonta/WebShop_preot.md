@@ -159,6 +159,7 @@ class ImageController extends AbstractController
                     'form' => $form->createView(),
                 ]);
             }
+            // @fixme later with DTO and deserialization
             if ($image->getPath() === '# % & { } \\ / $ ! \' \" : @ < > * ? + ` | =') {
                 $image->setPath($origPath);
             } else {
