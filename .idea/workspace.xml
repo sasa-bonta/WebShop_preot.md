@@ -5,28 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="89485b34-bc51-41ba-b9d1-73575030eea2" name="Default Changelist" comment="When editing, if password is null the old password remains">
-      <change afterPath="$PROJECT_DIR$/public/assets/main/app.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/main/cart/add-item.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/main/js/bootbox.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/CartApiController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/CartController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/CartItem.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/CartItemRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Service/CartService.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/main/cart.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/Version20210513160501.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/main/cart/cart.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/main/cart/read-items.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210411131230.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210505133942.php" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/Version20210506064648.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210505134027.php" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/Version20210512122114.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210505134032.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/main/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/main/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/assets/main/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/main/js/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ProductRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ProductRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/CartApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CartApiController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/CartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CartController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/cart.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/product/cart.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/main/product/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/product/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/navbar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/navbar.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +67,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="bugfix/teamred-31" />
+        <entry key="$PROJECT_DIR$" value="feature/teamred-35" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -229,19 +216,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\UNI\Pentalog\WebShop_preot.md\public\assets\main\js" />
-      <recent name="$PROJECT_DIR$/src/Validators/register" />
-      <recent name="$PROJECT_DIR$/public/assets/main/images" />
-      <recent name="$PROJECT_DIR$/templates/admin" />
-      <recent name="$PROJECT_DIR$/templates/admin/product" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public/assets/main/images/products" />
       <recent name="$PROJECT_DIR$/public/assets/main/images/social/Products" />
       <recent name="D:\UNI\Pentalog\WebShop_preot.md\src\Form" />
       <recent name="$PROJECT_DIR$/public/assets" />
       <recent name="$PROJECT_DIR$/templates/productApi" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\UNI\Pentalog\WebShop_preot.md\templates\main\product" />
+      <recent name="D:\UNI\Pentalog\WebShop_preot.md\public\assets\main\js" />
+      <recent name="$PROJECT_DIR$/src/Validators/register" />
+      <recent name="$PROJECT_DIR$/public/assets/main/images" />
+      <recent name="$PROJECT_DIR$/templates/admin" />
     </key>
   </component>
   <component name="ServiceViewManager">
@@ -751,10 +738,11 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="543" y="267" key="NewPhpClassDialog/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1620820715694" />
-    <state x="580" y="351" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1620389253509">
-      <screen x="0" y="0" width="1536" height="864" />
+    <state x="2500" y="351" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1620921805646">
+      <screen x="1920" y="0" width="1536" height="864" />
     </state>
     <state x="580" y="351" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864/1920.0.1536.864@0.0.1536.864" timestamp="1620389253509" />
+    <state x="2500" y="351" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1620921805646" />
     <state x="430" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1620847851296">
       <screen x="0" y="0" width="1536" height="864" />
     </state>

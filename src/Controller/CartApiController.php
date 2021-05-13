@@ -41,10 +41,10 @@ class CartApiController extends AbstractController
     /**
      * @Route("/{code}", name="cart_api_delete", methods={"DELETE")
      */
-    public function deleteItem()
-    {
-
-    }
+//    public function deleteItem()
+//    {
+//
+//    }
 
 //    public function addAmount() {
 //

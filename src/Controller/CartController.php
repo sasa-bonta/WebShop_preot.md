@@ -10,16 +10,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CartController extends AbstractController
 {
-//    /**
-//     * @Route("/cart", name="cart_index")
-//     */
-//    public function index(CartService $cartService) {
-//
-//        return $this->render("main/cart.html.twig", [
-//            'items' => $cartService->getFullCart(),
-//            'total' => $cartService->getTotal()
-//        ]);
-//    }
+    /**
+     * @Route("/cart", name="cart_index")
+     */
+    public function index() {
+
+        return $this->render("main/product/cart.html.twig");
+    }
 //
 //    /**
 //     * @Route("/cart/add/{productCode}", name="cart_add")
