@@ -21,6 +21,7 @@ class ImageEditType extends AbstractType
                     'placeholder' => 'Separate tags with commas'
                 )
             ])
+            // @fixme later with DTO and deserialization
             ->add('path', FileType::class, [
                 'required' => false,
                 'empty_data' => '# % & { } \\ / $ ! \' \" : @ < > * ? + ` | =',
