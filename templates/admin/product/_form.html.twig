@@ -53,21 +53,24 @@
 {{ form_end(form) }}
 
 
-
-
 <script>
     let $ = jQuery;
 
+    $(document).on('click', '.image img', function () {
+        alert($(this).attr("id"));
+    });
+
+
     $("#addImage").on('click', function () {
-        fetch("{{ path("gallery_fragment")}}")
-            .then(function (response){
+        fetch("{{ path("gallery_fragment") }}")
+            .then(function (response) {
                 response
                     .text()
-                    .then(function (result){
+                    .then(function (result) {
                         $('#gallery-fragment').append(result)
                     });
             })
-            .catch(function (){
+            .catch(function () {
                 console.log("You died.")
             });
     });

@@ -1,23 +1,28 @@
 <table class="table">
-    <thead>
-    <tr>
-        <th>Photo</th>
-        <th>File Name</th>
-    </tr>
-    </thead>
+
     <tbody>
     {% for image in images %}
         {% set fullImagePath = 'assets/main/images/gallery/' %}
         {% set fullImagePath = fullImagePath ~ image.path %}
-        <tr>
+        {% if loop.index0 % 4 == 0 %}
+            <tr>
             <td>
-                <img src="{{ asset(fullImagePath) }}" alt="" height="30px" width="30px">
+                <div class="image">
+                    <img src="{{ asset(fullImagePath) }}" id="{{ image.path }}" width="150" height="150"
+                         alt="Image 1">
+                </div>
             </td>
-            <td>{{ image.path }}</td>
-        </tr>
+        {% else %}
+            <td>
+                <div class="image">
+                    <img src="{{ asset(fullImagePath) }}" id="{{ image.path }}" width="150" height="150"
+                         alt="Image 1">
+                </div>
+            </td>
+        {% endif %}
     {% else %}
         <tr>
-            <td colspan="5">no records found</td>
+            <td colspan="9">no records found</td>
         </tr>
     {% endfor %}
     </tbody>
