@@ -40,7 +40,7 @@
 {#######################################################}
 
 <br>
-<button id="addImage" type="button">Add image</button>
+<button id="addImage" type="button" class="btn btn-primary">Add image</button>
 <br>
 <div class="gallery-fragment" id="gallery-fragment"></div>
 
@@ -65,7 +65,7 @@
 <script>
     let $ = jQuery;
 
-    // $("#product_img_path").prop( "disabled", true );
+    $("#product_img_path").prop( "disabled", true );
 
     function appendImagePath(e) {
         let currImgList = $("#product_img_path").val();
@@ -89,15 +89,18 @@
         }
     }
 
-    $(document).on('click', '[data-delete-item]', function (e) {
-        let $el = $(e.target);
-        $el.closest('[data-item]').remove();
-    });
+    // $(document).on('click', '[data-delete-item]', function (e) {
+    //     let $el = $(e.target);
+    //     $el.closest('[data-item]').remove();
+    // });
 
     $(document).on('click', '.image img', function () {
         appendImagePath(this);
     });
 
+    $(document).on('click', "#removeAll", function () {
+        $("#product_img_path").val("");
+    });
 
     $("#addImage").on('click', function () {
         fetch("{{ path("gallery_fragment") }}")
