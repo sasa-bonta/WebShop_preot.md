@@ -56,8 +56,12 @@
 <script>
     let $ = jQuery;
 
+    function appendImagePath(e) {
+        alert($(e).attr("id"));
+    }
+
     $(document).on('click', '.image img', function () {
-        alert($(this).attr("id"));
+        appendImagePath(this);
     });
 
 
