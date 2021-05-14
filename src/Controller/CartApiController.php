@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use App\Repository\CartItemRepository;
+use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,13 +18,22 @@ class CartApiController extends AbstractController
     /**
      * @Route("/", name="cart_api_index")
      */
-    public function index(CartItemRepository $cartItemRepository)
+    public function index(CartItemRepository $cartItemRepository, ProductRepository $productRepository)
     {
-        return $this->json($cartItemRepository->findItemsByUserId($this->getUserId()));
+        $cart = $cartItemRepository->findItemsByUserId($this->getUserId());
+
+        foreach ($cart as $cartItem) {
+            $cartDetailed [] = [
+                'product' => $productRepository->findAllByCodes($cartItem['code']),
+                'amount' => $cartItem['amount']
+            ];
+        }
+
+        return $this->json($cartDetailed);
     }
 
     /**
-     * @Route("/{productCode}", name="cart_api_add")
+     * @Route("/{productCode}", name="cart_api_add", methods={"POST"})
      */
     public function addItem(Request $request, $productCode, CartItemRepository $cartItemRepository): JsonResponse
     {

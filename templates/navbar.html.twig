@@ -5,7 +5,6 @@
         display: block;
         text-align: center;
     }
-
     .navbar-nav > li {
         display: inline-block;
         float: none;
@@ -45,9 +44,9 @@
                     </form>
                 </li>
                 <li>
-                    <label for="sortby" style="color: white; margin-left: 20px; margin-right: 20px; margin-top: 6px">Sort
+                    <label for="sortBy" style="color: white; margin-left: 20px; margin-right: 20px; margin-top: 6px">Sort
                         by:</label>
-                    <select id="sortby" onchange="changeSort(this.value)">
+                    <select id="sortBy" onchange="changeSort(this.value)">
                         <option value="created_at:DESC">date (descending)</option>
                         <option value="created_at:ASC">date (ascending)</option>
                         <option value="price:DESC">price (descending)</option>
@@ -69,12 +68,28 @@
                 {% if is_granted('ROLE_ADMIN') %}
                     <a style="color: white" href="{{ path('product_list') }}">ADMIN</a>
                 {% endif %}
-                <button type="button" class="btn btn-dark me-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                         class="bi bi-cart-fill" viewBox="0 0 16 16">
-                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                    </svg>
-                </button>
+
+                <div class="cart-widget">
+                    <button id="toggle-cart" type="button" class="shopping-cart btn btn-primary me-2">
+                        <i class="bi bi-cart-fill"></i>
+                        CART
+                    </button>
+                    <div id="cart" class="shopping-cart-oppened">
+                        <h1>Shopping cart</h1>
+                        <div class="content">
+                            {#                            Cart to be placed here#}
+                            <p class="empty-cart">Your shopping cart is empty now!</p>
+                        </div>
+                        <a class="go-to-cart-btn" href="{{ path('cart_index') }}">
+                            <button class="btn btn-outline-dark">
+                                Go to cart
+                            </button>
+                        </a>
+                    </div>
+                </div>
+
+
+
                 <a href="{{ path('app_logout') }}">
                     <button type="button" class="btn btn-dark me-2">Log out
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -105,38 +120,61 @@
         </div>
     </div>
 </nav>
-
+<script
+        src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
 <script>
-    var limit = document.getElementById("limit");
-    var order = document.getElementById("sortby");
-
-    limit.value = localStorage.getItem('limit');
-    order.value = localStorage.getItem('order')
-
+    const limit = document.getElementById("limit");
+    const order = document.getElementById("sortBy");
+    const name = document.getElementById("myInput");
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has("limit")) {
+        limit.value = urlParams.get("limit");
+    } else {
+        limit.value = 16;
+    }
+    if (urlParams.has("order")) {
+        order.value = urlParams.get("order");
+    } else {
+        order.value = "created_at:DESC";
+    }
+    if (urlParams.has("name")) {
+        name.value = urlParams.get("name");
+    }
     function changeLimit(value) {
-
         var urlSearchParams = new URLSearchParams(window.location.search);
-        urlSearchParams.set('limit', value);
-        urlSearchParams.set('page', 1);
+        urlSearchParams.set("limit", value);
+        urlSearchParams.set("page", 1);
         window.location.search = urlSearchParams;
-
-        localStorage.setItem('limit', value);
     }
-
     function changeSort(value) {
-
         var urlSearchParams = new URLSearchParams(window.location.search);
-        urlSearchParams.set('order', value);
+        urlSearchParams.set("order", value);
         window.location.search = urlSearchParams;
-
-        localStorage.setItem('order', value);
     }
-
     function setName() {
         var inputVal = document.getElementById("myInput").value;
-        var urlSearchParams = new URL('http://localhost:8000/products/');
-        urlSearchParams.searchParams.set('name', inputVal);
-        urlSearchParams.searchParams.set('page', 1);
-        window.location.replace(urlSearchParams);
+        var urlSearchParams;
+        if (window.location.origin + window.location.pathname !== "http://localhost:8000/products/") {
+            urlSearchParams = new URL("http://localhost:8000/products/");
+            urlSearchParams.searchParams.set("name", inputVal);
+            urlSearchParams.searchParams.set("page", 1);
+            window.location.replace(urlSearchParams);
+        } else {
+            urlSearchParams = new URLSearchParams(window.location.search);
+            urlSearchParams.set("name", inputVal);
+            urlSearchParams.set("page", 1);
+            window.location.search = urlSearchParams;
+        }
     }
+    let $ = jQuery;
+    $(document).on('click', '#toggle-cart', function (e) {
+        $('#cart').toggle();
+    });
+    $(document).on('click', function (e) {
+        if (e.target.id !== 'toggle-cart' && $(e.target).closest('#cart').length === 0) {
+            $('#cart').hide();
+        }
+    });
 </script>
