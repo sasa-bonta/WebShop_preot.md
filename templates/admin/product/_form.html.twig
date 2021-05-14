@@ -36,7 +36,7 @@
 <br>
 <h5>Image Path</h5>
 {{ form_widget(form.img_path) }}
-
+<input id="test" type="text" class="form-control">
 {#######################################################}
 
 <br>
@@ -65,7 +65,9 @@
 <script>
     let $ = jQuery;
 
-    $("#product_img_path").prop( "disabled", true );
+    $("#product_img_path").prop( "type", "hidden" );
+    $("#test").prop( "disabled", true );
+    $("#test").val($("#product_img_path").val());
 
     function appendImagePath(e) {
         let currImgList = $("#product_img_path").val();
@@ -84,6 +86,7 @@
                 path = currImgList + ", " + newImg;
             }
             $("#product_img_path").val(path);
+            $("#test").val(path);
         } else {
             $('#gallery-fragment').empty();
         }
@@ -100,6 +103,7 @@
 
     $(document).on('click', "#removeAll", function () {
         $("#product_img_path").val("");
+        $("#test").val("");
     });
 
     $("#addImage").on('click', function () {
