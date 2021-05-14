@@ -19,6 +19,7 @@
             <br>
             <h1 id="product-name"><b>{{ product.name }}</b></h1>
             <br><br>
+
             {# Galery #}
             <div class="custom-container">
                 <div class="backImage">
@@ -57,9 +58,13 @@
             {# Description #}
             <br><br>
             <p id="description">{{ product.description }}</p>
+
             {# Price #}
             <br><br>
             <p id="price"><b>{{ product.price | number_format(2) }} $</b></p>
+            {# Availability #}
+            <br>
+            <p id="avail">Availability: {{ product.availableAmount ? 'in stock' : 'out of stock' }}</p>
         </div>
         {# Footer #}
         {% include 'footer.html.twig' %}
