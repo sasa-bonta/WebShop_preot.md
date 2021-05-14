@@ -34,25 +34,25 @@
                     expandImg.parentElement.style.display = "block";
                 }
             </script>
-            {% set fullImagePath = 'assets/main/images/gallery/' %}
-            {% set fullImagePath = fullImagePath ~ product.imgPath %}
             <div class="row">
-                <div class="column">
-                    <img src="{{ asset(fullImagePath) }}" alt="Image 1" style="width:100%"
-                         onclick="myFunction(this);" onload="myFunction(this);">
-                </div>
-                <div class="column">
-                    <img src="{{ asset('assets/main/images/gallery/no-image.png') }}" alt="Image 2" style="width:100%"
-                         onclick="myFunction(this);">
-                </div>
-                <div class="column">
-                    <img src="{{ asset('assets/main/images/gallery/no-image.png') }}" alt="Image 3" style="width:100%"
-                         onclick="myFunction(this);">
-                </div>
-                <div class="column">
-                    <img src="{{ asset('assets/main/images/gallery/no-image.png') }}" alt="Image 4" style="width:100%"
-                         onclick="myFunction(this);">
-                </div>
+                {% for path in product.imgPath %}
+                    {% set fullImagePath = 'assets/main/images/gallery/' %}
+                    {% set fullImagePath = fullImagePath ~ path %}
+
+                    {% if loop.index == 1 %}
+                        <div class="column">
+                            <img src="{{ asset(fullImagePath) }}" alt="Image 1" style="width:100%"
+                                 onclick="myFunction(this);" onload="myFunction(this);">
+                        </div>
+                    {% else %}
+                        <div class="column">
+                            <img src="{{ asset(fullImagePath) }}" alt="Image 2"
+                                 style="width:100%"
+                                 onclick="myFunction(this);">
+                        </div>
+                    {% endif %}
+
+                {% endfor %}
             </div>
             {# Description #}
             <br><br>

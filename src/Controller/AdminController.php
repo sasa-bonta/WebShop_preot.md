@@ -97,6 +97,7 @@ class AdminController extends AbstractController
                 ]);
             }
 
+            $product->setPathsFromArray($product->getPathsArray());
             $entityManager = $this->getDoctrine()->getManager();
             $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
             $product->setCreatedAt($dateTime);
@@ -130,6 +131,9 @@ class AdminController extends AbstractController
         $form = $this->createForm(ProductType::class, $product);
         $origCode = $product->getCode();
         $form->handleRequest($request);
+
+
+
         $repo = $this->getDoctrine()->getRepository(Product::class);
         if ($form->isSubmitted() && !$form->isValid()) {
             if ($repo->count(['code' => $product->getCode()]) > 0 && $form->get('code')->getData() !== $origCode) {

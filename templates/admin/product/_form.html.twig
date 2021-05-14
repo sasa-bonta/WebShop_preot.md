@@ -37,10 +37,19 @@
 <h5>Image Path</h5>
 {{ form_widget(form.img_path) }}
 
+{#######################################################}
+
 <br>
 <button id="addImage" type="button">Add image</button>
 <br>
 <div class="gallery-fragment" id="gallery-fragment"></div>
+
+{#<div data-item="image-path" data-prototype style="display: none">#}
+{#    <button data-delete-item>Delete</button>#}
+{#    <p>Image: </p>#}
+{#</div>#}
+
+{#######################################################}
 
 <br>
 <p align="center">
@@ -56,14 +65,14 @@
 <script>
     let $ = jQuery;
 
+    // $("#product_img_path").prop( "disabled", true );
+
     function appendImagePath(e) {
         let currImgList = $("#product_img_path").val();
         let currImgArray = currImgList.split(",")
-
         if (currImgArray.length === 3) {
             $('#gallery-fragment').empty();
         }
-
         if (currImgArray.length < 4) {
 
             let newImg = $(e).attr("id");
@@ -74,12 +83,16 @@
             } else {
                 path = currImgList + ", " + newImg;
             }
-
             $("#product_img_path").val(path);
         } else {
             $('#gallery-fragment').empty();
         }
     }
+
+    $(document).on('click', '[data-delete-item]', function (e) {
+        let $el = $(e.target);
+        $el.closest('[data-item]').remove();
+    });
 
     $(document).on('click', '.image img', function () {
         appendImagePath(this);

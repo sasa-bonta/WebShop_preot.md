@@ -64,6 +64,7 @@ class Image
         return $this;
     }
 
+    // set tags: array -> json
     public function setTagsFromArray(array $tags): self
     {
         $this->tags = json_encode($tags);

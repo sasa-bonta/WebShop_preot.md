@@ -110,15 +110,53 @@ class Product
         return $this;
     }
 
-    public function getImgPath(): ?string
+    public function getImgPathCSV(): ?string
     {
+        return str_replace(["[", "]", "\""], " ", $this->imgPath);
+    }
+
+    // returns string|array|csv
+    public function getImgPath() {
         return $this->imgPath;
     }
 
-    public function setImgPath(string $imgPath): self
+    // get paths: json -> array
+    public function getPathsArray(): ?array
     {
-        $this->imgPath = $imgPath;
+        return json_decode($this->imgPath);
+    }
 
+    // set paths: "csv" -> array -> json
+    public function setImgPath(string $paths): self
+    {
+        $paths = explode(',', $paths);
+        $trimmedPaths = [];
+        foreach ($paths as $path) {
+            $path = ltrim($path);
+            $path = rtrim($path);
+            array_push($trimmedPaths, $path);
+        }
+        $this->imgPath = json_encode($trimmedPaths);
+        return $this;
+    }
+
+    // set paths: string
+    public function setImagePathEgal($paths)
+    {
+        $this->imgPath = $paths;
+        return $this;
+    }
+
+    public function setImgPathArray(array $paths): self
+    {
+        $this->imgPath = $paths;
+        return $this;
+    }
+
+    // set paths: array -> json
+    public function setPathsFromArray(array $paths): self
+    {
+        $this->imgPath = json_encode($paths);
         return $this;
     }
 
