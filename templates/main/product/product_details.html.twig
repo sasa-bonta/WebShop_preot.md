@@ -21,20 +21,20 @@
             <br><br>
             {# Galery #}
             <div class="custom-container">
+                <div class="backImage">
+
+                </div>
                 <img id="expandedImg" style="width:100%">
-                <div id="imgtext"></div>
             </div>
 
             <script>
                 function myFunction(imgs) {
                     var expandImg = document.getElementById("expandedImg");
-                    var imgText = document.getElementById("imgtext");
                     expandImg.src = imgs.src;
-                    imgText.innerHTML = imgs.alt;
                     expandImg.parentElement.style.display = "block";
                 }
             </script>
-            <div class="row">
+            <div class="row lowerImages">
                 {% for path in product.imgPath %}
                     {% set fullImagePath = 'assets/main/images/gallery/' %}
                     {% set fullImagePath = fullImagePath ~ path %}
