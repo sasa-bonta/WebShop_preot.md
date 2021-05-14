@@ -118,6 +118,7 @@ class AdminController extends AbstractController
      */
     public function show(Product $product): Response
     {
+        $product->setImagePathEgal($product->getImgPathCSV());
         return $this->render('admin/product/show.html.twig', [
             'product' => $product,
         ]);
@@ -128,11 +129,10 @@ class AdminController extends AbstractController
      */
     public function edit(Request $request, Product $product): Response
     {
+        $product->setImagePathEgal($product->getImgPathCSV());
         $form = $this->createForm(ProductType::class, $product);
         $origCode = $product->getCode();
         $form->handleRequest($request);
-
-
 
         $repo = $this->getDoctrine()->getRepository(Product::class);
         if ($form->isSubmitted() && !$form->isValid()) {
