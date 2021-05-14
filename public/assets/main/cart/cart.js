@@ -1,20 +1,26 @@
 function readItemsTemplate(data) {
 
     var read_items_html = `
-        <table class='table table-hover'>
+        <table class='cart-table table'>
             <tr>
-                <th class='w-5-pct' style="text-align: center">Code</th>
-                <th class='w-5-pct' style="text-align: center">Amount</th>
-<!--                <th class='w-20-pct' style="text-align: center">Product</th>-->
-<!--                <th class='w-10-pct' style="text-align: center">Qty</th>-->
-<!--                <th class='w-15-pct' style="text-align: center">Player</th>-->
-<!--                <th class='w-30-pct' style="text-align: center">Action</th>-->
+                <th class='example w-5-pct' style="text-align: center; align-items: center; vertical-align: middle"></th>
+                <th class='w-5-pct' style="text-align: center">Product</th>
+                <th class='w-5-pct' style="text-align: center">Price</th>
+                <th class='w-5-pct' style="text-align: center">Qty</th>
+                <th class='w-5-pct' style="text-align: center">Total</th>
+                <th class='w-5-pct' style="text-align: center"></th>
              </tr>`;
 
-    data.forEach(element => {
-        read_items_html += `<tr>
-            <td style="text-align: center">`+ element['code'] +`</td>
-            <td style="text-align: center">`+ element['amount'] +`</td>
+    data.forEach(cartItem => {
+        console.log(cartItem['product']['imgPath']);
+        read_items_html += `
+        <tr>
+            <td style="text-align: center; vertical-align: bottom"><img src="/`+ cartItem['product']['imgPath'] +`" alt="img" width="100" height="100"></td>
+            <td style="text-align: center">`+ cartItem['product']['name'] +`</td>
+            <td style="text-align: center">`+ cartItem['product']['price'] +`</td>
+            <td style="text-align: center">`+ cartItem['amount'] +`</td>
+            <td style="text-align: center">`+ cartItem['amount'] * cartItem['product']['price'] +`</td>
+            <td style="text-align: center"><button class="btn btn-danger">X</button></td>
         </tr>`;
     });
 
@@ -22,20 +28,3 @@ function readItemsTemplate(data) {
 
     $("#page-content").html(read_items_html);
 }
-// read_items_html += `<tr>
-//             <td style="vertical-align: middle;text-align: center"><img src="` + val.code + `" alt="img" width="50px" height="50px"></td>
-//             <td style="vertical-align: middle;text-align: center">` + val.amount + `</td>
-//             <td style="vertical-align: middle;text-align: center">` + val.userId + `</td>
-//             <td style="vertical-align: middle;text-align: center">
-//                 <audio controls>
-//                     <source src="` + val.code + `" type="audio/mp3">
-//                 </audio>
-//             </td>
-//             <td style="vertical-align: middle;text-align: center">
-//                 <button class='btn btn-dark m-r-10px read-one-song-button' data-id='` + val.code + `'>Listen</button>
-//
-//                 <button class='btn btn-outline-dark m-r-10px update-song-button' data-id='` + val.code + `'>Edit</button>
-//
-//                 <button class='btn btn-outline-danger delete-song-button' data-id='` + val.code + `'>Delete</button>
-//             </td>
-//         </tr>`;

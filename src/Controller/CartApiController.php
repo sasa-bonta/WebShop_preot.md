@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Entity\CartItem;
 use App\Repository\CartItemRepository;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,7 +22,7 @@ class CartApiController extends AbstractController
     public function index(CartItemRepository $cartItemRepository, ProductRepository $productRepository)
     {
         $cart = $cartItemRepository->findItemsByUserId($this->getUserId());
-
+        $cartDetailed = [];
         foreach ($cart as $cartItem) {
             $cartDetailed [] = [
                 'product' => $productRepository->findAllByCodes($cartItem['code']),
@@ -49,12 +50,15 @@ class CartApiController extends AbstractController
     }
 
     /**
-     * @Route("/{code}", name="cart_api_delete", methods={"DELETE")
+     * @Route("/{code}", name="cart_api_delete", methods={"DELETE"})
      */
-//    public function deleteItem()
-//    {
-//
-//    }
+    public function deleteItem(CartItem $cartItem, CartItemRepository $cartItemRepository): JsonResponse
+    {
+        $response = new JsonResponse();
+
+        $cartItemRepository->delete($cartItem);
+        return $response;
+    }
 
 //    public function addAmount() {
 //

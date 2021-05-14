@@ -1,6 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <script src="{{ asset('assets/main/app.js') }}"></script>
+
+    <script src="{{ asset('assets/main/cart/add-item.js') }}"></script>
+    <script src="{{ asset('assets/main/cart/cart.js') }}"></script>
+    <script src="{{ asset('assets/main/cart/read-items.js') }}"></script>
     <img class="img-fluid" src="{{ asset('assets/main/images/header-image.jpg') }}" width="2000" alt="1">
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -76,11 +81,7 @@
 
 
     <!-- app js script -->
-    <script src="{{ asset('assets/main/app.js') }}"></script>
 
-    <script src="{{ asset('assets/main/cart/add-item.js') }}"></script>
-    <script src="{{ asset('assets/main/cart/cart.js') }}"></script>
-    <script src="{{ asset('assets/main/cart/read-items.js') }}"></script>
     {#    <script src="app/music/create-song.js"></script>#}
     {#    <script src="app/music/read-one-song.js"></script>#}
     {#    <script src="app/music/update-song.js"></script>#}

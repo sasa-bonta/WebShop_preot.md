@@ -83,6 +83,12 @@ class CartItemRepository extends ServiceEntityRepository
         return;
     }
 
+    public function delete(CartItem $cartItem)
+    {
+        $this->getEntityManager()->remove($cartItem);
+        $this->getEntityManager()->flush();
+    }
+
 //    /**
 //     * @return CartItem[] Returns an array of CartItem objects
 //     */

@@ -10,7 +10,11 @@
         float: none;
     }
 </style>
+<script src="{{ asset('assets/main/app.js') }}"></script>
 
+<script src="{{ asset('assets/main/cart/add-item.js') }}"></script>
+<script src="{{ asset('assets/main/cart/cart.js') }}"></script>
+<script src="{{ asset('assets/main/cart/read-items.js') }}"></script>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <div class="navbar-brand" style="margin-left: 50px">Preot.md</div>
@@ -78,7 +82,8 @@
                         <h1>Shopping cart</h1>
                         <div class="content">
                             {#                            Cart to be placed here#}
-                            <p class="empty-cart">Your shopping cart is empty now!</p>
+                            <div id="app"></div>
+{#                            <p class="empty-cart">Your shopping cart is empty now!</p>#}
                         </div>
                         <a class="go-to-cart-btn" href="{{ path('cart_index') }}">
                             <button class="btn btn-outline-dark">

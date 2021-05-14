@@ -126,10 +126,11 @@ a.page-link {
     position: absolute;
     z-index: 10;
     width: 700px;
-    height: 350px;
+    /*height: 350px;*/
     background: white;
     right: 10px;
-    bottom: -359px;
+    top: 48px;
+    /*bottom: -9px;*/
     box-shadow: 0 0 50px 6px rgba(0,0,0,0.06);
     padding: 20px;
 }
@@ -141,4 +142,8 @@ a.page-link {
 
 .go-to-cart-btn {
     float: right;
+}
+
+.example {
+    text-decoration: #1b9448;
 }
