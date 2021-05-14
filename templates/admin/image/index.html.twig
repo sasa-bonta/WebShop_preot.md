@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Image index{% endblock %}
+
+{% block body %}
+    <style>
+        a {
+            text-decoration: none;
+        }
+
+        .pagination {
+            justify-content: center;
+        }
+
+        .page-link {
+            color: black;
+            background: none;
+            border: 1px black solid;
+        }
+
+        .page-link:hover {
+            color: white;
+            background: black;
+        }
+    </style>
+    {% include 'admin/admin_header.html.twig' %}
+    {% include 'admin/navbar_admin_gallery.html.twig' %}
+
+    <br>
+    <h1 align="center">Image index</h1>
+
+    <div class="container">
+        <div class="row my-3">
+            <div class="col-1">
+            </div>
+            <div class="col-10">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Photo</th>
+                        <th>Tags</th>
+                        <th>File Name</th>
+                        <th>Description</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for image in images %}
+                        {% set fullImagePath = 'assets/main/images/gallery/' %}
+                        {% set fullImagePath = fullImagePath ~ image.path %}
+                        <tr>
+                            <td>
+                                <img src="{{ asset(fullImagePath) }}" alt="" height="30px" width="30px">
+                            </td>
+                            <td>{{ image.tags }}</td>
+                            <td>{{ image.path }}</td>
+                            <td>{{ image.description }}</td>
+                            <td>
+                                <a href="{{ path('image_show', {'id': image.id}) }}">
+                                    <button class="btn btn-success">Show</button>
+                                </a>
+                                <a href="{{ path('image_edit', {'id': image.id}) }}">
+                                    <button class="btn btn-warning">Edit</button>
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <a href="{{ path('image_new') }}" class="btn btn-primary">Create new</a>
+
+                <nav aria-label="...">
+                    <ul class="pagination">
+                        {% if length > 0 %}
+                            {% for i in 1..(length / limit)|round(0,'ceil') %}
+                                <li class="page-item">
+                                    <button class="page-link" type="submit" value="{{ i }}"
+                                            onclick="setPage(this.value)">{{ i }}
+                                    </button>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </nav>
+
+            </div>
+            <div class="col-1">
+
+            </div>
+        </div>
+    </div>
+
+    {% include 'footer.html.twig' %}
+
+    <script>
+        function setPage(value) {
+            var urlSearchParams = new URLSearchParams(window.location.search);
+            urlSearchParams.set('page', value);
+            window.location.search = urlSearchParams;
+
+            var element = document.querySelectorAll("button[value=" + value + "]");
+            element.style.transform = "background: black;";
+        }
+    </script>
+
+{% endblock %}

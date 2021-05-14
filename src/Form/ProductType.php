@@ -37,7 +37,7 @@ class ProductType extends AbstractType
             ])
             ->add('img_path', null, [
                 'required' => false,
-                'empty_data' => '/assets/main/images/no-image.png',
+                'empty_data' => 'no-image.png',
             ])
             ->add('availableAmount', IntegerType::class, [
                 'required' => false,

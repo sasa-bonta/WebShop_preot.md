@@ -28,7 +28,7 @@ class UserController extends AbstractController
     {
         $param = $request->query->get('search');
         $page = $request->query->get('page', 1);
-        $limit = $request->query->get('limit', 16);
+        $limit = $request->query->get('limit', 10);
         if ($limit > 120) {
             throw new BadRequestHttpException("400");
         }
@@ -40,15 +40,13 @@ class UserController extends AbstractController
         try {
             $searchUser = new UserSearchCriteria($param, $page, $limit, $order, $ascDesc);
         } catch (Exception $e) {
-            throw new BadRequestHttpException("400");
+            throw new BadRequestHttpException($e->getMessage());
         }
 
         $length = $userRepository->countTotal($searchUser);
-        if ($page > ceil($length / $limit) and $length / $limit !== 0) {
-            throw new BadRequestHttpException("400");
+        if ($page > ceil($length / $limit) && $length / $limit !== 0) {
+            throw new BadRequestHttpException("Page limit exceed");
         }
-
-//        var_dump($userRepository->search($searchUser));
 
         return $this->render('admin/user/index.html.twig', [
             'users' => $userRepository->search($searchUser),
@@ -132,10 +130,10 @@ class UserController extends AbstractController
         # Errors existent Nickname and/or Email
         $errors = [];
         $repo = $this->getDoctrine()->getRepository(User::class);
-        if ($repo->count(['username' => $user->getUsername()]) > 0 and $form->get('username')->getData() !== $origNick) {
+        if ($repo->count(['username' => $user->getUsername()]) > 0 && $form->get('username')->getData() !== $origNick) {
             $errors['nick'] = "This nickname already exists";
         }
-        if ($repo->count(['email' => $user->getEmail()]) > 0 and $form->get('email')->getData() !== $origEmail) {
+        if ($repo->count(['email' => $user->getEmail()]) > 0 && $form->get('email')->getData() !== $origEmail) {
             $errors['email'] = "This e-mail address already exists";
         }
         return $errors;

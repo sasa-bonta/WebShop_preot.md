@@ -104,13 +104,6 @@
     {% include 'footer.html.twig' %}
 
     <script>
-        function setCategory(value) {
-            var urlSearchParams = new URLSearchParams(window.location.search);
-            urlSearchParams.set('category', value);
-            urlSearchParams.set('page', 1);
-            window.location.search = urlSearchParams;
-        }
-
         function setPage(value) {
             var urlSearchParams = new URLSearchParams(window.location.search);
             urlSearchParams.set('page', value);

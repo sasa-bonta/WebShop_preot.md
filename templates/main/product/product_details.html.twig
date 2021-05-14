@@ -22,37 +22,38 @@
 
             {# Galery #}
             <div class="custom-container">
+                <div class="backImage">
+
+                </div>
                 <img id="expandedImg" style="width:100%">
-                <div id="imgtext"></div>
             </div>
 
             <script>
                 function myFunction(imgs) {
                     var expandImg = document.getElementById("expandedImg");
-                    var imgText = document.getElementById("imgtext");
                     expandImg.src = imgs.src;
-                    imgText.innerHTML = imgs.alt;
                     expandImg.parentElement.style.display = "block";
                 }
             </script>
+            <div class="row lowerImages">
+                {% for path in product.imgPath %}
+                    {% set fullImagePath = 'assets/main/images/gallery/' %}
+                    {% set fullImagePath = fullImagePath ~ path %}
 
-            <div class="row">
-                <div class="column">
-                    <img src="{{ asset(product.imgPath) }}" alt="Image 1" style="width:100%"
-                         onclick="myFunction(this);" onload="myFunction(this);">
-                </div>
-                <div class="column">
-                    <img src="{{ asset('assets/main/images/no-image.png') }}" alt="Image 2" style="width:100%"
-                         onclick="myFunction(this);">
-                </div>
-                <div class="column">
-                    <img src="{{ asset('assets/main/images/no-image.png') }}" alt="Image 3" style="width:100%"
-                         onclick="myFunction(this);">
-                </div>
-                <div class="column">
-                    <img src="{{ asset('assets/main/images/no-image.png') }}" alt="Image 4" style="width:100%"
-                         onclick="myFunction(this);">
-                </div>
+                    {% if loop.index == 1 %}
+                        <div class="column">
+                            <img src="{{ asset(fullImagePath) }}" alt="Image 1" style="width:100%"
+                                 onclick="myFunction(this);" onload="myFunction(this);">
+                        </div>
+                    {% else %}
+                        <div class="column">
+                            <img src="{{ asset(fullImagePath) }}" alt="Image 2"
+                                 style="width:100%"
+                                 onclick="myFunction(this);">
+                        </div>
+                    {% endif %}
+
+                {% endfor %}
             </div>
             {# Description #}
             <br><br>

@@ -107,3 +107,27 @@ a.page-link {
     color: black;
     font-size: 20px;
 }
+
+.backImage {
+    background: #F5F5F5;
+    width: 918px;
+    height: 918px;
+    position: relative;
+}
+
+#expandedImg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.lowerImages {
+    display: flex;
+    align-items: center;
+}
+
+.custom-container {
+    display: flex;
+    align-items: center;
+}

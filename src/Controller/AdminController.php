@@ -39,7 +39,7 @@ class AdminController extends AbstractController
         $name = $request->query->get('name');
         $category = $request->query->get('category');
         $page = $request->query->get('page', 1);
-        $limit = $request->query->get('limit', 16);
+        $limit = $request->query->get('limit', 10);
         if ($limit > 120) {
             throw new BadRequestHttpException("400");
         }
@@ -51,12 +51,12 @@ class AdminController extends AbstractController
         try {
             $searchCriteria = new SearchCriteria($name, $category, $page, $limit, $order, $ascDesc);
         } catch (Exception $e) {
-            throw new BadRequestHttpException("400");
+            throw new BadRequestHttpException($e->getMessage());
         }
 
         $length = $productRepository->countTotal($searchCriteria);
         if ($page > ceil($length / $limit)) {
-            throw new BadRequestHttpException("400");
+            throw new BadRequestHttpException("Page limit exceed");
         }
 
         return $this->render('admin/product/list_of_products.html.twig', [
@@ -97,6 +97,7 @@ class AdminController extends AbstractController
                 ]);
             }
 
+            $product->setPathsFromArray($product->getPathsArray());
             $entityManager = $this->getDoctrine()->getManager();
             $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
             $product->setCreatedAt($dateTime);
@@ -117,6 +118,7 @@ class AdminController extends AbstractController
      */
     public function show(Product $product): Response
     {
+        $product->setImagePathEgal($product->getImgPathCSV());
         return $this->render('admin/product/show.html.twig', [
             'product' => $product,
         ]);
@@ -127,12 +129,14 @@ class AdminController extends AbstractController
      */
     public function edit(Request $request, Product $product): Response
     {
+        $product->setImagePathEgal($product->getImgPathCSV());
         $form = $this->createForm(ProductType::class, $product);
         $origCode = $product->getCode();
         $form->handleRequest($request);
+
         $repo = $this->getDoctrine()->getRepository(Product::class);
         if ($form->isSubmitted() && !$form->isValid()) {
-            if ($repo->count(['code' => $product->getCode()]) > 0 and $form->get('code')->getData() !== $origCode) {
+            if ($repo->count(['code' => $product->getCode()]) > 0 && $form->get('code')->getData() !== $origCode) {
                 $this->addFlash('code', "This code already exists");
 
                 return $this->render('admin/product/edit.html.twig', [
@@ -143,7 +147,7 @@ class AdminController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($repo->count(['code' => $product->getCode()]) > 0 and $form->get('code')->getData() !== $origCode) {
+            if ($repo->count(['code' => $product->getCode()]) > 0 && $form->get('code')->getData() !== $origCode) {
                 $this->addFlash('code', "This code already exists");
 
                 return $this->render('admin/product/edit.html.twig', [

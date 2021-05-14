@@ -35,11 +35,11 @@ class SearchCriteria
         if ($limit > 128) {
             throw new InvalidLimitException("Limit must be <= 128");
         }
-        if ($order !== 'created_at' and $order !== 'price') {
+        if ($order !== 'created_at' && $order !== 'price') {
             throw new NonexistentOrderByColumn("Nonexistent column name");
         }
 
-        if ($ascDesc !== 'ASC' and $ascDesc !== 'DESC') {
+        if ($ascDesc !== 'ASC' && $ascDesc !== 'DESC') {
             throw new NonexistentOrderingType("Nonexistent sort order");
         }
         $this->ascDesc = $ascDesc;

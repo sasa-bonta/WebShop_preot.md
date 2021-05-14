@@ -38,12 +38,12 @@ class UserSearchCriteria
         } else {
             $this->limit = $limit;
         }
-        if ($order !== 'username' and $order !== 'email') {
+        if ($order !== 'username' && $order !== 'email') {
             throw new NonexistentOrderByColumn("Nonexistent column name");
         } else {
             $this->order = $order;
         }
-        if ($ascDesc !== 'ASC' and $ascDesc !== 'DESC') {
+        if ($ascDesc !== 'ASC' && $ascDesc !== 'DESC') {
             throw new NonexistentOrderingType("Nonexistent sort order");
         } else {
             $this->ascDesc = $ascDesc;
