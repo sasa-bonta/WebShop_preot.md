@@ -95,6 +95,16 @@ class ProductRepository extends ServiceEntityRepository
 
         return $query->getResult()[0];
     }
+  
+    public function getCategories(): array
+    {
+        $categories = $this
+            ->createQueryBuilder('p')
+            ->select("DISTINCT p.category")
+            ->getQuery()
+            ->getResult();
+        return array_column($categories, 'category');
+    }
     /*
     public function findByExampleField($value)
     {

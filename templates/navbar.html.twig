@@ -134,20 +134,31 @@
     const limit = document.getElementById("limit");
     const order = document.getElementById("sortBy");
     const name = document.getElementById("myInput");
+
     const urlParams = new URLSearchParams(window.location.search);
+
+    const urlParams = new URLSearchParams(window.location.search);
+
     if (urlParams.has("limit")) {
         limit.value = urlParams.get("limit");
     } else {
         limit.value = 16;
     }
+
     if (urlParams.has("order")) {
         order.value = urlParams.get("order");
     } else {
         order.value = "created_at:DESC";
     }
+
     if (urlParams.has("name")) {
         name.value = urlParams.get("name");
     }
+
+    if (urlParams.has("name")) {
+        name.value = urlParams.get("name");
+    }
+
     function changeLimit(value) {
         var urlSearchParams = new URLSearchParams(window.location.search);
         urlSearchParams.set("limit", value);

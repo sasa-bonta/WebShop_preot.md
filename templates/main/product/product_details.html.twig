@@ -19,11 +19,12 @@
             <br>
             <h1 id="product-name"><b>{{ product.name }}</b></h1>
             <br><br>
-            <p id="availableAmount">Available amount: {{ product.availableAmount }}</p>
 
             {# Galery #}
             <div class="custom-container">
                 <img id="expandedImg" style="width:100%" height="500">
+                <div class="backImage"></div>
+                <img id="expandedImg" style="width:100%">
             </div>
 
             <script>
@@ -33,28 +34,30 @@
                     expandImg.parentElement.style.display = "block";
                 }
             </script>
+            <div class="row lowerImages">
+                {% for path in product.imgPath %}
+                    {% set fullImagePath = 'assets/main/images/gallery/' %}
+                    {% set fullImagePath = fullImagePath ~ path %}
 
-            <div class="row">
-                <div class="column">
-                    <img src="{{ asset(product.imgPath) }}" alt="Image 1" style="width:100%"
-                         onclick="myFunction(this);" onload="myFunction(this);">
-                </div>
-                <div class="column">
-                    <img src="{{ asset('assets/main/images/no-image.png') }}" alt="Image 2" style="width:100%"
-                         onclick="myFunction(this);">
-                </div>
-                <div class="column">
-                    <img src="{{ asset('assets/main/images/no-image.png') }}" alt="Image 3" style="width:100%"
-                         onclick="myFunction(this);">
-                </div>
-                <div class="column">
-                    <img src="{{ asset('assets/main/images/no-image.png') }}" alt="Image 4" style="width:100%"
-                         onclick="myFunction(this);">
-                </div>
+                    {% if loop.index == 1 %}
+                        <div class="column">
+                            <img src="{{ asset(fullImagePath) }}" alt="Image 1" style="width:100%"
+                                 onclick="myFunction(this);" onload="myFunction(this);">
+                        </div>
+                    {% else %}
+                        <div class="column">
+                            <img src="{{ asset(fullImagePath) }}" alt="Image 2"
+                                 style="width:100%"
+                                 onclick="myFunction(this);">
+                        </div>
+                    {% endif %}
+
+                {% endfor %}
             </div>
             {# Description #}
             <br><br>
             <p id="description">{{ product.description }}</p>
+
             {# Price #}
             <br><br>
             <div class="row-price-add">
@@ -68,6 +71,9 @@
                     <b>Add</b>
                 </button>
             </div>
+            {# Availability #}
+            <br>
+            <p id="avail">Availability: {{ product.availableAmount ? 'in stock' : 'out of stock' }}</p>
         </div>
         {# Footer #}
         {% include 'footer.html.twig' %}

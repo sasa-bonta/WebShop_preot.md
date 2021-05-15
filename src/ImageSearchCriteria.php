@@ -9,25 +9,25 @@ use App\Exceptions\InvalidPageException;
 use App\Exceptions\NonexistentOrderByColumn;
 use App\Exceptions\NonexistentOrderingType;
 
-class UserSearchCriteria
+class ImageSearchCriteria
 {
-    private $param;
+    private $tag;
     private $page;
     private $limit;
     private $order;
     private $ascDesc;
 
     /**
-     * UserSearchCriteria constructor.
-     * @param $param
+     * ImageSearchCriteria constructor.
+     * @param $tag
      * @param $page
      * @param $limit
      * @param $order
      * @param $ascDesc
      */
-    public function __construct($param, $page, $limit, $order, $ascDesc)
+    public function __construct($tag, $page, $limit, $order, $ascDesc)
     {
-        $this->param = $param;
+        $this->tag = $tag;
         if ($page <= 0) {
             throw new InvalidPageException("Page must be positive");
         } else {
@@ -38,7 +38,7 @@ class UserSearchCriteria
         } else {
             $this->limit = $limit;
         }
-        if ($order !== 'username' && $order !== 'email') {
+        if ($order !== 'id') {
             throw new NonexistentOrderByColumn("Nonexistent column name");
         } else {
             $this->order = $order;
@@ -53,17 +53,17 @@ class UserSearchCriteria
     /**
      * @return mixed
      */
-    public function getParam()
+    public function getTag()
     {
-        return $this->param;
+        return $this->tag;
     }
 
     /**
-     * @param mixed $param
+     * @param mixed $tag
      */
-    public function setParam($param): void
+    public function setTag($tag): void
     {
-        $this->param = $param;
+        $this->tag = $tag;
     }
 
     /**
@@ -99,36 +99,34 @@ class UserSearchCriteria
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getOrder()
+    public function getOrder(): string
     {
         return $this->order;
     }
 
     /**
-     * @param mixed $order
+     * @param string $order
      */
-    public function setOrder($order): void
+    public function setOrder(string $order): void
     {
         $this->order = $order;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getAscDesc()
+    public function getAscDesc(): string
     {
         return $this->ascDesc;
     }
 
     /**
-     * @param mixed $ascDesc
+     * @param string $ascDesc
      */
-    public function setAscDesc($ascDesc): void
+    public function setAscDesc(string $ascDesc): void
     {
         $this->ascDesc = $ascDesc;
     }
-
-
 }

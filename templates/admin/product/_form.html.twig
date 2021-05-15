@@ -1,11 +1,138 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <br>
-    <p align="center">
-        <button class="btn btn-success" type="submit">{{ button_label|default('Save') }}</button>
-    </p>
-    <p align="center">
-        <button class="btn btn-warning" type="reset">{{ button_label|default('Reset') }}</button>
-    </p>
-    <br>
+
+<br>
+<h5>Code</h5>
+{% for message in app.flashes('code') %}
+    <div class="alert-danger">
+           <span class="d-block">
+                <span class="form-error-icon badge badge-danger text-uppercase">Error</span>
+                <span class="form-error-message">{{ message }}</span>
+            </span>
+    </div>
+{% endfor %}
+{{ form_widget(form.code) }}
+
+<br>
+<h5>Name</h5>
+{{ form_widget(form.name) }}
+
+<br>
+<h5>Category</h5>
+{{ form_widget(form.category) }}
+
+<br>
+<h5>Description</h5>
+{{ form_widget(form.description) }}
+
+<br>
+<h5>Price</h5>
+{% if form_errors(form.price) %}
+    <div class="alert alert-danger">
+        {{ form_errors(form.price) }}
+    </div>
+{% endif %}
+{{ form_widget(form.price) }}
+
+<br>
+<h5>Available amount</h5>
+{% if form_errors(form.availableAmount) %}
+    <div class="alert alert-danger">
+        {{ form_errors(form.availableAmount) }}
+    </div>
+{% endif %}
+{{ form_widget(form.availableAmount) }}
+
+<br>
+<h5>Image Path</h5>
+{{ form_widget(form.img_path) }}
+<input id="test" type="text" class="form-control">
+{#######################################################}
+
+<br>
+<button id="addImage" type="button" class="btn btn-primary">Add image</button>
+<br>
+<div class="gallery-fragment" id="gallery-fragment"></div>
+
+{#<div data-item="image-path" data-prototype style="display: none">#}
+{#    <button data-delete-item>Delete</button>#}
+{#    <p>Image: </p>#}
+{#</div>#}
+
+{#######################################################}
+
+<br>
+<p align="center">
+    <button class="btn btn-success" type="submit">{{ button_label|default('Save') }}</button>
+</p>
+<p align="center">
+    <button class="btn btn-warning" type="reset">{{ button_label|default('Reset') }}</button>
+</p>
+<br>
 {{ form_end(form) }}
+
+
+<script>
+    let $ = jQuery;
+
+    $("#product_img_path").prop( "type", "hidden" );
+    $("#test").prop( "disabled", true );
+    $("#test").val($("#product_img_path").val());
+
+    function appendImagePath(e) {
+        let currImgList = $("#product_img_path").val();
+        let currImgArray = currImgList.split(",")
+        if (currImgArray.length === 3) {
+            $('#gallery-fragment').empty();
+        }
+        if (currImgArray.length < 4) {
+
+            let newImg = $(e).attr("id");
+            let path;
+
+            if (currImgList.length === 0) {
+                path = newImg;
+            } else {
+                path = currImgList + ", " + newImg;
+            }
+            $("#product_img_path").val(path);
+            $("#test").val(path);
+        } else {
+            $('#gallery-fragment').empty();
+        }
+    }
+
+    // $(document).on('click', '[data-delete-item]', function (e) {
+    //     let $el = $(e.target);
+    //     $el.closest('[data-item]').remove();
+    // });
+
+    $(document).on('click', '.image img', function () {
+        appendImagePath(this);
+    });
+
+    $(document).on('click', "#removeAll", function () {
+        $("#product_img_path").val("");
+        $("#test").val("");
+    });
+
+    $("#addImage").on('click', function () {
+        fetch("{{ path("gallery_fragment") }}")
+            .then(function (response) {
+                response
+                    .text()
+                    .then(function (result) {
+                        $('#gallery-fragment').append(result)
+                    });
+            })
+            .catch(function () {
+                console.log("You died.")
+            });
+    });
+
+    $(document).on('click', function (e) {
+        if (e.target.id !== 'gallery-fragment' && $(e.target).closest('#gallery-fragment').length === 0) {
+            $('#gallery-fragment').empty();
+        }
+    });
+
+</script>

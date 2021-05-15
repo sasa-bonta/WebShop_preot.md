@@ -126,11 +126,9 @@ a.page-link {
     position: absolute;
     z-index: 10;
     width: 700px;
-    /*height: 350px;*/
     background: white;
     right: 10px;
     top: 48px;
-    /*bottom: -9px;*/
     box-shadow: 0 0 50px 6px rgba(0,0,0,0.06);
     padding: 20px;
 }
@@ -156,4 +154,28 @@ a.page-link {
 
 #add-to-cart {
     padding: 15px;
+}
+
+.backImage {
+    background: #F5F5F5;
+    width: 918px;
+    height: 918px;
+    position: relative;
+}
+
+#expandedImg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.lowerImages {
+    display: flex;
+    align-items: center;
+}
+
+.custom-container {
+    display: flex;
+    align-items: center;
 }

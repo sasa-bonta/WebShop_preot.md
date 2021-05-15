@@ -45,9 +45,31 @@ class User implements UserInterface
      */
     private $roles;
 
+    /**
+     * @ORM\Column(type="boolean", options={"default": false})
+     */
+    private $activated;
+
+    /**
+     * @return mixed
+     */
+    public function getActivated()
+    {
+        return $this->activated;
+    }
+
+    /**
+     * @param mixed $activated
+     */
+    public function setActivated($activated): void
+    {
+        $this->activated = $activated;
+    }
+
     public function __construct()
     {
         $this->roles = ['ROLE_USER'];
+        $this->activated = false;
     }
 
     public function getId(): ?int

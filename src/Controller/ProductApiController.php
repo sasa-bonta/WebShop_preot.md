@@ -3,12 +3,8 @@
 
 namespace App\Controller;
 
-
 use App\Entity\Product;
-use App\Exceptions\InvalidLimitException;
-use App\Exceptions\InvalidPageException;
-use App\Exceptions\NonexistentOrderByColumn;
-use App\Exceptions\NonexistentOrderingType;
+use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use App\SearchCriteria;
 use DateTime;
@@ -18,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -27,18 +24,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProductApiController extends AbstractController
 {
     /**
-     * @Route("/", name="productApi_index", methods={"GET"})
+     * @Route("/", name="product_api_index", defaults={"_format":"json"}, methods={"GET"})
      * @throws Exception
      */
-    public function index(ProductRepository $productRepository, Request $request): Response
+    public function index(ProductRepository $productRepository, Request $request): JsonResponse
     {
         $name = $request->query->get('name');
         $category = $request->query->get('category');
         $page = $request->query->get('page', 1);
         $limit = $request->query->get('limit', 16);
-        if ($limit > 100) {
-            return $this->json(array('code' => 400, 'message' => 'limit must be < 100>'));
-        }
         $orderBy = $request->query->get('order', 'created_at:ASC');
         $arr = explode(":", $orderBy, 2);
         $order = $arr[0];
@@ -46,86 +40,102 @@ class ProductApiController extends AbstractController
 
         try {
             $searchCriteria = new SearchCriteria($name, $category, $page, $limit, $order, $ascDesc);
-        } catch (InvalidPageException $e) {
-            return $this->json(array('code' => 400, 'message' => 'page must be positive'));
-        } catch (InvalidLimitException $e) {
-            return $this->json(array('code' => 400, 'message' => 'limit must be positive'));
-        } catch (NonexistentOrderByColumn $e) {
-            return $this->json(array('code' => 400, 'message' => 'nonexistent column name'));
-        } catch (NonexistentOrderingType $e) {
-            return $this->json(array('code' => 400, 'message' => 'nonexistent sort order'));
+        } catch (Exception $e) {
+            throw new BadRequestHttpException($e->getMessage());
         }
 
         $length = $productRepository->countTotal($searchCriteria);
-        if ($page > ceil($length / $limit)) {
-            return $this->json(array('code' => 400, 'message' => 'page limit exceeded'));
+        if ($page > ceil($length / $limit) && $page > 1) {
+            throw new BadRequestHttpException("page limit exceeded");
         }
 
         return $this->json($productRepository->search($searchCriteria));
     }
 
     /**
-     * @Route("/new", name="productApi_new", methods={"POST"})
+     * @Route("/new", name="product_api_new", defaults={"_format":"json"}, methods={"POST"})
      */
-    public function new(Request $request): JsonResponse
+    public function new(Request $request, ProductRepository $repo): JsonResponse
     {
+        $response = new JsonResponse();
         $parameters = json_decode($request->getContent(), true);
         $product = new Product();
-        $entityManager = $this->getDoctrine()->getManager();
-        $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
-        $product->setCode($parameters['code']);
-        $product->setName($parameters['name']);
-        $product->setCategory($parameters['category']);
-        $product->setPrice($parameters['price']);
-        $product->setImgPath($parameters['imgPath']);
-        $product->setDescription($parameters['description']);
-        $product->setCreatedAt($dateTime);
-        $product->setAvailableAmount($parameters['availableAmount']);
-        $entityManager->persist($product);
-        $entityManager->flush();
+        $form = $this->createForm(ProductType::class, $product, ['csrf_protection' => false]);
+        $form->handleRequest($request);
+        $form->submit($parameters);
 
-        return new JsonResponse(['code' => 201,
-            'message' => 'new product created']);
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($repo->count(['code' => $parameters['code']]) > 0) {
+                throw new BadRequestHttpException("this code already exists");
+            } else {
+                $data = ["status" => 201, "description" => "created", "message" => "new product is created"];
+            }
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
+            $product->setCreatedAt($dateTime);
+            $entityManager->persist($product);
+            $entityManager->flush();
+
+            $response->setStatusCode(JsonResponse::HTTP_CREATED);
+            $response->setData($data);
+            return $response;
+        } else {
+            throw new BadRequestHttpException($form->getErrors(true, true)->current()->getMessage());
+        }
     }
 
     /**
-     * @Route("/{code}", name="productApi_show", methods={"GET"})
+     * @Route("/{code}", name="product_api_show", defaults={"_format":"json"},methods={"GET"})
      */
-    public function show(ProductRepository $productRepository, Product $product): Response
+    public function show(Product $product): Response
     {
         return $this->json($product);
     }
 
     /**
-     * @Route("/{code}", name="productApi_edit", methods={"PUT"})
+     * @Route("/{code}", name="product_api_edit", defaults={"_format":"json"}, methods={"PUT"})
      */
-    public function edit(Request $request, Product $product, ProductRepository $productRepository): JsonResponse
+    public function edit(Request $request, Product $product, ProductRepository $repo): JsonResponse
     {
+        $response = new JsonResponse();
         $parameters = json_decode($request->getContent(), true);
-        $product = $productRepository->findOneBy(array('code' => $parameters['code']));
-        $entityManager = $this->getDoctrine()->getManager();
-        $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
-        $product->setName($parameters['name']);
-        $product->setCategory($parameters['category']);
-        $product->setPrice($parameters['price']);
-        $product->setImgPath($parameters['imgPath']);
-        $product->setDescription($parameters['description']);
-        $product->setUpdatedAt($dateTime);
-        $product->setAvailableAmount($parameters['availableAmount']);
-        $entityManager->persist($product);
-        $entityManager->flush();
+        $initCode = $product->getCode();
 
-        return new JsonResponse(['code' => 201,
-            'message' => 'product updated']);
+        $form = $this->createForm(ProductType::class, $product, ['csrf_protection' => false]);
+        $form->handleRequest($request);
+        $form->submit($parameters);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($repo->count(['code' => $product->getCode()]) > 0 && $product->getCode() !== $initCode) {
+              throw new BadRequestHttpException("this code already exists");
+            }
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
+            $product->setUpdatedAt($dateTime);
+            $entityManager->persist($product);
+            $entityManager->flush();
+
+            $data = ["status" => 200, "description" => "ok", "message" => "the product is updated"];
+            $response->setStatusCode(JsonResponse::HTTP_OK);
+            $response->setData($data);
+            return $response;
+        } else {
+            throw new BadRequestHttpException($form->getErrors(true, true));
+        }
     }
 
     /**
-     * @Route("/{code}", name="productApi_delete", methods={"DELETE"})
+     * @Route("/{code}", name="product_api_delete", defaults={"_format":"json"}, methods={"DELETE"})
      */
     public function delete(Product $product, ProductRepository $productRepository): JsonResponse
     {
+        $response = new JsonResponse();
         $productRepository->delete($product);
-        return new JsonResponse(['code' => 200,
-            'message' => 'product deleted']);
+        $response->setStatusCode(JsonResponse::HTTP_OK);
+        $data = ["status" => 200, "description" => "ok", "message" => "the product is deleted"];
+        $response->setData($data);
+        return $response;
     }
 }

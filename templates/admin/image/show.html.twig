@@ -1,0 +1,52 @@
+{% extends 'admin/crud_base.thml.twig' %}
+
+{% block title %} Image {% endblock %}
+
+{% block navbar %} {% include 'admin/navbar_admin_users.html.twig' %} {% endblock %}
+
+{% block content %}
+    <h1 align="center">Image</h1>
+    <h1>Image</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ image.id }}</td>
+        </tr>
+        <tr>
+            <th>Tags</th>
+            <td>{{ image.tags }}</td>
+        </tr>
+        <tr>
+            <th>Path</th>
+            <td>{{ image.path }}</td>
+        </tr>
+        <tr>
+            <th>Image</th>
+            <td>
+                {% set fullImagePath = 'assets/main/images/gallery/' %}
+                {% set fullImagePath = fullImagePath ~ image.path %}
+                <img src="{{ asset(fullImagePath) }}" alt="" height="300px">
+            </td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ image.description }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p align="center">
+        <a href="{{ path('image_index') }}">
+            <button class="btn btn-primary">Back to list</button>
+        </a>
+    </p>
+    <p align="center">
+        <a href="{{ path('image_edit', {'id': image.id}) }}">
+            <button class="btn btn-success">Edit</button>
+        </a>
+    </p>
+
+    {{ include('admin/image/_delete_form.html.twig') }}
+{% endblock %}

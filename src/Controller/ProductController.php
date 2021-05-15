@@ -41,16 +41,22 @@ class ProductController extends AbstractController
         try {
             $searchCriteria = new SearchCriteria($name, $category, $page, $limit, $order, $ascDesc);
         } catch (Exception $e) {
-            throw new BadRequestHttpException("400");
+            throw new BadRequestHttpException($e->getMessage());
         }
 
         $length = $productRepository->countTotal($searchCriteria);
-        if ($page > ceil($length / $limit) and $length / $limit !== 0) {
-            throw new BadRequestHttpException("400");
+        if ($page > ceil($length / $limit) && $page > 1) {
+            throw new BadRequestHttpException("Page limit exceed");
+        }
+
+        $products = $productRepository->search($searchCriteria);
+        foreach ($products as $product) {
+            $product->setImagePathEgal($product->getPathsArray());
         }
 
         return $this->render('main/product/index.html.twig', [
-            'products' => $productRepository->search($searchCriteria),
+            'products' => $products,
+            'categories' => $productRepository->getCategories(),
             'length' => $length,
             'limit' => $searchCriteria->getLimit()
         ]);
@@ -61,6 +67,7 @@ class ProductController extends AbstractController
      */
     public function show(Product $product): Response
     {
+        $product->setImagePathEgal($product->getPathsArray());
         return $this->render('main/product/product_details.html.twig', [
             'product' => $product,
         ]);

@@ -17,6 +17,21 @@
         {% endif %}
 
         <h1 class="h3 mb-3 font-weight-normal" align="center">Please sign in</h1>
+        {% for message in app.flashes('check') %}
+            <div class="alert-danger">
+                <li><h4>{{ message }}</h4></li>
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('verify_email_error') %}
+            <div class="alert-warning">
+                <li><h4>{{ message }}</h4></li>
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('success') %}
+            <div class="alert-success">
+                <li><h4>{{ message }}</h4></li>
+            </div>
+        {% endfor %}
         <label for="inputUsername">Username</label>
         <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required
                autofocus>
