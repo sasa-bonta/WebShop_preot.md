@@ -20,6 +20,12 @@ $(document).ready(function () {
         var form_data = JSON.stringify($(this).serializeObject());
         var product_code = $(this).attr("data-productCode");
 
+        $.getJSON("http://localhost:8000/api/v1/cart/" + product_code, function(data) {
+            console.log(data);
+
+            if (data.message === "item out of stock") alert("There are not so many products in stock");
+        });
+
         $.ajax({
             url: "http://localhost:8000/api/v1/cart/" + product_code,
             type: "POST",
@@ -28,16 +34,10 @@ $(document).ready(function () {
             success: function (result) {
                 showCart();
             },
-            complete: function (xhr) {
-                if (xhr.status === 204) {
-                    alert("There are not so many products in stock");
-                }
-            },
             error: function (xhr, resp, text) {
                 console.log(xhr, resp, text);
             }
         });
-
 
         return false;
     });
