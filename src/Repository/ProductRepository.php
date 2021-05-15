@@ -6,6 +6,7 @@ use App\SearchCriteria;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\Types\This;
 
 /**
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
@@ -79,6 +80,22 @@ class ProductRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
+    /**
+     * @return Product
+     */
+    public function findAllByCodes(string $code)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p.code, p.name, p.imgPath, p.price, p.availableAmount
+            FROM App\Entity\Product p
+            WHERE p.code = :code'
+        )->setParameter('code', $code);
+
+        return $query->getResult()[0];
+    }
+  
     public function getCategories(): array
     {
         $categories = $this
