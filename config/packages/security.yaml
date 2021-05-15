@@ -17,6 +17,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            http-basic: ~
             anonymous: lazy
             guard:
                 authenticators:
