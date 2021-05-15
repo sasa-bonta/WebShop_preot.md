@@ -36,15 +36,19 @@ class CartApiController extends AbstractController
     /**
      * @Route("/{productCode}", name="cart_api_add", methods={"POST"})
      */
-    public function addItem(Request $request, $productCode, CartItemRepository $cartItemRepository): JsonResponse
+    public function addItem(Request $request, $productCode, CartItemRepository $cartItemRepository, ProductRepository $productRepository): JsonResponse
     {
         $response = new JsonResponse();
 
-        $cartItemRepository->add($productCode, $this->getUserId());
-
-        $data = ["status" => 200, "description" => "ok", "message" => "item added to cart"];
-        $response->setStatusCode(JsonResponse::HTTP_OK);
-        $response->setData($data);
+        if ($cartItemRepository->add($productCode, $this->getUserId(),(array) $productRepository->findAllByCodes($productCode))) {
+            $data = ["status" => 200, "description" => "ok", "message" => "item added to cart"];
+            $response->setStatusCode(JsonResponse::HTTP_OK);
+            $response->setData($data);
+        } else {
+            $data = ["status" => 204, "description" => "no content", "message" => "item out of stock"];
+            $response->setStatusCode(JsonResponse::HTTP_NO_CONTENT);
+            $response->setData($data);
+        }
 
         return $response;
     }

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\CartItem;
+use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -43,7 +44,7 @@ class CartItemRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    public function add(string $productCode, int $userId)
+    public function add(string $productCode, int $userId, array $product) : bool
     {
         $entityManager = $this->getEntityManager();
 
@@ -62,6 +63,8 @@ class CartItemRepository extends ServiceEntityRepository
             if ($productCode === $i['code']) {
                 $amount = $i['amount'] + 1;
 
+                if ($amount > $product['availableAmount']) return 0;
+
                 $query = $entityManager->createQuery(
                     'UPDATE App\Entity\CartItem c
                     SET c.amount = :amount
@@ -69,7 +72,7 @@ class CartItemRepository extends ServiceEntityRepository
                 )->setParameter('amount', $amount)
                     ->setParameter('code', $productCode)
                     ->getResult();
-                return;
+                return 1;
             }
         }
         $cartItem = new CartItem();
@@ -77,10 +80,12 @@ class CartItemRepository extends ServiceEntityRepository
         $cartItem->setAmount(1);
         $cartItem->setUserId($userId);
 
+        if ($cartItem->getAmount() > $product['availableAmount']) return 0;
+
         $entityManager->persist($cartItem);
 
         $entityManager->flush();
-        return;
+        return 1;
     }
 
     public function delete(CartItem $cartItem)

@@ -90,62 +90,6 @@
     {#    <script src="app/music/music.js"></script>#}
     {#    <script src="app/music/search-music.js"></script>#}
 
-
-    {#    <div id="content">#}
-    {#        {% include 'navbar.html.twig' %}#}
-    {#        <div class="container">#}
-    {#            <h1>Your cart:</h1>#}
-    {#        </div>#}
-
-    {#        {% if items | length > 0 %}#}
-    {#            <table class="cart-table table">#}
-    {#                <thead>#}
-    {#                <tr>#}
-    {#                    <th></th>#}
-    {#                    <th class="text-center">Product</th>#}
-    {#                    <th class="text-center">Price</th>#}
-    {#                    <th class="text-center">Qty</th>#}
-    {#                    <th class="text-center">Total</th>#}
-    {#                    <th class="text-center"></th>#}
-    {#                </tr>#}
-    {#                </thead>#}
-    {#                <tbody>#}
-    {#                {% for item in items %}#}
-    {#                    <tr>#}
-    {#                        <td class="text-center"><img src="{{ item.product.imgPath }}" alt="" width="50" height="50"></td>#}
-    {#                        <td class="text-center">{{ item.product.name }}</td>#}
-    {#                        <td class="text-center">{{ item.product.price }} $</td>#}
-    {#                        <td class="text-center">#}
-    {#                            <button class="btn btn-outline-dark btn-sm" onclick="reduceQty()">- </button>#}
-    {#                            {{ item.quantity }}#}
-    {#                            <button class="btn btn-outline-dark btn-sm"> +</button>#}
-
-    {#                        </td>#}
-    {#                        <td class="text-center">{{ item.product.price * item.quantity }} $</td>#}
-    {#                        <td class="text-center">#}
-    {#                            <a href="{{ path('cart_remove', {'productCode': item.product.code}) }}"#}
-    {#                               class="btn btn-danger btn-sm">#}
-    {#                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">#}
-    {#                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>#}
-    {#                                </svg>                            </a>#}
-    {#                        </td>#}
-    {#                    </tr>#}
-    {#                {% endfor %}#}
-    {#                </tbody>#}
-    {#                <tfoot>#}
-    {#                    <tr>#}
-    {#                        <td></td>#}
-    {#                        <td class="text-end" colspan="3"><b>Total : </b></td>#}
-    {#                        <td class="text-center"><b>{{ total }} $</b></td>#}
-    {#                        <td></td>#}
-    {#                    </tr>#}
-    {#                </tfoot>#}
-    {#            </table>#}
-
-    {#        {% else %}#}
-    {#            <p>The cart is empty</p>#}
-    {#        {% endif %}#}
-
     {% include 'footer.html.twig' %}
 
 

@@ -88,7 +88,7 @@ class ProductRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
-            'SELECT p.code, p.name, p.imgPath, p.price
+            'SELECT p.code, p.name, p.imgPath, p.price, p.availableAmount
             FROM App\Entity\Product p
             WHERE p.code = :code'
         )->setParameter('code', $code);

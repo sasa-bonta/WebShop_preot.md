@@ -147,3 +147,13 @@ a.page-link {
 .example {
     text-decoration: #1b9448;
 }
+
+.row-price-add {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#add-to-cart {
+    padding: 15px;
+}
