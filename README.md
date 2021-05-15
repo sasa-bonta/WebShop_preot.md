@@ -4,3 +4,6 @@
 - composer require symfonycasts/verify-email-bundle
 - (optional) composer require --dev symfony/profiler-pack
 - sudo docker-compose up -d
+
+
+- in prod page doesn't change? -- sudo php bin/console cache:clear -e prod
