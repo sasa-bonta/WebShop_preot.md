@@ -71,6 +71,7 @@ class ProductApiController extends AbstractController
                 $data = ["status" => 201, "description" => "created", "message" => "new product is created"];
             }
 
+            $product->writeImgPathsFromArray($product->readImgPathsArray());
             $entityManager = $this->getDoctrine()->getManager();
             $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
             $product->setCreatedAt($dateTime);

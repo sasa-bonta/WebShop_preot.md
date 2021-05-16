@@ -33,7 +33,7 @@ class ProductController extends AbstractController
         if(!in_array($limit, [16, 32, 64, 128])){
             throw new BadRequestHttpException("400");
         }
-        $orderBy = $request->query->get('order', 'created_at:ASC');
+        $orderBy = $request->query->get('order', 'created_at:DESC');
         $arr = explode(":", $orderBy, 2);
         $order = $arr[0];
         $ascDesc = $arr[1];
@@ -51,7 +51,7 @@ class ProductController extends AbstractController
 
         $products = $productRepository->search($searchCriteria);
         foreach ($products as $product) {
-            $product->setImagePathEgal($product->getPathsArray());
+            $product->writeImgPathEgal($product->readImgPathsArray());
         }
 
         return $this->render('main/product/index.html.twig', [
@@ -67,7 +67,7 @@ class ProductController extends AbstractController
      */
     public function show(Product $product): Response
     {
-        $product->setImagePathEgal($product->getPathsArray());
+        $product->writeImgPathEgal($product->readImgPathsArray());
         return $this->render('main/product/product_details.html.twig', [
             'product' => $product,
         ]);

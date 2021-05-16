@@ -92,10 +92,10 @@ class ImageController extends AbstractController
         $errors = [];
         foreach ($image->getTagsArray() as $tag) {
             if (mb_strlen($tag) > 12 || mb_strlen($tag) < 2) {
-                array_push($errors, "The length of each tag must be from 2 to 12 characters");
+                $errors['tagLen'] = "The length of each tag must be from 2 to 12 characters";
             }
             if (preg_match('/[^a-zа-я0-9]/', $tag)) {
-                array_push($errors, "The tags must contain only characters and digits");
+                $errors['tagMatch'] = "The tags must contain only characters and digits";
             }
         }
         return $errors;

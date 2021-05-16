@@ -43,7 +43,7 @@ class AdminController extends AbstractController
         if ($limit > 120) {
             throw new BadRequestHttpException("400");
         }
-        $orderBy = $request->query->get('order', 'created_at:ASC');
+        $orderBy = $request->query->get('order', 'created_at:DESC');
         $arr = explode(":", $orderBy, 2);
         $order = $arr[0];
         $ascDesc = $arr[1];
@@ -55,7 +55,7 @@ class AdminController extends AbstractController
         }
 
         $length = $productRepository->countTotal($searchCriteria);
-        if ($page > ceil($length / $limit)) {
+        if ($page > ceil($length / $limit) && $page > 1) {
             throw new BadRequestHttpException("Page limit exceed");
         }
 
@@ -97,7 +97,7 @@ class AdminController extends AbstractController
                 ]);
             }
 
-            $product->setPathsFromArray($product->getPathsArray());
+            $product->writeImgPathsFromArray($product->readImgPathsArray());
             $entityManager = $this->getDoctrine()->getManager();
             $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
             $product->setCreatedAt($dateTime);
@@ -118,7 +118,7 @@ class AdminController extends AbstractController
      */
     public function show(Product $product): Response
     {
-        $product->setImagePathEgal($product->getImgPathCSV());
+        $product->writeImgPathEgal($product->readImgPathCSV());
         return $this->render('admin/product/show.html.twig', [
             'product' => $product,
         ]);
@@ -129,7 +129,7 @@ class AdminController extends AbstractController
      */
     public function edit(Request $request, Product $product): Response
     {
-        $product->setImagePathEgal($product->getImgPathCSV());
+        $product->writeImgPathEgal($product->readImgPathCSV());
         $form = $this->createForm(ProductType::class, $product);
         $origCode = $product->getCode();
         $form->handleRequest($request);

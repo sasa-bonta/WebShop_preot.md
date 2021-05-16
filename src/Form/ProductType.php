@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Positive;
+use Symfony\Component\Validator\Constraints\PositiveOrZero;
 
 class ProductType extends AbstractType
 {
@@ -23,17 +24,20 @@ class ProductType extends AbstractType
                 'constraints' => new NotBlank(['message' => 'Product name cannot be blank'])
             ])
             ->add('category', ChoiceType::class, [
+                'constraints' => new NotBlank(['message' => 'Category cannot be blank']),
                 'choices' => [
                     'Tools' => 'tools',
                     'Supplies' => 'supplies',
                     'Cars' => 'cars',
                     'Toys' => 'toys',
                 ],])
-            ->add('description')
+            ->add('description', TextType::class, [
+                'constraints' => new NotBlank(['message' => 'Description cannot be blank'])
+            ])
             ->add('price', NumberType::class, [
                 'invalid_message' => "price must be number",
                 'scale' => 2,
-                'constraints' => [new Positive()],
+                'constraints' => [new Positive(), new NotBlank(['message' => 'Price cannot be blank'])],
             ])
             ->add('img_path', null, [
                 'required' => false,
@@ -42,7 +46,7 @@ class ProductType extends AbstractType
             ->add('availableAmount', IntegerType::class, [
                 'required' => false,
                 'empty_data' => 0,
-                'constraints' => [new Positive()],
+                'constraints' => [new PositiveOrZero()],
             ]);
     }
 
