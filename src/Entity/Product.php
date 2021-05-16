@@ -131,10 +131,11 @@ class Product
         $this->availableAmount = $availableAmount;
     }
 
-    public function getImgPathCSV(): ?string
-    {
-        return str_replace(["[", "]", "\""], " ", $this->imgPath);
-    }
+    // get paths: json -> CSV
+//    public function getImgPathCSV(): ?string
+//    {
+//        return str_replace(["[", "]", "\""], " ", $this->imgPath);
+//    }
 
     // returns string|array|csv
     public function getImgPath() {
@@ -142,10 +143,10 @@ class Product
     }
 
     // get paths: json -> array
-    public function getPathsArray(): ?array
-    {
-        return json_decode($this->imgPath);
-    }
+//    public function getPathsArray(): ?array
+//    {
+//        return json_decode($this->imgPath);
+//    }
 
     // set paths: "csv" -> array -> json
     public function setImgPath(string $paths): self
@@ -162,13 +163,7 @@ class Product
     }
 
     // set paths: string
-    public function setImagePathEgal($paths)
-    {
-        $this->imgPath = $paths;
-        return $this;
-    }
-
-    public function setImgPathArray(array $paths): self
+    public function setImagePathEgal($paths): self
     {
         $this->imgPath = $paths;
         return $this;

@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/api/v1/products")
+ * @Route("/api/v1/products", defaults={"_format":"json"})
  * @method Exception(string $string)
  */
 class ProductApiController extends AbstractController
