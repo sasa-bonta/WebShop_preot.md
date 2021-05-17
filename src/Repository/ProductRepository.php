@@ -93,7 +93,7 @@ class ProductRepository extends ServiceEntityRepository
             WHERE p.code = :code'
         )->setParameter('code', $code);
 
-        return $query->getResult()[0];
+        return $query->getResult();
     }
   
     public function getCategories(): array

@@ -1,5 +1,6 @@
 function readItemsTemplate(data) {
 
+
     var read_items_html = ``;
     var total = 0;
 
@@ -23,6 +24,7 @@ function readItemsTemplate(data) {
     data.forEach(cartItem => {
 
         var icon = JSON.parse(cartItem['product']['imgPath']);
+
         total += cartItem['product']['price'] * cartItem['amount'];
 
         read_items_html += `
@@ -37,6 +39,10 @@ function readItemsTemplate(data) {
         `;
     });
 
+    if (window.location.href === 'http://localhost:8000/cart') {
+        $("#cart-container").css("overflow-y", "hidden").css("height", "auto");
+        // $("#cart-container").css("height", "auto");
+    }
 
     if (total === 0) {
         read_items_html += `<p class="empty-cart">Your shopping cart is empty now</p>`;
@@ -49,6 +55,9 @@ function readItemsTemplate(data) {
             </tr>
         </table>`;
     }
+
+
+
 
     $("#page-content").html(read_items_html);
 }

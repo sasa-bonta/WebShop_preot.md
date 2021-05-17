@@ -25,7 +25,7 @@ class CartApiController extends AbstractController
         $cartDetailed = [];
         foreach ($cart as $cartItem) {
             $cartDetailed [] = [
-                'product' => $productRepository->findAllByCodes($cartItem['code']),
+                'product' => $productRepository->findOneBy(['code' => $cartItem['code']]),
                 'amount' => $cartItem['amount']
             ];
         }

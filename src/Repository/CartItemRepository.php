@@ -63,7 +63,7 @@ class CartItemRepository extends ServiceEntityRepository
             if ($productCode === $i['code']) {
                 $amount = $i['amount'] + 1;
 
-                if ($amount > $product['availableAmount']) return 0;
+                if ($amount > $product[0]['availableAmount']) return 0;
 
                 $query = $entityManager->createQuery(
                     'UPDATE App\Entity\CartItem c
@@ -80,7 +80,7 @@ class CartItemRepository extends ServiceEntityRepository
         $cartItem->setAmount(1);
         $cartItem->setUserId($userId);
 
-        if ($cartItem->getAmount() > $product['availableAmount']) return 0;
+        if ($cartItem->getAmount() > $product[0]['availableAmount']) return 0;
 
         $entityManager->persist($cartItem);
 
