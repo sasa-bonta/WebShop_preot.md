@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Positive;
 use Symfony\Component\Validator\Constraints\PositiveOrZero;
@@ -44,9 +45,8 @@ class ProductType extends AbstractType
                 'empty_data' => 'no-image.png',
             ])
             ->add('availableAmount', IntegerType::class, [
-                'required' => false,
                 'empty_data' => 0,
-                'constraints' => [new PositiveOrZero()],
+                'constraints' => [new GreaterThanOrEqual(0)],
             ]);
     }
 
