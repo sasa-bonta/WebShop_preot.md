@@ -41,7 +41,6 @@ function readItemsTemplate(data) {
 
     if (window.location.href === 'http://localhost:8000/cart') {
         $("#cart-container").css("overflow-y", "hidden").css("height", "auto");
-        // $("#cart-container").css("height", "auto");
     }
 
     if (total === 0) {
