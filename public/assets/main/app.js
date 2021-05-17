@@ -1,6 +1,6 @@
 $(document).ready(function(){
     var app_html=`
-        <div class='container'>
+        <div id="cart-container" class='cart-container'>
             <div id='page-content'></div>
         </div>`;
 

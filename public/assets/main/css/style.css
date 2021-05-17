@@ -131,6 +131,7 @@ a.page-link {
     top: 48px;
     box-shadow: 0 0 50px 6px rgba(0,0,0,0.06);
     padding: 20px;
+
 }
 
 .empty-cart {
@@ -139,6 +140,7 @@ a.page-link {
 }
 
 .go-to-cart-btn {
+    margin-top: 20px;
     float: right;
 }
 
@@ -178,4 +180,9 @@ a.page-link {
 .custom-container {
     display: flex;
     align-items: center;
+}
+
+.cart-container {
+    overflow-y: auto;
+    height: 270px;
 }
