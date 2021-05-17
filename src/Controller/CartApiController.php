@@ -36,7 +36,7 @@ class CartApiController extends AbstractController
     /**
      * @Route("/{productCode}", name="cart_api_add", methods={"GET","POST"})
      */
-    public function addItem(Request $request, $productCode, CartItemRepository $cartItemRepository, ProductRepository $productRepository): JsonResponse
+    public function addItem($productCode, CartItemRepository $cartItemRepository, ProductRepository $productRepository): JsonResponse
     {
         $response = new JsonResponse();
 

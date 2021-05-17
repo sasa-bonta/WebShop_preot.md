@@ -1,7 +1,7 @@
 {# templates/bundles/TwigBundle/Exception/error404.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Product{% endblock %}
+{% block title %}404{% endblock %}
 
 {% block body %}
     <header>
@@ -12,8 +12,11 @@
     <div>
         {# Navigation bar HERE #}
         {% include 'navbar.html.twig' %}
-        <img src="{{ asset('assets/main/images/404.jpg') }}" alt="Image 2"
+        <img src="{{ asset('assets/main/images/404.svg') }}" alt="Image 2"
              style="width:800px; padding-top: 50px; display: block; margin-left: auto; margin-right: auto;">
+        <div style="text-align: center">
+            <a href="https://storyset.com/web" style="text-align:center;">Illustration by Freepik Storyset</a>
+        </div>
         {# Footer #}
         {% include 'footer.html.twig' %}
     </div>
