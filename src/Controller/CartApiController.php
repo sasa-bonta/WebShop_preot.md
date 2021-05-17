@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/api/v1/cart")
+ * @Route("/api/v1/cart", defaults={"_format":"json"})
  */
 class CartApiController extends AbstractController
 {
@@ -59,18 +59,16 @@ class CartApiController extends AbstractController
     public function deleteItem(CartItem $cartItem, CartItemRepository $cartItemRepository): JsonResponse
     {
         $response = new JsonResponse();
-
         $cartItemRepository->delete($cartItem);
+        $data = ["status" => 200, "description" => "ok", "message" => "item deleted"];
+        $response->setStatusCode(JsonResponse::HTTP_OK);
+        $response->setData($data);
+
         return $response;
     }
 
-//    public function addAmount() {
-//
-//    }
-
-//    public function decreaseAmount() {
-//
-//    }
+// @todo addAmount()
+// @todo decreaseAmount()
 
     /**
      * @return mixed
