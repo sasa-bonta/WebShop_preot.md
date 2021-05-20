@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Image;
+use App\Exceptions\NonexistentOrderByColumn;
 use App\Form\ImageEditType;
 use App\Form\ImageType;
-use App\ImageSearchCriteria;
 use App\Repository\ImageRepository;
+use App\SearchCriteria\SearchCriteria;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -37,8 +39,12 @@ class ImageController extends AbstractController
         $order = $arr[0];
         $ascDesc = $arr[1];
 
+        if ($order !== 'id') {
+            throw new BadRequestHttpException("Nonexistent column name");
+        }
+
         try {
-            $searchImage = new ImageSearchCriteria($tag, $page, $limit, $order, $ascDesc);
+            $searchImage = new SearchCriteria($tag, $page, $limit, $order, $ascDesc);
         } catch (Exception $e) {
             throw new BadRequestHttpException($e->getMessage());
         }

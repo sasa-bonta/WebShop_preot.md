@@ -4,7 +4,6 @@
 namespace App\Controller;
 
 
-use App\CheckUserService;
 use App\Entity\User;
 use App\Form\RegisterType;
 use App\Repository\UserRepository;

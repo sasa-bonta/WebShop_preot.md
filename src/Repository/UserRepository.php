@@ -3,8 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\User;
-use App\SearchCriteria;
-use App\UserSearchCriteria;
+use App\SearchCriteria\SearchCriteria;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -21,15 +20,15 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-    public function search(UserSearchCriteria $searchCriteria)
+    public function search(SearchCriteria $searchCriteria)
     {
         $offset = ($searchCriteria->getPage() - 1) * $searchCriteria->getLimit();
 
         $query = $this->createQueryBuilder('u');
-        if ($searchCriteria->getParam() !== null) {
+        if ($searchCriteria->getName() !== null) {
             $query = $query
                 ->where('u.username LIKE :param OR  u.email LIKE :param')
-                ->setParameter('param', '%' . $searchCriteria->getParam() . '%');
+                ->setParameter('param', '%' . $searchCriteria->getName() . '%');
         }
         return $query
             ->orderBy('u.' . $searchCriteria->getOrder(), $searchCriteria->getAscDesc())
@@ -43,46 +42,17 @@ class UserRepository extends ServiceEntityRepository
      * @throws \Doctrine\ORM\NonUniqueResultException
      * @throws \Doctrine\ORM\NoResultException
      */
-    public function countTotal(UserSearchCriteria $searchCriteria)
+    public function countTotal(SearchCriteria $searchCriteria)
     {
         $query = $this->createQueryBuilder('u')
             ->select('count(u.id)');
-        if ($searchCriteria->getParam() !== null) {
+        if ($searchCriteria->getName() !== null) {
             $query = $query
                 ->where('u.username LIKE :param OR  u.email LIKE :param')
-                ->setParameter('param', '%' . $searchCriteria->getParam() . '%');
+                ->setParameter('param', '%' . $searchCriteria->getName() . '%');
         }
         return $query
             ->getQuery()
             ->getSingleScalarResult();
     }
-
-    // /**
-    //  * @return User[] Returns an array of User objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?User
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

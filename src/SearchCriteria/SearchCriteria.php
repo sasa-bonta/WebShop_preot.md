@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App;
+namespace App\SearchCriteria;
 
 
 use App\Exceptions\InvalidLimitException;
@@ -23,7 +23,7 @@ class SearchCriteria
      * SearchCriteria constructor.
      * @throws Exception
      */
-    public function __construct($name, $category, $page, $limit, $order, $ascDesc)
+    public function __construct($name, $page, $limit, $order, $ascDesc, $category = null)
     {
 
         if ($page <= 0) {
@@ -35,10 +35,6 @@ class SearchCriteria
         if ($limit > 128) {
             throw new InvalidLimitException("Limit must be <= 128");
         }
-        if ($order !== 'created_at' && $order !== 'price') {
-            throw new NonexistentOrderByColumn("Nonexistent column name");
-        }
-
         if ($ascDesc !== 'ASC' && $ascDesc !== 'DESC') {
             throw new NonexistentOrderingType("Nonexistent sort order");
         }

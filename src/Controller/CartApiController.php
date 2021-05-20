@@ -8,7 +8,6 @@ use App\Repository\CartItemRepository;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -73,7 +72,7 @@ class CartApiController extends AbstractController
     /**
      * @return mixed
      */
-    public function getUserId()
+    private function getUserId()
     {
         return $this->get('security.token_storage')->getToken()->getUser()->getId();
     }

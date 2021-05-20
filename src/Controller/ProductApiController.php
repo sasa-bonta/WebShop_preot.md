@@ -4,9 +4,10 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Exceptions\NonexistentOrderByColumn;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
-use App\SearchCriteria;
+use App\SearchCriteria\SearchCriteria;
 use DateTime;
 use DateTimeZone;
 use Exception;
@@ -25,7 +26,6 @@ class ProductApiController extends AbstractController
 {
     /**
      * @Route("/", name="product_api_index", methods={"GET"})
-     * @throws Exception
      */
     public function index(ProductRepository $productRepository, Request $request): JsonResponse
     {
@@ -38,8 +38,12 @@ class ProductApiController extends AbstractController
         $order = $arr[0];
         $ascDesc = $arr[1];
 
+        if ($order !== 'created_at' && $order !== 'price') {
+            throw new BadRequestHttpException("Nonexistent column name");
+        }
+
         try {
-            $searchCriteria = new SearchCriteria($name, $category, $page, $limit, $order, $ascDesc);
+            $searchCriteria = new SearchCriteria($name, $page, $limit, $order, $ascDesc, $category);
         } catch (Exception $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
@@ -87,7 +91,7 @@ class ProductApiController extends AbstractController
     }
 
     /**
-     * @Route("/{code}", name="product_api_show", defaults={"_format":"json"},methods={"GET"})
+     * @Route("/{code}", name="product_api_show", methods={"GET"})
      */
     public function show(Product $product): Response
     {
@@ -102,7 +106,7 @@ class ProductApiController extends AbstractController
         $response = new JsonResponse();
         $parameters = json_decode($request->getContent(), true);
         $initCode = $product->getCode();
-        $form = $this->createForm(ProductType::class, $product, ['csrf_protection' => false]);
+        $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
         $keys = ['code', 'name', 'category', 'price', 'availableAmount', 'description'];
         foreach ($keys as $key) {

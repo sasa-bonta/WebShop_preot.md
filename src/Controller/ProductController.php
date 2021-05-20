@@ -3,8 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Exceptions\NonexistentOrderByColumn;
 use App\Repository\ProductRepository;
-use App\SearchCriteria;
+use App\SearchCriteria\SearchCriteria;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,12 +21,9 @@ class ProductController extends AbstractController
 {
     /**
      * @Route("/", name="product_index", methods={"GET"})
-     * @throws Exception
      */
     public function index(ProductRepository $productRepository, Request $request): Response
     {
-        // http://localhost:8000/products/?name=product&category=tools&page=1&limit=2&order=price
-
         $name = $request->query->get('name');
         $category = $request->query->get('category');
         $page = $request->query->get('page', 1);
@@ -38,8 +36,12 @@ class ProductController extends AbstractController
         $order = $arr[0];
         $ascDesc = $arr[1];
 
+        if ($order !== 'created_at' && $order !== 'price') {
+            throw new BadRequestHttpException("Nonexistent column name");
+        }
+
         try {
-            $searchCriteria = new SearchCriteria($name, $category, $page, $limit, $order, $ascDesc);
+            $searchCriteria = new SearchCriteria($name, $page, $limit, $order, $ascDesc, $category);
         } catch (Exception $e) {
             throw new BadRequestHttpException($e->getMessage());
         }

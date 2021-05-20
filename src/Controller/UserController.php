@@ -2,12 +2,11 @@
 
 namespace App\Controller;
 
-use App\CheckUserService;
 use App\Entity\User;
 use App\Form\UserType;
+use App\SearchCriteria\SearchCriteria;
 use Exception;
 use App\Repository\UserRepository;
-use App\UserSearchCriteria;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,8 +36,12 @@ class UserController extends AbstractController
         $order = $arr[0];
         $ascDesc = $arr[1];
 
+        if ($order !== 'username' && $order !== 'email') {
+            throw new BadRequestHttpException("Nonexistent column name");
+        }
+
         try {
-            $searchUser = new UserSearchCriteria($param, $page, $limit, $order, $ascDesc);
+            $searchUser = new SearchCriteria($param, $page, $limit, $order, $ascDesc);
         } catch (Exception $e) {
             throw new BadRequestHttpException($e->getMessage());
         }

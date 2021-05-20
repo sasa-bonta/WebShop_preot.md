@@ -5,12 +5,13 @@ namespace App\Controller;
 
 
 use App\Entity\Product;
+use App\Exceptions\NonexistentOrderByColumn;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use DateTime;
 use DateTimeZone;
 use Exception;
-use App\SearchCriteria;
+use App\SearchCriteria\SearchCriteria;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -48,8 +49,12 @@ class AdminController extends AbstractController
         $order = $arr[0];
         $ascDesc = $arr[1];
 
+        if ($order !== 'created_at' && $order !== 'price') {
+            throw new BadRequestHttpException("Nonexistent column name");
+        }
+
         try {
-            $searchCriteria = new SearchCriteria($name, $category, $page, $limit, $order, $ascDesc);
+            $searchCriteria = new SearchCriteria($name, $page, $limit, $order, $ascDesc, $category);
         } catch (Exception $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
