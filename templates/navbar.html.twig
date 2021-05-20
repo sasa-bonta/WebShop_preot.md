@@ -1,21 +1,11 @@
-<style>
-    .navbar-nav {
-        float: none;
-        margin: 0 auto;
-        display: block;
-        text-align: center;
-    }
-    .navbar-nav > li {
-        display: inline-block;
-        float: none;
-    }
-</style>
-<script src="{{ asset('assets/main/app.js') }}"></script>
+<style src="{{ asset('assets/main/css/style.css') }}"></style>
 
+<script src="{{ asset('assets/main/app.js') }}"></script>
 <script src="{{ asset('assets/main/cart/add-item.js') }}"></script>
 <script src="{{ asset('assets/main/cart/delete-item.js') }}"></script>
 <script src="{{ asset('assets/main/cart/cart.js') }}"></script>
 <script src="{{ asset('assets/main/cart/read-items.js') }}"></script>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <div class="navbar-brand" style="margin-left: 50px">Preot.md</div>
@@ -94,8 +84,6 @@
                     </div>
                 </div>
 
-
-
                 <a href="{{ path('app_logout') }}">
                     <button type="button" class="btn btn-dark me-2">Log out
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -121,7 +109,6 @@
                 </a>
 
             {% endif %}
-
 
         </div>
     </div>
