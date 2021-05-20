@@ -1,12 +1,10 @@
-<style src="{{ asset('assets/main/css/style.css') }}"></style>
-
 <script src="{{ asset('assets/main/app.js') }}"></script>
 <script src="{{ asset('assets/main/cart/add-item.js') }}"></script>
 <script src="{{ asset('assets/main/cart/delete-item.js') }}"></script>
 <script src="{{ asset('assets/main/cart/cart.js') }}"></script>
 <script src="{{ asset('assets/main/cart/read-items.js') }}"></script>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" onload="setSearchLabels();">
     <div class="container-fluid">
         <div class="navbar-brand" style="margin-left: 50px">Preot.md</div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -60,6 +58,7 @@
             </ul>
 
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+
                 {% if is_granted('ROLE_ADMIN') %}
                     <a style="color: white" href="{{ path('product_list') }}">ADMIN</a>
                 {% endif %}
@@ -72,9 +71,9 @@
                     <div id="cart" class="shopping-cart-oppened">
                         <h1>Shopping cart</h1>
                         <div class="content">
-                            {#                            Cart to be placed here#}
+                            {# Cart to be placed here #}
                             <div id="app"></div>
-{#                            <p class="empty-cart">Your shopping cart is empty now!</p>#}
+                            {# <p class="empty-cart">Your shopping cart is empty now!</p> #}
                         </div>
                         <a class="go-to-cart-btn" href="{{ path('cart_index') }}">
                             <button class="btn btn-outline-dark">
@@ -118,66 +117,5 @@
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
         crossorigin="anonymous">
 </script>
-<script>
-    const limit = document.getElementById("limit");
-    const order = document.getElementById("sortBy");
-    const name = document.getElementById("myInput");
-
-    const urlParams = new URLSearchParams(window.location.search);
-
-    if (urlParams.has("limit")) {
-        limit.value = urlParams.get("limit");
-    } else {
-        limit.value = 16;
-    }
-
-    if (urlParams.has("order")) {
-        order.value = urlParams.get("order");
-    } else {
-        order.value = "created_at:DESC";
-    }
-
-    if (urlParams.has("name")) {
-        name.value = urlParams.get("name");
-    }
-
-    if (urlParams.has("name")) {
-        name.value = urlParams.get("name");
-    }
-
-    function changeLimit(value) {
-        var urlSearchParams = new URLSearchParams(window.location.search);
-        urlSearchParams.set("limit", value);
-        urlSearchParams.set("page", 1);
-        window.location.search = urlSearchParams;
-    }
-    function changeSort(value) {
-        var urlSearchParams = new URLSearchParams(window.location.search);
-        urlSearchParams.set("order", value);
-        window.location.search = urlSearchParams;
-    }
-    function setName() {
-        var inputVal = document.getElementById("myInput").value;
-        var urlSearchParams;
-        if (window.location.origin + window.location.pathname !== "http://localhost:8000/products/") {
-            urlSearchParams = new URL("http://localhost:8000/products/");
-            urlSearchParams.searchParams.set("name", inputVal);
-            urlSearchParams.searchParams.set("page", 1);
-            window.location.replace(urlSearchParams);
-        } else {
-            urlSearchParams = new URLSearchParams(window.location.search);
-            urlSearchParams.set("name", inputVal);
-            urlSearchParams.set("page", 1);
-            window.location.search = urlSearchParams;
-        }
-    }
-    let $ = jQuery;
-    $(document).on('click', '#toggle-cart', function (e) {
-        $('#cart').toggle();
-    });
-    $(document).on('click', function (e) {
-        if (e.target.id !== 'toggle-cart' && $(e.target).closest('#cart').length === 0) {
-            $('#cart').hide();
-        }
-    });
-</script>
+<script src="{{ asset('assets/main/navbar/user/user.js') }}"></script>
+<script src="{{ asset('assets/main/navbar/common.js') }}"></script>

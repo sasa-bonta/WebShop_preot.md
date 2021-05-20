@@ -1,22 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <style>
-        .pagination {
-            justify-content: center;
-        }
 
-        .page-link {
-            color: black;
-            background: none;
-            border: 1px black solid;
-        }
-
-        .page-link:hover {
-            color: white;
-            background: black;
-        }
-    </style>
     <header id="header">
         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -166,22 +151,5 @@
         {% include 'footer.html.twig' %}
     </div>
 
-    <script>
-        function setCategory(value) {
-            var urlSearchParams = new URLSearchParams(window.location.search);
-            urlSearchParams.set('category', value);
-            urlSearchParams.set('page', 1);
-            window.location.search = urlSearchParams;
-        }
-
-        function setPage(value) {
-            var urlSearchParams = new URLSearchParams(window.location.search);
-            urlSearchParams.set('page', value);
-            window.location.search = urlSearchParams;
-
-            var element = document.querySelectorAll("button[value=" + value + "]");
-            element.style.transform = "background: black;";
-        }
-    </script>
 {% endblock %}
 

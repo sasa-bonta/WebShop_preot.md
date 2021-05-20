@@ -28,13 +28,8 @@
                 <img id="expandedImg" style="width:100%">
             </div>
 
-            <script>
-                function myFunction(imgs) {
-                    var expandImg = document.getElementById("expandedImg");
-                    expandImg.src = imgs.src;
-                    expandImg.parentElement.style.display = "block";
-                }
-            </script>
+            <script src="{{ asset('assets/main/js/script.js') }}"></script>
+
             <div class="row lowerImages">
                 {% for path in product.imgPath %}
                     {% set fullImagePath = 'assets/main/images/gallery/' %}
@@ -43,13 +38,13 @@
                     {% if loop.index == 1 %}
                         <div class="column">
                             <img src="{{ asset(fullImagePath) }}" alt="Image 1" style="width:100%"
-                                 onclick="myFunction(this);" onload="myFunction(this);">
+                                 onclick="expandImage(this);" onload="expandImage(this);">
                         </div>
                     {% else %}
                         <div class="column">
                             <img src="{{ asset(fullImagePath) }}" alt="Image 2"
                                  style="width:100%"
-                                 onclick="myFunction(this);">
+                                 onclick="expandImage(this);">
                         </div>
                     {% endif %}
 
