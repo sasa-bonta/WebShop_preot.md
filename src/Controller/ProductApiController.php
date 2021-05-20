@@ -24,7 +24,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProductApiController extends AbstractController
 {
     /**
-     * @Route("/", name="product_api_index", defaults={"_format":"json"}, methods={"GET"})
+     * @Route("/", name="product_api_index", methods={"GET"})
      * @throws Exception
      */
     public function index(ProductRepository $productRepository, Request $request): JsonResponse
@@ -53,7 +53,7 @@ class ProductApiController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="product_api_new", defaults={"_format":"json"}, methods={"POST"})
+     * @Route("/new", name="product_api_new", methods={"POST"})
      */
     public function new(Request $request, ProductRepository $repo): JsonResponse
     {
@@ -95,7 +95,7 @@ class ProductApiController extends AbstractController
     }
 
     /**
-     * @Route("/{code}", name="product_api_edit", defaults={"_format":"json"}, methods={"PUT"})
+     * @Route("/{code}", name="product_api_edit", methods={"PUT"})
      */
     public function edit(Request $request, Product $product, ProductRepository $repo): JsonResponse
     {
@@ -133,7 +133,7 @@ class ProductApiController extends AbstractController
     }
 
     /**
-     * @Route("/{code}", name="product_api_delete", defaults={"_format":"json"}, methods={"DELETE"})
+     * @Route("/{code}", name="product_api_delete", methods={"DELETE"})
      */
     public function delete(Product $product, ProductRepository $productRepository): JsonResponse
     {
