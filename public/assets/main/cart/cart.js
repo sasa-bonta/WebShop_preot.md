@@ -5,7 +5,7 @@ function readItemsTemplate(data) {
     var total = 0;
 
     if (data.length > 0) {
-        read_items_html = `
+        read_items_html += `
         <table class='cart-table table'>
             <tr>
                 <th class='w-5-pct' colspan="2" style="text-align: center">Product</th>
@@ -41,7 +41,6 @@ function readItemsTemplate(data) {
 
     if (window.location.href === 'http://localhost:8000/cart') {
         $("#cart-container").css("overflow-y", "hidden").css("height", "auto");
-        // $("#cart-container").css("height", "auto");
     }
 
     if (total === 0) {
