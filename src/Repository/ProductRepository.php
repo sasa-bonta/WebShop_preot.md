@@ -5,6 +5,10 @@ namespace App\Repository;
 use App\Entity\Product;
 use App\SearchCriteria\SearchCriteria;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -23,7 +27,7 @@ class ProductRepository extends ServiceEntityRepository
     /**
      * @return Product[] Returns an array of Product objects
      */
-    public function search(SearchCriteria $searchCriteria)
+    public function search(SearchCriteria $searchCriteria): array
     {
         $offset = ($searchCriteria->getPage() - 1) * $searchCriteria->getLimit();
 
@@ -47,8 +51,8 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     /**
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     * @throws \Doctrine\ORM\NoResultException
+     * @throws NonUniqueResultException
+     * @throws NoResultException
      */
     public function countTotal(SearchCriteria $searchCriteria)
     {
@@ -70,8 +74,8 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     /**
-     * @throws \Doctrine\ORM\OptimisticLockException
-     * @throws \Doctrine\ORM\ORMException
+     * @throws OptimisticLockException
+     * @throws ORMException
      */
     public function delete(Product $product)
     {
@@ -80,21 +84,18 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Product
      */
     public function findAllByCodes(string $code)
     {
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            'SELECT p.code, p.name, p.imgPath, p.price, p.availableAmount
-            FROM App\Entity\Product p
-            WHERE p.code = :code'
-        )->setParameter('code', $code);
-
-        return $query->getResult();
+        return $this
+            ->createQueryBuilder('p')
+            ->select('p.code, p.name, p.imgPath, p.price, p.availableAmount')
+            ->where('p.code = :code')
+            ->setParameter('code', $code)
+            ->getQuery()
+            ->getResult();
     }
-  
+
     public function getCategories(): array
     {
         $categories = $this

@@ -4,7 +4,6 @@
 namespace App\Controller;
 
 use App\Entity\Product;
-use App\Exceptions\NonexistentOrderByColumn;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use App\SearchCriteria\SearchCriteria;
@@ -118,7 +117,7 @@ class ProductApiController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($repo->count(['code' => $product->getCode()]) > 0 && $product->getCode() !== $initCode) {
-              throw new BadRequestHttpException("this code already exists");
+                throw new BadRequestHttpException("this code already exists");
             }
 
             $entityManager = $this->getDoctrine()->getManager();

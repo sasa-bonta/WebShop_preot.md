@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Exceptions\NonexistentOrderByColumn;
 use App\Form\ProductType;
+use App\Repository\CartItemRepository;
 use App\Repository\ProductRepository;
 use DateTime;
 use DateTimeZone;
@@ -176,10 +177,11 @@ class AdminController extends AbstractController
      * @Route("/products/{code}", name="product_delete", methods={"POST"})
      */
     public
-    function delete(Request $request, Product $product): Response
+    function delete(Request $request, Product $product, CartItemRepository $cartItemRepository): Response
     {
         if ($this->isCsrfTokenValid('delete' . $product->getCode(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+            $cartItemRepository->deleteProduct($product);
             $entityManager->remove($product);
             $entityManager->flush();
         }
