@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Image;
-use App\Exceptions\NonexistentOrderByColumn;
+use DateTime;
+use DateTimeZone;
 use App\Form\ImageEditType;
 use App\Form\ImageType;
 use App\Repository\ImageRepository;
+use App\Repository\ProductRepository;
 use App\SearchCriteria\SearchCriteria;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -191,17 +193,29 @@ class ImageController extends AbstractController
         ]);
     }
 
+    public function deleteImageFromProducts(Image $image, ProductRepository $productRepository) {
+        $products = $productRepository->findByImage($image);
+        foreach ($products as $product) {
+            $paths = $product->readImgPathsArray();
+            array_splice($paths, array_search($image->getPath(), $paths), 1);
+            (count($paths) === 0) ? $product->writeImgPathsFromArray(["no-image.png"]) : $product->writeImgPathsFromArray($paths);
+            $date = new DateTime(null, new DateTimeZone('Europe/Athens'));
+            $product->setUpdatedAt($date);
+            $productRepository->updateImgPath($product);
+        }
+    }
+
     /**
      * @Route("/{id}", name="image_delete", methods={"POST"})
      */
-    public function delete(Request $request, Image $image): Response
+    public function delete(Request $request, Image $image, ProductRepository $productRepository): Response
     {
         if ($this->isCsrfTokenValid('delete' . $image->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+            $this->deleteImageFromProducts($image, $productRepository);
             $entityManager->remove($image);
             $entityManager->flush();
         }
-
         return $this->redirectToRoute('image_index');
     }
 }
