@@ -132,19 +132,7 @@
                         </tbody>
                     </table>
 
-                    <nav aria-label="...">
-                        <ul class="pagination">
-                            {% if length > 0 %}
-                                {% for i in 1..(length / limit)|round(0,'ceil') %}
-                                    <li class="page-item">
-                                        <button class="page-link" type="submit" value="{{ i }}"
-                                                onclick="setPage(this.value)">{{ i }}
-                                        </button>
-                                    </li>
-                                {% endfor %}
-                            {% endif %}
-                        </ul>
-                    </nav>
+                    {% include 'pagination.html.twig' %}
 
                 </div>
                 <div class="col-3">
@@ -165,23 +153,5 @@
 
         {% include 'footer.html.twig' %}
     </div>
-
-    <script>
-        function setCategory(value) {
-            var urlSearchParams = new URLSearchParams(window.location.search);
-            urlSearchParams.set('category', value);
-            urlSearchParams.set('page', 1);
-            window.location.search = urlSearchParams;
-        }
-
-        function setPage(value) {
-            var urlSearchParams = new URLSearchParams(window.location.search);
-            urlSearchParams.set('page', value);
-            window.location.search = urlSearchParams;
-
-            var element = document.querySelectorAll("button[value=" + value + "]");
-            element.style.transform = "background: black;";
-        }
-    </script>
+    <script src="{{ asset('assets/main/js/script.js') }}" type="text/javascript"></script>
 {% endblock %}
-

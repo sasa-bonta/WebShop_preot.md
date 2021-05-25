@@ -1,0 +1,13 @@
+<nav aria-label="...">
+    <ul id="pagination" class="pagination">
+        {% if length > 0 %}
+            {% for i in 1..(length / limit)|round(0,'ceil') %}
+                <li class="paginationButtons page-item">
+                    <button id="pagBtn{{ i }}" class="page-link" type="submit" value="{{ i }}"
+                            onclick="setPage(this.value)">{{ i }}
+                    </button>
+                </li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+</nav>
