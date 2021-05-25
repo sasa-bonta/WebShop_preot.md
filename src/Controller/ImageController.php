@@ -12,6 +12,7 @@ use App\Repository\ProductRepository;
 use App\SearchCriteria\SearchCriteria;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -213,6 +214,9 @@ class ImageController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $image->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $this->deleteImageFromProducts($image, $productRepository);
+            $filesystem = new Filesystem();
+            $gallery = $this->getParameter('gallery_path');
+            $filesystem->remove($gallery .$image->getPath());
             $entityManager->remove($image);
             $entityManager->flush();
         }
