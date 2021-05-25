@@ -1,10 +1,7 @@
-
 var list = document.getElementsByClassName('paginationButtons'),
     ul = document.getElementById('pagination'),
     li = document.createElement("li"),
     btn = document.createElement("div");
-
-// console.log(ul);
 
 var element1 = document.getElementById("pagBtn1");
 
