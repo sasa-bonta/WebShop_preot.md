@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixtures extends Fixture
@@ -23,7 +24,8 @@ class UserFixtures extends Fixture
         $user->setEmail('abonta@pentalog.com');
         $user->setPassword($this->encoder->encodePassword($user,'sasa'));
         $user->setRoles(["ROLE_ADMIN"]);
-        $user->setApiToken('api-token');
+        $uuid = Uuid::uuid6();
+        $user->setApiToken($uuid->toString());
         $manager->persist($user);
         $manager->flush();
     }
