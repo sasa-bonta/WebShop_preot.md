@@ -2,7 +2,8 @@
 
 - composer install
 - composer require symfonycasts/verify-email-bundle
-- (optional) composer require --dev symfony/profiler-pack
+- (optional) composer require --dev symfony/profiler-pack 
+- composer require ramsey/uuid
 - sudo docker-compose up -d
 
 

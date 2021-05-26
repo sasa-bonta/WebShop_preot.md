@@ -51,6 +51,27 @@ class User implements UserInterface
     private $activated;
 
     /**
+     * @ORM\Column(type="string", unique=true, nullable=true)
+     */
+    private $apiToken;
+
+    /**
+     * @return mixed
+     */
+    public function getApiToken()
+    {
+        return $this->apiToken;
+    }
+
+    /**
+     * @param mixed $apiToken
+     */
+    public function setApiToken($apiToken): void
+    {
+        $this->apiToken = $apiToken;
+    }
+
+    /**
      * @return mixed
      */
     public function getActivated()
@@ -116,7 +137,7 @@ class User implements UserInterface
     /**
      * @inheritDoc
      */
-    public function getRoles() : array
+    public function getRoles(): array
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER

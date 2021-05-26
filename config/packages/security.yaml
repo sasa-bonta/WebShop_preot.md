@@ -5,21 +5,34 @@ security:
             algorithm: auto
 
     providers:
-        our_db_provider:
+        main_db_provider:
             entity:
                 class: App\Entity\User
                 property: username
                 # if you're using multiple entity managers
                 # manager_name: customer
 
+        api_db_provider:
+            entity:
+                class: App\Entity\User
+                property: apiToken
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+        api:
+            pattern: ^/api/
+            guard:
+                provider: api_db_provider
+                authenticators:
+                    - App\Security\TokenAuthenticator
+
         main:
-            http-basic: ~
             anonymous: lazy
             guard:
+                provider: main_db_provider
                 authenticators:
                     - App\Security\LoginFormAuthenticator
             logout:
@@ -37,4 +50,5 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/api/*, roles: ROLE_ADMIN }
         - { path: ^/*, roles: IS_AUTHENTICATED_ANONYMOUSLY }

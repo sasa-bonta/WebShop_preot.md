@@ -56,7 +56,7 @@ class ProductApiController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="product_api_new", methods={"POST"})
+     * @Route("/", name="product_api_new", methods={"POST"})
      */
     public function new(Request $request, ProductRepository $repo): JsonResponse
     {

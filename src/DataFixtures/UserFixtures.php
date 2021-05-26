@@ -19,10 +19,12 @@ class UserFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $user = new User();
-        $user->setEmail('admin@mediaforce.com');
-        $user->setPassword($this->encoder->encodePassword($user,'some'));
+        $user->setUsername('sasa');
+        $user->setEmail('abonta@pentalog.com');
+        $user->setPassword($this->encoder->encodePassword($user,'sasa'));
+        $user->setRoles(["ROLE_ADMIN"]);
+        $user->setApiToken('api-token');
         $manager->persist($user);
-
         $manager->flush();
     }
 }
