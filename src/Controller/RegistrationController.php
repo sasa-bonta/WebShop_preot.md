@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegisterType;
 use App\Repository\UserRepository;
+use App\Service\CheckUserService;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,25 +23,13 @@ class RegistrationController extends AbstractController
 
     private VerifyEmailHelperInterface $verifyEmailHelper;
     private MailerInterface $mailer;
+    private CheckUserService $checkUser;
 
-    public function __construct(VerifyEmailHelperInterface $helper, MailerInterface $mailer)
+    public function __construct(VerifyEmailHelperInterface $helper, MailerInterface $mailer, CheckUserService $checkUser)
     {
         $this->verifyEmailHelper = $helper;
         $this->mailer = $mailer;
-    }
-
-    function checkData(User $user): array
-    {
-        # Errors existent Nickname and/or Email
-        $errors = [];
-        $repo = $this->getDoctrine()->getRepository(User::class);
-        if ($repo->count(['username' => $user->getUsername()]) > 0) {
-            $errors['nick'] = "This nickname already exists";
-        }
-        if ($repo->count(['email' => $user->getEmail()]) > 0) {
-            $errors['email'] = "This e-mail address already exists";
-        }
-        return $errors;
+        $this->checkUser = $checkUser;
     }
 
     /**
@@ -52,7 +41,7 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegisterType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && !$form->isValid()) {
-            $errors = $this->checkData($user);
+            $errors = $this->checkUser->checkData($user);
             if (!empty($errors)) {
                 return $this->render('registration/register.html.twig', [
                     'errors' => $errors,
@@ -62,7 +51,7 @@ class RegistrationController extends AbstractController
             }
         }
         if ($form->isSubmitted() && $form->isValid()) {
-            $errors = $this->checkData($user);
+            $errors = $this->checkUser->checkData($user);
             if (!empty($errors)) {
                 return $this->render('registration/register.html.twig', [
                     'errors' => $errors,

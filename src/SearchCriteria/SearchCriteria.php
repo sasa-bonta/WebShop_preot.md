@@ -6,7 +6,6 @@ namespace App\SearchCriteria;
 
 use App\Exceptions\InvalidLimitException;
 use App\Exceptions\InvalidPageException;
-use App\Exceptions\NonexistentOrderByColumn;
 use App\Exceptions\NonexistentOrderingType;
 use Exception;
 

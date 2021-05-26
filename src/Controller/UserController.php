@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\SearchCriteria\SearchCriteria;
+use App\Service\CheckUserService;
 use Exception;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,6 +21,15 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class UserController extends AbstractController
 {
+    private CheckUserService $checkUser;
+    /**
+     * UserController constructor.
+     */
+    public function __construct(CheckUserService $checkUser)
+    {
+        $this->checkUser = $checkUser;
+    }
+
     /**
      * @Route("/", name="user_index", methods={"GET"})
      */
@@ -58,20 +68,6 @@ class UserController extends AbstractController
         ]);
     }
 
-    function checkData(User $user): array
-    {
-        # Errors existent Nickname and/or Email
-        $errors = [];
-        $repo = $this->getDoctrine()->getRepository(User::class);
-        if ($repo->count(['username' => $user->getUsername()]) > 0) {
-            $errors['nick'] = "This nickname already exists";
-        }
-        if ($repo->count(['email' => $user->getEmail()]) > 0) {
-            $errors['email'] = "This e-mail address already exists";
-        }
-        return $errors;
-    }
-
     /**
      * @Route("/new", name="user_new", methods={"GET","POST"})
      */
@@ -81,7 +77,7 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && !$form->isValid()) {
-            $errors = $this->checkData($user);
+            $errors = $this->checkUser->checkData($user);
             if (!empty($errors)) {
                 return $this->render('admin/user/new.html.twig', [
                     'errors' => $errors,
@@ -95,7 +91,7 @@ class UserController extends AbstractController
             if (empty($plainPassword)) {
                 $errors['pass'] = "The password must not be empty";
             }
-            $errors = $this->checkData($user);
+            $errors = $this->checkUser->checkData($user);
             if (!empty($errors)) {
                 return $this->render('admin/user/new.html.twig', [
                     'errors' => $errors,
@@ -128,33 +124,18 @@ class UserController extends AbstractController
         ]);
     }
 
-    function checkDataEditUser(User $user, $origNick, $origEmail, $form): array
-    {
-        # Errors existent Nickname and/or Email
-        $errors = [];
-        $repo = $this->getDoctrine()->getRepository(User::class);
-        if ($repo->count(['username' => $user->getUsername()]) > 0 && $form->get('username')->getData() !== $origNick) {
-            $errors['nick'] = "This nickname already exists";
-        }
-        if ($repo->count(['email' => $user->getEmail()]) > 0 && $form->get('email')->getData() !== $origEmail) {
-            $errors['email'] = "This e-mail address already exists";
-        }
-        return $errors;
-    }
-
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, User $user, UserPasswordEncoderInterface $encoder): Response
     {
         $form = $this->createForm(UserType::class, $user);
-        $origNick = $user->getUsername();
-        $origEmail = $user->getEmail();
+        $origUser = $user;
         $originalPassword = $user->getPassword();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && !$form->isValid()) {
-            $errors = $this->checkDataEditUser($user, $origNick, $origEmail, $form);
+            $errors = $this->checkUser->checkData($user, $origUser);
             if (!empty($errors)) {
                 return $this->render('admin/user/edit.html.twig', [
                     'errors' => $errors,
@@ -170,7 +151,7 @@ class UserController extends AbstractController
             } else {
                 $user->setPassword($originalPassword);
             }
-            $errors = $this->checkDataEditUser($user, $origNick, $origEmail, $form);
+            $errors = $this->checkUser->checkData($user, $origUser);
             if (!empty($errors)) {
                 return $this->render('admin/user/edit.html.twig', [
                     'errors' => $errors,
