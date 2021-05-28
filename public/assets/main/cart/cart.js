@@ -32,7 +32,11 @@ function readItemsTemplate(data) {
             <td style="text-align: center"><img src="/assets/main/images/gallery/` + icon[0] + `" alt="img" width="100" height="100"></td>
             <td style="vertical-align: middle;text-align: center">` + cartItem['product']['name'] + `</td>
             <td style="vertical-align: middle;text-align: center">` + formatter.format(cartItem['product']['price']) + ` $</td>
-            <td style="vertical-align: middle;text-align: center">` + cartItem['amount'] + `</td>
+            <td style="vertical-align: middle;text-align: center">
+                <button class="btn btn-outline-dark">sdf</button>
+                ` + cartItem['amount'] + `
+
+            </td>
             <td style="vertical-align: middle;text-align: center">` + formatter.format(cartItem['amount'] * cartItem['product']['price']) + ` $</td>
             <td style="vertical-align: middle;text-align: center"><button class="delete-item-btn btn btn-danger" data-code="` + cartItem['product']['code'] + `">X</button></td>
         </tr>
@@ -54,9 +58,6 @@ function readItemsTemplate(data) {
             </tr>
         </table>`;
     }
-
-
-
 
     $("#page-content").html(read_items_html);
 }
