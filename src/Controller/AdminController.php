@@ -8,10 +8,10 @@ use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\CartItemRepository;
 use App\Repository\ProductRepository;
+use App\SearchCriteria\ProductAdminSearchCriteria;
 use DateTime;
 use DateTimeZone;
 use Exception;
-use App\SearchCriteria\SearchCriteria;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -36,31 +36,14 @@ class AdminController extends AbstractController
      */
     public function list(ProductRepository $productRepository, Request $request): Response
     {
-
-        $name = $request->query->get('name');
-        $category = $request->query->get('category');
-        $page = $request->query->get('page', 1);
-        $limit = $request->query->get('limit', 10);
-        if ($limit > 120) {
-            throw new BadRequestHttpException("400");
-        }
-        $orderBy = $request->query->get('order', 'created_at:DESC');
-        $arr = explode(":", $orderBy, 2);
-        $order = $arr[0];
-        $ascDesc = $arr[1];
-
-        if ($order !== 'created_at' && $order !== 'price') {
-            throw new BadRequestHttpException("Nonexistent column name");
-        }
-
         try {
-            $searchCriteria = new SearchCriteria($name, $page, $limit, $order, $ascDesc, $category);
+            $searchCriteria = new ProductAdminSearchCriteria($request->query->all());
         } catch (Exception $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
 
         $length = $productRepository->countTotal($searchCriteria);
-        if ($page > ceil($length / $limit) && $page > 1) {
+        if ($searchCriteria->getPage() > ceil($length / $searchCriteria->getLimit()) && $searchCriteria->getPage() > 1) {
             throw new BadRequestHttpException("Page limit exceed");
         }
 

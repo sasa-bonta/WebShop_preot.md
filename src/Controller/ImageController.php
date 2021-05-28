@@ -3,13 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Image;
+use App\SearchCriteria\ImageSearchCriteria;
 use DateTime;
 use DateTimeZone;
 use App\Form\ImageEditType;
 use App\Form\ImageType;
 use App\Repository\ImageRepository;
 use App\Repository\ProductRepository;
-use App\SearchCriteria\SearchCriteria;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
@@ -31,29 +31,14 @@ class ImageController extends AbstractController
      */
     public function index(ImageRepository $imageRepository, Request $request): Response
     {
-        $tag = $request->query->get('search');
-        $page = $request->query->get('page', 1);
-        $limit = $request->query->get('limit', 10);
-        if ($limit > 120) {
-            throw new BadRequestHttpException("400");
-        }
-        $orderBy = $request->query->get('order', 'id:DESC');
-        $arr = explode(":", $orderBy, 2);
-        $order = $arr[0];
-        $ascDesc = $arr[1];
-
-        if ($order !== 'id') {
-            throw new BadRequestHttpException("Nonexistent column name");
-        }
-
         try {
-            $searchImage = new SearchCriteria($tag, $page, $limit, $order, $ascDesc);
+            $searchImage = new ImageSearchCriteria($request->query->all());
         } catch (Exception $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
 
         $length = $imageRepository->countTotal($searchImage);
-        if ($page > ceil($length / $limit) && $length / $limit !== 0) {
+        if ($searchImage->getPage() > ceil($length / $searchImage->getLimit()) && $length / $searchImage->getLimit() !== 0) {
             throw new BadRequestHttpException("Page limit exceed");
         }
 
@@ -123,7 +108,7 @@ class ImageController extends AbstractController
             /** @var UploadedFile $imageFile */
 
             // Check tags
-           $errors = $this->checkTags($image);
+            $errors = $this->checkTags($image);
 
             if (!empty($errors)) {
                 return $this->render('admin/image/new.html.twig', [
@@ -194,7 +179,8 @@ class ImageController extends AbstractController
         ]);
     }
 
-    public function deleteImageFromProducts(Image $image, ProductRepository $productRepository) {
+    public function deleteImageFromProducts(Image $image, ProductRepository $productRepository)
+    {
         $products = $productRepository->findByImage($image);
         foreach ($products as $product) {
             $paths = $product->readImgPathsArray();
@@ -216,7 +202,7 @@ class ImageController extends AbstractController
             $this->deleteImageFromProducts($image, $productRepository);
             $filesystem = new Filesystem();
             $gallery = $this->getParameter('gallery_path');
-            $filesystem->remove($gallery .$image->getPath());
+            $filesystem->remove($gallery . $image->getPath());
             $entityManager->remove($image);
             $entityManager->flush();
         }

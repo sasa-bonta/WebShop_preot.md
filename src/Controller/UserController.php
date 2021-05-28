@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
-use App\SearchCriteria\SearchCriteria;
+use App\SearchCriteria\UserSearchCriteria;
 use App\Service\CheckUserService;
 use Exception;
 use App\Repository\UserRepository;
@@ -22,6 +22,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserController extends AbstractController
 {
     private CheckUserService $checkUser;
+
     /**
      * UserController constructor.
      */
@@ -35,29 +36,14 @@ class UserController extends AbstractController
      */
     public function index(Request $request, UserRepository $userRepository): Response
     {
-        $param = $request->query->get('search');
-        $page = $request->query->get('page', 1);
-        $limit = $request->query->get('limit', 10);
-        if ($limit > 120) {
-            throw new BadRequestHttpException("400");
-        }
-        $orderBy = $request->query->get('order', 'email:ASC');
-        $arr = explode(":", $orderBy, 2);
-        $order = $arr[0];
-        $ascDesc = $arr[1];
-
-        if ($order !== 'username' && $order !== 'email') {
-            throw new BadRequestHttpException("Nonexistent column name");
-        }
-
         try {
-            $searchUser = new SearchCriteria($param, $page, $limit, $order, $ascDesc);
+            $searchUser = new UserSearchCriteria($request->query->all());
         } catch (Exception $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
 
         $length = $userRepository->countTotal($searchUser);
-        if ($page > ceil($length / $limit) && $length / $limit !== 0) {
+        if ($searchUser->getPage() > ceil($length / $searchUser->getLimit()) && $length / $searchUser->getLimit() !== 0) {
             throw new BadRequestHttpException("Page limit exceed");
         }
 
