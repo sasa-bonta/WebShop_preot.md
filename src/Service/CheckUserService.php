@@ -10,6 +10,7 @@ use App\Repository\UserRepository;
 class CheckUserService
 {
     private UserRepository $repo;
+    private $errors = [];
 
     /**
      * CheckUserService constructor.
@@ -21,44 +22,31 @@ class CheckUserService
 
     public function checkData(User $newUser, User $origUser = null): array
     {
-        $errors = [];
-        $nickError = $this->checkUsername($newUser, $origUser) ?? null;
-        $emailError = $this->checkEmail($newUser, $origUser) ?? null;
-        if (isset($nickError)) {
-            $errors['nick'] = $nickError;
-        }
-        if (isset($emailError)) {
-            $errors['email'] = $emailError;
-        }
-
-        return $errors;
+        $this->errors = [];
+        $this->checkUsername($newUser, $origUser);
+        $this->checkEmail($newUser, $origUser);
+        return $this->errors;
     }
 
-    // fixme banan
-    private function checkUsername(User $newUser, User $origUser = null): ?string
+    private function checkUsername(User $newUser, User $origUser = null)
     {
         # Errors existent Nickname
         if ($this->repo->count(['username' => $newUser->getUsername()]) > 0) {
-            if (isset($origUser) && $newUser->getUsername() !== $origUser->getUsername()) {
-                return null;
+            if (isset($origUser) && $newUser->getUsername() === $origUser->getUsername()) {
+                return;
             }
-            return "This nickname already exists";
-        } else {
-            return null;
+            $this->errors['nick'] = "This nickname already exists";
         }
     }
 
-    // fixme testuser4@pentalog.com
-    private function checkEmail(User $newUser, User $origUser = null): ?string
+    private function checkEmail(User $newUser, User $origUser = null)
     {
         # Errors existent Email
         if ($this->repo->count(['email' => $newUser->getEmail()]) > 0) {
-            if (isset($origUser) && $newUser->getEmail() !== $origUser->getEmail()) {
-                return null;
+            if (isset($origUser) && $newUser->getEmail() === $origUser->getEmail()) {
+                return;
             }
-            return "This e-mail address already exists";
-        } else {
-            return null;
+            $this->errors['email'] = "This e-mail address already exists";
         }
     }
 }

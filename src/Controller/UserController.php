@@ -130,10 +130,9 @@ class UserController extends AbstractController
     public function edit(Request $request, User $user, UserPasswordEncoderInterface $encoder): Response
     {
         $form = $this->createForm(UserType::class, $user);
-        $origUser = $user;
+        $origUser = clone $user;
         $originalPassword = $user->getPassword();
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && !$form->isValid()) {
             $errors = $this->checkUser->checkData($user, $origUser);
             if (!empty($errors)) {
