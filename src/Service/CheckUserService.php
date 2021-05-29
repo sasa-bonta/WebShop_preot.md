@@ -10,7 +10,6 @@ use App\Repository\UserRepository;
 class CheckUserService
 {
     private UserRepository $repo;
-    private $errors = [];
 
     /**
      * CheckUserService constructor.
@@ -22,31 +21,43 @@ class CheckUserService
 
     public function checkData(User $newUser, User $origUser = null): array
     {
-        $this->errors = [];
-        $this->checkUsername($newUser, $origUser);
-        $this->checkEmail($newUser, $origUser);
-        return $this->errors;
+        $errors = [];
+
+        $nickError = $this->checkUsername($newUser, $origUser);
+        if (isset($nickError)) {
+            $errors['nick'] = $nickError;
+        }
+
+        $emailError = $this->checkEmail($newUser, $origUser);
+        if (isset($emailError)) {
+            $errors['email'] = $emailError;
+        }
+        return $errors;
     }
 
     private function checkUsername(User $newUser, User $origUser = null)
     {
         # Errors existent Nickname
+        $nickError = null;
         if ($this->repo->count(['username' => $newUser->getUsername()]) > 0) {
             if (isset($origUser) && $newUser->getUsername() === $origUser->getUsername()) {
-                return;
+                return null;
             }
-            $this->errors['nick'] = "This nickname already exists";
+            $nickError = "This nickname already exists";
         }
+        return $nickError;
     }
 
     private function checkEmail(User $newUser, User $origUser = null)
     {
         # Errors existent Email
+        $emailError = null;
         if ($this->repo->count(['email' => $newUser->getEmail()]) > 0) {
             if (isset($origUser) && $newUser->getEmail() === $origUser->getEmail()) {
-                return;
+                return null;
             }
-            $this->errors['email'] = "This e-mail address already exists";
+            $emailError = "This e-mail address already exists";
         }
+        return $emailError;
     }
 }
