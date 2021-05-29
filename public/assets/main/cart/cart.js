@@ -1,6 +1,5 @@
 function readItemsTemplate(data) {
 
-
     var read_items_html = ``;
     var total = 0;
 
@@ -54,9 +53,6 @@ function readItemsTemplate(data) {
             </tr>
         </table>`;
     }
-
-
-
 
     $("#page-content").html(read_items_html);
 }
