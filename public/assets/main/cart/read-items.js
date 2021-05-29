@@ -8,6 +8,7 @@ $(document).ready(function () {
 });
 
 function showCart() {
+    alert("read-items.js");
     $.getJSON("http://localhost:8000/api/v1/cart", function (data) {
         readItemsTemplate(data);
 

@@ -1,5 +1,5 @@
 function readItemsTemplate(data) {
-
+alert("cart.js");
 
     var read_items_html = ``;
     var total = 0;
