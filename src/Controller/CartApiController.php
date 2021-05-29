@@ -72,7 +72,7 @@ class CartApiController extends AbstractController
     /**
      * @return mixed
      */
-    private function getUserId()
+    public function getUserId()
     {
         return $this->get('security.token_storage')->getToken()->getUser()->getId();
     }
