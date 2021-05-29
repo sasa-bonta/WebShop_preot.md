@@ -38,7 +38,7 @@ class ImageController extends AbstractController
         }
 
         $length = $imageRepository->countTotal($searchImage);
-        if ($searchImage->getPage() > ceil($length / $searchImage->getLimit()) && $length / $searchImage->getLimit() !== 0) {
+        if ($searchImage->getPage() > ceil($length / $searchImage->getLimit()) && $searchImage->getPage() > 1) {
             throw new BadRequestHttpException("Page limit exceed");
         }
 

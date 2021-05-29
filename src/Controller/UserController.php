@@ -43,7 +43,7 @@ class UserController extends AbstractController
         }
 
         $length = $userRepository->countTotal($searchUser);
-        if ($searchUser->getPage() > ceil($length / $searchUser->getLimit()) && $length / $searchUser->getLimit() !== 0) {
+        if ($searchUser->getPage() > ceil($length / $searchUser->getLimit()) && $searchUser->getPage() > 1) {
             throw new BadRequestHttpException("Page limit exceed");
         }
 

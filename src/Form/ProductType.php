@@ -20,7 +20,9 @@ class ProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('code')
+            ->add('code', TextType::class, [
+                'constraints' => new NotBlank(['message' => 'Product code cannot be blank'])
+            ])
             ->add('name', TextType::class, [
                 'constraints' => new NotBlank(['message' => 'Product name cannot be blank'])
             ])

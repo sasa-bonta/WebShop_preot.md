@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
+use App\SearchCriteria\ProductAdminSearchCriteria;
 use App\SearchCriteria\SearchCriteria;
 use DateTime;
 use DateTimeZone;
@@ -28,27 +29,14 @@ class ProductApiController extends AbstractController
      */
     public function index(ProductRepository $productRepository, Request $request): JsonResponse
     {
-        $name = $request->query->get('name');
-        $category = $request->query->get('category');
-        $page = $request->query->get('page', 1);
-        $limit = $request->query->get('limit', 16);
-        $orderBy = $request->query->get('order', 'created_at:ASC');
-        $arr = explode(":", $orderBy, 2);
-        $order = $arr[0];
-        $ascDesc = $arr[1];
-
-        if ($order !== 'created_at' && $order !== 'price') {
-            throw new BadRequestHttpException("Nonexistent column name");
-        }
-
         try {
-            $searchCriteria = new SearchCriteria($name, $page, $limit, $order, $ascDesc, $category);
+            $searchCriteria = new ProductAdminSearchCriteria($request->query->all());
         } catch (Exception $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
 
         $length = $productRepository->countTotal($searchCriteria);
-        if ($page > ceil($length / $limit) && $page > 1) {
+        if ($searchCriteria->getPage() > ceil($length / $searchCriteria->getLimit()) && $searchCriteria->getPage()) {
             throw new BadRequestHttpException("page limit exceeded");
         }
 
@@ -65,12 +53,6 @@ class ProductApiController extends AbstractController
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product, ['csrf_protection' => false]);
         $form->handleRequest($request);
-        $keys = ['code', 'name', 'category', 'price', 'availableAmount', 'description'];
-        foreach ($keys as $key) {
-            if (!array_key_exists($key, $parameters) || empty($parameters[$key])) {
-                throw new BadRequestHttpException($form->getErrors(true, true));
-            }
-        }
         $form->submit($parameters);
 
         if ($form->isSubmitted() && $form->isValid()) {
