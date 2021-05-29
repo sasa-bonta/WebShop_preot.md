@@ -16,8 +16,8 @@ if (urlParams.has("order")) {
     order.value = "id:DESC";
 }
 
-if (urlParams.has("search")) {
-    name.value = urlParams.get("search");
+if (urlParams.has("name")) {
+    name.value = urlParams.get("name");
 }
 
 let $ = jQuery;
