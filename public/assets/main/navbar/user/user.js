@@ -23,8 +23,8 @@ if (urlParams.has("name")) {
 function setName() {
     var inputVal = document.getElementById("myInput").value;
     var urlSearchParams;
-    if (window.location.origin + window.location.pathname !== "http://localhost:8000/products/") {
-        urlSearchParams = new URL("http://localhost:8000/products/");
+    if ($('body').data('route-name').indexOf('product_index') !== 0) {
+        urlSearchParams = new URL(document.location.protocol + "//" + document.location.host + "/products/");
         urlSearchParams.searchParams.set("name", inputVal);
         urlSearchParams.searchParams.set("page", 1);
         window.location.replace(urlSearchParams);

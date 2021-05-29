@@ -20,17 +20,19 @@ if (urlParams.has("search")) {
     name.value = urlParams.get("search");
 }
 
-function setCriteria() {
+let $ = jQuery;
+
+function setTag() {
     var inputVal = document.getElementById("myInput").value;
     var urlSearchParams;
-    if (window.location.origin + window.location.pathname !== "http://localhost:8000/admin/gallery/") {
-        urlSearchParams = new URL("http://localhost:8000/admin/gallery/");
-        urlSearchParams.searchParams.set("search", inputVal);
+    if ($('body').data('route-name').indexOf('image_index') !== 0) {
+        urlSearchParams = new URL(document.location.protocol + "//" + document.location.host + "/admin/gallery/");
+        urlSearchParams.searchParams.set("name", inputVal);
         urlSearchParams.searchParams.set("page", 1);
         window.location.replace(urlSearchParams);
     } else {
         urlSearchParams = new URLSearchParams(window.location.search);
-        urlSearchParams.set("search", inputVal);
+        urlSearchParams.set("name", inputVal);
         urlSearchParams.set("page", 1);
         window.location.search = urlSearchParams;
     }

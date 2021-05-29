@@ -12,7 +12,6 @@ class ImageSearchCriteria extends SearchCriteria
 
     public function __construct(array $data)
     {
-        $data['name'] = $data['search'] ?? null;
         parent::__construct($data);
 
         if ($this->order !== 'id') {

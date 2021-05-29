@@ -31,7 +31,7 @@
     {% endblock %}
 </head>
 
-<body>
+<body data-route-name="{{ app.request.get('_route') }}">
 
 {% block body %}{% endblock %}
 
