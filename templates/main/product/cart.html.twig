@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %} Cart {% endblock %}
+
 {% block body %}
     <script src="{{ asset('assets/main/app.js') }}"></script>
     <script src="{{ asset('assets/main/cart/add-item.js') }}"></script>
@@ -7,9 +9,35 @@
     <script src="{{ asset('assets/main/cart/cart.js') }}"></script>
     <script src="{{ asset('assets/main/cart/read-items.js') }}"></script>
 
-    <img class="img-fluid" src="{{ asset('assets/main/images/header-image.jpg') }}" width="2000" alt="1">
+    <div>
+        <img class="img-fluid" src="{{ asset('assets/main/images/header-image.jpg') }}" width="2000" alt="1">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height: 50px">
+            <div class="container-fluid">
+                <div class="navbar-brand" style="margin-left: 50px">Preot.md</div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{ path('product_index') }}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Info</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contacts</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <br><br>
 
-    <div id="app"></div>
+    <div id="app" style="min-height: 260px"></div>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
