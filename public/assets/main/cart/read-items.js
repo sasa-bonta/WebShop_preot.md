@@ -11,6 +11,5 @@ function showCart() {
     alert("read-items");
     $.getJSON("http://localhost:8000/api/v1/cart", function (data) {
         readItemsTemplate(data);
-
     });
 }
