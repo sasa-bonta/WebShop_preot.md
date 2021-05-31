@@ -63,7 +63,8 @@ class AdminController extends AbstractController
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
-        $repo = $this->getDoctrine()->getRepository(Product::class);
+        // @ todo check this staff
+//        $repo = $this->getDoctrine()->getRepository(Product::class);
         if ($form->isSubmitted() && !$form->isValid()) {
             if ($repo->count(['code' => $product->getCode()]) > 0) {
                 $this->addFlash('code', "This code already exists");
