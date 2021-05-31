@@ -30,6 +30,8 @@ security:
                     - App\Security\TokenAuthenticator
 
         main:
+            http-basic:
+                provider: main_db_provider
             anonymous: lazy
             guard:
                 provider: main_db_provider
