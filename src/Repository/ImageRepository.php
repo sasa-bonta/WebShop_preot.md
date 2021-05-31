@@ -3,8 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Image;
-use App\ImageSearchCriteria;
-use App\UserSearchCriteria;
+use App\SearchCriteria\SearchCriteria;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -21,15 +20,15 @@ class ImageRepository extends ServiceEntityRepository
         parent::__construct($registry, Image::class);
     }
 
-    public function search(ImageSearchCriteria $searchCriteria)
+    public function search(SearchCriteria $searchCriteria)
     {
         $offset = ($searchCriteria->getPage() - 1) * $searchCriteria->getLimit();
 
         $query = $this->createQueryBuilder('i');
-        if ($searchCriteria->getTag() !== null) {
+        if ($searchCriteria->getName() !== null) {
             $query = $query
                 ->where('i.tags LIKE :param')
-                ->setParameter('param', '%"' . $searchCriteria->getTag() . '"%');
+                ->setParameter('param', '%"' . $searchCriteria->getName() . '"%');
         }
         return $query
             ->orderBy('i.' . $searchCriteria->getOrder(), $searchCriteria->getAscDesc())
@@ -43,46 +42,17 @@ class ImageRepository extends ServiceEntityRepository
      * @throws \Doctrine\ORM\NonUniqueResultException
      * @throws \Doctrine\ORM\NoResultException
      */
-    public function countTotal(ImageSearchCriteria $searchCriteria)
+    public function countTotal(SearchCriteria $searchCriteria)
     {
         $query = $this->createQueryBuilder('i')
             ->select('count(i.id)');
-        if ($searchCriteria->getTag() !== null) {
+        if ($searchCriteria->getName() !== null) {
             $query = $query
                 ->where('i.tags LIKE :param')
-                ->setParameter('param', '%"' . $searchCriteria->getTag() . '"%');
+                ->setParameter('param', '%"' . $searchCriteria->getName() . '"%');
         }
         return $query
             ->getQuery()
             ->getSingleScalarResult();
     }
-
-    // /**
-    //  * @return Image[] Returns an array of Image objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('i.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Image
-    {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

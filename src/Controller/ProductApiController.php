@@ -6,7 +6,8 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
-use App\SearchCriteria;
+use App\SearchCriteria\ProductAdminSearchCriteria;
+use App\SearchCriteria\SearchCriteria;
 use DateTime;
 use DateTimeZone;
 use Exception;
@@ -24,28 +25,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProductApiController extends AbstractController
 {
     /**
-     * @Route("/", name="product_api_index", defaults={"_format":"json"}, methods={"GET"})
-     * @throws Exception
+     * @Route("/", name="product_api_index", methods={"GET"})
      */
     public function index(ProductRepository $productRepository, Request $request): JsonResponse
     {
-        $name = $request->query->get('name');
-        $category = $request->query->get('category');
-        $page = $request->query->get('page', 1);
-        $limit = $request->query->get('limit', 16);
-        $orderBy = $request->query->get('order', 'created_at:ASC');
-        $arr = explode(":", $orderBy, 2);
-        $order = $arr[0];
-        $ascDesc = $arr[1];
-
         try {
-            $searchCriteria = new SearchCriteria($name, $category, $page, $limit, $order, $ascDesc);
+            $searchCriteria = new ProductAdminSearchCriteria($request->query->all());
         } catch (Exception $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
 
         $length = $productRepository->countTotal($searchCriteria);
-        if ($page > ceil($length / $limit) && $page > 1) {
+        if ($searchCriteria->getPage() > ceil($length / $searchCriteria->getLimit()) && $searchCriteria->getPage() > 1) {
             throw new BadRequestHttpException("page limit exceeded");
         }
 
@@ -53,7 +44,7 @@ class ProductApiController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="product_api_new", defaults={"_format":"json"}, methods={"POST"})
+     * @Route("/", name="product_api_new", methods={"POST"})
      */
     public function new(Request $request, ProductRepository $repo): JsonResponse
     {
@@ -87,7 +78,7 @@ class ProductApiController extends AbstractController
     }
 
     /**
-     * @Route("/{code}", name="product_api_show", defaults={"_format":"json"},methods={"GET"})
+     * @Route("/{code}", name="product_api_show", methods={"GET"})
      */
     public function show(Product $product): Response
     {
@@ -95,7 +86,7 @@ class ProductApiController extends AbstractController
     }
 
     /**
-     * @Route("/{code}", name="product_api_edit", defaults={"_format":"json"}, methods={"PUT"})
+     * @Route("/{code}", name="product_api_edit", methods={"PUT"})
      */
     public function edit(Request $request, Product $product, ProductRepository $repo): JsonResponse
     {
@@ -104,17 +95,12 @@ class ProductApiController extends AbstractController
         $initCode = $product->getCode();
         $form = $this->createForm(ProductType::class, $product, ['csrf_protection' => false]);
         $form->handleRequest($request);
-        $keys = ['code', 'name', 'category', 'price', 'availableAmount', 'description'];
-        foreach ($keys as $key) {
-            if (!array_key_exists($key, $parameters)) {
-                throw new BadRequestHttpException($form->getErrors(true, true));
-            }
-        }
+
         $form->submit($parameters);
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($repo->count(['code' => $product->getCode()]) > 0 && $product->getCode() !== $initCode) {
-              throw new BadRequestHttpException("this code already exists");
+                throw new BadRequestHttpException("this code already exists");
             }
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -133,7 +119,7 @@ class ProductApiController extends AbstractController
     }
 
     /**
-     * @Route("/{code}", name="product_api_delete", defaults={"_format":"json"}, methods={"DELETE"})
+     * @Route("/{code}", name="product_api_delete", methods={"DELETE"})
      */
     public function delete(Product $product, ProductRepository $productRepository): JsonResponse
     {

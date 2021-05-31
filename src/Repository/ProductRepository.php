@@ -2,11 +2,15 @@
 
 namespace App\Repository;
 
-use App\SearchCriteria;
+use App\Entity\Image;
 use App\Entity\Product;
+use App\SearchCriteria\SearchCriteria;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
-use phpDocumentor\Reflection\Types\This;
 
 /**
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
@@ -24,7 +28,7 @@ class ProductRepository extends ServiceEntityRepository
     /**
      * @return Product[] Returns an array of Product objects
      */
-    public function search(SearchCriteria $searchCriteria)
+    public function search(SearchCriteria $searchCriteria): array
     {
         $offset = ($searchCriteria->getPage() - 1) * $searchCriteria->getLimit();
 
@@ -48,8 +52,8 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     /**
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     * @throws \Doctrine\ORM\NoResultException
+     * @throws NonUniqueResultException
+     * @throws NoResultException
      */
     public function countTotal(SearchCriteria $searchCriteria)
     {
@@ -71,8 +75,8 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     /**
-     * @throws \Doctrine\ORM\OptimisticLockException
-     * @throws \Doctrine\ORM\ORMException
+     * @throws OptimisticLockException
+     * @throws ORMException
      */
     public function delete(Product $product)
     {
@@ -81,21 +85,18 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Product
      */
     public function findAllByCodes(string $code)
     {
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            'SELECT p.code, p.name, p.imgPath, p.price, p.availableAmount
-            FROM App\Entity\Product p
-            WHERE p.code = :code'
-        )->setParameter('code', $code);
-
-        return $query->getResult();
+        return $this
+            ->createQueryBuilder('p')
+            ->select('p.code, p.name, p.imgPath, p.price, p.availableAmount')
+            ->where('p.code = :code')
+            ->setParameter('code', $code)
+            ->getQuery()
+            ->getResult();
     }
-  
+
     public function getCategories(): array
     {
         $categories = $this
@@ -105,29 +106,25 @@ class ProductRepository extends ServiceEntityRepository
             ->getResult();
         return array_column($categories, 'category');
     }
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Product
+    public function findByImage(Image $image): array
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
+        return $this
+            ->createQueryBuilder('p')
+            ->where('p.imgPath LIKE :imgPath')
+            ->setParameter('imgPath', '%"' .$image->getPath() .'"%')
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
-    */
+
+    public function updateImgPath(Product $product) {
+        $this
+            ->createQueryBuilder('p')
+            ->update()
+            ->set('p.imgPath', json_encode($product->getImgPath()))
+            ->set('p.updated_at', $product->getUpdatedAt()->format('Y-m-d H:i:s'))
+            ->where('p.id = :id')
+            ->setParameter('id', $product->getId())
+            ->getQuery();
+    }
 }

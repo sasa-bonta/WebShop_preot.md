@@ -20,28 +20,21 @@ class CartItemRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, CartItem::class);
-
-        $this->cartItems = $this->getEntityManager()
-            ->createQuery(
-                'SELECT c
-                FROM App\Entity\CartItem c'
-            )->getResult();
+        $this->cartItems = $this->findAll();
     }
 
     /**
      * @return CartItem[]
      */
-    public function findItemsByUserId($userId)
+    public function findItemsByUserId($userId): array
     {
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            'SELECT c.code, c.amount
-            FROM App\Entity\CartItem c
-            WHERE c.userId = :userId'
-        )->setParameter('userId', $userId);
-
-        return $query->getResult();
+        return $this
+            ->createQueryBuilder('c')
+            ->select('c.code, c.amount')
+            ->where('c.userId = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
     }
 
     public function add(string $productCode, int $userId, array $product) : bool
@@ -65,13 +58,13 @@ class CartItemRepository extends ServiceEntityRepository
 
                 if ($amount > $product[0]['availableAmount']) return 0;
 
-                $query = $entityManager->createQuery(
-                    'UPDATE App\Entity\CartItem c
-                    SET c.amount = :amount
-                    WHERE c.code = :code'
-                )->setParameter('amount', $amount)
+                $this->createQueryBuilder('c')
+                    ->update()
+                    ->set('c.amount', $amount)
+                    ->where('c.code = :code')
                     ->setParameter('code', $productCode)
-                    ->getResult();
+                    ->getQuery()
+                    ->execute();
                 return 1;
             }
         }
@@ -83,7 +76,6 @@ class CartItemRepository extends ServiceEntityRepository
         if ($cartItem->getAmount() > $product[0]['availableAmount']) return 0;
 
         $entityManager->persist($cartItem);
-
         $entityManager->flush();
         return 1;
     }
@@ -94,31 +86,14 @@ class CartItemRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
-//    /**
-//     * @return CartItem[] Returns an array of CartItem objects
-//     */
-    /*
-    public function findByExampleField($value)
+    public function deleteProduct(Product $product)
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+        $this
+            ->createQueryBuilder('c')
+            ->delete()
+            ->where('c.code = :code')
+            ->setParameter('code', $product->getCode())
             ->getQuery()
-            ->getResult()
-        ;
+            ->execute();
     }
-    */
-    /*
-    public function findOneBySomeField($value): ?CartItem
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

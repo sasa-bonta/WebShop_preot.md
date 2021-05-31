@@ -54,8 +54,5 @@ function readItemsTemplate(data) {
         </table>`;
     }
 
-
-
-
     $("#page-content").html(read_items_html);
 }

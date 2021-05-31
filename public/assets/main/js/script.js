@@ -28,6 +28,7 @@ if (!(window.location.href.includes('page'))) {
 
     var element2 = document.getElementById("pagBtn" + page);
 
+
     element1.style.setProperty('background', 'none');
     element1.style.setProperty('color', 'black');
 
@@ -65,4 +66,10 @@ function setPage(value) {
     var urlSearchParams = new URLSearchParams(window.location.search);
     urlSearchParams.set('page', value);
     window.location.search = urlSearchParams;
+}
+
+function expandImage(imgs) {
+    var expandImg = document.getElementById("expandedImg");
+    expandImg.src = imgs.src;
+    expandImg.parentElement.style.display = "block";
 }

@@ -70,6 +70,7 @@
 <br>
 {{ form_end(form) }}
 
+{# @todo script to sep file #}
 
 <script>
     let $ = jQuery;
@@ -100,11 +101,6 @@
             $('#gallery-fragment').empty();
         }
     }
-
-    // $(document).on('click', '[data-delete-item]', function (e) {
-    //     let $el = $(e.target);
-    //     $el.closest('[data-item]').remove();
-    // });
 
     $(document).on('click', '.image img', function () {
         appendImagePath(this);

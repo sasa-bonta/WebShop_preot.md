@@ -186,3 +186,18 @@ a.page-link {
     overflow-y: auto;
     height: 270px;
 }
+
+.pagination {
+    justify-content: center;
+}
+
+.page-link {
+    color: black;
+    background: none;
+    border: 1px black solid;
+}
+
+.page-link:hover {
+    color: white;
+    background: black;
+}

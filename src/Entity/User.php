@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
-use phpDocumentor\Reflection\Utils;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -49,6 +48,28 @@ class User implements UserInterface
      * @ORM\Column(type="boolean", options={"default": false})
      */
     private $activated;
+
+    // @fixme uuid
+    /**
+     * @ORM\Column(type="string", unique=true, nullable=true)
+     */
+    private $apiToken;
+
+    /**
+     * @return mixed
+     */
+    public function getApiToken()
+    {
+        return $this->apiToken;
+    }
+
+    /**
+     * @param mixed $apiToken
+     */
+    public function setApiToken($apiToken): void
+    {
+        $this->apiToken = $apiToken;
+    }
 
     /**
      * @return mixed
@@ -116,7 +137,7 @@ class User implements UserInterface
     /**
      * @inheritDoc
      */
-    public function getRoles() : array
+    public function getRoles(): array
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
