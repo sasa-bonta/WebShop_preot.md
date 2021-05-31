@@ -95,12 +95,7 @@ class ProductApiController extends AbstractController
         $initCode = $product->getCode();
         $form = $this->createForm(ProductType::class, $product, ['csrf_protection' => false]);
         $form->handleRequest($request);
-        $keys = ['code', 'name', 'category', 'price', 'availableAmount', 'description'];
-        foreach ($keys as $key) {
-            if (!array_key_exists($key, $parameters) || empty($parameters[$key])) {
-                throw new BadRequestHttpException($form->getErrors(true, true));
-            }
-        }
+
         $form->submit($parameters);
 
         if ($form->isSubmitted() && $form->isValid()) {
