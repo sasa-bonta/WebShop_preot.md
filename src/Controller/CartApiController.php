@@ -108,6 +108,34 @@ class CartApiController extends AbstractController
     }
 
     /**
+     * @Route("/introduce/{productCode}", name="cart_api_introduce_amount", methods={"PATCH"})
+     */
+    public function introduceAmount(Request $request, $productCode, CartItemRepository $cartItemRepository, ProductRepository $productRepository): JsonResponse
+    {
+        $response = new JsonResponse();
+
+        $amount = $request->query->get('amount');
+
+        $result = $cartItemRepository->introduce($amount, $productCode, $this->getUserId(), (array)$productRepository->findAllByCodes($productCode));
+
+        if ($result === 1) {
+            $data = ["status" => 200, "description" => "ok", "message" => "amount introduced correctly"];
+            $response->setStatusCode(JsonResponse::HTTP_OK);
+            $response->setData($data);
+        } elseif ($result === 0) {
+            $data = ["status" => 200, "description" => "ok", "message" => "amount should be greater than 0"];
+            $response->setStatusCode(JsonResponse::HTTP_OK);
+            $response->setData($data);
+        } else {
+            $data = ["status" => 200, "description" => "ok", "message" => "amount is greater than the stock quantity"];
+            $response->setStatusCode(JsonResponse::HTTP_OK);
+            $response->setData($data);
+        }
+
+        return $response;
+    }
+
+    /**
      * @return mixed
      */
     public function getUserId()

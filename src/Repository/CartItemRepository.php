@@ -126,10 +126,10 @@ class CartItemRepository extends ServiceEntityRepository
             }
         }
 
-        return 1;
+        return 0;
     }
 
-    public function deleteOneItem(string $productCode, int $userId, array $product) : bool
+    public function deleteOneItem(string $productCode, int $userId, array $product): bool
     {
         $entityManager = $this->getEntityManager();
 
@@ -161,7 +161,43 @@ class CartItemRepository extends ServiceEntityRepository
             }
         }
 
-        return 1;
+        return 0;
+    }
+
+    public function introduce($newAmount, string $productCode, int $userId, array $product) : int
+    {
+        $entityManager = $this->getEntityManager();
+
+        $item = [];
+        foreach ($this->cartItems as $cartItem) {
+            if ($cartItem->getUserId() === $userId) {
+                $item[] = [
+                    'code' => $cartItem->getCode(),
+                    'amount' => $cartItem->getAmount(),
+                    'userId' => $cartItem->getUserId(),
+                ];
+            }
+        }
+
+        foreach ($item as $i) {
+            if ($productCode === $i['code']) {
+                $amount = $newAmount;
+
+                if ($amount <= 0) return 0;
+                elseif ($amount > $product[0]['availableAmount']) return -1;
+
+                $query = $entityManager->createQuery(
+                    'UPDATE App\Entity\CartItem c
+                    SET c.amount = :amount
+                    WHERE c.code = :code'
+                )->setParameter('amount', $amount)
+                    ->setParameter('code', $productCode)
+                    ->getResult();
+                return 1;
+            }
+        }
+
+        return 0;
     }
 
 //    /**
