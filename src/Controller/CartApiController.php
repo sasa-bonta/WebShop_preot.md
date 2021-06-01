@@ -67,8 +67,45 @@ class CartApiController extends AbstractController
         return $response;
     }
 
-// @todo addAmount()
-// @todo decreaseAmount()
+    /**
+     * @Route("/increase/{productCode}", name="cart_api_increase_amount", methods={"PATCH"})
+     */
+    public function increaseAmount($productCode, CartItemRepository $cartItemRepository, ProductRepository $productRepository): JsonResponse
+    {
+        $response = new JsonResponse();
+
+        if ($cartItemRepository->addOneItem($productCode, $this->getUserId(), (array)$productRepository->findAllByCodes($productCode))) {
+            $data = ["status" => 200, "description" => "ok", "message" => "amount increased"];
+            $response->setStatusCode(JsonResponse::HTTP_OK);
+            $response->setData($data);
+        } else {
+            $data = ["status" => 200, "description" => "ok", "message" => "item out of stock"];
+            $response->setStatusCode(JsonResponse::HTTP_OK);
+            $response->setData($data);
+        }
+
+        return $response;
+    }
+
+    /**
+     * @Route("/decrease/{productCode}", name="cart_api_decrease_amount", methods={"PATCH"})
+     */
+    public function decreaseAmount($productCode, CartItemRepository $cartItemRepository, ProductRepository $productRepository): JsonResponse
+    {
+        $response = new JsonResponse();
+
+        if ($cartItemRepository->deleteOneItem($productCode, $this->getUserId(), (array)$productRepository->findAllByCodes($productCode))) {
+            $data = ["status" => 200, "description" => "ok", "message" => "amount decreased"];
+            $response->setStatusCode(JsonResponse::HTTP_OK);
+            $response->setData($data);
+        } else {
+            $data = ["status" => 200, "description" => "ok", "message" => "amount cannot be 0"];
+            $response->setStatusCode(JsonResponse::HTTP_OK);
+            $response->setData($data);
+        }
+
+        return $response;
+    }
 
     /**
      * @return mixed

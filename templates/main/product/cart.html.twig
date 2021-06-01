@@ -1,84 +1,71 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <script src="{{ asset('assets/main/app.js') }}"></script>
-
-    <script src="{{ asset('assets/main/cart/add-item.js') }}"></script>
-    <script src="{{ asset('assets/main/cart/delete-item.js') }}"></script>
-    <script src="{{ asset('assets/main/cart/cart.js') }}"></script>
-    <script src="{{ asset('assets/main/cart/read-items.js') }}"></script>
     <img class="img-fluid" src="{{ asset('assets/main/images/header-image.jpg') }}" width="2000" alt="1">
 
-{#    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">#}
-{#        <div class="container-fluid">#}
-{#            <div class="navbar-brand" style="margin-left: 50px">Preot.md</div>#}
-{#            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"#}
-{#                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"#}
-{#                    aria-expanded="false" aria-label="Toggle navigation">#}
-{#                <span class="navbar-toggler-icon"></span>#}
-{#            </button>#}
-{#            <div class="collapse navbar-collapse" id="navbarSupportedContent">#}
-{#                <ul class="navbar-nav me-auto mb-2 mb-lg-0">#}
-{#                    <li class="nav-item">#}
-{#                        <a class="nav-link active" aria-current="page" href="{{ path('product_index') }}">Home</a>#}
-{#                    </li>#}
-{#                    <li class="nav-item">#}
-{#                        <a class="nav-link" href="#">Info</a>#}
-{#                    </li>#}
-{#                    <li class="nav-item">#}
-{#                        <a class="nav-link" href="#">Contacts</a>#}
-{#                    </li>#}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="navbar-brand" style="margin-left: 50px">Preot.md</div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ path('product_index') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Info</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contacts</a>
+                    </li>
 
-{#                </ul>#}
+                </ul>
 
-{#                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}#}
-{#                    {% if is_granted('ROLE_ADMIN') %}#}
-{#                        <a style="color: white" href="{{ path('product_list') }}">ADMIN</a>#}
-{#                    {% endif %}#}
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a style="color: white" href="{{ path('product_list') }}">ADMIN</a>
+                    {% endif %}
 
-{#                    <a href="{{ path('app_logout') }}">#}
-{#                        <button type="button" class="btn btn-dark me-2">Log out#}
-{#                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"#}
-{#                                 class="bi bi-door-open-fill" viewBox="0 0 16 16">#}
-{#                                <path d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>#}
-{#                            </svg>#}
-{#                        </button>#}
-{#                    </a>#}
-{#                {% else %}#}
-{#                    <a href="{{ path('app_login') }}">#}
-{#                        <button type="button" class="btn btn-dark me-2">Sign in</button>#}
-{#                    </a>#}
-{#                    <a href="{{ path('user_registration') }}">#}
-{#                        <button type="button" class="btn btn-light me-2">Sign Up#}
-{#                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"#}
-{#                                 class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">#}
-{#                                <path fill-rule="evenodd"#}
-{#                                      d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>#}
-{#                                <path fill-rule="evenodd"#}
-{#                                      d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>#}
-{#                            </svg>#}
-{#                        </button>#}
-{#                    </a>#}
+                    <a href="{{ path('app_logout') }}">
+                        <button type="button" class="btn btn-dark me-2">Log out
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-door-open-fill" viewBox="0 0 16 16">
+                                <path d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
+                            </svg>
+                        </button>
+                    </a>
+                {% else %}
+                    <a href="{{ path('app_login') }}">
+                        <button type="button" class="btn btn-dark me-2">Sign in</button>
+                    </a>
+                    <a href="{{ path('user_registration') }}">
+                        <button type="button" class="btn btn-light me-2">Sign Up
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                      d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+                                <path fill-rule="evenodd"
+                                      d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                            </svg>
+                        </button>
+                    </a>
 
-{#                {% endif %}#}
+                {% endif %}
 
 
-{#            </div>#}
-{#        </div>#}
-{#    </nav>#}
+            </div>
+        </div>
+    </nav>
 
-{#    <div id="shopping-cart-container" class="container" data-container="cart">#}
-{#        <div class="h1">Shopping Cart</div>#}
-{#    </div>#}
+    <div id="shopping-cart-container" class="container" data-container="cart">
+        <div class="h1">Shopping Cart</div>
+    </div>
 
     <div id="app"></div>
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
-
-    <!-- bootbox for confirm pop up -->
-    <script src="{{ asset('assets/main/js/bootbox.min.js') }}" type="text/javascript"></script>
 
     {% include 'footer.html.twig' %}
 

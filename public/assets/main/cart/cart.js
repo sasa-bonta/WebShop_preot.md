@@ -1,8 +1,8 @@
 function readItemsTemplate(data) {
 
 
-    var read_items_html = ``;
-    var total = 0;
+    var read_items_html = ``,
+        total = 0;
 
     if (data.length > 0) {
         read_items_html += `
@@ -33,8 +33,9 @@ function readItemsTemplate(data) {
             <td style="vertical-align: middle;text-align: center">` + cartItem['product']['name'] + `</td>
             <td style="vertical-align: middle;text-align: center">` + formatter.format(cartItem['product']['price']) + ` $</td>
             <td style="vertical-align: middle;text-align: center">
-                <button class="btn btn-outline-dark">sdf</button>
-                ` + cartItem['amount'] + `
+                <button id="addOneItem" class="btn btn-outline-dark btn-sm" data-code="` + cartItem['product']['code'] + `">+</button>
+                <input class="enter-amount input-group-sm" style="width: 30px;height: 30.44px;border: none; text-align: center" type="text" placeholder="` + cartItem['amount'] + `">
+                <button id="deleteOneItem" class="btn btn-outline-dark btn-sm" data-code="` + cartItem['product']['code'] + `">-</button>
 
             </td>
             <td style="vertical-align: middle;text-align: center">` + formatter.format(cartItem['amount'] * cartItem['product']['price']) + ` $</td>
