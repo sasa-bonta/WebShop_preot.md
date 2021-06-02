@@ -54,5 +54,29 @@ function readItemsTemplate(data) {
         </table>`;
     }
 
+    if (document.location.href === document.location.protocol + "//" + document.location.host + "/cart") {
+        read_items_html += `
+            <br>
+            <p align="center">
+                <button class="btn btn-success btn-lg" id="checkout"> Checkout </button>
+            </p>        
+        `;
+    }
+
     $("#page-content").html(read_items_html);
+
+    $("#checkout").on('click', function () {
+    //     fetch("{{ path("gallery_fragment") }}")
+    // .then(function (response) {
+    //         response
+    //             .text()
+    //             .then(function (result) {
+    //                 $('#gallery-fragment').append(result)
+    //             });
+    //     })
+    //         .catch(function () {
+    //             console.log("You died.")
+    //         });
+        alert("adding address form");
+    });
 }
