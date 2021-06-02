@@ -63,7 +63,7 @@ class Order
         return $this->id;
     }
 
-    public function getItems(): ?array
+    public function getItems(): ArrayCollection
     {
         return $this->items;
     }
@@ -109,12 +109,12 @@ class Order
         return $this;
     }
 
-    public function getStatus(): ?array
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    public function setStatus(array $status): self
+    public function setStatus(string $status): self
     {
         $this->status = $status;
 
