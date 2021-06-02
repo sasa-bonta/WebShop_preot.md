@@ -86,6 +86,9 @@ class AdminController extends AbstractController
                 ]);
             }
 
+            var_dump($product);
+            die;
+
             $product->writeImgPathsFromArray($product->readImgPathsArray());
             $entityManager = $this->getDoctrine()->getManager();
             $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
