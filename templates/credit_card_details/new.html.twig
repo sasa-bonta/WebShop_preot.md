@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New CreditCardDetails{% endblock %}
+
+{% block body %}
+    <h1>Create new CreditCardDetails</h1>
+
+    {{ include('credit_card_details/_form.html.twig') }}
+
+    <a href="{{ path('credit_card_details_index') }}">back to list</a>
+{% endblock %}
