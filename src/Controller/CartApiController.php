@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\CartItem;
 use App\Repository\CartItemRepository;
 use App\Repository\ProductRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
