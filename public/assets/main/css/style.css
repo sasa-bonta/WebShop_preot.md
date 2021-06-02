@@ -187,6 +187,9 @@ a.page-link {
     height: 270px;
 }
 
-/*.enter-amount {*/
-/*    display: none;*/
-/*}*/
+td {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
