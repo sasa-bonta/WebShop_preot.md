@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\order;
 
 use App\Entity\PaymentDetails;
 use Symfony\Component\Form\AbstractType;

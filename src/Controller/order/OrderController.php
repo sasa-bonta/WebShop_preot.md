@@ -3,7 +3,7 @@
 namespace App\Controller\order;
 
 use App\Entity\Order;
-use App\Form\OrderType;
+use App\Form\order\OrderType;
 use App\Repository\OrderRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

@@ -3,7 +3,7 @@
 namespace App\Controller\order;
 
 use App\Entity\CreditCardDetails;
-use App\Form\CreditCardDetailsType;
+use App\Form\order\CreditCardDetailsType;
 use App\Repository\CreditCardDetailsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

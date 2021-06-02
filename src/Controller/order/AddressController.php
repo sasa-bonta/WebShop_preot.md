@@ -3,7 +3,7 @@
 namespace App\Controller\order;
 
 use App\Entity\Address;
-use App\Form\AddressType;
+use App\Form\order\AddressType;
 use App\Repository\AddressRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

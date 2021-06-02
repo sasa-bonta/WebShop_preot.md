@@ -3,7 +3,7 @@
 namespace App\Controller\order;
 
 use App\Entity\PaymentDetails;
-use App\Form\PaymentDetailsType;
+use App\Form\order\PaymentDetailsType;
 use App\Repository\PaymentDetailsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
