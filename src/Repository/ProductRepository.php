@@ -79,22 +79,6 @@ class ProductRepository extends ServiceEntityRepository
         $this->getEntityManager()->remove($product);
         $this->getEntityManager()->flush();
     }
-
-    /**
-     * @return Product
-     */
-    public function findAllByCodes(string $code)
-    {
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            'SELECT p.code, p.name, p.imgPath, p.price, p.availableAmount
-            FROM App\Entity\Product p
-            WHERE p.code = :code'
-        )->setParameter('code', $code);
-
-        return $query->getResult();
-    }
   
     public function getCategories(): array
     {

@@ -40,7 +40,7 @@ class CartApiController extends AbstractController
     {
         $response = new JsonResponse();
 
-        if ($cartItemRepository->add($productCode, $this->getUserId(), (array)$productRepository->findAllByCodes($productCode))) {
+        if ($cartItemRepository->add($this->getUserId(), $productRepository->findOneBy(["code" => $productCode]))) {
             $data = ["status" => 200, "description" => "ok", "message" => "item added to cart"];
             $response->setStatusCode(JsonResponse::HTTP_OK);
             $response->setData($data);
@@ -74,7 +74,7 @@ class CartApiController extends AbstractController
     {
         $response = new JsonResponse();
 
-        if ($cartItemRepository->addOneItem($productCode, $this->getUserId(), (array)$productRepository->findAllByCodes($productCode))) {
+        if ($cartItemRepository->addOneItem($this->getUserId(), $productRepository->findOneBy(['code' => $productCode]))) {
             $data = ["status" => 200, "description" => "ok", "message" => "amount increased"];
             $response->setStatusCode(JsonResponse::HTTP_OK);
             $response->setData($data);
@@ -90,11 +90,11 @@ class CartApiController extends AbstractController
     /**
      * @Route("/decrease/{productCode}", name="cart_api_decrease_amount", methods={"PATCH"})
      */
-    public function decreaseAmount($productCode, CartItemRepository $cartItemRepository, ProductRepository $productRepository): JsonResponse
+    public function decreaseAmount($productCode, CartItemRepository $cartItemRepository): JsonResponse
     {
         $response = new JsonResponse();
 
-        if ($cartItemRepository->deleteOneItem($productCode, $this->getUserId(), (array)$productRepository->findAllByCodes($productCode))) {
+        if ($cartItemRepository->deleteOneItem($productCode, $this->getUserId())) {
             $data = ["status" => 200, "description" => "ok", "message" => "amount decreased"];
             $response->setStatusCode(JsonResponse::HTTP_OK);
             $response->setData($data);
@@ -116,7 +116,7 @@ class CartApiController extends AbstractController
 
         $amount = $request->query->get('amount');
 
-        $result = $cartItemRepository->introduce($amount, $productCode, $this->getUserId(), (array)$productRepository->findAllByCodes($productCode));
+        $result = $cartItemRepository->introduce($amount, $this->getUserId(), $productRepository->findOneBy(["code" => $productCode]));
 
         if ($result === 1) {
             $data = ["status" => 200, "description" => "ok", "message" => "amount introduced correctly"];

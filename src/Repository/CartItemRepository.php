@@ -45,49 +45,38 @@ class CartItemRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    public function add(string $productCode, int $userId, array $product): bool
+    public function add(int $userId, Product $product): bool
     {
         $entityManager = $this->getEntityManager();
 
-        $item = [];
+        $item = $this->findOneBy(['userId' => $userId, 'code' => $product->getCode()]);
 
-        foreach ($this->cartItems as $cartItem) {
-            if ($cartItem->getUserId() === $userId) {
-                $item[] = [
-                    'code' => $cartItem->getCode(),
-                    'amount' => $cartItem->getAmount(),
-                    'userId' => $cartItem->getUserId(),
-                ];
-            }
-        }
+        if (isset($item)) {
+            $amount = $item->getAmount() + 1;
 
-        foreach ($item as $i) {
-            if ($productCode === $i['code']) {
-                $amount = $i['amount'] + 1;
+            if ($amount > $product->getAvailableAmount()) return 0;
 
-                if ($amount > $product[0]['availableAmount']) return 0;
-
-                $query = $entityManager->createQuery(
-                    'UPDATE App\Entity\CartItem c
+            $query = $entityManager->createQuery(
+                'UPDATE App\Entity\CartItem c
                     SET c.amount = :amount
                     WHERE c.code = :code'
-                )->setParameter('amount', $amount)
-                    ->setParameter('code', $productCode)
-                    ->getResult();
-                return 1;
-            }
+            )->setParameter('amount', $amount)
+                ->setParameter('code', $product->getCode())
+                ->getResult();
+            return 1;
+        } else {
+            $cartItem = new CartItem();
+            $cartItem->setCode($product->getCode());
+            $cartItem->setAmount(1);
+            $cartItem->setUserId($userId);
+
+            if ($cartItem->getAmount() > $product->getAvailableAmount()) return 0;
+
+            $entityManager->persist($cartItem);
+
+            $entityManager->flush();
+            return 1;
         }
-        $cartItem = new CartItem();
-        $cartItem->setCode($productCode);
-        $cartItem->setAmount(1);
-        $cartItem->setUserId($userId);
-
-        if ($cartItem->getAmount() > $product[0]['availableAmount']) return 0;
-
-        $entityManager->persist($cartItem);
-
-        $entityManager->flush();
-        return 1;
     }
 
     public function delete(CartItem $cartItem)
@@ -96,131 +85,79 @@ class CartItemRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
-    public function addOneItem(string $productCode, int $userId, array $product): bool
+    public function addOneItem(int $userId, Product $product): bool
     {
         $entityManager = $this->getEntityManager();
 
-        $isExistent = false;
-        $item = [];
+        $item = $this->findOneBy(['userId' => $userId, 'code' => $product->getCode()]);
 
-        foreach ($this->cartItems as $cartItem) {
-            if ($cartItem->getUserId() === $userId) {
-                $item[] = [
-                    'code' => $cartItem->getCode(),
-                    'amount' => $cartItem->getAmount(),
-                    'userId' => $cartItem->getUserId(),
-                ];
-            }
-        }
+        if (isset($item)) {
+            $amount = $item->getAmount() + 1;
 
-        foreach ($item as $i) {
-            if ($productCode === $i['code']) {
-                $isExistent = true;
-                $amount = $i['amount'] + 1;
+            if ($amount > $product->getAvailableAmount()) return 0;
 
-                if ($amount > $product[0]['availableAmount']) return 0;
-
-                $query = $entityManager->createQuery(
-                    'UPDATE App\Entity\CartItem c
+            $query = $entityManager->createQuery(
+                'UPDATE App\Entity\CartItem c
                     SET c.amount = :amount
                     WHERE c.code = :code'
-                )->setParameter('amount', $amount)
-                    ->setParameter('code', $productCode)
-                    ->getResult();
-                return 1;
-            }
-        }
-
-        if ($isExistent === false) {
+            )->setParameter('amount', $amount)
+                ->setParameter('code', $product->getCode())
+                ->getResult();
+            return 1;
+        } else {
             throw new NotFoundHttpException("product code does not exist");
         }
-
-        return 0;
     }
 
-    public function deleteOneItem(string $productCode, int $userId, array $product): bool
+    public function deleteOneItem(string $productCode, int $userId): bool
     {
         $entityManager = $this->getEntityManager();
 
-        $isExistent = false;
-        $item = [];
+        $item = $this->findOneBy(['userId' => $userId, 'code' => $productCode]);
 
-        foreach ($this->cartItems as $cartItem) {
-            if ($cartItem->getUserId() === $userId) {
-                $item[] = [
-                    'code' => $cartItem->getCode(),
-                    'amount' => $cartItem->getAmount(),
-                    'userId' => $cartItem->getUserId(),
-                ];
-            }
-        }
+        if (isset($item)) {
+            $amount = $item->getAmount() - 1;
 
-        foreach ($item as $i) {
-            if ($productCode === $i['code']) {
-                $isExistent = true;
-                $amount = $i['amount'] - 1;
+            if ($amount === 0) return 0;
 
-                if ($amount === 0) return 0;
-
-                $query = $entityManager->createQuery(
-                    'UPDATE App\Entity\CartItem c
+            $query = $entityManager->createQuery(
+                'UPDATE App\Entity\CartItem c
                     SET c.amount = :amount
                     WHERE c.code = :code'
-                )->setParameter('amount', $amount)
-                    ->setParameter('code', $productCode)
-                    ->getResult();
-                return 1;
-            }
-        }
-
-        if ($isExistent === false) {
+            )->setParameter('amount', $amount)
+                ->setParameter('code', $productCode)
+                ->getResult();
+            return 1;
+        } else {
             throw new NotFoundHttpException("product code does not exist");
-        }
 
-        return 0;
+        }
     }
 
-    public function introduce($newAmount, string $productCode, int $userId, array $product): int
+    public function introduce($newAmount, int $userId, Product $product): int
     {
         $entityManager = $this->getEntityManager();
 
-        $newAmount = (int) $newAmount;
-        $isExistent = false;
-        $item = [];
-        foreach ($this->cartItems as $cartItem) {
-            if ($cartItem->getUserId() === $userId) {
-                $item[] = [
-                    'code' => $cartItem->getCode(),
-                    'amount' => $cartItem->getAmount(),
-                    'userId' => $cartItem->getUserId(),
-                ];
-            }
-        }
+        $newAmount = (int)$newAmount;
+        $item = $this->findOneBy(['userId' => $userId, 'code' => $product->getCode()]);
 
-        foreach ($item as $i) {
-            if ($productCode === $i['code']) {
-                $isExistent = true;
-                $amount = $newAmount;
+        if (isset($item)) {
+            $amount = $newAmount;
 
-                if ($amount <= 0) return 0;
-                elseif ($amount > $product[0]['availableAmount']) return -1;
+            if ($amount <= 0) return 0;
+            elseif ($amount > $product->getAvailableAmount()) return -1;
 
-                $query = $entityManager->createQuery(
-                    'UPDATE App\Entity\CartItem c
+            $query = $entityManager->createQuery(
+                'UPDATE App\Entity\CartItem c
                     SET c.amount = :amount
                     WHERE c.code = :code'
-                )->setParameter('amount', $amount)
-                    ->setParameter('code', $productCode)
-                    ->getResult();
-                return 1;
-            }
-        }
-
-        if ($isExistent === false) {
+            )->setParameter('amount', $amount)
+                ->setParameter('code', $product->getCode())
+                ->getResult();
+            return 1;
+        } else {
             throw new NotFoundHttpException("product code does not exist");
         }
-
-        return 0;
     }
 
 //    /**
