@@ -6,7 +6,7 @@ use App\Repository\PaymentDetailsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=PaymentDetailsRepository::class)
+ * @ORM\Embeddable()
  */
 class PaymentDetails
 {
@@ -21,7 +21,7 @@ class PaymentDetails
     private $currency;
 
     /**
-     * @ORM\Embedded(class="CreditCardDetails", nullable=true)
+     * @ORM\Embedded(class="CreditCardDetails")
      */
     private $card;
 
