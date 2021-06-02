@@ -84,19 +84,6 @@ class ProductRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
-    /**
-     */
-    public function findAllByCodes(string $code)
-    {
-        return $this
-            ->createQueryBuilder('p')
-            ->select('p.code, p.name, p.imgPath, p.price, p.availableAmount')
-            ->where('p.code = :code')
-            ->setParameter('code', $code)
-            ->getQuery()
-            ->getResult();
-    }
-
     public function getCategories(): array
     {
         $categories = $this

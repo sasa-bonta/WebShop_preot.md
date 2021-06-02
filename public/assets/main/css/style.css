@@ -187,6 +187,13 @@ a.page-link {
     height: 270px;
 }
 
+td {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .pagination {
     justify-content: center;
 }

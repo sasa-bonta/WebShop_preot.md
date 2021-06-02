@@ -20,8 +20,6 @@ $(document).ready(function () {
         var form_data = JSON.stringify($(this).serializeObject());
         var product_code = $(this).attr("data-productCode");
 
-        console.log(product_code);
-
         $.ajax({
             url: "http://localhost:8000/api/v1/cart/" + product_code,
             type: "POST",
