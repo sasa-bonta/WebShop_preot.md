@@ -6,6 +6,7 @@ use App\Entity\CartItem;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @method CartItem|null find($id, $lockMode = null, $lockVersion = null)
@@ -49,6 +50,7 @@ class CartItemRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
 
         $item = [];
+
         foreach ($this->cartItems as $cartItem) {
             if ($cartItem->getUserId() === $userId) {
                 $item[] = [
@@ -98,7 +100,9 @@ class CartItemRepository extends ServiceEntityRepository
     {
         $entityManager = $this->getEntityManager();
 
+        $isExistent = false;
         $item = [];
+
         foreach ($this->cartItems as $cartItem) {
             if ($cartItem->getUserId() === $userId) {
                 $item[] = [
@@ -111,6 +115,7 @@ class CartItemRepository extends ServiceEntityRepository
 
         foreach ($item as $i) {
             if ($productCode === $i['code']) {
+                $isExistent = true;
                 $amount = $i['amount'] + 1;
 
                 if ($amount > $product[0]['availableAmount']) return 0;
@@ -126,6 +131,10 @@ class CartItemRepository extends ServiceEntityRepository
             }
         }
 
+        if ($isExistent === false) {
+            throw new NotFoundHttpException("product code does not exist");
+        }
+
         return 0;
     }
 
@@ -133,7 +142,9 @@ class CartItemRepository extends ServiceEntityRepository
     {
         $entityManager = $this->getEntityManager();
 
+        $isExistent = false;
         $item = [];
+
         foreach ($this->cartItems as $cartItem) {
             if ($cartItem->getUserId() === $userId) {
                 $item[] = [
@@ -146,6 +157,7 @@ class CartItemRepository extends ServiceEntityRepository
 
         foreach ($item as $i) {
             if ($productCode === $i['code']) {
+                $isExistent = true;
                 $amount = $i['amount'] - 1;
 
                 if ($amount === 0) return 0;
@@ -161,13 +173,19 @@ class CartItemRepository extends ServiceEntityRepository
             }
         }
 
+        if ($isExistent === false) {
+            throw new NotFoundHttpException("product code does not exist");
+        }
+
         return 0;
     }
 
-    public function introduce($newAmount, string $productCode, int $userId, array $product) : int
+    public function introduce($newAmount, string $productCode, int $userId, array $product): int
     {
         $entityManager = $this->getEntityManager();
 
+        $newAmount = (int) $newAmount;
+        $isExistent = false;
         $item = [];
         foreach ($this->cartItems as $cartItem) {
             if ($cartItem->getUserId() === $userId) {
@@ -181,6 +199,7 @@ class CartItemRepository extends ServiceEntityRepository
 
         foreach ($item as $i) {
             if ($productCode === $i['code']) {
+                $isExistent = true;
                 $amount = $newAmount;
 
                 if ($amount <= 0) return 0;
@@ -195,6 +214,10 @@ class CartItemRepository extends ServiceEntityRepository
                     ->getResult();
                 return 1;
             }
+        }
+
+        if ($isExistent === false) {
+            throw new NotFoundHttpException("product code does not exist");
         }
 
         return 0;

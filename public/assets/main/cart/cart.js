@@ -34,7 +34,7 @@ function readItemsTemplate(data) {
             <td style="vertical-align: middle;text-align: center">` + formatter.format(cartItem['product']['price']) + ` $</td>
             <td style="vertical-align: middle;text-align: center">
                 <button id="addOneItem" class="btn btn-outline-dark btn-sm" data-code="` + cartItem['product']['code'] + `">+</button>
-                <input class="enter-amount input-group-sm" style="width: 30px;height: 30.44px;border: none; text-align: center" type="text" value="` + cartItem['amount'] + `" data-code="` + cartItem['product']['code'] + `">
+                <input class="enter-amount input-group-sm" style="width: 30px;height: 30.44px;border: none; text-align: center" type="number" value="` + cartItem['amount'] + `" data-code="` + cartItem['product']['code'] + `">
                 <button id="deleteOneItem" class="btn btn-outline-dark btn-sm" data-code="` + cartItem['product']['code'] + `">-</button>
 
             </td>
