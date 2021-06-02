@@ -11,13 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
 class PaymentDetails
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $type;
@@ -28,14 +21,9 @@ class PaymentDetails
     private $currency;
 
     /**
-     * @ORM\Column(type="object")
+     * @ORM\Embedded(class="CreditCardDetails", nullable=true)
      */
-    private $details;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    private $card;
 
     public function getType(): ?string
     {
@@ -61,15 +49,13 @@ class PaymentDetails
         return $this;
     }
 
-    public function getDetails()
+    public function getCard()
     {
-        return $this->details;
+        return $this->card;
     }
 
-    public function setDetails($details): self
+    public function setCard($card): void
     {
-        $this->details = $details;
-
-        return $this;
+        $this->card = $card;
     }
 }

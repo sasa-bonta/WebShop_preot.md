@@ -2,21 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CreditCardDetailsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CreditCardDetailsRepository::class)
+ * @ORM\Embeddable()
  */
 class CreditCardDetails
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
     /**
      * @ORM\Column(type="string", length=255)
      */

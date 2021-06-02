@@ -24,12 +24,12 @@ class Order
     private $items = [];
 
     /**
-     * @ORM\Column(type="object")
+     * @ORM\Embedded(class="PaymentDetails")
      */
-    private $paymentDetails;
+    private $payment;
 
     /**
-     * @ORM\Column(type="object")
+     * @ORM\Embedded(class="Address")
      */
     private $address;
 
@@ -65,16 +65,14 @@ class Order
         return $this;
     }
 
-    public function getPaymentDetails()
+    public function getPayment()
     {
-        return $this->paymentDetails;
+        return $this->payment;
     }
 
-    public function setPaymentDetails($paymentDetails): self
+    public function setPayment($payment): void
     {
-        $this->paymentDetails = $paymentDetails;
-
-        return $this;
+        $this->payment = $payment;
     }
 
     public function getAddress()
