@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\PaymentDetailsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,6 +25,11 @@ class PaymentDetails
      * @ORM\Embedded(class="CreditCardDetails")
      */
     private $card;
+
+    public function __construct()
+    {
+        $this->card = new CreditCardDetails();
+    }
 
     public function getType(): ?string
     {

@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\OrderRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * @ORM\Entity(repositoryClass=OrderRepository::class)
@@ -19,9 +22,9 @@ class Order
     private $id;
 
     /**
-     * @ORM\Column(type="array")
+     * @OneToMany(targetEntity="App\Entity\OrderItem", mappedBy="productCode")
      */
-    private $items = [];
+    private $items;
 
     /**
      * @ORM\Embedded(class="PaymentDetails")
@@ -39,14 +42,21 @@ class Order
     private $total;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="string")
      */
-    private $status = [];
+    private $status;
 
     /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
+
+    public function __construct()
+    {
+        $this->payment = new PaymentDetails();
+        $this->address = new Address();
+        $this->items = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -119,6 +129,28 @@ class Order
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function addItem(OrderItem $item): self
+    {
+        if (!$this->items->contains($item)) {
+            $this->items[] = $item;
+            $item->setProductCode($this);
+        }
+
+        return $this;
+    }
+
+    public function removeItem(OrderItem $item): self
+    {
+        if ($this->items->removeElement($item)) {
+            // set the owning side to null (unless already changed)
+            if ($item->getProductCode() === $this) {
+                $item->setProductCode(null);
+            }
+        }
 
         return $this;
     }

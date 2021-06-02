@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Form\order;
+
+namespace App\Form;
+
 
 use App\Entity\Address;
 use Symfony\Component\Form\AbstractType;
@@ -16,8 +18,7 @@ class AddressType extends AbstractType
             ->add('state')
             ->add('city')
             ->add('address')
-            ->add('phoneNumber')
-        ;
+            ->add('phoneNumber');
     }
 
     public function configureOptions(OptionsResolver $resolver)

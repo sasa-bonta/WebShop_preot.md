@@ -1,27 +1,28 @@
 <?php
 
-namespace App\Form\order;
 
-use App\Entity\CreditCardDetails;
+namespace App\Form;
+
+
+use App\Entity\PaymentDetails;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CreditCardDetailsType extends AbstractType
+class PaymentDetailsType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('code')
-            ->add('cvv')
-            ->add('expiresAt')
-        ;
+            ->add('type')
+            ->add('currency')
+            ->add('card', CreditCardDetailsType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => CreditCardDetails::class,
+            'data_class' => PaymentDetails::class,
         ]);
     }
 }
