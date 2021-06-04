@@ -21,7 +21,7 @@ class Order
     private $id;
 
     /**
-     * @OneToMany(targetEntity="App\Entity\OrderItem", mappedBy="productCode")
+     * @OneToMany(targetEntity="App\Entity\OrderItem", cascade="persist", mappedBy="productCode")
      */
     private $items;
 
@@ -153,7 +153,6 @@ class Order
     {
         if (!$this->items->contains($item)) {
             $this->items[] = $item;
-            $item->setProductCode($this);
         }
 
         return $this;
@@ -161,13 +160,7 @@ class Order
 
     public function removeItem(OrderItem $item): self
     {
-        if ($this->items->removeElement($item)) {
-            // set the owning side to null (unless already changed)
-            if ($item->getProductCode() === $this) {
-                $item->setProductCode(null);
-            }
-        }
-
+        $this->items->removeElement($item);
         return $this;
     }
 }
