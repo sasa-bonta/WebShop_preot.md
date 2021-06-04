@@ -10,12 +10,12 @@ use Doctrine\ORM\Mapping as ORM;
 class CreditCardDetails
 {
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=16, nullable=true)
      */
     private $code;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=3, nullable=true)
      */
     private $cvv;
 
@@ -36,12 +36,12 @@ class CreditCardDetails
         return $this;
     }
 
-    public function getCvv(): ?int
+    public function getCvv(): ?string
     {
         return $this->cvv;
     }
 
-    public function setCvv(int $cvv): self
+    public function setCvv(string $cvv): self
     {
         $this->cvv = $cvv;
 

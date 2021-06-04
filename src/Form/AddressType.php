@@ -18,6 +18,7 @@ class AddressType extends AbstractType
             ->add('state')
             ->add('city')
             ->add('address')
+            ->add('recipient')
             ->add('phoneNumber');
     }
 

@@ -34,6 +34,23 @@ class Address
      */
     private $phoneNumber;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $recipient;
+
+    public function getRecipient(): ?string
+    {
+        return $this->recipient;
+    }
+
+    public function setRecipient(string $recipient): self
+    {
+        $this->recipient = $recipient;
+
+        return $this;
+    }
+
     public function getCountry(): ?string
     {
         return $this->country;
