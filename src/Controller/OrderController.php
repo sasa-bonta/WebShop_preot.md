@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Order;
+use App\Entity\OrderItem;
 use App\Form\OrderType;
 use App\Repository\CartItemRepository;
 use App\Repository\OrderRepository;
@@ -50,9 +51,16 @@ class OrderController extends AbstractController
             $order->setStatus("in process");
             $items = $cartRepository->findBy(['userId' => $userId]);
             foreach ($items as $item) {
-                $product = $productRepository->findOneBy(['code' => $item->getCode()]);
-                $price = $product->getPrice() * $item->getAmount();
-                $total += $price;
+                $code = $item->getCode();
+                $product = $productRepository->findOneBy(['code' => $code]);
+
+                $orderItem = new OrderItem();
+                $orderItem->setProductCode($code);
+                $orderItem->setPrice($product->getPrice());
+                $orderItem->setAmount($item->getAmount());
+
+                $order->addItem($orderItem);
+                $total += $orderItem->getPrice() * $orderItem->getAmount();
             }
             $order->setTotal($total);
             $entityManager->persist($order);
