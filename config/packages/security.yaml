@@ -23,7 +23,7 @@ security:
             security: false
 
         api:
-            pattern: ^/api/v1/products
+            pattern: ^/api/v1 # всё API должно быть защищено, не только продукты
             guard:
                 provider: api_products_provider
                 authenticators:

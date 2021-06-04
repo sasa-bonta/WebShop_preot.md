@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Order;
 use App\Entity\OrderItem;
+use App\Entity\User;
 use App\Form\OrderType;
 use App\Repository\CartItemRepository;
 use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,23 +37,31 @@ class OrderController extends AbstractController
     /**
      * @Route("/new", name="order_new", methods={"GET","POST"})
      */
-    public function new(Request $request, CartItemRepository $cartRepository, ProductRepository $productRepository): Response
+    public function new(
+        Request $request,
+        CartItemRepository $cartRepository,
+        ProductRepository $productRepository
+    ): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
+
         $order = new Order();
+        /** @var Form $form */
         $form = $this->createForm(OrderType::class, $order);
+
         $form->remove('status');
-        $form->handleRequest($request);
+        $form->submit($request->toArray());
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
-            $userId = $this->getUserId();
             $total = 0;
 
             $order->setCreatedAt($dateTime);
-            $order->setUserId($userId);
+            $order->setUserId($user->getId());
             $order->setStatus("in process");
-            $items = $cartRepository->findBy(['userId' => $userId]);
+            $items = $cartRepository->findBy(['userId' => $user->getId()]);
             foreach ($items as $item) {
                 $code = $item->getCode();
                 $product = $productRepository->findOneBy(['code' => $code]);
@@ -120,11 +130,4 @@ class OrderController extends AbstractController
         return $this->redirectToRoute('order_index');
     }
 
-    /**
-     * @return mixed
-     */
-    public function getUserId()
-    {
-        return $this->get('security.token_storage')->getToken()->getUser()->getId();
-    }
 }
