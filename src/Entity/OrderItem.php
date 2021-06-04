@@ -44,7 +44,7 @@ class OrderItem
         return $this->productCode;
     }
 
-    public function setProductCode(string $productCode): self
+    public function setProductCode($productCode): self
     {
         $this->productCode = $productCode;
 

@@ -28,6 +28,15 @@
                 <td>{{ order.userId }}</td>
             </tr>
             <tr>
+                <th>Items</th>
+                {% for item in order.items %}
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.product_code }}</td>
+                    <td>{{ item.amount }}</td>
+                    <td>{{ item.price }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
                 <th>Payment.type</th>
                 <td>{{ order.payment.type }}</td>
             </tr>

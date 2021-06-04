@@ -25,6 +25,8 @@ class OrderController extends AbstractController
      */
     public function index(OrderRepository $orderRepository): Response
     {
+//        var_dump($orderRepository->findAll());
+//        die;
         return $this->render('order/index.html.twig', [
             'orders' => $orderRepository->findAll(),
         ]);
@@ -58,7 +60,6 @@ class OrderController extends AbstractController
                 $orderItem->setProductCode($code);
                 $orderItem->setPrice($product->getPrice());
                 $orderItem->setAmount($item->getAmount());
-
                 $order->addItem($orderItem);
                 $total += $orderItem->getPrice() * $orderItem->getAmount();
             }
