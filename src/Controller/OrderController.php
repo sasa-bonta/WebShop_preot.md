@@ -37,29 +37,33 @@ class OrderController extends AbstractController
      */
     public function new(Request $request, CartItemRepository $cartRepository, ProductRepository $productRepository): Response
     {
+        $user = $this->getUser();
         $order = new Order();
         $form = $this->createForm(OrderType::class, $order);
         $form->remove('status');
         $form->handleRequest($request);
+//        $form->submit($request->toArray());
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
-            $userId = $this->getUserId();
             $total = 0;
 
             $order->setCreatedAt($dateTime);
-            $order->setUserId($userId);
+            $order->setUserId($user->getId());
             $order->setStatus("in process");
-            $items = $cartRepository->findBy(['userId' => $userId]);
+            $items = $cartRepository->findBy(['userId' => $user->getId()]);
             foreach ($items as $item) {
                 $code = $item->getCode();
                 $product = $productRepository->findOneBy(['code' => $code]);
-
                 $orderItem = new OrderItem();
                 $orderItem->setProductCode($code);
                 $orderItem->setPrice($product->getPrice());
                 $orderItem->setAmount($item->getAmount());
+
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+
                 $order->addItem($orderItem);
                 $total += $orderItem->getPrice() * $orderItem->getAmount();
             }
@@ -118,13 +122,5 @@ class OrderController extends AbstractController
         }
 
         return $this->redirectToRoute('order_index');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUserId()
-    {
-        return $this->get('security.token_storage')->getToken()->getUser()->getId();
     }
 }

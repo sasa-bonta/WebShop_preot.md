@@ -15,7 +15,6 @@ class PaymentDetailsType extends AbstractType
     {
         $builder
             ->add('type')
-            ->add('currency')
             ->add('card', CreditCardDetailsType::class);
     }
 

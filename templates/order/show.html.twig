@@ -7,79 +7,74 @@
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ order.id }}</td>
-            </tr>
-            <tr>
-                <th>Total</th>
-                <td>{{ order.total | number_format(2)}}</td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td>{{ order.status }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>User id</th>
-                <td>{{ order.userId }}</td>
-            </tr>
-            <tr>
-                <th>Items</th>
-                {% for item in order.items %}
-                    <td>{{ item.id }}</td>
-                    <td>{{ item.product_code }}</td>
-                    <td>{{ item.amount }}</td>
-                    <td>{{ item.price }}</td>
-                {% endfor %}
-            </tr>
-            <tr>
-                <th>Payment.type</th>
-                <td>{{ order.payment.type }}</td>
-            </tr>
-            <tr>
-                <th>Payment.currency</th>
-                <td>{{ order.payment.currency }}</td>
-            </tr>
-            <tr>
-                <th>Payment.card.code</th>
-                <td>{{ order.payment.card.code }}</td>
-            </tr>
-            <tr>
-                <th>Payment.card.cvv</th>
-                <td>{{ order.payment.card.cvv }}</td>
-            </tr>
-            <tr>
-                <th>Payment.card.expiresAt</th>
-                <td>{{ order.payment.card.expiresAt ? order.payment.card.expiresAt|date('Y-m') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Address.country</th>
-                <td>{{ order.address.country }}</td>
-            </tr>
-            <tr>
-                <th>Address.state</th>
-                <td>{{ order.address.state }}</td>
-            </tr>
-            <tr>
-                <th>Address.city</th>
-                <td>{{ order.address.city }}</td>
-            </tr>
-            <tr>
-                <th>Address.address</th>
-                <td>{{ order.address.address }}</td>
-            </tr>
-            <tr>
-                <th>Address.recipient</th>
-                <td>{{ order.address.recipient }}</td>
-            </tr>
-            <tr>
-                <th>Address.phoneNumber</th>
-                <td>{{ order.address.phoneNumber }}</td>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ order.id }}</td>
+        </tr>
+        <tr>
+            <th>Total</th>
+            <td>{{ order.total | number_format(2) }}</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>{{ order.status }}</td>
+        </tr>
+        <tr>
+            <th>CreatedAt</th>
+            <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>User id</th>
+            <td>{{ order.userId }}</td>
+        </tr>
+        <tr>
+            <th>Items</th>
+            <td>{{ order.items }}</td>
+        </tr>
+        <tr>
+            <th>Payment.type</th>
+            <td>{{ order.payment.type }}</td>
+        </tr>
+        <tr>
+            <th>Payment.currency</th>
+            <td>{{ order.payment.currency }}</td>
+        </tr>
+        <tr>
+            <th>Payment.card.code</th>
+            <td>{{ order.payment.card.code }}</td>
+        </tr>
+        <tr>
+            <th>Payment.card.cvv</th>
+            <td>{{ order.payment.card.cvv }}</td>
+        </tr>
+        <tr>
+            <th>Payment.card.expiresAt</th>
+            <td>{{ order.payment.card.expiresAt ? order.payment.card.expiresAt|date('Y-m') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Address.country</th>
+            <td>{{ order.address.country }}</td>
+        </tr>
+        <tr>
+            <th>Address.state</th>
+            <td>{{ order.address.state }}</td>
+        </tr>
+        <tr>
+            <th>Address.city</th>
+            <td>{{ order.address.city }}</td>
+        </tr>
+        <tr>
+            <th>Address.address</th>
+            <td>{{ order.address.address }}</td>
+        </tr>
+        <tr>
+            <th>Address.recipient</th>
+            <td>{{ order.address.recipient }}</td>
+        </tr>
+        <tr>
+            <th>Address.phoneNumber</th>
+            <td>{{ order.address.phoneNumber }}</td>
+        </tr>
         </tbody>
     </table>
 

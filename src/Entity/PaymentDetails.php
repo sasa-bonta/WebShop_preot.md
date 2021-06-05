@@ -17,11 +17,6 @@ class PaymentDetails
     private $type;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $currency;
-
-    /**
      * @ORM\Embedded(class="CreditCardDetails")
      */
     private $card;
@@ -39,18 +34,6 @@ class PaymentDetails
     public function setType(string $type): self
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    public function getCurrency(): ?string
-    {
-        return $this->currency;
-    }
-
-    public function setCurrency(string $currency): self
-    {
-        $this->currency = $currency;
 
         return $this;
     }
