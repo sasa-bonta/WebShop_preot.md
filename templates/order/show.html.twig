@@ -29,15 +29,17 @@
         </tr>
         <tr>
             <th>Items</th>
-            <td>{{ order.items }}</td>
+            {% for item in order.items %}
+                <td>{{ item.id }}</td>
+{#                <td>{{ item.product_code }}</td>#}
+{#                <td>{{ item.amount }}</td>#}
+{#                <td>{{ item.price }}</td>#}
+            {% endfor %}
         </tr>
+
         <tr>
             <th>Payment.type</th>
             <td>{{ order.payment.type }}</td>
-        </tr>
-        <tr>
-            <th>Payment.currency</th>
-            <td>{{ order.payment.currency }}</td>
         </tr>
         <tr>
             <th>Payment.card.code</th>
