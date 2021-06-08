@@ -4,9 +4,6 @@
 
 {% block body %}
 
-    {# https://getbootstrap.com/docs/5.0/components/navs-tabs/ #}
-    {# tabs #}
-
     <h1 align="center">Order</h1>
 
     <ul class="nav nav-tabs">
@@ -19,9 +16,11 @@
         <li>
             <a class="nav-link" href="#items" data-togle="tab">Items</a>
         </li>
+        {% if order.payment.type == 'card' %}
         <li>
-            <a class="nav-link" href="#payment" data-togle="tab">Payment</a>
+            <a class="nav-link" href="#payment" data-togle="tab">Card details</a>
         </li>
+        {% endif %}
     </ul>
 
     <div class="tab-content" id="myTabContent">
@@ -102,6 +101,7 @@
             </table>
         </div>
 
+        {% if order.payment.type == 'card' %}
         <div class="tab-pane" id="payment">
             <table class="table">
                 <tbody>
@@ -120,6 +120,7 @@
                 </tbody>
             </table>
         </div>
+        {% endif %}
     </div>
 
     <script>
