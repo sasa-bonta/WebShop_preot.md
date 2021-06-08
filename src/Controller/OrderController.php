@@ -8,9 +8,13 @@ use App\Form\OrderType;
 use App\Repository\CartItemRepository;
 use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
+use App\SearchCriteria\OrderSearchCriteria;
+use App\SearchCriteria\UserSearchCriteria;
+use Doctrine\DBAL\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use DateTime;
 use DateTimeZone;
@@ -23,10 +27,19 @@ class OrderController extends AbstractController
     /**
      * @Route("/", name="order_index", methods={"GET"})
      */
-    public function index(OrderRepository $orderRepository): Response
+    public function index(Request $request, OrderRepository $orderRepository): Response
     {
-//        var_dump($orderRepository->findAll());
-//        die;
+        try {
+            $searchOrder = new OrderSearchCriteria($request->query->all());
+        } catch (Exception $e) {
+            throw new BadRequestHttpException($e->getMessage());
+        }
+
+        $length = $orderRepository->countTotal($searchOrder);
+        if ($searchOrder->getPage() > ceil($length / $searchOrder->getLimit()) && $searchOrder->getPage() > 1) {
+            throw new BadRequestHttpException("Page limit exceed");
+        }
+
         return $this->render('admin/order/index.html.twig', [
             'orders' => $orderRepository->findAll(),
         ]);
