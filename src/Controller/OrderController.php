@@ -42,6 +42,8 @@ class OrderController extends AbstractController
 
         return $this->render('admin/order/index.html.twig', [
             'orders' => $orderRepository->findAll(),
+            'length' => $length,
+            'limit' => $searchOrder->getLimit()
         ]);
     }
 
