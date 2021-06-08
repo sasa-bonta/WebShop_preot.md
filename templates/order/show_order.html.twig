@@ -1,0 +1,28 @@
+<table class="table">
+    <tbody>
+    <tr>
+        <th>Id</th>
+        <td>{{ order.id }}</td>
+    </tr>
+    <tr>
+        <th>Total</th>
+        <td>{{ order.total | number_format(2) }}</td>
+    </tr>
+    <tr>
+        <th>Status</th>
+        <td>{{ order.status }}</td>
+    </tr>
+    <tr>
+        <th>CreatedAt</th>
+        <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+    </tr>
+    <tr>
+        <th>User id</th>
+        <td>{{ order.userId }}</td>
+    </tr>
+    <tr>
+        <th>Payment.type</th>
+        <td>{{ order.payment.type }}</td>
+    </tr>
+    </tbody>
+</table>
