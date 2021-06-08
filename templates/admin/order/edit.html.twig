@@ -5,9 +5,9 @@
 {% block body %}
     <h1>Edit Order</h1>
 
-    {{ include('order/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('admin/order/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('order_index') }}">back to list</a>
 
-    {{ include('order/_delete_form.html.twig') }}
+    {{ include('admin/order/_delete_form.html.twig') }}
 {% endblock %}

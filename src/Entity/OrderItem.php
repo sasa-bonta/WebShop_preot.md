@@ -19,8 +19,12 @@ class OrderItem
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
      * @ManyToOne(targetEntity="App\Entity\Order", inversedBy="items")
+     */
+    private $order;
+
+    /**
+     * @ORM\Column(type="string", length=255)
      */
     private $productCode;
 
@@ -33,6 +37,16 @@ class OrderItem
      * @ORM\Column(type="float")
      */
     private $price;
+
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    public function setOrder(?Order $order): void
+    {
+        $this->order = $order;
+    }
 
     public function getId(): ?int
     {
