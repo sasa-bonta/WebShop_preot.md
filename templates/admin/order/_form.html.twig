@@ -1,4 +1,31 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+<br>
+<h3 align="center">Address</h3>
+<h5>Country</h5>
+{{ form_widget(form.address.country) }}
+<h5>State</h5>
+{{ form_widget(form.address.state) }}
+<h5>City</h5>
+{{ form_widget(form.address.city) }}
+<h5>Street & home number</h5>
+{{ form_widget(form.address.address) }}
+<h5>Recipient</h5>
+{{ form_widget(form.address.recipient) }}
+<h5>Phone number</h5>
+{{ form_widget(form.address.phoneNumber) }}
+
+<h3 align="center">Payment</h3>
+<h5>Payment options</h5>
+{{ form_widget(form.payment.type) }}
+
+<h3 align="center">Card-details</h3>
+<h5>Code</h5>
+{{ form_widget(form.payment.card.code) }}
+<h5>CVV</h5>
+{{ form_widget(form.payment.card.cvv) }}
+<h5>Expires at</h5>
+{{ form_widget(form.payment.card.expiresAt) }}
+
+<button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
