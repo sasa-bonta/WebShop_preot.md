@@ -11,6 +11,7 @@ use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
 use App\SearchCriteria\OrderSearchCriteria;
 use Doctrine\DBAL\Exception;
+use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +25,12 @@ use DateTimeZone;
  */
 class OrderController extends AbstractController
 {
+    private array $STATUS = [
+        1 => 'in process',
+        2 => 'sent',
+        3 => 'arrived'
+    ];
+
     /**
      * @Route("/", name="order_index", methods={"GET"})
      */
@@ -141,5 +148,44 @@ class OrderController extends AbstractController
         }
 
         return $this->redirectToRoute('order_index');
+    }
+
+    /**
+     * @Route("/next/{id}", name="order_next_status", methods={"POST"})
+     */
+    public function nextStatus(Request $request, Order $order): Response
+    {
+        if ($this->isCsrfTokenValid('nextStatus' . $order->getId(), $request->request->get('_token'))) {
+            $statNum = array_search($order->getStatus(), $this->STATUS);
+
+            if ($statNum < 3) {
+                if (!empty($this->STATUS[$statNum++])) {
+                    $order->setStatus($this->STATUS[$statNum++]);
+                }
+            }
+            $this->getDoctrine()->getManager()->flush();
+
+        }
+
+        return $this->redirectToRoute('order_edit', ['id' => $order->getId()]);
+    }
+
+    /**
+     * @Route("/prev/{id}", name="order_prev_status", methods={"POST"})
+     */
+    public function prevStatus(Request $request, Order $order): Response
+    {
+        if ($this->isCsrfTokenValid('prevStatus' . $order->getId(), $request->request->get('_token'))) {
+            $statNum = array_search($order->getStatus(), $this->STATUS);
+
+            if ($statNum > 1) {
+                if (!empty($this->STATUS[$statNum--])) {
+                    $order->setStatus($this->STATUS[$statNum--]);
+                }
+            }
+            $this->getDoctrine()->getManager()->flush();
+        }
+
+        return $this->redirectToRoute('order_edit', ['id' => $order->getId()]);
     }
 }

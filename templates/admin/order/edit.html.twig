@@ -7,6 +7,8 @@
 {% block content %}
     <h1 align="center">Edit Order</h1>
 
+    <h5><b>Status: {{ order.status }}</b></h5>
+
     {{ include('admin/order/_form.html.twig', {'button_label': 'Update'}) }}
 
     <p align="center">
@@ -16,6 +18,14 @@
     </p>
     <p align="center">
         {{ include('admin/order/_delete_form.html.twig') }}
+    </p>
+
+    <p align="center">
+        {{ include('admin/order/_next_status.html.twig') }}
+    </p>
+
+    <p align="center">
+        {{ include('admin/order/_prev_status.html.twig') }}
     </p>
 
     <script>
