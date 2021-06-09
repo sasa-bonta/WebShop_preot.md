@@ -3,9 +3,21 @@
 {% block title %}New Order{% endblock %}
 
 {% block body %}
-    <h1>Create new Order</h1>
+    <h1 align="center">Checkout</h1>
 
-    {{ include('order/_form.html.twig') }}
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                {# 2 columns #}
+            </div>
+            <div class="col-6">
+                {{ include('admin/order/_form.html.twig') }}
+            </div>
+            <div class="col-3">
+                {# 2 columns #}
+            </div>
+        </div>
+    </div>
 
     <a href="{{ path('order_index') }}">back to list</a>
 {% endblock %}

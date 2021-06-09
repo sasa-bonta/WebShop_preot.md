@@ -11,7 +11,6 @@ use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
 use App\SearchCriteria\OrderSearchCriteria;
 use Doctrine\DBAL\Exception;
-use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

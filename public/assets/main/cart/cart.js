@@ -66,17 +66,16 @@ function readItemsTemplate(data) {
     $("#page-content").html(read_items_html);
 
     $("#checkout").on('click', function () {
-    //     fetch("{{ path("gallery_fragment") }}")
-    // .then(function (response) {
-    //         response
-    //             .text()
-    //             .then(function (result) {
-    //                 $('#gallery-fragment').append(result)
-    //             });
-    //     })
-    //         .catch(function () {
-    //             console.log("You died.")
-    //         });
-        alert("adding address form");
+        fetch("/order/item/new")
+            .then(function (response) {
+                response
+                    .text()
+                    .then(function (result) {
+                        $('#checkout-fragment').append(result)
+                    });
+            })
+            .catch(function () {
+                console.log("You died.")
+            });
     });
 }
