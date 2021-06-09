@@ -1,13 +1,24 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/crud_base.thml.twig' %}
 
 {% block title %}Edit Order{% endblock %}
 
-{% block body %}
-    <h1>Edit Order</h1>
+{% block navbar %} {% include 'admin/navbar_admin_orders.html.twig' %} {% endblock %}
+
+{% block content %}
+    <h1 align="center">Edit Order</h1>
 
     {{ include('admin/order/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('order_index') }}">back to list</a>
+    <p align="center">
+        <a href="{{ path('order_index') }}">
+            <button class="btn btn-primary">Back to list</button>
+        </a>
+    </p>
+    <p align="center">
+        {{ include('admin/order/_delete_form.html.twig') }}
+    </p>
 
-    {{ include('admin/order/_delete_form.html.twig') }}
+    <script>
+
+    </script>
 {% endblock %}

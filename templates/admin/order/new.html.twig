@@ -1,11 +1,17 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/crud_base.thml.twig' %}
 
 {% block title %}New Order{% endblock %}
 
-{% block body %}
+{% block navbar %} {% include 'admin/navbar_admin_orders.html.twig' %} {% endblock %}
+
+{% block content %}
     <h1 align="center">Create new Order</h1>
 
     {{ include('admin/order/_form.html.twig') }}
 
-    <a href="{{ path('order_index') }}">back to list</a>
+    <p align="center">
+        <a href="{{ path('order_index') }}">
+            <button class="btn btn-primary">back to list</button>
+        </a>
+    </p>
 {% endblock %}

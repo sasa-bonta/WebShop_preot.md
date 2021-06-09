@@ -9,7 +9,6 @@ use App\Repository\CartItemRepository;
 use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
 use App\SearchCriteria\OrderSearchCriteria;
-use App\SearchCriteria\UserSearchCriteria;
 use Doctrine\DBAL\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -110,6 +109,7 @@ class OrderController extends AbstractController
     public function edit(Request $request, Order $order): Response
     {
         $form = $this->createForm(OrderType::class, $order);
+        $form->remove('status');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

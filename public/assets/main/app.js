@@ -7,12 +7,6 @@ $(document).ready(function(){
     $("#app").html(app_html);
 });
 
-function changePageTitle(page_title){
-
-    $('#page-title').text(page_title);
-    document.title=page_title;
-}
-
 $.fn.serializeObject = function()
 {
     var o = {};
