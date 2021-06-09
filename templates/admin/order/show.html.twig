@@ -1,8 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/crud_base.thml.twig' %}
 
 {% block title %}Order{% endblock %}
 
-{% block body %}
+{% block navbar %} {% include 'admin/navbar_admin_orders.html.twig' %} {% endblock %}
+
+{% block content %}
 
     <h1 align="center">Order</h1>
 
@@ -131,9 +133,17 @@
         {% endif %}
     </div>
 
-    <a href="{{ path('order_index') }}">back to list</a>
+    <p align="center">
+        <a href="{{ path('order_index') }}">
+            <button class="btn btn-primary">Back to list</button>
+        </a>
+    </p>
 
-    <a href="{{ path('order_edit', {'id': order.id}) }}">edit</a>
+    <p align="center">
+        <a href="{{ path('order_edit', {'id': order.id}) }}">
+            <button class="btn btn-success">Edit</button>
+        </a>
+    </p>
 
     {{ include('admin/order/_delete_form.html.twig') }}
 {% endblock %}
