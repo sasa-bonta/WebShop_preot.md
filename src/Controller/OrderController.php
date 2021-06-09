@@ -167,7 +167,7 @@ class OrderController extends AbstractController
 
         }
 
-        return $this->redirectToRoute('order_edit', ['id' => $order->getId()]);
+        return $this->redirectToRoute('order_index');
     }
 
     /**
@@ -186,6 +186,6 @@ class OrderController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
         }
 
-        return $this->redirectToRoute('order_edit', ['id' => $order->getId()]);
+        return $this->redirectToRoute('order_index');
     }
 }

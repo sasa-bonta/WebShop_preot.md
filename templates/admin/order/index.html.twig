@@ -21,8 +21,9 @@
                         <th>Id</th>
                         <th>Total</th>
                         <th>Status</th>
-                        <th>CreatedAt</th>
-                        <th>Payment.type</th>
+                        <th>Created at</th>
+                        <th>Payment type</th>
+                        <th></th>
                         <th>actions</th>
                     </tr>
                     </thead>
@@ -35,12 +36,18 @@
                             <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                             <td>{{ order.payment.type }}</td>
                             <td>
-                                <a href="{{ path('order_show', {'id': order.id}) }}">
-                                    <button class="btn btn-success">Show</button>
-                                </a>
-                                <a href="{{ path('order_edit', {'id': order.id}) }}">
-                                    <button class="btn btn-warning">Edit</button>
-                                </a>
+                                {{ include('admin/order/_next_status.html.twig') }}
+                            </td>
+                            <td>
+                                <div id="actions" style="vertical-align:middle;">
+                                    <a href="{{ path('order_show', {'id': order.id}) }}">
+                                        <button class="btn btn-success">Show</button>
+                                    </a>
+                                    <a href="{{ path('order_edit', {'id': order.id}) }}">
+                                        <button class="btn btn-warning">Edit</button>
+                                    </a>
+
+                                </div>
                             </td>
                         </tr>
                     {% else %}
