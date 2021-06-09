@@ -66,6 +66,7 @@ function readItemsTemplate(data) {
     $("#page-content").html(read_items_html);
 
     $("#checkout").on('click', function () {
+        $("#checkout").hide();
         fetch("/order/item/new")
             .then(function (response) {
                 response
@@ -77,5 +78,6 @@ function readItemsTemplate(data) {
             .catch(function () {
                 console.log("You died.")
             });
+        $("#card-details").hide(); //@fixme ???????????
     });
 }

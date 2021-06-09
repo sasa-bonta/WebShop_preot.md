@@ -22,22 +22,22 @@
 {{ form_widget(form.address.phoneNumber) }}
 
 <br>
-<h3 align="center">Payment</h3>
-<br>
-<h5>Payment options</h5>
+<h3 align="center">Payment options</h3>
 {{ form_widget(form.payment.type) }}
 
-<br>
-<h3 align="center">Card-details</h3>
-<br>
-<h5>Code</h5>
-{{ form_widget(form.payment.card.code) }}
-<br>
-<h5>CVV</h5>
-{{ form_widget(form.payment.card.cvv) }}
-<br>
-<h5>Expires at</h5>
-{{ form_widget(form.payment.card.expiresAt) }}
+<div id="card-details">
+    <br>
+    <h3 align="center">Card-details</h3>
+    <br>
+    <h5>Code</h5>
+    {{ form_widget(form.payment.card.code) }}
+    <br>
+    <h5>CVV</h5>
+    {{ form_widget(form.payment.card.cvv) }}
+    <br>
+    <h5>Expires at</h5>
+    {{ form_widget(form.payment.card.expiresAt) }}
+</div>
 
 <br>
 <p align="center">

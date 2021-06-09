@@ -19,7 +19,7 @@ class OrderType extends AbstractType
                     'Sent' => "sent",
                     'Arrived' => "arrived"
                 ],
-                'label' => 'Status'
+                'label' => 'Status',
             ])
             ->add('address', AddressType::class)
             ->add('payment', PaymentDetailsType::class);
