@@ -61,7 +61,6 @@ class OrderController extends AbstractController
         $user = $this->getUser();
         $order = new Order();
         $form = $this->createForm(OrderType::class, $order);
-        $form->remove('status');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -158,8 +157,8 @@ class OrderController extends AbstractController
             $statNum = array_search($order->getStatus(), $this->STATUS);
 
             if ($statNum < 3) {
-                if (!empty($this->STATUS[$statNum++])) {
-                    $order->setStatus($this->STATUS[$statNum++]);
+                if (!empty($this->STATUS[$statNum + 1])) {
+                    $order->setStatus($this->STATUS[$statNum + 1]);
                 }
             }
             $this->getDoctrine()->getManager()->flush();
@@ -178,8 +177,8 @@ class OrderController extends AbstractController
             $statNum = array_search($order->getStatus(), $this->STATUS);
 
             if ($statNum > 1) {
-                if (!empty($this->STATUS[$statNum--])) {
-                    $order->setStatus($this->STATUS[$statNum--]);
+                if (!empty($this->STATUS[$statNum - 1])) {
+                    $order->setStatus($this->STATUS[$statNum - 1]);
                 }
             }
             $this->getDoctrine()->getManager()->flush();
