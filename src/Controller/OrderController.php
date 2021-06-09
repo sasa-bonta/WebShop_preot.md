@@ -6,6 +6,7 @@ use App\Entity\Order;
 use App\Entity\OrderItem;
 use App\Form\OrderType;
 use App\Repository\CartItemRepository;
+use App\Repository\OrderItemRepository;
 use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
 use App\SearchCriteria\OrderSearchCriteria;
@@ -127,10 +128,14 @@ class OrderController extends AbstractController
     /**
      * @Route("/{id}", name="order_delete", methods={"POST"})
      */
-    public function delete(Request $request, Order $order): Response
+    public function delete(Request $request, Order $order, OrderItemRepository $itemRepository): Response
     {
         if ($this->isCsrfTokenValid('delete' . $order->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+            $items = $itemRepository->findBy(['order' => $order->getId()]);
+            foreach ($items as $item) {
+                $entityManager->remove($item);
+            }
             $entityManager->remove($order);
             $entityManager->flush();
         }
