@@ -79,9 +79,11 @@ class OrderController extends AbstractController
                 $orderItem->setProductCode($item->getCode());
                 $orderItem->setPrice($product->getPrice());
                 $orderItem->setAmount($item->getAmount());
-                $entityManager->flush();
                 $order->addItem($orderItem);
                 $total += $orderItem->getPrice() * $orderItem->getAmount();
+                $product->setAvailableAmount($product->getAvailableAmount() - $orderItem->getAmount());
+                $entityManager->remove($item);
+                $entityManager->flush();
             }
 
             $order->setTotal($total);
