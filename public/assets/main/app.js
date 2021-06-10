@@ -23,3 +23,9 @@ $.fn.serializeObject = function()
     });
     return o;
 };
+
+$('.js-datepicker').datepicker({
+    format: 'yyyy-mm',
+    minViewMode: 1,
+    autoclose : true
+});
