@@ -19,12 +19,12 @@ $("#order_payment_type_1").on('click', function () {
     $('#order_payment_card_expiresAt').attr("required", true);
 });
 
-const urlParams = new URLSearchParams(window.location.search);
+let urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has("success")) {
     const myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
         backdrop: true
     })
     myModal.show();
+    window.history.replaceState({}, document.title, location.protocol + '//' + location.host + location.pathname);
 }
-urlParams.delete("success");
 
