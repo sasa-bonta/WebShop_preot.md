@@ -1,8 +1,9 @@
 $( "#order_payment_type_0" ).trigger( "click" );
 
 $("#checkout").on('click', function () {
-    $("#checkout-fragment").show();
-    $("#card-details").hide();
+    $('#checkout-fragment').show();
+    $('#card-details').hide();
+    $('#checkout').hide();
 });
 
 $("#order_payment_type_0").on('click', function () {
