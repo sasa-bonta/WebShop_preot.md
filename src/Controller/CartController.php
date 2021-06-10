@@ -48,38 +48,12 @@ class CartController extends AbstractController
                 $total += $orderItem->getPrice() * $orderItem->getAmount();
             }
             $order->setTotal($total);
-
+            // @todo 10/06/2021 delete all from cart
             return $this->redirectToRoute('cart_index', ['success' => true]);
         }
         return $this->render('main/cart/cart.html.twig', [
             'order' => $order,
             'form' => $form->createView()
         ]);
-    }
-
-    /**
-     * @Route("/order", name="cart_order", methods={"GET"})
-     */
-    public function placeOrder(): Response
-    {
-//        $form = $this->createForm(OrderType::class, $order);
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            $entityManager = $this->getDoctrine()->getManager();
-//            $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
-//
-//            $order->setCreatedAt($dateTime);
-//            $order->setStatus("in process");
-//
-//            // @todo 10/06/2021 empty card
-//
-//            $entityManager->persist($order);
-//            $entityManager->flush();
-//
-//            return $this->redirectToRoute('cart_index');
-//        }
-
-        return $this->render('main/order/place_order.html.twig');
     }
 }

@@ -21,7 +21,8 @@ class CreditCardDetailsType extends AbstractType
                 DateType::class, [
                 'widget' => 'single_text',
                     'days' => [1],
-                    'years' => range(date("Y"), date("Y") + 12)
+                    'years' => range(date("Y"), date("Y") + 12),
+                    'required' => false
             ]);
     }
 

@@ -1,4 +1,3 @@
-$('#order_payment_card_expiresAt').attr("required", false);
 $( "#order_payment_type_0" ).trigger("click");
 
 $("#checkout").on('click', function () {
