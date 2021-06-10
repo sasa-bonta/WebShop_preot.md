@@ -72,20 +72,18 @@ class OrderController extends AbstractController
             $order->setUserId($user->getId());
             $order->setStatus("in process");
             $items = $cartRepository->findBy(['userId' => $user->getId()]);
+
             foreach ($items as $item) {
-                $code = $item->getCode();
-                $product = $productRepository->findOneBy(['code' => $code]);
+                $product = $productRepository->findOneBy(['code' => $item->getCode()]);
                 $orderItem = new OrderItem();
-                $orderItem->setProductCode($code);
+                $orderItem->setProductCode($item->getCode());
                 $orderItem->setPrice($product->getPrice());
                 $orderItem->setAmount($item->getAmount());
-
-                $em = $this->getDoctrine()->getManager();
-                $em->flush();
-
+                $entityManager->flush();
                 $order->addItem($orderItem);
                 $total += $orderItem->getPrice() * $orderItem->getAmount();
             }
+
             $order->setTotal($total);
             $entityManager->persist($order);
             $entityManager->flush();
