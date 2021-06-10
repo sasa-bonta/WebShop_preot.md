@@ -8,8 +8,6 @@ use App\Entity\OrderItem;
 use App\Form\OrderType;
 use App\Repository\CartItemRepository;
 use App\Repository\ProductRepository;
-use DateTime;
-use DateTimeZone;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,37 +29,10 @@ class CartController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            var_dump($order);
-            die;
-            return $this->forward('App\Controller\CartController::placeOrder');
-        }
-        return $this->render('main/cart/cart.html.twig', [
-            'order' => $order,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/order", name="cart_order", methods={"GET","POST"})
-     */
-    public function placeOrder(Request $request, CartItemRepository $cartRepository, ProductRepository $productRepository): Response
-    {
-        echo 'hello';
-        die;
-        $user = $this->getUser();
-        $order = new Order();
-        $form = $this->createForm(OrderType::class, $order);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
             $total = 0;
+            $items = $cartRepository->findBy(['userId' => $this->getUser()->getId()]);
+            $order->setUserId($this->getUser()->getId());
 
-            $order->setCreatedAt($dateTime);
-            $order->setUserId($user->getId());
-            $order->setStatus("in process");
-            $items = $cartRepository->findBy(['userId' => $user->getId()]);
             foreach ($items as $item) {
                 $code = $item->getCode();
                 $product = $productRepository->findOneBy(['code' => $code]);
@@ -77,14 +48,38 @@ class CartController extends AbstractController
                 $total += $orderItem->getPrice() * $orderItem->getAmount();
             }
             $order->setTotal($total);
-            $entityManager->persist($order);
-            $entityManager->flush();
 
-            return $this->redirectToRoute('cart_index');
+            return $this->redirectToRoute('cart_index', ['success' => true]);
         }
-        return $this->render('main/order/place_order.html.twig', [
+        return $this->render('main/cart/cart.html.twig', [
             'order' => $order,
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/order", name="cart_order", methods={"GET"})
+     */
+    public function placeOrder(): Response
+    {
+//        $form = $this->createForm(OrderType::class, $order);
+//        $form->handleRequest($request);
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $entityManager = $this->getDoctrine()->getManager();
+//            $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
+//
+//            $order->setCreatedAt($dateTime);
+//            $order->setStatus("in process");
+//
+//            // @todo 10/06/2021 empty card
+//
+//            $entityManager->persist($order);
+//            $entityManager->flush();
+//
+//            return $this->redirectToRoute('cart_index');
+//        }
+
+        return $this->render('main/order/place_order.html.twig');
     }
 }
