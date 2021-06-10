@@ -18,3 +18,9 @@ $("#order_payment_type_1").on('click', function () {
     $('#order_payment_card_cvv').attr("required", true);
     // $('')
 });
+
+$('#placed-order').on('click', function () {
+    $('#card-details').hide();
+    $('#order_payment_card_code').attr("required", false);
+    $('#order_payment_card_cvv').attr("required", false);
+});
