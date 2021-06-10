@@ -23,11 +23,15 @@ class CartApiController extends AbstractController
     {
         $cart = $cartItemRepository->findItemsByUserId($this->getUserId());
         $cartDetailed = [];
+        $i = 0;
+
         foreach ($cart as $cartItem) {
-            $cartDetailed [] = [
+            $cartDetailed [$i] = [
                 'product' => $productRepository->findOneBy(['code' => $cartItem['code']]),
                 'amount' => $cartItem['amount']
             ];
+            if ($cartDetailed[$i]['amount'] > $cartDetailed[$i]['product']->getAvailableAmount()) $cartDetailed[$i]['amount'] = $cartDetailed[$i]['product']->getAvailableAmount();
+            $i++;
         }
 
         return $this->json($cartDetailed);
