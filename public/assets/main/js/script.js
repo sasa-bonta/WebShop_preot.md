@@ -61,6 +61,13 @@ function setCategory(value) {
     window.location.search = urlSearchParams;
 }
 
+function setStatus(value) {
+    var urlSearchParams = new URLSearchParams(window.location.search);
+    urlSearchParams.set('status', value);
+    urlSearchParams.set('page', 1);
+    window.location.search = urlSearchParams;
+}
+
 function setPage(value) {
     var urlSearchParams = new URLSearchParams(window.location.search);
     urlSearchParams.set('page', value);

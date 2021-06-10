@@ -20,7 +20,7 @@ use DateTime;
 use DateTimeZone;
 
 /**
- * @Route("/order")
+ * @Route("/admin/order")
  */
 class OrderController extends AbstractController
 {
@@ -47,7 +47,8 @@ class OrderController extends AbstractController
         }
 
         return $this->render('admin/order/index.html.twig', [
-            'orders' => $orderRepository->findAll(),
+            'orders' => $orderRepository->search($searchOrder),
+            'status' => $this->STATUS,
             'length' => $length,
             'limit' => $searchOrder->getLimit()
         ]);
