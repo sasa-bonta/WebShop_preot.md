@@ -15,14 +15,39 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+/**
+ * @Route("/cart")
+ */
 class CartController extends AbstractController
 {
     /**
-     * @Route("/cart", name="cart_index", methods={"GET","POST"})
+     * @Route("/", name="cart_index", methods={"GET","POST"})
      */
     public function index(Request $request, CartItemRepository $cartRepository, ProductRepository $productRepository): Response
     {
+        $order = new Order();
+        $form = $this->createForm(OrderType::class, $order);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            var_dump($order);
+            die;
+            return $this->forward('App\Controller\CartController::placeOrder');
+        }
+        return $this->render('main/cart/cart.html.twig', [
+            'order' => $order,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/order", name="cart_order", methods={"GET","POST"})
+     */
+    public function placeOrder(Request $request, CartItemRepository $cartRepository, ProductRepository $productRepository): Response
+    {
+        echo 'hello';
+        die;
         $user = $this->getUser();
         $order = new Order();
         $form = $this->createForm(OrderType::class, $order);
@@ -57,7 +82,7 @@ class CartController extends AbstractController
 
             return $this->redirectToRoute('cart_index');
         }
-        return $this->render('main/cart/cart.html.twig', [
+        return $this->render('main/order/place_order.html.twig', [
             'order' => $order,
             'form' => $form->createView(),
         ]);

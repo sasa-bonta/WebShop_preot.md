@@ -38,7 +38,7 @@ function readItemsTemplate(data) {
         `;
     });
 
-    if (window.location.href === 'http://localhost:8000/cart') {
+    if ($('body').data('route-name').indexOf('cart_index') === 0) {
         $("#cart-container").css("overflow-y", "hidden").css("height", "auto");
     }
 
