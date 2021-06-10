@@ -28,3 +28,9 @@ if (urlParams.has("success")) {
     window.history.replaceState({}, document.title, location.protocol + '//' + location.host + location.pathname);
 }
 
+if (!$('page-content').next().has('table').length) {
+    $('#checkout').show();
+} else {
+    $('#checkout').hide();
+}
+
