@@ -58,8 +58,6 @@ class CartController extends AbstractController
             $entityManager->persist($order);
             $entityManager->flush();
 
-            // @todo 10/06/2021 delete all from cart
-            // @todo 11/06/2021 subtract from quantity of products
             // @todo 11/06/2021 errors in form
             // @todo 11/06/2021 validate form (card code, cvv...)
 

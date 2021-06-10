@@ -132,14 +132,26 @@ class OrderController extends AbstractController
     /**
      * @Route("/{id}", name="order_delete", methods={"POST"})
      */
-    public function delete(Request $request, Order $order, OrderItemRepository $itemRepository): Response
+    public function delete(Request $request, Order $order, OrderItemRepository $itemRepository, ProductRepository $productRepository): Response
     {
         if ($this->isCsrfTokenValid('delete' . $order->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $items = $itemRepository->findBy(['order' => $order->getId()]);
-            foreach ($items as $item) {
-                $entityManager->remove($item);
+
+            if ($order->getStatus() === 'in process') {
+                foreach ($items as $item) {
+                    $product = $productRepository->findOneBy(['code' => $item->getProductCode()]);
+                    if (isset($product)) {
+                        $product->setAvailableAmount($product->getAvailableAmount() + $item->getAmount());
+                    }
+                    $entityManager->remove($item);
+                }
+            } else {
+                foreach ($items as $item) {
+                    $entityManager->remove($item);
+                }
             }
+
             $entityManager->remove($order);
             $entityManager->flush();
         }

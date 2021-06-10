@@ -144,6 +144,8 @@
             <button class="btn btn-success">Edit</button>
         </a>
     </p>
-
+    {% if order.status == 'in process' or order.status == 'arrived' %}
     {{ include('admin/order/_delete_form.html.twig') }}
+    {% endif %}
+
 {% endblock %}
