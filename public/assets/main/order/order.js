@@ -1,8 +1,8 @@
-$( "#order_payment_type_0" ).trigger( "click" );
+$('#order_payment_card_expiresAt').attr("required", false);
+$( "#order_payment_type_0" ).trigger("click");
 
 $("#checkout").on('click', function () {
     $('#checkout-fragment').show();
-    $('#card-details').hide();
     $('#checkout').hide();
 });
 
