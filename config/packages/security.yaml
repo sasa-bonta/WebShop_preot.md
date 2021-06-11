@@ -58,6 +58,6 @@ security:
   # Note: Only the *first* access control that matches will be used
   access_control:
     - { path: ^/admin, roles: ROLE_ADMIN }
-    - { path: ^/api/v1/products, roles: ROLE_USER, methods: [ GET ] }
-    - { path: ^/api/v1/products, roles: ROLE_ADMIN }
+    - { path: ^/api/v1/, roles: ROLE_USER, methods: [ GET ] }
+    - { path: ^/api/v1/, roles: ROLE_ADMIN }
     - { path: ^/*, roles: IS_AUTHENTICATED_ANONYMOUSLY }
