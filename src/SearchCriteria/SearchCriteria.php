@@ -10,7 +10,9 @@ use Exception;
 
 class SearchCriteria
 {
+    protected $id;
     protected $name;
+    protected $status;
     protected $page;
     protected $limit;
     protected $order;
@@ -25,7 +27,9 @@ class SearchCriteria
      */
     public function __construct(array $data)
     {
+        $this->id = $data['id'] ?? null;
         $this->name = $data['name'] ?? null;
+        $this->status = $data['status'] ?? null;
         $this->page = $data['page'] ?? static::DEFAULT_PAGE;
         $this->limit = $data['limit'] ?? static::DEFAULT_LIMIT;
         $order = $data['order'] ?? static::DEFAULT_ORDER;
@@ -44,6 +48,16 @@ class SearchCriteria
         }
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId(string $id)
+    {
+        $this->id = $id;
+    }
+
     public function getName()
     {
         return $this->name;
@@ -52,6 +66,16 @@ class SearchCriteria
     public function setName(string $name)
     {
         $this->name = $name;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status)
+    {
+        $this->status = $status;
     }
 
     public function getPage()

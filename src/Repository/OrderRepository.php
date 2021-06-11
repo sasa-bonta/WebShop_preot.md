@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Order;
 use App\SearchCriteria\OrderSearchCriteria;
+use App\SearchCriteria\SearchCriteria;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -20,19 +21,44 @@ class OrderRepository extends ServiceEntityRepository
         parent::__construct($registry, Order::class);
     }
 
+    public function search(OrderSearchCriteria $searchCriteria): array
+    {
+        $offset = ($searchCriteria->getPage() - 1) * $searchCriteria->getLimit();
+
+        $query = $this->createQueryBuilder('o');
+
+        if ($searchCriteria->getId() !== null) {
+            $query = $query
+                ->where('o.id LIKE :id')
+                ->setParameter('id', '%' . $searchCriteria->getId() . '%');
+        }
+
+        if ($searchCriteria->getStatus() !== null) {
+            $query = $query
+                ->andWhere('o.status LIKE :status')
+                ->setParameter('status', $searchCriteria->getStatus());
+        }
+
+        return $query
+            ->orderBy('o.' . $searchCriteria->getOrder(), $searchCriteria->getAscDesc())
+            ->setFirstResult($offset)
+            ->setMaxResults($searchCriteria->getLimit())
+            ->getQuery()
+            ->getResult();
+    }
+
     /**
      * @throws \Doctrine\ORM\NonUniqueResultException
      * @throws \Doctrine\ORM\NoResultException
      */
     public function countTotal(OrderSearchCriteria $searchCriteria)
     {
-        // @fixme search by ????
         $query = $this->createQueryBuilder('o')
             ->select('count(o.id)');
-        if ($searchCriteria->getName() !== null) {
+        if ($searchCriteria->getId() !== null) {
             $query = $query
-                ->where('o.username LIKE :param OR  u.email LIKE :param')
-                ->setParameter('param', '%' . $searchCriteria->getName() . '%');
+                ->where('o.id LIKE :id')
+                ->setParameter('id', '%' . $searchCriteria->getId() . '%');
         }
         return $query
             ->getQuery()
