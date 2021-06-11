@@ -1,16 +1,15 @@
 function readItemsTemplate(data) {
 
-
-    var read_items_html = ``,
-        total = 0;
+    var read_items_html = ``;
+    var total = 0;
 
     if (data.length > 0) {
         read_items_html += `
-        <table class='cart-table table'>
+        <table class='cart-table table' id="cart-content">
             <tr>
                 <th class='w-5-pct' colspan="2" style="text-align: center">Product</th>
                 <th class='w-5-pct' style="text-align: center">Price</th>
-                <th class='w-10-pct' style="text-align: center">Qty</th>
+                <th class='w-5-pct' style="text-align: center">Qty</th>
                 <th class='w-5-pct' style="text-align: center">Total</th>
                 <th class='w-5-pct' style="text-align: center"></th>
              </tr>`;
@@ -44,9 +43,8 @@ function readItemsTemplate(data) {
         `;
     });
 
-    if (window.location.href === 'http://localhost:8000/cart') {
+    if ($('body').data('route-name').indexOf('cart_index') === 0) {
         $("#cart-container").css("overflow-y", "hidden").css("height", "auto");
-        $(".cart-image").css("width", "100px").css("height", "100px");
     }
 
     if (total === 0) {

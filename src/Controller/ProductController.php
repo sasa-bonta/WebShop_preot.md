@@ -29,6 +29,7 @@ class ProductController extends AbstractController
             throw new BadRequestHttpException($e->getMessage());
         }
 
+
         $length = $productRepository->countTotal($searchCriteria);
         if ($searchCriteria->getPage() > ceil($length / $searchCriteria->getLimit()) && $searchCriteria->getPage() > 1) {
             throw new BadRequestHttpException("Page limit exceed");

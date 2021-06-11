@@ -4,32 +4,31 @@ var list = document.getElementsByClassName('paginationButtons'),
     btn = document.createElement("div");
 
 var element1 = document.getElementById("pagBtn1");
-
 li.className = 'paginationButtons page-item';
 btn.className = 'page-link';
+
 btn.appendChild(document.createTextNode("..."));
 
 li.appendChild(btn);
-
 if (!(window.location.href.includes('page'))) {
     element1.style.setProperty('background', 'black');
-    element1.style.setProperty('color', 'white');
 
+    element1.style.setProperty('color', 'white');
     for (let i = 4; i <= list.length - 2; i++) {
         list[i].style.setProperty('display', 'none');
-    }
 
+    }
     if (list.length > 5) {
         ul.insertBefore(li, ul.childNodes[list.length]);
     }
 } else {
     var url = new URL(window.location.href);
+
     var page = url.searchParams.get("page");
 
     var element2 = document.getElementById("pagBtn" + page);
-
-
     element1.style.setProperty('background', 'none');
+
     element1.style.setProperty('color', 'black');
 
     element2.style.setProperty('background', 'black');

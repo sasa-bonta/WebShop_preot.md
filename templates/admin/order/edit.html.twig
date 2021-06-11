@@ -1,0 +1,32 @@
+{% extends 'admin/crud_base.thml.twig' %}
+
+{% block title %}Edit Order{% endblock %}
+
+{% block navbar %} {% include 'admin/navbar_admin_orders.html.twig' %} {% endblock %}
+
+{% block content %}
+    <h1 align="center">Edit Order</h1>
+
+    <h5><b>Status: {{ order.status }}</b></h5>
+    <p align="center">
+        {{ include('admin/order/_next_status.html.twig') }}
+
+        {{ include('admin/order/_prev_status.html.twig') }}
+    </p>
+    <br>
+
+    {{ include('admin/order/_form.html.twig') }}
+
+    <p align="center">
+        <a href="{{ path('order_index') }}">
+            <button class="btn btn-primary">Back to list</button>
+        </a>
+    </p>
+
+    {% if order.status == 'in process' or order.status == 'arrived' %}
+        {{ include('admin/order/_delete_form.html.twig') }}
+    {% endif %}
+
+    <script src="{{ asset('assets/main/order/order.js') }}"></script>
+
+{% endblock %}

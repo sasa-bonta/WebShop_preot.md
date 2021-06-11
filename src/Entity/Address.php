@@ -2,21 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\AddressRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=AddressRepository::class)
+ * @ORM\Embeddable()
  */
 class Address
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -42,9 +34,21 @@ class Address
      */
     private $phoneNumber;
 
-    public function getId(): ?int
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $recipient;
+
+    public function getRecipient(): ?string
     {
-        return $this->id;
+        return $this->recipient;
+    }
+
+    public function setRecipient(string $recipient): self
+    {
+        $this->recipient = $recipient;
+
+        return $this;
     }
 
     public function getCountry(): ?string

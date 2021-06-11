@@ -1,0 +1,10 @@
+{% if order.status != 'arrived' %}
+<form method="post" action="{{ path('order_next_status', {'id': order.id}) }}"
+      onsubmit="return confirm('Are you sure you want to move this item\'s status to next?');">
+
+    <input type="hidden" name="_token" value="{{ csrf_token('nextStatus' ~ order.id) }}">
+    <p align="center">
+        <button class="btn btn-success">Next status</button>
+    </p>
+</form>
+{% endif %}

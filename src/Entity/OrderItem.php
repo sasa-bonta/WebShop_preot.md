@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\OrderItemRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\ManyToOne;
 
 /**
  * @ORM\Entity(repositoryClass=OrderItemRepository::class)
@@ -16,6 +17,11 @@ class OrderItem
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ManyToOne(targetEntity="App\Entity\Order", inversedBy="items")
+     */
+    private $order;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -32,6 +38,16 @@ class OrderItem
      */
     private $price;
 
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    public function setOrder(?Order $order): void
+    {
+        $this->order = $order;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -42,7 +58,7 @@ class OrderItem
         return $this->productCode;
     }
 
-    public function setProductCode(string $productCode): self
+    public function setProductCode($productCode): self
     {
         $this->productCode = $productCode;
 

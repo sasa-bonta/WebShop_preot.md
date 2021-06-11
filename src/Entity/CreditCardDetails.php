@@ -2,40 +2,27 @@
 
 namespace App\Entity;
 
-use App\Repository\CreditCardDetailsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CreditCardDetailsRepository::class)
+ * @ORM\Embeddable()
  */
 class CreditCardDetails
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $code;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=3, nullable=true)
      */
     private $cvv;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     private $expiresAt;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getCode(): ?string
     {
@@ -49,12 +36,12 @@ class CreditCardDetails
         return $this;
     }
 
-    public function getCvv(): ?int
+    public function getCvv(): ?string
     {
         return $this->cvv;
     }
 
-    public function setCvv(int $cvv): self
+    public function setCvv(string $cvv): self
     {
         $this->cvv = $cvv;
 
@@ -66,7 +53,7 @@ class CreditCardDetails
         return $this->expiresAt;
     }
 
-    public function setExpiresAt(\DateTimeInterface $expiresAt): self
+    public function setExpiresAt(?\DateTimeInterface $expiresAt): self
     {
         $this->expiresAt = $expiresAt;
 

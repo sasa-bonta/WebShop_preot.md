@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\OrderRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * @ORM\Entity(repositoryClass=OrderRepository::class)
@@ -19,17 +21,17 @@ class Order
     private $id;
 
     /**
-     * @ORM\Column(type="array")
+     * @OneToMany(targetEntity="App\Entity\OrderItem", cascade="persist", mappedBy="order")
      */
-    private $items = [];
+    private $items;
 
     /**
-     * @ORM\Column(type="object")
+     * @ORM\Embedded(class="PaymentDetails")
      */
-    private $paymentDetails;
+    private $payment;
 
     /**
-     * @ORM\Column(type="object")
+     * @ORM\Embedded(class="Address")
      */
     private $address;
 
@@ -39,21 +41,45 @@ class Order
     private $total;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="string")
      */
-    private $status = [];
+    private $status;
 
     /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $userId;
+
+    public function __construct()
+    {
+        $this->payment = new PaymentDetails();
+        $this->address = new Address();
+        $this->items = new ArrayCollection();
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->userId;
+    }
+
+    public function setUserId(?int $userId): self
+    {
+        $this->userId = $userId;
+
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getItems(): ?array
+    public function getItems()
     {
         return $this->items;
     }
@@ -65,16 +91,14 @@ class Order
         return $this;
     }
 
-    public function getPaymentDetails()
+    public function getPayment()
     {
-        return $this->paymentDetails;
+        return $this->payment;
     }
 
-    public function setPaymentDetails($paymentDetails): self
+    public function setPayment($payment): void
     {
-        $this->paymentDetails = $paymentDetails;
-
-        return $this;
+        $this->payment = $payment;
     }
 
     public function getAddress()
@@ -101,12 +125,12 @@ class Order
         return $this;
     }
 
-    public function getStatus(): ?array
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    public function setStatus(array $status): self
+    public function setStatus(string $status): self
     {
         $this->status = $status;
 
@@ -118,9 +142,27 @@ class Order
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function addItem(OrderItem $item): self
+    {
+        if (!$this->items->contains($item)) {
+            $this->items[] = $item;
+            $item->setOrder($this);
+        }
+
+        return $this;
+    }
+
+    public function removeItem(OrderItem $item): self
+    {
+        $this->items->removeElement($item);
+        $item->setOrder(null);
 
         return $this;
     }

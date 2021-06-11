@@ -1,0 +1,75 @@
+{{ form_start(form) }}
+
+{% if not form.vars.valid %}
+    {% for child in form.children %}
+        {% for error in child.vars.errors %}
+            <div class="alert alert-danger">
+                {{ form_errors(form.username) }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endif %}
+
+<br>
+<h3 align="center">Address</h3>
+<br>
+<h5>Country</h5>
+{{ form_widget(form.address.country) }}
+<br>
+<h5>State</h5>
+{{ form_widget(form.address.state) }}
+<br>
+<h5>City</h5>
+{{ form_widget(form.address.city) }}
+<br>
+<h5>Street & home number</h5>
+{{ form_widget(form.address.address) }}
+<br>
+<h5>Recipient</h5>
+{{ form_widget(form.address.recipient) }}
+<br>
+<h5>Phone number</h5>
+{{ form_widget(form.address.phoneNumber) }}
+
+<br>
+<h3 align="center">Payment options</h3>
+{{ form_widget(form.payment.type) }}
+
+<div id="card-details" style="display: none;">
+    <br>
+    <h3 align="center">Card-details</h3>
+    <br>
+    <h5>Code</h5>
+    {{ form_widget(form.payment.card.code) }}
+    <br>
+    <h5>CVV</h5>
+    {{ form_widget(form.payment.card.cvv) }}
+    <br>
+    <h5>Expires at</h5>
+    {% if errors.expiresAt is defined and errors.expiresAt is not null %}
+        <div class="alert alert-danger" id="expires-at-error">
+            <span class="d-block">
+                <span class="form-error-icon badge badge-danger text-uppercase">Error</span>
+                <span class="form-error-message">{{ errors.expiresAt }}</span>
+            </span>
+        </div>
+    {% endif %}
+    {{ form_widget(form.payment.card.expiresAt) }}
+</div>
+
+<br>
+<p align="center">
+    <button class="btn btn-success" type="submit">{{ button_label|default('Place order') }}</button>
+</p>
+<p align="center">
+    <button class="btn btn-warning" type="reset">{{ button_label|default('Reset') }}</button>
+</p>
+<br>
+{{ form_end(form) }}
+
+<script src="{{ asset('assets/main/js/jquery.mask.min.js') }}"></script>
+<script>
+    $('#order_payment_card_cvv').mask('000');
+    $('#order_address_phoneNumber').mask('+ 000 000 000 000 000 000');
+    $('#order_payment_card_code').mask('0000 0000 0000 0000');
+</script>

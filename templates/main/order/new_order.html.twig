@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Order{% endblock %}
+
+{% block body %}
+    <br>
+    <h1 align="center">Checkout</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                {# 2 columns #}
+            </div>
+            <div class="col-6">
+                {{ include('admin/order/_form.html.twig') }}
+            </div>
+            <div class="col-3">
+                {# 2 columns #}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

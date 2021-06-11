@@ -3,38 +3,27 @@
 namespace App\Entity;
 
 use App\Repository\PaymentDetailsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=PaymentDetailsRepository::class)
+ * @ORM\Embeddable()
  */
 class PaymentDetails
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $type;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Embedded(class="CreditCardDetails")
      */
-    private $currency;
+    private $card;
 
-    /**
-     * @ORM\Column(type="object")
-     */
-    private $details;
-
-    public function getId(): ?int
+    public function __construct()
     {
-        return $this->id;
+        $this->card = new CreditCardDetails();
     }
 
     public function getType(): ?string
@@ -49,27 +38,13 @@ class PaymentDetails
         return $this;
     }
 
-    public function getCurrency(): ?string
+    public function getCard()
     {
-        return $this->currency;
+        return $this->card;
     }
 
-    public function setCurrency(string $currency): self
+    public function setCard($card): void
     {
-        $this->currency = $currency;
-
-        return $this;
-    }
-
-    public function getDetails()
-    {
-        return $this->details;
-    }
-
-    public function setDetails($details): self
-    {
-        $this->details = $details;
-
-        return $this;
+        $this->card = $card;
     }
 }
