@@ -42,6 +42,3 @@ if (urlParams.has("success")) {
     myModal.show();
     window.history.replaceState({}, document.title, location.protocol + '//' + location.host + location.pathname);
 }
-
-
-
