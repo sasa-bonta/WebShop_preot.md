@@ -19,17 +19,11 @@ class ProductAdminSearchCriteria extends SearchCriteria
         }
     }
 
-    /**
-     * @return mixed|null
-     */
     public function getCategory()
     {
         return $this->category;
     }
 
-    /**
-     * @param mixed|null $category
-     */
     public function setCategory($category): void
     {
         $this->category = $category;

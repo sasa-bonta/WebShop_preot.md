@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Image;
-use App\SearchCriteria\SearchCriteria;
+use App\SearchCriteria\ImageSearchCriteria;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -20,7 +20,7 @@ class ImageRepository extends ServiceEntityRepository
         parent::__construct($registry, Image::class);
     }
 
-    public function search(SearchCriteria $searchCriteria)
+    public function search(ImageSearchCriteria $searchCriteria)
     {
         $offset = ($searchCriteria->getPage() - 1) * $searchCriteria->getLimit();
 
@@ -42,7 +42,7 @@ class ImageRepository extends ServiceEntityRepository
      * @throws \Doctrine\ORM\NonUniqueResultException
      * @throws \Doctrine\ORM\NoResultException
      */
-    public function countTotal(SearchCriteria $searchCriteria)
+    public function countTotal(ImageSearchCriteria $searchCriteria)
     {
         $query = $this->createQueryBuilder('i')
             ->select('count(i.id)');
