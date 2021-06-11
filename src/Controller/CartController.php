@@ -61,10 +61,6 @@ class CartController extends AbstractController
             $entityManager->persist($order);
             $entityManager->flush();
 
-            // @todo 11/06/2021 errors in form
-            // @todo 11/06/2021 validate form (card code, cvv...)
-            // @todo 11/06/2021 validate payement (card)
-
             return $this->redirectToRoute('cart_index', ['success' => true]);
         }
         return $this->render('main/cart/cart.html.twig', [

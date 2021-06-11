@@ -58,3 +58,8 @@
 </p>
 <br>
 {{ form_end(form) }}
+
+<script src="{{ asset('assets/main/js/jquery.mask.min.js') }}"></script>
+<script>
+    $('#order_payment_card_code').mask('0000 0000 0000 0000')
+</script>

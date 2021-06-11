@@ -3,8 +3,14 @@ $( "#order_payment_type_0" ).trigger("click");
 $("#checkout").on('click', function () {
     if ($('#cart-content').length) {
         $('#checkout-fragment').show();
+    } else {
+        // if to delete these 2 lines it will be funny.
+        // If the cart is empty the checkout button wil disappear
+        alert("Your cart is empty");
+        return;
     }
     $('#checkout').hide();
+
 });
 
 $("#order_payment_type_0").on('click', function () {
