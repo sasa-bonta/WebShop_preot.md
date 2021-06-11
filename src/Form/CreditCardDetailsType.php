@@ -18,11 +18,13 @@ class CreditCardDetailsType extends AbstractType
         $builder
             ->add('code', TextType::class, [
                 'attr' => ['pattern' => '[0-9]{4}[" "]?[0-9]{4}[" "]?[0-9]{4}[" "]?[0-9]{4}',
-                    'placeholder' => '1111 1111 1111 1111',]
+                    'placeholder' => '1111 1111 1111 1111',],
+                'required' => false
             ])
             ->add('cvv', TextType::class, [
                 'attr' => ['pattern' => '[0-9]{3}',
-                    'placeholder' => '111',]
+                    'placeholder' => '111',],
+                'required' => false
             ])
             ->add('expiresAt',
                 DateType::class, [

@@ -77,20 +77,22 @@ class OrderController extends AbstractController
             }
 
             // verifying card's expiration date
-            $expiresAt = new DateTime($order->getPayment()->getCard()->getExpiresAt()->format('Y-m-1 H:i:s.v'));
-            $now = new DateTime();
-            if ($expiresAt <= $now) {
-                $errors['expiresAt'] = "The credit card with indicated date is already expired";
-            }
-            if ($expiresAt > $now->modify('+10 year')) {
-                $errors['expiresAt'] = "Card with indicated expiration date cannot exist";
-            }
-            if (isset($errors)) {
-                return $this->render('main/cart/cart.html.twig', [
-                    'order' => $order,
-                    'form' => $form->createView(),
-                    'errors' => $errors
-                ]);
+            if ($order->getPayment()->getCard()->getExpiresAt() !== null) {
+                $expiresAt = new DateTime($order->getPayment()->getCard()->getExpiresAt()->format('Y-m-1 H:i:s.v'));
+                $now = new DateTime();
+                if ($expiresAt <= $now) {
+                    $errors['expiresAt'] = "The credit card with indicated date is already expired";
+                }
+                if ($expiresAt > $now->modify('+10 year')) {
+                    $errors['expiresAt'] = "Card with indicated expiration date cannot exist";
+                }
+                if (isset($errors)) {
+                    return $this->render('main/cart/cart.html.twig', [
+                        'order' => $order,
+                        'form' => $form->createView(),
+                        'errors' => $errors
+                    ]);
+                }
             }
 
             foreach ($items as $item) {
