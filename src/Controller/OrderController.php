@@ -76,6 +76,23 @@ class OrderController extends AbstractController
                 return $this->redirectToRoute('cart_index');
             }
 
+            // verifying card's expiration date
+            $expiresAt = new DateTime($order->getPayment()->getCard()->getExpiresAt()->format('Y-m-1 H:i:s.v'));
+            $now = new DateTime();
+            if ($expiresAt <= $now) {
+                $errors['expiresAt'] = "The credit card with indicated date is already expired";
+            }
+            if ($expiresAt > $now->modify('+10 year')) {
+                $errors['expiresAt'] = "Card with indicated expiration date cannot exist";
+            }
+            if (isset($errors)) {
+                return $this->render('main/cart/cart.html.twig', [
+                    'order' => $order,
+                    'form' => $form->createView(),
+                    'errors' => $errors
+                ]);
+            }
+
             foreach ($items as $item) {
                 $product = $productRepository->findOneBy(['code' => $item->getCode()]);
                 $orderItem = new OrderItem();
