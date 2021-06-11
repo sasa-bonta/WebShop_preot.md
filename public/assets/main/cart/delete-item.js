@@ -2,6 +2,9 @@ $(document).ready(function () {
 
     $(document).on('click', '.delete-item-btn', function () {
 
+        $('#checkout-fragment').hide();
+        $('#checkout').show();
+
         var product_code = $(this).attr('data-code');
 
         $.ajax({

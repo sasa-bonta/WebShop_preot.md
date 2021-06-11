@@ -61,7 +61,6 @@ class CartController extends AbstractController
             // @todo 11/06/2021 errors in form
             // @todo 11/06/2021 validate form (card code, cvv...)
             // @todo 11/06/2021 validate payement (card)
-            // @todo 11/06/2021 if cart if empty hide checkout
 
             return $this->redirectToRoute('cart_index', ['success' => true]);
         }
