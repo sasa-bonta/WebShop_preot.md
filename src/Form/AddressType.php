@@ -40,7 +40,7 @@ class AddressType extends AbstractType
             ])
             ->add('phoneNumber', TextType::class, [
                 'attr' => [
-                    'placeholder' => '+373 760 32 200', // настоящии номер анонимных наркоманов 🤣
+                    'placeholder' => '+ 373 760 32 200', // настоящии номер анонимных наркоманов 🤣
                     'pattern' => '[+]?[0-9" "]{5,25}',
 // @fixme 11/06/2021 doesnt work
 //                    'oninvalid' => "setCustomValidity('The phone number must contain only + (optional), numbers, and spaces (optional)')"
