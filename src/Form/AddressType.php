@@ -19,27 +19,31 @@ class AddressType extends AbstractType
             ->add('country', CountryType::class)
             ->add('state', TextType::class, [
                 'attr' => ['pattern' => '[a-zA-Z" "]*',
-                    'oninvalid' => "setCustomValidity('This field must contain only letters and space')"
+// @fixme 11/06/2021 doesnt work errors after rectification
+//                    'oninvalid' => "setCustomValidity('This field must contain only letters and space')"
                 ]
             ])
             ->add('city', TextType::class, [
                 'attr' => ['pattern' => '[a-zA-Z" "]*',
-                    'oninvalid' => "setCustomValidity('This field must contain only letters and space')"
+// @fixme 11/06/2021 doesnt work errors after rectification
+//                    'oninvalid' => "setCustomValidity('This field must contain only letters and space')"
                 ]
             ])
             ->add('address')
             ->add('recipient', TextType::class, [
                 'attr' => [
                     'placeholder' => 'Firstname Lastname',
-                    'pattern' => '[a-zA-Z\-\']{1,15}[" "]{1}[a-zA-Z\-\']{1,15}',
-                    'oninvalid' => "setCustomValidity('Enter your Firstname Lastname')"
+                    'pattern' => '[a-zA-Z-\']{1,15}[" "]{1}[a-zA-Z-\']{1,15}',
+// @fixme 11/06/2021 doesnt work errors after rectification
+//                    'oninvalid' => "setCustomValidity('Enter your Firstname Lastname')"
                 ]
             ])
             ->add('phoneNumber', TextType::class, [
                 'attr' => [
                     'placeholder' => '+373 760 32 200', // настоящии номер анонимных наркоманов 🤣
                     'pattern' => '[+]?[0-9" "]{5,25}',
-                    'oninvalid' => "setCustomValidity('The phone number must contain only + (optional), numbers, and spaces (optional)')"
+// @fixme 11/06/2021 doesnt work
+//                    'oninvalid' => "setCustomValidity('The phone number must contain only + (optional), numbers, and spaces (optional)')"
                 ]
             ]);
     }
