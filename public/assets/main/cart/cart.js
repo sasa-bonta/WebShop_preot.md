@@ -5,7 +5,7 @@ function readItemsTemplate(data) {
 
     if (data.length > 0) {
         read_items_html += `
-        <table class='cart-table table'>
+        <table class='cart-table table' id="cart-content">
             <tr>
                 <th class='w-5-pct' colspan="2" style="text-align: center">Product</th>
                 <th class='w-5-pct' style="text-align: center">Price</th>

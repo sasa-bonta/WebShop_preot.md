@@ -1,7 +1,9 @@
 $( "#order_payment_type_0" ).trigger("click");
 
 $("#checkout").on('click', function () {
-    $('#checkout-fragment').show();
+    if ($('#cart-content').length) {
+        $('#checkout-fragment').show();
+    }
     $('#checkout').hide();
 });
 
@@ -28,9 +30,5 @@ if (urlParams.has("success")) {
     window.history.replaceState({}, document.title, location.protocol + '//' + location.host + location.pathname);
 }
 
-if (!$('page-content').next().has('table').length) {
-    $('#checkout').show();
-} else {
-    $('#checkout').hide();
-}
+
 
