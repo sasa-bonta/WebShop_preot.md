@@ -1,4 +1,11 @@
-$( "#order_payment_type_0" ).trigger("click");
+if ($('#expires-at-error').length !== 0) {
+    $("#order_payment_type_1").trigger("click");
+    $('#checkout').hide();
+    $('#checkout-fragment').show();
+    $('#card-details').show();
+} else {
+    $( "#order_payment_type_0" ).trigger("click");
+}
 
 $("#checkout").on('click', function () {
     if ($('#cart-content').length) {

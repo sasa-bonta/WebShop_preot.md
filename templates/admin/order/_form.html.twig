@@ -46,6 +46,14 @@
     {{ form_widget(form.payment.card.cvv) }}
     <br>
     <h5>Expires at</h5>
+    {% if errors.expiresAt is defined and errors.expiresAt is not null %}
+        <div class="alert alert-danger" id="expires-at-error">
+            <span class="d-block">
+                <span class="form-error-icon badge badge-danger text-uppercase">Error</span>
+                <span class="form-error-message">{{ errors.expiresAt }}</span>
+            </span>
+        </div>
+    {% endif %}
     {{ form_widget(form.payment.card.expiresAt) }}
 </div>
 
@@ -61,6 +69,7 @@
 
 <script src="{{ asset('assets/main/js/jquery.mask.min.js') }}"></script>
 <script>
-    $('#order_address_phoneNumber').mask('+ 000 000 000 000 000 000')
-    $('#order_payment_card_code').mask('0000 0000 0000 0000')
+    $('#order_payment_card_cvv').mask('000');
+    $('#order_address_phoneNumber').mask('+ 000 000 000 000 000 000');
+    $('#order_payment_card_code').mask('0000 0000 0000 0000');
 </script>

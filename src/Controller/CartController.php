@@ -35,6 +35,7 @@ class CartController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
             $total = 0;
+            $errors = null;
 
             $order->setCreatedAt($dateTime);
             $order->setUserId($user->getId());
@@ -42,6 +43,23 @@ class CartController extends AbstractController
             $items = $cartRepository->findBy(['userId' => $user->getId()]);
             if (is_null($items)) {
                 return $this->redirectToRoute('cart_index');
+            }
+
+            // verifying card's expiration date
+            $expiresAt = new DateTime($order->getPayment()->getCard()->getExpiresAt()->format('Y-m-1 H:i:s.v'));
+            $now = new DateTime();
+            if ($expiresAt <= $now) {
+                $errors['expiresAt'] = "The credit card with indicated date is already expired";
+            }
+            if ($expiresAt > $now->modify('+10 year')) {
+                $errors['expiresAt'] = "Card with indicated expiration date cannot exist";
+            }
+            if (isset($errors)) {
+                return $this->render('main/cart/cart.html.twig', [
+                    'order' => $order,
+                    'form' => $form->createView(),
+                    'errors' => $errors
+                ]);
             }
 
             foreach ($items as $item) {
