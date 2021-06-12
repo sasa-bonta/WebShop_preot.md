@@ -5,17 +5,23 @@ security:
             algorithm: auto
 
     providers:
-        main_db_provider:
+        main_user_provider:
             entity:
                 class: App\Entity\User
                 property: username
                 # if you're using multiple entity managers
                 # manager_name: customer
 
-        api_products_provider:
+        api_user_provider:
             entity:
                 class: App\Entity\User
                 property: apiToken
+
+        combined_user_provider:
+            chain:
+                providers:
+                    - api_user_provider
+                    - main_user_provider
 
     firewalls:
         dev:
@@ -25,16 +31,14 @@ security:
         api:
             pattern: ^/api/v1 # всё API должно быть защищено, не только продукты
             guard:
-                provider: api_products_provider
+                provider: combined_user_provider
                 authenticators:
                     - App\Security\TokenAuthenticator
 
         main:
-            http-basic:
-                provider: main_db_provider
             anonymous: lazy
             guard:
-                provider: main_db_provider
+                provider: main_user_provider
                 authenticators:
                     - App\Security\LoginFormAuthenticator
             logout:
@@ -52,5 +56,8 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/api/v1/products, roles: ROLE_ADMIN }
+        - { path: ^/api/v1/cart,  roles: ROLE_USER }                            # user can read and modify his cart
+        - { path: ^/api/v1/order, roles: ROLE_ADMIN, methods: [GET, DELETE] }   # only admin can read and delete orders, but both can create them
+        - { path: ^/api/v1, roles: ROLE_USER, methods: [GET] }                  # user can read and search products
+        - { path: ^/api/v1, roles: ROLE_ADMIN }                                 # only admin can modify products and orders
         - { path: ^/*, roles: IS_AUTHENTICATED_ANONYMOUSLY }
