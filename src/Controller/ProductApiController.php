@@ -98,8 +98,8 @@ class ProductApiController extends AbstractController
 
         $formRequires = ['code', 'name', 'category', 'price', 'availableAmount', 'description'];
         foreach ($formRequires as $required) {
-            if (!array_key_exists($required, $parameters)) {
-                throw new BadRequestHttpException("The parameter " .$required ." is absent");
+            if (!array_key_exists($required, $parameters) || is_null($parameters[$required]) || $parameters[$required] === "") {
+                throw new BadRequestHttpException("The parameter " . $required . " is absent");
             }
         }
 
