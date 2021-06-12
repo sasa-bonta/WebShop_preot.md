@@ -5,6 +5,7 @@
 {% block navbar %} {% include 'admin/navbar_admin_orders.html.twig' %} {% endblock %}
 
 {% block content %}
+
     <h1 align="center">Create new Order</h1>
 
     {{ include('admin/order/_form.html.twig') }}
@@ -15,6 +16,6 @@
         </a>
     </p>
 
-    <script src="{{ asset('assets/main/order/order.js') }}"></script>
+    <script src="{{ asset('assets/main/order/admin_new_order.js') }}"></script>
 
 {% endblock %}

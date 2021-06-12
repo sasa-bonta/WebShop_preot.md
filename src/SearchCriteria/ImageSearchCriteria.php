@@ -4,7 +4,7 @@
 namespace App\SearchCriteria;
 
 
-use App\Exceptions\NonexistentOrderByColumn;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ImageSearchCriteria extends SearchCriteria
 {
@@ -15,7 +15,7 @@ class ImageSearchCriteria extends SearchCriteria
         parent::__construct($data);
 
         if ($this->order !== 'id') {
-            throw new NonexistentOrderByColumn("Nonexistent column name");
+            throw new BadRequestHttpException("Nonexistent column name");
         }
     }
 

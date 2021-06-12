@@ -11,8 +11,6 @@ $("#checkout").on('click', function () {
     if ($('#cart-content').length) {
         $('#checkout-fragment').show();
     } else {
-        // if to delete these 2 lines it will be funny.
-        // If the cart is empty the checkout button wil disappear
         alert("Your cart is empty");
         return;
     }

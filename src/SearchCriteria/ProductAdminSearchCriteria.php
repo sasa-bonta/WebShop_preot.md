@@ -3,7 +3,7 @@
 
 namespace App\SearchCriteria;
 
-use App\Exceptions\NonexistentOrderByColumn;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ProductAdminSearchCriteria extends SearchCriteria
 {
@@ -15,7 +15,7 @@ class ProductAdminSearchCriteria extends SearchCriteria
         $this->category = $data['category'] ?? null;
 
         if ($this->order !== 'created_at' && $this->order !== 'price') {
-            throw new NonexistentOrderByColumn("Nonexistent column name");
+            throw new BadRequestHttpException("Nonexistent column name");
         }
     }
 

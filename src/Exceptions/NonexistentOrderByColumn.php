@@ -4,10 +4,10 @@
 namespace App\Exceptions;
 
 
-use Exception;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Throwable;
 
-class NonexistentOrderByColumn extends Exception
+class NonexistentOrderByColumn extends BadRequestHttpException
 {
     public function __construct($message = "", $code = 0, Throwable $previous = null)
     {

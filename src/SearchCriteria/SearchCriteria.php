@@ -3,10 +3,8 @@
 
 namespace App\SearchCriteria;
 
-use App\Exceptions\InvalidLimitException;
-use App\Exceptions\InvalidPageException;
-use App\Exceptions\NonexistentOrderingType;
 use Exception;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class SearchCriteria
 {
@@ -32,15 +30,15 @@ class SearchCriteria
         list($this->order, $this->ascDesc) = explode(":", $order, 2);
 
         if ($this->page <= 0) {
-            throw new InvalidPageException("The page must be greater than zero");
+            throw new BadRequestHttpException("The page must be greater than zero");
         }
 
         if ($this->limit <= 0 || $this->limit > 128) {
-            throw new InvalidLimitException("The limit must be: 0 < limit < 129");
+            throw new BadRequestHttpException("The limit must be: 0 < limit < 129");
         }
 
         if ($this->ascDesc !== "ASC" && $this->ascDesc !== "DESC") {
-            throw new NonexistentOrderingType("Ordering type must be ASC or DESC");
+            throw new BadRequestHttpException("Ordering type must be ASC or DESC");
         }
     }
 

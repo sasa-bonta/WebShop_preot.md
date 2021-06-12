@@ -59,7 +59,7 @@
                     <td>{{ order.userId }}</td>
                 </tr>
                 <tr>
-                    <th>Payment.type</th>
+                    <th>Payment Type</th>
                     <td>{{ order.payment.type }}</td>
                 </tr>
                 </tbody>
@@ -69,27 +69,27 @@
             <table class="table">
                 <tbody>
                 <tr>
-                    <th>Address.country</th>
+                    <th>Country</th>
                     <td>{{ order.address.country }}</td>
                 </tr>
                 <tr>
-                    <th>Address.state</th>
+                    <th>State</th>
                     <td>{{ order.address.state }}</td>
                 </tr>
                 <tr>
-                    <th>Address.city</th>
+                    <th>City</th>
                     <td>{{ order.address.city }}</td>
                 </tr>
                 <tr>
-                    <th>Address.address</th>
+                    <th>Address</th>
                     <td>{{ order.address.address }}</td>
                 </tr>
                 <tr>
-                    <th>Address.recipient</th>
+                    <th>Recipient</th>
                     <td>{{ order.address.recipient }}</td>
                 </tr>
                 <tr>
-                    <th>Address.phoneNumber</th>
+                    <th>Phone Number</th>
                     <td>{{ order.address.phoneNumber }}</td>
                 </tr>
                 </tbody>
@@ -139,13 +139,16 @@
         </a>
     </p>
 
-    <p align="center">
-        <a href="{{ path('order_edit', {'id': order.id}) }}">
-            <button class="btn btn-success">Edit</button>
-        </a>
-    </p>
+    {% if order.status == 'in process' %}
+        <p align="center">
+            <a href="{{ path('order_edit', {'id': order.id}) }}">
+                <button class="btn btn-success">Edit</button>
+            </a>
+        </p>
+    {% endif %}
+
     {% if order.status == 'in process' or order.status == 'arrived' %}
-    {{ include('admin/order/_delete_form.html.twig') }}
+        {{ include('admin/order/_delete_form.html.twig') }}
     {% endif %}
 
 {% endblock %}

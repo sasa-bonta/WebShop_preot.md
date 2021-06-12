@@ -4,6 +4,8 @@
 namespace App\SearchCriteria;
 
 
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+
 class OrderSearchCriteria extends SearchCriteria
 {
     protected $id;
@@ -13,6 +15,9 @@ class OrderSearchCriteria extends SearchCriteria
         parent::__construct($data);
         $this->status = $data['status'] ?? null;
         $this->id = $data['id'] ?? null;
+        if ($this->order !== 'created_at') {
+            throw new BadRequestHttpException("Nonexistent column name");
+        }
     }
 
     public function getId()

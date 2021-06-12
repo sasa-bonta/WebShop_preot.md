@@ -4,14 +4,10 @@
 namespace App\Exceptions;
 
 
-use Exception;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Throwable;
 
-class InvalidLimitException extends Exception
+class InvalidLimitException extends BadRequestHttpException
 {
-    public function __construct($message = "", $code = 0, Throwable $previous = null)
-    {
-        parent::__construct($message, $code, $previous);
-    }
 
 }

@@ -3,8 +3,7 @@
 
 namespace App\SearchCriteria;
 
-use App\Exceptions\InvalidLimitException;
-use App\Exceptions\NonexistentOrderByColumn;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ProductSearchCriteria extends SearchCriteria
 {
@@ -17,11 +16,11 @@ class ProductSearchCriteria extends SearchCriteria
         $this->category = $data['category'] ?? null;
 
         if(!in_array($this->limit, [16, 32, 64, 128])) {
-            throw new InvalidLimitException("The limit is not in array");
+            throw new BadRequestHttpException("The limit is not in array");
         }
 
         if ($this->order !== 'created_at' && $this->order !== 'price') {
-            throw new NonexistentOrderByColumn("Nonexistent column name");
+            throw new BadRequestHttpException("Nonexistent column name");
         }
     }
 

@@ -4,14 +4,13 @@
 namespace App\Exceptions;
 
 
-use Exception;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Throwable;
 
-class NonexistentOrderingType extends Exception
+class NonexistentOrderingType extends BadRequestHttpException
 {
-    public function __construct($message = "", $code = 0, Throwable $previous = null)
+    public function __construct(?string $message = '', \Throwable $previous = null, int $code = 0, array $headers = [])
     {
-        parent::__construct($message, $code, $previous);
+        parent::__construct($message, $previous, $code, $headers);
     }
-
 }

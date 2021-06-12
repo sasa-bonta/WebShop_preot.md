@@ -41,10 +41,11 @@
                                     <a href="{{ path('order_show', {'id': order.id}) }}">
                                         <button class="btn btn-success">Show</button>
                                     </a>
-                                    <a href="{{ path('order_edit', {'id': order.id}) }}">
-                                        <button class="btn btn-warning">Edit</button>
-                                    </a>
-
+                                    {% if order.status == 'in process' %}
+                                        <a href="{{ path('order_edit', {'id': order.id}) }}">
+                                            <button class="btn btn-warning">Edit</button>
+                                        </a>
+                                    {% endif %}
                                 </div>
                             </td>
                         </tr>
@@ -58,7 +59,7 @@
 
                 <a href="{{ path('order_new') }}" class="btn btn-primary">Create new</a>
 
-                 {% include 'pagination.html.twig' %}
+                {% include 'pagination.html.twig' %}
 
             </div>
 
