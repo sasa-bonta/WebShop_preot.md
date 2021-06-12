@@ -96,6 +96,13 @@ class ProductApiController extends AbstractController
         $form = $this->createForm(ProductType::class, $product, ['csrf_protection' => false]);
         $form->handleRequest($request);
 
+        $formRequires = ['code', 'name', 'category', 'price', 'availableAmount', 'description'];
+        foreach ($formRequires as $required) {
+            if (!array_key_exists($required, $parameters)) {
+                throw new BadRequestHttpException("The parameter " .$required ." is absent");
+            }
+        }
+
         $form->submit($parameters);
 
         if ($form->isSubmitted() && $form->isValid()) {

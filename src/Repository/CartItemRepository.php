@@ -159,4 +159,15 @@ class CartItemRepository extends ServiceEntityRepository
             throw new NotFoundHttpException("product code does not exist");
         }
     }
+
+    public function deleteProduct(Product $product)
+    {
+        $this
+            ->createQueryBuilder('c')
+            ->delete()
+            ->where('c.code = :code')
+            ->setParameter('code', $product->getCode())
+            ->getQuery()
+            ->execute();
+    }
 }
