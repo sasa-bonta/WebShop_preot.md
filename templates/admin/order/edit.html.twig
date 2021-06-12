@@ -27,6 +27,18 @@
         {{ include('admin/order/_delete_form.html.twig') }}
     {% endif %}
 
+
+    {% if order.payment.type == 'card' %}
+        <script>
+            $('#card-details').show();
+            $("#order_payment_type_1").trigger('click');
+        </script>
+        {% else %}
+        <script>
+            $("#order_payment_type_0").trigger('click');
+        </script>
+    {% endif %}
+
     <script src="{{ asset('assets/main/order/admin_edit_order.js') }}"></script>
 
 {% endblock %}

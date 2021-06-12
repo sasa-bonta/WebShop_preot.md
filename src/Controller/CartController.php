@@ -41,7 +41,7 @@ class CartController extends AbstractController
             $order->setUserId($user->getId());
             $order->setStatus("in process");
             $items = $cartRepository->findBy(['userId' => $user->getId()]);
-            if (is_null($items)) {
+            if (empty($items)) {
                 return $this->redirectToRoute('cart_index');
             }
 

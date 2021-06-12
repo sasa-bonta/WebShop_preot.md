@@ -1,3 +1,5 @@
+$("#order_payment_type_0").trigger('click');
+
 $("#order_payment_type_0").on('click', function () {
     $('#card-details').hide();
     $('#order_payment_card_code').attr("required", false);

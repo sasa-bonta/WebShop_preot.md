@@ -24,7 +24,7 @@ class AddressType extends AbstractType
                 ]
             ])
             ->add('city', TextType::class, [
-                'attr' => ['pattern' => '[a-zA-Z" "]*',
+                'attr' => ['pattern' => '[a-zA-Z" "-\']*',
 // @fixme 11/06/2021 doesnt work errors after rectification
 //                    'oninvalid' => "setCustomValidity('This field must contain only letters and space')"
                 ]
