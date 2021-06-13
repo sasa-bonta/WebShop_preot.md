@@ -29,7 +29,7 @@ class CreditCardDetails
         return $this->code;
     }
 
-    public function setCode(string $code): self
+    public function setCode(?string $code): self
     {
         $this->code = $code;
 
@@ -41,7 +41,7 @@ class CreditCardDetails
         return $this->cvv;
     }
 
-    public function setCvv(string $cvv): self
+    public function setCvv(?string $cvv): self
     {
         $this->cvv = $cvv;
 
