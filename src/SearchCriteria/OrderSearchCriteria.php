@@ -10,6 +10,8 @@ class OrderSearchCriteria extends SearchCriteria
 {
     protected $id;
     protected $status;
+    const DEFAULT_ORDER = 'created_at:DESC';
+
     public function __construct(array $data)
     {
         parent::__construct($data);
