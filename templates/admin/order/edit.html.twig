@@ -14,8 +14,9 @@
         {{ include('admin/order/_prev_status.html.twig') }}
     </p>
     <br>
-
-    {{ include('admin/order/_form.html.twig') }}
+    {% if order.status == 'in process' %}
+        {{ include('admin/order/_form.html.twig') }}
+    {% endif %}
 
     <p align="center">
         <a href="{{ path('order_index') }}">
@@ -33,7 +34,7 @@
             $('#card-details').show();
             $("#order_payment_type_1").trigger('click');
         </script>
-        {% else %}
+    {% else %}
         <script>
             $("#order_payment_type_0").trigger('click');
         </script>

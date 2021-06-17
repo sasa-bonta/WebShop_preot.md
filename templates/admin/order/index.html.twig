@@ -41,11 +41,11 @@
                                     <a href="{{ path('order_show', {'id': order.id}) }}">
                                         <button class="btn btn-success">Show</button>
                                     </a>
-                                    {% if order.status == 'in process' %}
+{#                                    {% if order.status == 'in process' %}#}
                                         <a href="{{ path('order_edit', {'id': order.id}) }}">
                                             <button class="btn btn-warning">Edit</button>
                                         </a>
-                                    {% endif %}
+{#                                    {% endif %}#}
                                 </div>
                             </td>
                         </tr>
