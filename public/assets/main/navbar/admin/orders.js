@@ -16,8 +16,8 @@ if (urlParams.has("order")) {
     order.value = "created_at:DESC";
 }
 
-if (urlParams.has("id")) {
-    name.value = urlParams.get("id");
+if (urlParams.has("name")) {
+    name.value = urlParams.get("name");
 }
 
 function setId() {
@@ -25,12 +25,12 @@ function setId() {
     var urlSearchParams;
     if ($('body').data('route-name').indexOf('order_index') !== 0) {
         urlSearchParams = new URL(document.location.protocol + "//" + document.location.host + "/admin/order/");
-        urlSearchParams.searchParams.set("id", inputVal);
+        urlSearchParams.searchParams.set("name", inputVal);
         urlSearchParams.searchParams.set("page", 1);
         window.location.replace(urlSearchParams);
     } else {
         urlSearchParams = new URLSearchParams(window.location.search);
-        urlSearchParams.set("id", inputVal);
+        urlSearchParams.set("name", inputVal);
         urlSearchParams.set("page", 1);
         window.location.search = urlSearchParams;
     }
