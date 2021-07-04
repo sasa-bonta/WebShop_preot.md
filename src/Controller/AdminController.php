@@ -11,6 +11,7 @@ use App\Repository\ProductRepository;
 use App\SearchCriteria\ProductAdminSearchCriteria;
 use DateTime;
 use DateTimeZone;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -58,7 +59,7 @@ class AdminController extends AbstractController
     /**
      * @Route("/products/new", name="product_new", methods={"GET","POST"})
      */
-    public function new(Request $request, ProductRepository $repo): Response
+    public function new(Request $request, ProductRepository $repo, EntityManagerInterface $entityManager): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
@@ -86,7 +87,6 @@ class AdminController extends AbstractController
             }
 
             $product->writeImgPathsFromArray($product->readImgPathsArray());
-            $entityManager = $this->getDoctrine()->getManager();
             $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
             $product->setCreatedAt($dateTime);
             $entityManager->persist($product);
@@ -115,7 +115,7 @@ class AdminController extends AbstractController
     /**
      * @Route("/products/{code}/edit", name="product_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Product $product): Response
+    public function edit(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
         $product->writeImgPathEgal($product->readImgPathCSV());
         $form = $this->createForm(ProductType::class, $product);
@@ -146,7 +146,7 @@ class AdminController extends AbstractController
 
             $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
             $product->setUpdatedAt($dateTime);
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager->flush();
 
             return $this->redirectToRoute('product_list');
         }
@@ -159,10 +159,9 @@ class AdminController extends AbstractController
     /**
      * @Route("/products/{code}", name="product_delete", methods={"POST"})
      */
-    public function delete(Request $request, Product $product, CartItemRepository $cartItemRepository): Response
+    public function delete(Request $request, Product $product, CartItemRepository $cartItemRepository, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $product->getCode(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
             $cartItemRepository->deleteProduct($product);
             $entityManager->remove($product);
             $entityManager->flush();
