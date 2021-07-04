@@ -6,7 +6,7 @@ namespace App\SearchCriteria;
 use Exception;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-class SearchCriteria
+abstract class SearchCriteria
 {
     protected $name;
     protected $page;
