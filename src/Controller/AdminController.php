@@ -34,7 +34,7 @@ class AdminController extends AbstractController
     /**
      * @Route("/products/", name="product_list", methods={"GET"})
      */
-    public function list(ProductRepository $productRepository, Request $request): Response
+    public function index(ProductRepository $productRepository, Request $request): Response
     {
         try {
             $searchCriteria = new ProductAdminSearchCriteria($request->query->all());
