@@ -1,4 +1,6 @@
-<?php
+<?php /** @noinspection PhpRouteMissingInspection */
+
+/** @noinspection AnnotationDeprecatedInspection */
 
 
 namespace App\Controller;
@@ -8,6 +10,7 @@ use App\Entity\User;
 use App\Form\RegisterType;
 use App\Repository\UserRepository;
 use App\Service\CheckUserService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,7 +38,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register", name="user_registration")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager)
     {
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
@@ -62,7 +65,6 @@ class RegistrationController extends AbstractController
 
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -94,7 +96,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/verify", name="registration_confirmation_route")
      */
-    public function verifyUserEmail(Request $request, UserRepository $userRepository): Response
+    public function verifyUserEmail(Request $request, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
     {
         $id = $request->get('id'); // retrieve the user id from the url
 
@@ -120,7 +122,6 @@ class RegistrationController extends AbstractController
         }
 
         // Mark your user as verified. e.g. switch a User::verified property to true
-        $entityManager = $this->getDoctrine()->getManager();
         $user->setActivated(true);
         $entityManager->persist($user);
         $entityManager->flush();
