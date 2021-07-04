@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\SearchCriteria\UserSearchCriteria;
 use App\Service\CheckUserService;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -57,7 +58,7 @@ class UserController extends AbstractController
     /**
      * @Route("/new", name="user_new", methods={"GET","POST"})
      */
-    public function new(Request $request, UserPasswordEncoderInterface $encoder): Response
+    public function new(Request $request, UserPasswordEncoderInterface $encoder, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -87,7 +88,6 @@ class UserController extends AbstractController
             }
             $user->setActivated(true);
             $user->setPassword($encoder->encodePassword($user, $form->get('plainPassword')->getData()));
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -113,7 +113,7 @@ class UserController extends AbstractController
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, User $user, UserPasswordEncoderInterface $encoder): Response
+    public function edit(Request $request, User $user, UserPasswordEncoderInterface $encoder, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $origUser = clone $user;
@@ -145,7 +145,7 @@ class UserController extends AbstractController
                 ]);
             }
 
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager->flush();
             return $this->redirectToRoute('user_index');
         }
 
@@ -159,10 +159,9 @@ class UserController extends AbstractController
      * @Route("/{id}", name="user_delete", methods={"POST"})
      */
     public
-    function delete(Request $request, User $user): Response
+    function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($user);
             $entityManager->flush();
         }
