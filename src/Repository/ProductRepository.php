@@ -8,8 +8,6 @@ use App\SearchCriteria\SearchCriteria;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -72,16 +70,6 @@ class ProductRepository extends ServiceEntityRepository
         return $query
             ->getQuery()
             ->getSingleScalarResult();
-    }
-
-    /**
-     * @throws OptimisticLockException
-     * @throws ORMException
-     */
-    public function delete(Product $product)
-    {
-        $this->getEntityManager()->remove($product);
-        $this->getEntityManager()->flush();
     }
 
     public function getCategories(): array

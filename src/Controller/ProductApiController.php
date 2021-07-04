@@ -7,9 +7,9 @@ use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use App\SearchCriteria\ProductAdminSearchCriteria;
-use App\SearchCriteria\SearchCriteria;
 use DateTime;
 use DateTimeZone;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -46,7 +46,7 @@ class ProductApiController extends AbstractController
     /**
      * @Route("/", name="product_api_new", methods={"POST"})
      */
-    public function new(Request $request, ProductRepository $repo): JsonResponse
+    public function new(Request $request, ProductRepository $repo, EntityManagerInterface $entityManager): JsonResponse
     {
         $response = new JsonResponse();
         $parameters = json_decode($request->getContent(), true);
@@ -63,7 +63,6 @@ class ProductApiController extends AbstractController
             }
 
             $product->writeImgPathsFromArray($product->readImgPathsArray());
-            $entityManager = $this->getDoctrine()->getManager();
             $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
             $product->setCreatedAt($dateTime);
             $entityManager->persist($product);
@@ -88,7 +87,7 @@ class ProductApiController extends AbstractController
     /**
      * @Route("/{code}", name="product_api_edit", methods={"PUT"})
      */
-    public function edit(Request $request, Product $product, ProductRepository $repo): JsonResponse
+    public function edit(Request $request, Product $product, ProductRepository $repo, EntityManagerInterface $entityManager): JsonResponse
     {
         $response = new JsonResponse();
         $parameters = json_decode($request->getContent(), true);
@@ -110,7 +109,6 @@ class ProductApiController extends AbstractController
                 throw new BadRequestHttpException("this code already exists");
             }
 
-            $entityManager = $this->getDoctrine()->getManager();
             $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
             $product->setUpdatedAt($dateTime);
             $entityManager->persist($product);
@@ -128,10 +126,11 @@ class ProductApiController extends AbstractController
     /**
      * @Route("/{code}", name="product_api_delete", methods={"DELETE"})
      */
-    public function delete(Product $product, ProductRepository $productRepository): JsonResponse
+    public function delete(Product $product, EntityManagerInterface $entityManager): JsonResponse
     {
         $response = new JsonResponse();
-        $productRepository->delete($product);
+        $entityManager->remove($product);
+        $entityManager->flush();
         $response->setStatusCode(JsonResponse::HTTP_OK);
         $data = ["status" => 200, "description" => "ok", "message" => "the product is deleted"];
         $response->setData($data);
