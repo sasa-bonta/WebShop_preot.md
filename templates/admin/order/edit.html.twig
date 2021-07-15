@@ -30,14 +30,9 @@
 
 
     {% if order.payment.type == 'card' %}
-        <script>
-            $('#card-details').show();
-            $("#order_payment_type_1").trigger('click');
-        </script>
+        <script src="{{ asset('assets/main/order/edit_order_card.js') }}"></script>
     {% else %}
-        <script>
-            $("#order_payment_type_0").trigger('click');
-        </script>
+        <script src="{{ asset('assets/main/order/edit_order_cash.js') }}"></script>
     {% endif %}
 
     <script src="{{ asset('assets/main/order/admin_edit_order.js') }}"></script>
