@@ -10,6 +10,7 @@ use App\Form\ImageEditType;
 use App\Form\ImageType;
 use App\Repository\ImageRepository;
 use App\Repository\ProductRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
@@ -98,7 +99,7 @@ class ImageController extends AbstractController
     /**
      * @Route("/new", name="image_new", methods={"GET","POST"})
      */
-    public function new(Request $request, SluggerInterface $slugger): Response
+    public function new(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
     {
         $image = new Image();
         $form = $this->createForm(ImageType::class, $image);
@@ -122,7 +123,6 @@ class ImageController extends AbstractController
             $image->setTagsFromArray($image->getTagsArray());
             // Add image
             $image->setPath($this->uploadImageWithSecureName($form, $slugger));
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($image);
             $entityManager->flush();
             return $this->redirectToRoute('image_index');
@@ -147,7 +147,7 @@ class ImageController extends AbstractController
     /**
      * @Route("/{id}/edit", name="image_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Image $image, SluggerInterface $slugger): Response
+    public function edit(Request $request, Image $image, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
     {
         $origPath = $image->getPath();
         $form = $this->createForm(ImageEditType::class, $image);
@@ -169,7 +169,7 @@ class ImageController extends AbstractController
             } else {
                 $image->setPath($this->uploadImageWithSecureName($form, $slugger));
             }
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager->flush();
             return $this->redirectToRoute('image_index');
         }
 
@@ -195,10 +195,9 @@ class ImageController extends AbstractController
     /**
      * @Route("/{id}", name="image_delete", methods={"POST"})
      */
-    public function delete(Request $request, Image $image, ProductRepository $productRepository): Response
+    public function delete(Request $request, Image $image, ProductRepository $productRepository, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $image->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
             $this->deleteImageFromProducts($image, $productRepository);
             $filesystem = new Filesystem();
             $gallery = $this->getParameter('gallery_path');

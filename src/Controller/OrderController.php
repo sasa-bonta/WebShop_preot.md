@@ -11,6 +11,7 @@ use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
 use App\SearchCriteria\OrderSearchCriteria;
 use Doctrine\DBAL\Exception;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,7 +58,7 @@ class OrderController extends AbstractController
     /**
      * @Route("/new", name="order_new", methods={"GET","POST"})
      */
-    public function new(Request $request, CartItemRepository $cartRepository, ProductRepository $productRepository): Response
+    public function new(Request $request, CartItemRepository $cartRepository, ProductRepository $productRepository, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
         $order = new Order();
@@ -65,7 +66,6 @@ class OrderController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
             $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
             $total = 0;
 
@@ -135,13 +135,13 @@ class OrderController extends AbstractController
     /**
      * @Route("/{id}/edit", name="order_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Order $order): Response
+    public function edit(Request $request, Order $order, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(OrderType::class, $order);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager->flush();
 
             return $this->redirectToRoute('order_index');
         }
@@ -155,10 +155,9 @@ class OrderController extends AbstractController
     /**
      * @Route("/{id}", name="order_delete", methods={"POST"})
      */
-    public function delete(Request $request, Order $order, OrderItemRepository $itemRepository, ProductRepository $productRepository): Response
+    public function delete(Request $request, Order $order, OrderItemRepository $itemRepository, ProductRepository $productRepository, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $order->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
             $items = $itemRepository->findBy(['order' => $order->getId()]);
 
             if ($order->getStatus() === 'in process') {
@@ -185,7 +184,7 @@ class OrderController extends AbstractController
     /**
      * @Route("/next/{id}", name="order_next_status", methods={"POST"})
      */
-    public function nextStatus(Request $request, Order $order): Response
+    public function nextStatus(Request $request, Order $order, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('nextStatus' . $order->getId(), $request->request->get('_token'))) {
             $statNum = array_search($order->getStatus(), $this->STATUS);
@@ -195,7 +194,7 @@ class OrderController extends AbstractController
                     $order->setStatus($this->STATUS[$statNum + 1]);
                 }
             }
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager->flush();
 
         }
 
@@ -205,7 +204,7 @@ class OrderController extends AbstractController
     /**
      * @Route("/prev/{id}", name="order_prev_status", methods={"POST"})
      */
-    public function prevStatus(Request $request, Order $order): Response
+    public function prevStatus(Request $request, Order $order, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('prevStatus' . $order->getId(), $request->request->get('_token'))) {
             $statNum = array_search($order->getStatus(), $this->STATUS);
@@ -215,7 +214,7 @@ class OrderController extends AbstractController
                     $order->setStatus($this->STATUS[$statNum - 1]);
                 }
             }
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager->flush();
         }
 
         return $this->redirectToRoute('order_index');
