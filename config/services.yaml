@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     gallery_path: '%kernel.project_dir%/public/assets/main/images/gallery/'
+    stripe_publishable_key: '%env(STRIPE_PUBLISHABLE_KEY)%'
+    stripe_secret_key: '%env(STRIPE_SECRET_KEY)%'
 
 services:
     # default configuration for services in *this* file

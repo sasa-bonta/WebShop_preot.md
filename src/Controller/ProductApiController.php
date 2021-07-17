@@ -11,6 +11,7 @@ use DateTime;
 use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use Stripe\StripeClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -77,6 +78,26 @@ class ProductApiController extends AbstractController
     }
 
     /**
+     * @Route("/stripe", name="stripe_import_products", methods={"GET"})
+     */
+    public function stripeProductsImport(ProductRepository $productRepository): JsonResponse
+    {
+        $response = new JsonResponse();
+        $products = $productRepository->findAll();
+        $data = ['key' => $this->getParameter('stripe_publishable_key')];
+
+        $stripe = new StripeClient(
+            $this->getParameter('stripe_publishable_key')
+        );
+
+//        foreach ($products as $product) {
+//
+//        }
+        $response->setData($data);
+        return $response;
+    }
+
+    /**
      * @Route("/{code}", name="product_api_show", methods={"GET"})
      */
     public function show(Product $product): Response
@@ -109,7 +130,7 @@ class ProductApiController extends AbstractController
                 throw new BadRequestHttpException("this code already exists");
             }
 
-            $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
+            $dateTime = new DateTime(null, new DateTimeZone('Europe / Athens'));
             $product->setUpdatedAt($dateTime);
             $entityManager->persist($product);
             $entityManager->flush();
