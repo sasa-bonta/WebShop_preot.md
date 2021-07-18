@@ -80,19 +80,37 @@ class ProductApiController extends AbstractController
     /**
      * @Route("/stripe", name="stripe_import_products", methods={"GET"})
      */
-    public function stripeProductsImport(ProductRepository $productRepository): JsonResponse
+    public function stripeProductsImport(ProductRepository $productRepository, EntityManagerInterface $entityManager): JsonResponse
     {
+        $count = 0;
         $response = new JsonResponse();
-        $products = $productRepository->findAll();
-        $data = ['key' => $this->getParameter('stripe_publishable_key')];
 
         $stripe = new StripeClient(
-            $this->getParameter('stripe_publishable_key')
+            $this->getParameter('stripe_secret_key')
         );
 
-//        foreach ($products as $product) {
-//
-//        }
+        foreach ($productRepository->findAll() as $product) {
+            if ($product->getStripeProductId() !== null) {
+                continue;
+            }
+
+            $stripeProduct = $stripe->products->create([
+                'name' => $product->getName(),
+            ]);
+
+            $stripePrice = $stripe->prices->create([
+                'unit_amount' => $product->getPrice() * 100,
+                'currency' => 'usd',
+                'product' => $stripeProduct->id,
+            ]);
+
+            $product->setStripeProductId($stripeProduct->id);
+            $product->setStripePriceId($stripePrice->id);
+            $entityManager->flush();
+            $count++;
+        }
+
+        $data = ['status' => 200, 'products added to stripe' => $count];
         $response->setData($data);
         return $response;
     }

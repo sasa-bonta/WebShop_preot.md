@@ -62,6 +62,16 @@ class Product
      */
     private $availableAmount;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $stripeProductId;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $stripePriceId;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -138,7 +148,8 @@ class Product
     }
 
     // returns string|array|csv
-    public function getImgPath() {
+    public function getImgPath()
+    {
         return $this->imgPath;
     }
 
@@ -208,6 +219,30 @@ class Product
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getStripeProductId(): ?string
+    {
+        return $this->stripeProductId;
+    }
+
+    public function setStripeProductId($stripeProductId): self
+    {
+        $this->stripeProductId = $stripeProductId;
+
+        return $this;
+    }
+
+    public function getStripePriceId(): ?string
+    {
+        return $this->stripePriceId;
+    }
+
+    public function setStripePriceId($stripePriceId): self
+    {
+        $this->stripePriceId = $stripePriceId;
 
         return $this;
     }
