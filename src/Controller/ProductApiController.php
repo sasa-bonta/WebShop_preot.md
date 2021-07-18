@@ -25,6 +25,14 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProductApiController extends AbstractController
 {
+
+    private StripeClient $stripe;
+
+    public function __construct(string $stripeSecretKey)
+    {
+        $this->stripe = new StripeClient($stripeSecretKey);
+    }
+
     /**
      * @Route("/", name="product_api_index", methods={"GET"})
      */
@@ -85,20 +93,16 @@ class ProductApiController extends AbstractController
         $count = 0;
         $response = new JsonResponse();
 
-        $stripe = new StripeClient(
-            $this->getParameter('stripe_secret_key')
-        );
-
         foreach ($productRepository->findAll() as $product) {
             if ($product->getStripeProductId() !== null) {
                 continue;
             }
 
-            $stripeProduct = $stripe->products->create([
+            $stripeProduct = $this->stripe->products->create([
                 'name' => $product->getName(),
             ]);
 
-            $stripePrice = $stripe->prices->create([
+            $stripePrice = $this->stripe->prices->create([
                 'unit_amount' => $product->getPrice() * 100,
                 'currency' => 'usd',
                 'product' => $stripeProduct->id,
