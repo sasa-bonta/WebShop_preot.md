@@ -7,6 +7,7 @@ use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use App\SearchCriteria\ProductAdminSearchCriteria;
+use App\Service\StripeService;
 use DateTime;
 use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,16 +24,14 @@ use Symfony\Component\Routing\Annotation\Route;
  * @Route("/api/v1/products", defaults={"_format":"json"})
  * @method Exception(string $string)
  */
-// defaults={"_format":"json"}
-
 class ProductApiController extends AbstractController
 {
 
-    private StripeClient $stripe;
+    private StripeService $stripeService;
 
-    public function __construct(string $stripeSecretKey)
+    public function __construct(StripeService $stripeService)
     {
-        $this->stripe = new StripeClient($stripeSecretKey);
+        $this->stripeService = $stripeService;
     }
 
     /**
@@ -73,19 +72,11 @@ class ProductApiController extends AbstractController
                 $data = ["status" => 201, "description" => "created", "message" => "new product is created"];
             }
 
-            $stripeProduct = $this->stripe->products->create([
-                'name' => $product->getName(),
-            ]);
-
-            $stripePrice = $this->stripe->prices->create([
-                'unit_amount' => (int)$product->getPrice() * 100,
-                'currency' => 'usd',
-                'product' => $stripeProduct->id,
-            ]);
+            $stripeProduct = $this->stripeService->createProduct($product->getName());
+            $stripePrice = $this->stripeService->createPrice($product->getPrice(), $stripeProduct->id);
 
             $product->setStripeProductId($stripeProduct->id);
             $product->setStripePriceId($stripePrice->id);
-
             $product->writeImgPathsFromArray($product->readImgPathsArray());
             $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
             $product->setCreatedAt($dateTime);
@@ -113,16 +104,8 @@ class ProductApiController extends AbstractController
                 continue;
             }
 
-            $stripeProduct = $this->stripe->products->create([
-                'name' => $product->getName(),
-            ]);
-
-            $stripePrice = $this->stripe->prices->create([
-                'unit_amount' => (int)$product->getPrice() * 100,
-                'currency' => 'usd',
-                'product' => $stripeProduct->id,
-            ]);
-
+            $stripeProduct = $this->stripeService->createProduct($product->getName());
+            $stripePrice = $this->stripeService->createPrice($product->getPrice(), $stripeProduct->id);
             $product->setStripeProductId($stripeProduct->id);
             $product->setStripePriceId($stripePrice->id);
             $entityManager->flush();
@@ -168,22 +151,12 @@ class ProductApiController extends AbstractController
             }
 
             if ($product->getName() !== $initProduct->getName()) {
-                $this->stripe->products->update(
-                    $product->getStripeProductId(),
-                    ['name' => $product->getName()],
-                );
+                $this->stripeService->updateProductName($product->getStripeProductId(), $product->getName());
             }
 
             if ($product->getPrice() !== $initProduct->getPrice()) {
-                $this->stripe->prices->update(
-                    $product->getStripePriceId(),
-                    ['active' => false],
-                );
-                $this->stripe->prices->create([
-                    'unit_amount' => (int)$product->getPrice() * 100,
-                    'currency' => 'usd',
-                    'product' => $product->getStripeProductId(),
-                ]);
+                $this->stripeService->archivePrice($product->getStripePriceId());
+                $this->stripeService->createPrice($product->getPrice(), $product->getStripeProductId());
             }
 
             $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
@@ -206,14 +179,8 @@ class ProductApiController extends AbstractController
     public function delete(Product $product, EntityManagerInterface $entityManager): JsonResponse
     {
         $response = new JsonResponse();
-        $this->stripe->prices->update(
-            $product->getStripePriceId(),
-            ['active' => false],
-        );
-        $this->stripe->products->update(
-            $product->getStripeProductId(),
-            ['active' => false],
-        );
+        $this->stripeService->archivePrice($product->getStripePriceId());
+        $this->stripeService->archiveProduct($product->getStripeProductId());
         $entityManager->remove($product);
         $entityManager->flush();
         $response->setStatusCode(Response::HTTP_OK);
