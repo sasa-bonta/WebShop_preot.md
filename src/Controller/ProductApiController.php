@@ -73,6 +73,19 @@ class ProductApiController extends AbstractController
                 $data = ["status" => 201, "description" => "created", "message" => "new product is created"];
             }
 
+            $stripeProduct = $this->stripe->products->create([
+                'name' => $product->getName(),
+            ]);
+
+            $stripePrice = $this->stripe->prices->create([
+                'unit_amount' => (int)$product->getPrice() * 100,
+                'currency' => 'usd',
+                'product' => $stripeProduct->id,
+            ]);
+
+            $product->setStripeProductId($stripeProduct->id);
+            $product->setStripePriceId($stripePrice->id);
+
             $product->writeImgPathsFromArray($product->readImgPathsArray());
             $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
             $product->setCreatedAt($dateTime);
