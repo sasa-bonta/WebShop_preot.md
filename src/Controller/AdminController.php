@@ -9,21 +9,30 @@ use App\Form\ProductType;
 use App\Repository\CartItemRepository;
 use App\Repository\ProductRepository;
 use App\SearchCriteria\ProductAdminSearchCriteria;
+use App\Service\StripeService;
 use DateTime;
 use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route("/admin")
  */
 class AdminController extends AbstractController
 {
+
+    private StripeService $stripeService;
+
+    public function __construct(StripeService $stripeService)
+    {
+        $this->stripeService = $stripeService;
+    }
+
     /**
      * @Route("/", name="admin_main", methods={"GET"})
      */
@@ -86,6 +95,10 @@ class AdminController extends AbstractController
                 ]);
             }
 
+            $stripeProduct = $this->stripeService->createProduct($product->getName());
+            $stripePrice = $this->stripeService->createPrice($product->getPrice(), $stripeProduct->id);
+            $product->setStripeProductId($stripeProduct->id);
+            $product->setStripePriceId($stripePrice->id);
             $product->writeImgPathsFromArray($product->readImgPathsArray());
             $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
             $product->setCreatedAt($dateTime);
@@ -118,6 +131,7 @@ class AdminController extends AbstractController
     public function edit(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
         $product->writeImgPathEgal($product->readImgPathCSV());
+        $initProduct = clone $product;
         $form = $this->createForm(ProductType::class, $product);
         $origCode = $product->getCode();
         $form->handleRequest($request);
@@ -144,6 +158,16 @@ class AdminController extends AbstractController
                 ]);
             }
 
+            if ($product->getName() !== $initProduct->getName()) {
+                $this->stripeService->updateProductName($product->getStripeProductId(), $product->getName());
+            }
+
+            if ($product->getPrice() !== $initProduct->getPrice()) {
+                $this->stripeService->archivePrice($product->getStripePriceId());
+                $stripePrice = $this->stripeService->createPrice($product->getPrice(), $product->getStripeProductId());
+                $product->setStripePriceId($stripePrice->id);
+            }
+
             $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
             $product->setUpdatedAt($dateTime);
             $entityManager->flush();
@@ -162,6 +186,8 @@ class AdminController extends AbstractController
     public function delete(Request $request, Product $product, CartItemRepository $cartItemRepository, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $product->getCode(), $request->request->get('_token'))) {
+            $this->stripeService->archivePrice($product->getStripePriceId());
+            $this->stripeService->archiveProduct($product->getStripeProductId());
             $cartItemRepository->deleteProduct($product);
             $entityManager->remove($product);
             $entityManager->flush();

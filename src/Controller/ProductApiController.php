@@ -12,7 +12,6 @@ use DateTime;
 use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
-use Stripe\StripeClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -74,7 +73,6 @@ class ProductApiController extends AbstractController
 
             $stripeProduct = $this->stripeService->createProduct($product->getName());
             $stripePrice = $this->stripeService->createPrice($product->getPrice(), $stripeProduct->id);
-
             $product->setStripeProductId($stripeProduct->id);
             $product->setStripePriceId($stripePrice->id);
             $product->writeImgPathsFromArray($product->readImgPathsArray());
@@ -156,7 +154,8 @@ class ProductApiController extends AbstractController
 
             if ($product->getPrice() !== $initProduct->getPrice()) {
                 $this->stripeService->archivePrice($product->getStripePriceId());
-                $this->stripeService->createPrice($product->getPrice(), $product->getStripeProductId());
+                $stripePrice = $this->stripeService->createPrice($product->getPrice(), $product->getStripeProductId());
+                $product->setStripePriceId($stripePrice->id);
             }
 
             $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
