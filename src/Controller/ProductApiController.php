@@ -23,6 +23,8 @@ use Symfony\Component\Routing\Annotation\Route;
  * @Route("/api/v1/products", defaults={"_format":"json"})
  * @method Exception(string $string)
  */
+// defaults={"_format":"json"}
+
 class ProductApiController extends AbstractController
 {
 
@@ -77,7 +79,7 @@ class ProductApiController extends AbstractController
             $entityManager->persist($product);
             $entityManager->flush();
 
-            $response->setStatusCode(JsonResponse::HTTP_CREATED);
+            $response->setStatusCode(Response::HTTP_CREATED);
             $response->setData($data);
             return $response;
         } else {
@@ -103,7 +105,7 @@ class ProductApiController extends AbstractController
             ]);
 
             $stripePrice = $this->stripe->prices->create([
-                'unit_amount' => $product->getPrice() * 100,
+                'unit_amount' => (int)$product->getPrice() * 100,
                 'currency' => 'usd',
                 'product' => $stripeProduct->id,
             ]);
@@ -134,7 +136,7 @@ class ProductApiController extends AbstractController
     {
         $response = new JsonResponse();
         $parameters = json_decode($request->getContent(), true);
-        $initCode = $product->getCode();
+        $initProduct = clone $product;
         $form = $this->createForm(ProductType::class, $product, ['csrf_protection' => false]);
         $form->handleRequest($request);
 
@@ -148,17 +150,36 @@ class ProductApiController extends AbstractController
         $form->submit($parameters);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($repo->count(['code' => $product->getCode()]) > 0 && $product->getCode() !== $initCode) {
+            if ($repo->count(['code' => $product->getCode()]) > 0 && $product->getCode() !== $initProduct->getCode()) {
                 throw new BadRequestHttpException("this code already exists");
             }
 
-            $dateTime = new DateTime(null, new DateTimeZone('Europe / Athens'));
+            if ($product->getName() !== $initProduct->getName()) {
+                $this->stripe->products->update(
+                    $product->getStripeProductId(),
+                    ['name' => $product->getName()],
+                );
+            }
+
+            if ($product->getPrice() !== $initProduct->getPrice()) {
+                $this->stripe->prices->update(
+                    $product->getStripePriceId(),
+                    ['active' => false],
+                );
+                $this->stripe->prices->create([
+                    'unit_amount' => (int)$product->getPrice() * 100,
+                    'currency' => 'usd',
+                    'product' => $product->getStripeProductId(),
+                ]);
+            }
+
+            $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
             $product->setUpdatedAt($dateTime);
             $entityManager->persist($product);
             $entityManager->flush();
 
             $data = ["status" => 200, "description" => "ok", "message" => "the product is updated"];
-            $response->setStatusCode(JsonResponse::HTTP_OK);
+            $response->setStatusCode(Response::HTTP_OK);
             $response->setData($data);
             return $response;
         } else {
@@ -172,9 +193,17 @@ class ProductApiController extends AbstractController
     public function delete(Product $product, EntityManagerInterface $entityManager): JsonResponse
     {
         $response = new JsonResponse();
+        $this->stripe->prices->update(
+            $product->getStripePriceId(),
+            ['active' => false],
+        );
+        $this->stripe->products->update(
+            $product->getStripeProductId(),
+            ['active' => false],
+        );
         $entityManager->remove($product);
         $entityManager->flush();
-        $response->setStatusCode(JsonResponse::HTTP_OK);
+        $response->setStatusCode(Response::HTTP_OK);
         $data = ["status" => 200, "description" => "ok", "message" => "the product is deleted"];
         $response->setData($data);
         return $response;

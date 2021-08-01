@@ -228,7 +228,7 @@ class Product
         return $this->stripeProductId;
     }
 
-    public function setStripeProductId($stripeProductId): self
+    public function setStripeProductId(?string $stripeProductId): self
     {
         $this->stripeProductId = $stripeProductId;
 
@@ -240,7 +240,7 @@ class Product
         return $this->stripePriceId;
     }
 
-    public function setStripePriceId($stripePriceId): self
+    public function setStripePriceId(?string $stripePriceId): self
     {
         $this->stripePriceId = $stripePriceId;
 
