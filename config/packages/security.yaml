@@ -12,7 +12,7 @@ security:
         # if you're using multiple entity managers
         # manager_name: customer
 
-    api_products_provider:
+    api_provider:
       entity:
         class: App\Entity\User
         property: apiToken
@@ -22,10 +22,11 @@ security:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
       security: false
 
+#       pattern: ^/api/v1(?!/cart)
     api:
       pattern: ^/api/v1/products
       guard:
-        provider: api_products_provider
+        provider: api_provider
         authenticators:
           - App\Security\TokenAuthenticator
 
