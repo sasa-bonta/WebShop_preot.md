@@ -101,19 +101,16 @@ class ImageApiController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="image_api_edit", methods={"PUT"})
+     * @Route("/{id}", name="image_api_edit", methods={"POST"})
      */
     public function edit(Request $request, Image $image, EntityManagerInterface $entityManager): JsonResponse
     {
         $response = new JsonResponse();
         $origPath = $image->getPath();
         $parameters = $request->request->all();
-        // @fixme 02/08/2021 doesn't work
-//        var_dump($parameters);
-//        die;
         $files = $request->files->all();
         $data = array_replace_recursive($parameters, $files);
-        $form = $this->createForm(ImageEditType::class, $image);
+        $form = $this->createForm(ImageEditType::class, $image, ['csrf_protection' => false]);
         $form->handleRequest($request);
         $form->submit($data);
         // @fixme 02/08/2021 verify if all fields are !== null
