@@ -10,6 +10,8 @@ use App\Repository\CartItemRepository;
 use App\Repository\ProductRepository;
 use DateTime;
 use DateTimeZone;
+use Stripe\Checkout\Session;
+use Stripe\Stripe;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,7 +37,7 @@ class CartController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $dateTime = new DateTime(null, new DateTimeZone('Europe/Athens'));
             $total = 0;
-            $errors = null;
+            $stripeItems = [];
 
             $order->setCreatedAt($dateTime);
             $order->setUserId($user->getId());
@@ -45,31 +47,19 @@ class CartController extends AbstractController
                 return $this->redirectToRoute('cart_index');
             }
 
-            // verifying card's expiration date
-            if ($order->getPayment()->getCard()->getExpiresAt() !== null) {
-                $expiresAt = new DateTime($order->getPayment()->getCard()->getExpiresAt()->format('Y-m-1 H:i:s.v'));
-                $now = new DateTime();
-                if ($expiresAt <= $now) {
-                    $errors['expiresAt'] = "The credit card with indicated date is already expired";
-                }
-                if ($expiresAt > $now->modify('+10 year')) {
-                    $errors['expiresAt'] = "Card with indicated expiration date cannot exist";
-                }
-                if (isset($errors)) {
-                    return $this->render('main/cart/cart.html.twig', [
-                        'order' => $order,
-                        'form' => $form->createView(),
-                        'errors' => $errors
-                    ]);
-                }
-            }
-
             foreach ($items as $item) {
                 $product = $productRepository->findOneBy(['code' => $item->getCode()]);
                 $orderItem = new OrderItem();
                 $orderItem->setProductCode($item->getCode());
                 $orderItem->setPrice($product->getPrice());
                 $orderItem->setAmount($item->getAmount());
+                /**
+                 * create array of order items
+                 * ['price' => $price, 'quantity' => $quantity]
+                 */
+                $itemArray['price'] = $product->getStripePriceId();
+                $itemArray['quantity'] = $orderItem->getAmount();
+                $stripeItems[] = $itemArray;
                 $order->addItem($orderItem);
                 $total += $orderItem->getPrice() * $orderItem->getAmount();
                 $product->setAvailableAmount($product->getAvailableAmount() - $orderItem->getAmount());
@@ -77,11 +67,29 @@ class CartController extends AbstractController
                 $entityManager->flush();
             }
 
+            // @fixme 01/08/2021 bug here
+            $entityManager->flush();
             $order->setTotal($total);
             $entityManager->persist($order);
-            $entityManager->flush();
 
-            return $this->redirectToRoute('cart_index', ['success' => true]);
+            /**
+             * Stripe checkout session
+             */
+            if ($order->getPayment()->getType() === 'card') {
+                // creating stripe checkout session
+                Stripe::setApiKey($this->getParameter('stripe_secret_key'));
+                $checkout_session = Session::create([
+                    'success_url' => $this->getParameter('domain_url') . '/cart/?success=1',
+                    // @todo 01/08/2021 add cancel page
+                    'cancel_url' => $this->getParameter('domain_url') . '/canceled.html',
+                    'payment_method_types' => ['card'],
+                    'mode' => 'payment',
+                    'line_items' => $stripeItems,
+                ]);
+
+                header("HTTP/1.1 303 See Other");
+                header("Location: " . $checkout_session->url);
+            }
         }
         return $this->render('main/cart/cart.html.twig', [
             'order' => $order,

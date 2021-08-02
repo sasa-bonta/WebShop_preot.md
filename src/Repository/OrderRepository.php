@@ -52,6 +52,7 @@ class OrderRepository extends ServiceEntityRepository
      */
     public function countTotal(OrderSearchCriteria $searchCriteria)
     {
+        // @fixme 01/08/2021 add status
         $query = $this->createQueryBuilder('o')
             ->select('count(o.id)');
         if ($searchCriteria->getName() !== null) {
