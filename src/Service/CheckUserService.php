@@ -35,7 +35,7 @@ class CheckUserService
         return $errors;
     }
 
-    private function checkUsername(User $newUser, User $origUser = null)
+    public function checkUsername(User $newUser, User $origUser = null)
     {
         # Errors existent Nickname
         $nickError = null;
@@ -48,7 +48,7 @@ class CheckUserService
         return $nickError;
     }
 
-    private function checkEmail(User $newUser, User $origUser = null)
+    public function checkEmail(User $newUser, User $origUser = null)
     {
         # Errors existent Email
         $emailError = null;

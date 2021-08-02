@@ -5,17 +5,13 @@ namespace App\Controller\Api;
 use App\Entity\Image;
 use App\Form\ImageEditType;
 use App\Form\ImageType;
-use App\Form\ProductType;
 use App\Repository\ImageRepository;
-use App\Repository\ProductRepository;
 use App\SearchCriteria\ImageSearchCriteria;
-use DateTime;
-use DateTimeZone;
+use App\Service\ImageService;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,6 +27,13 @@ use Symfony\Component\String\Slugger\SluggerInterface;
  */
 class ImageApiController extends AbstractController
 {
+    private ImageService $imageService;
+
+    public function __construct(ImageService $imageService)
+    {
+        $this->imageService = $imageService;
+    }
+
     /**
      * @Route("/", name="image_api_index", methods={"GET"})
      */
@@ -50,46 +53,10 @@ class ImageApiController extends AbstractController
         return $this->json($imageRepository->search($searchImage));
     }
 
-    private function uploadImageWithSecureName($form, $slugger): string
-    {
-        $imageFile = $form->get('path')->getData();
-        $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-        // this is needed to safely include the file name as part of the URL
-        $safeFilename = $slugger->slug($originalFilename);
-        $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
-        // Move the file to the directory where brochures are stored
-        try {
-            $gallery = $this->getParameter('gallery_path');
-            $imageFile->move(
-                $gallery,
-                $newFilename
-            );
-        } catch (FileException $e) {
-            throw new BadRequestHttpException($e->getMessage());
-        }
-        // updates the 'brochureFilename' property to store the PDF file name
-        // instead of its contents
-        return $newFilename;
-    }
-
-    private function checkTags(Image $image): array
-    {
-        $errors = [];
-        foreach ($image->getTagsArray() as $tag) {
-            if (mb_strlen($tag) > 12 || mb_strlen($tag) < 2) {
-                $errors['tagLen'] = "The length of each tag must be from 2 to 12 characters";
-            }
-            if (preg_match('/[^a-zа-я0-9]/', $tag)) {
-                $errors['tagMatch'] = "The tags must contain only characters and digits";
-            }
-        }
-        return $errors;
-    }
-
     /**
      * @Route("/", name="image_api_new", methods={"POST"})
      */
-    public function new(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager): JsonResponse
+    public function new(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
         $response = new JsonResponse();
         $parameters = $request->request->all();
@@ -99,12 +66,13 @@ class ImageApiController extends AbstractController
         $form = $this->createForm(ImageType::class, $image, ['csrf_protection' => false]);
         $form->handleRequest($request);
         $form->submit($data);
+        // @fixme 02/08/2021 verify if all fields are !== null
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $imageFile */
 
             // Check tags
-            $errors = $this->checkTags($image);
+            $errors = $this->imageService->checkTags($image);
 
             if (!empty($errors)) {
                 throw new BadRequestHttpException($form->getErrors(true, true)->current()->getMessage());
@@ -113,10 +81,10 @@ class ImageApiController extends AbstractController
             // Add tags
             $image->setTagsFromArray($image->getTagsArray());
             // Add image
-            $image->setPath($this->uploadImageWithSecureName($form, $slugger));
+            $image->setPath($this->imageService->uploadImageWithSecureName($form));
             $entityManager->persist($image);
             $entityManager->flush();
-            $data = ["status" => 201, "description" => "created", "message" => "new image is added"];
+            $data = ["status" => 201, "description" => "created", "message" => "new image added", "id" => $image->getId()];
             $response->setStatusCode(Response::HTTP_CREATED);
             $response->setData($data);
             return $response;
@@ -133,22 +101,26 @@ class ImageApiController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="image_api_edit", methods={"GET","POST"})
+     * @Route("/{id}", name="image_api_edit", methods={"PUT"})
      */
-    public function edit(Request $request, Image $image, SluggerInterface $slugger, EntityManagerInterface $entityManager): JsonResponse
+    public function edit(Request $request, Image $image, EntityManagerInterface $entityManager): JsonResponse
     {
         $response = new JsonResponse();
         $origPath = $image->getPath();
         $parameters = $request->request->all();
+        // @fixme 02/08/2021 doesn't work
+//        var_dump($parameters);
+//        die;
         $files = $request->files->all();
         $data = array_replace_recursive($parameters, $files);
         $form = $this->createForm(ImageEditType::class, $image);
         $form->handleRequest($request);
         $form->submit($data);
+        // @fixme 02/08/2021 verify if all fields are !== null
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $errors = $this->checkTags($image);
+            $errors = $this->imageService->checkTags($image);
             if (!empty($errors)) {
                 throw new BadRequestHttpException($form->getErrors(true, true)->current()->getMessage());
 
@@ -157,44 +129,31 @@ class ImageApiController extends AbstractController
             if ($image->getPath() === '# % & { } \\ / $ ! \' \" : @ < > * ? + ` | =') {
                 $image->setPath($origPath);
             } else {
-                $image->setPath($this->uploadImageWithSecureName($form, $slugger));
+                $image->setPath($this->imageService->uploadImageWithSecureName($form));
             }
             $entityManager->flush();
-            return $this->redirectToRoute('image_index');
+            $data = ["status" => 201, "description" => "created", "message" => "the image is updated"];
+            $response->setStatusCode(Response::HTTP_OK);
+            $response->setData($data);
+            return $response;
         }
-
-        return $this->render('admin/image/edit.html.twig', [
-            'image' => $image,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    public function deleteImageFromProducts(Image $image, ProductRepository $productRepository)
-    {
-        $products = $productRepository->findByImage($image);
-        foreach ($products as $product) {
-            $paths = $product->readImgPathsArray();
-            array_splice($paths, array_search($image->getPath(), $paths), 1);
-            (count($paths) === 0) ? $product->writeImgPathsFromArray(["no-image.png"]) : $product->writeImgPathsFromArray($paths);
-            $date = new DateTime(null, new DateTimeZone('Europe/Athens'));
-            $product->setUpdatedAt($date);
-            $productRepository->updateImgPath($product);
-        }
+        throw new BadRequestHttpException($form->getErrors(true, true)->current()->getMessage());
     }
 
     /**
-     * @Route("/{id}", name="image_api_delete", methods={"POST"})
+     * @Route("/{id}", name="image_api_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Image $image, ProductRepository $productRepository, EntityManagerInterface $entityManager): JsonResponse
+    public function delete(Image $image, EntityManagerInterface $entityManager): JsonResponse
     {
-        if ($this->isCsrfTokenValid('delete' . $image->getId(), $request->request->get('_token'))) {
-            $this->deleteImageFromProducts($image, $productRepository);
-            $filesystem = new Filesystem();
-            $gallery = $this->getParameter('gallery_path');
-            $filesystem->remove($gallery . $image->getPath());
-            $entityManager->remove($image);
-            $entityManager->flush();
-        }
-        return $this->redirectToRoute('image_index');
+        $response = new JsonResponse();
+        $this->imageService->deleteImageFromProducts($image);
+        $filesystem = new Filesystem();
+        $gallery = $this->getParameter('gallery_path');
+        $filesystem->remove($gallery . $image->getPath());
+        $entityManager->remove($image);
+        $entityManager->flush();
+        $data = ["status" => 200, "description" => "ok", "message" => "the image is deleted"];
+        $response->setData($data);
+        return $response;
     }
 }

@@ -23,9 +23,6 @@ class UserController extends AbstractController
 {
     private CheckUserService $checkUser;
 
-    /**
-     * UserController constructor.
-     */
     public function __construct(CheckUserService $checkUser)
     {
         $this->checkUser = $checkUser;

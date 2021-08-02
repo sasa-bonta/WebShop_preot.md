@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Image;
 use App\SearchCriteria\ImageSearchCriteria;
+use App\Service\ImageService;
 use DateTime;
 use DateTimeZone;
 use App\Form\ImageEditType;
@@ -26,6 +27,13 @@ use Symfony\Component\String\Slugger\SluggerInterface;
  */
 class ImageController extends AbstractController
 {
+    private ImageService $imageService;
+
+    public function __construct(ImageService $imageService)
+    {
+        $this->imageService = $imageService;
+    }
+
     /**
      * @Route("/", name="image_index", methods={"GET"})
      */
@@ -59,42 +67,6 @@ class ImageController extends AbstractController
         ]);
     }
 
-    private function uploadImageWithSecureName($form, $slugger): string
-    {
-        $imageFile = $form->get('path')->getData();
-        $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-        // this is needed to safely include the file name as part of the URL
-        $safeFilename = $slugger->slug($originalFilename);
-        $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
-        // Move the file to the directory where brochures are stored
-        try {
-            $gallery = $this->getParameter('gallery_path');
-            $imageFile->move(
-                $gallery,
-                $newFilename
-            );
-        } catch (FileException $e) {
-            throw new BadRequestHttpException($e->getMessage());
-        }
-        // updates the 'brochureFilename' property to store the PDF file name
-        // instead of its contents
-        return $newFilename;
-    }
-
-    private function checkTags(Image $image): array
-    {
-        $errors = [];
-        foreach ($image->getTagsArray() as $tag) {
-            if (mb_strlen($tag) > 12 || mb_strlen($tag) < 2) {
-                $errors['tagLen'] = "The length of each tag must be from 2 to 12 characters";
-            }
-            if (preg_match('/[^a-zа-я0-9]/', $tag)) {
-                $errors['tagMatch'] = "The tags must contain only characters and digits";
-            }
-        }
-        return $errors;
-    }
-
     /**
      * @Route("/new", name="image_new", methods={"GET","POST"})
      */
@@ -108,7 +80,7 @@ class ImageController extends AbstractController
             /** @var UploadedFile $imageFile */
 
             // Check tags
-            $errors = $this->checkTags($image);
+            $errors = $this->imageService->checkTags($image);
 
             if (!empty($errors)) {
                 return $this->render('admin/image/new.html.twig', [
@@ -121,7 +93,7 @@ class ImageController extends AbstractController
             // Add tags
             $image->setTagsFromArray($image->getTagsArray());
             // Add image
-            $image->setPath($this->uploadImageWithSecureName($form, $slugger));
+            $image->setPath($this->imageService->uploadImageWithSecureName($form));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($image);
             $entityManager->flush();
@@ -167,7 +139,7 @@ class ImageController extends AbstractController
             if ($image->getPath() === '# % & { } \\ / $ ! \' \" : @ < > * ? + ` | =') {
                 $image->setPath($origPath);
             } else {
-                $image->setPath($this->uploadImageWithSecureName($form, $slugger));
+                $image->setPath($this->imageService->uploadImageWithSecureName($form));
             }
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('image_index');
@@ -179,19 +151,6 @@ class ImageController extends AbstractController
         ]);
     }
 
-    public function deleteImageFromProducts(Image $image, ProductRepository $productRepository)
-    {
-        $products = $productRepository->findByImage($image);
-        foreach ($products as $product) {
-            $paths = $product->readImgPathsArray();
-            array_splice($paths, array_search($image->getPath(), $paths), 1);
-            (count($paths) === 0) ? $product->writeImgPathsFromArray(["no-image.png"]) : $product->writeImgPathsFromArray($paths);
-            $date = new DateTime(null, new DateTimeZone('Europe/Athens'));
-            $product->setUpdatedAt($date);
-            $productRepository->updateImgPath($product);
-        }
-    }
-
     /**
      * @Route("/{id}", name="image_delete", methods={"POST"})
      */
@@ -199,7 +158,7 @@ class ImageController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete' . $image->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $this->deleteImageFromProducts($image, $productRepository);
+            $this->imageService->deleteImageFromProducts($image);
             $filesystem = new Filesystem();
             $gallery = $this->getParameter('gallery_path');
             $filesystem->remove($gallery . $image->getPath());
