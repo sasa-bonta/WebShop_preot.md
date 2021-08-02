@@ -65,8 +65,9 @@ class ImageApiController extends AbstractController
         $image = new Image();
         $form = $this->createForm(ImageType::class, $image, ['csrf_protection' => false]);
         $form->handleRequest($request);
+        $formRequires = ['tags', 'path', 'description'];
+        $this->checkRequestData($formRequires, $data);
         $form->submit($data);
-        // @fixme 02/08/2021 verify if all fields are !== null
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $imageFile */
@@ -112,8 +113,9 @@ class ImageApiController extends AbstractController
         $data = array_replace_recursive($parameters, $files);
         $form = $this->createForm(ImageEditType::class, $image, ['csrf_protection' => false]);
         $form->handleRequest($request);
+        $formRequires = ['tags', 'description'];
+        $this->checkRequestData($formRequires, $data);
         $form->submit($data);
-        // @fixme 02/08/2021 verify if all fields are !== null
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -152,5 +154,18 @@ class ImageApiController extends AbstractController
         $data = ["status" => 200, "description" => "ok", "message" => "the image is deleted"];
         $response->setData($data);
         return $response;
+    }
+
+    /**
+     * @param array $formRequires
+     * @param array $data
+     */
+    public function checkRequestData(array $formRequires, array $data): void
+    {
+        foreach ($formRequires as $required) {
+            if (!array_key_exists($required, $data) || is_null($data[$required]) || $data[$required] === "") {
+                throw new BadRequestHttpException("The parameter " . $required . " is absent");
+            }
+        }
     }
 }
