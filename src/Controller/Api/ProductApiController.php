@@ -1,13 +1,12 @@
 <?php
 
 
-namespace App\Controller;
+namespace App\Controller\Api;
 
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use App\SearchCriteria\ProductAdminSearchCriteria;
-use App\SearchCriteria\SearchCriteria;
 use DateTime;
 use DateTimeZone;
 use Exception;

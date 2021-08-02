@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Controller;
+namespace App\Controller\Api;
 
 use App\Entity\CartItem;
 use App\Repository\CartItemRepository;

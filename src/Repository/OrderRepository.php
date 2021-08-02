@@ -54,11 +54,19 @@ class OrderRepository extends ServiceEntityRepository
     {
         $query = $this->createQueryBuilder('o')
             ->select('count(o.id)');
+
         if ($searchCriteria->getId() !== null) {
             $query = $query
                 ->where('o.id LIKE :id')
                 ->setParameter('id', '%' . $searchCriteria->getId() . '%');
         }
+
+        if ($searchCriteria->getStatus() !== null) {
+            $query = $query
+                ->andWhere('o.status LIKE :status')
+                ->setParameter('status', $searchCriteria->getStatus());
+        }
+
         return $query
             ->getQuery()
             ->getSingleScalarResult();
