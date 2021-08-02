@@ -11,6 +11,7 @@ use App\Repository\ProductRepository;
 use App\SearchCriteria\ImageSearchCriteria;
 use DateTime;
 use DateTimeZone;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
@@ -88,7 +89,7 @@ class ImageApiController extends AbstractController
     /**
      * @Route("/", name="image_api_new", methods={"POST"})
      */
-    public function new(Request $request, SluggerInterface $slugger): Response
+    public function new(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager): JsonResponse
     {
         $response = new JsonResponse();
         $parameters = $request->request->all();
@@ -113,7 +114,6 @@ class ImageApiController extends AbstractController
             $image->setTagsFromArray($image->getTagsArray());
             // Add image
             $image->setPath($this->uploadImageWithSecureName($form, $slugger));
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($image);
             $entityManager->flush();
             $data = ["status" => 201, "description" => "created", "message" => "new image is added"];
@@ -127,7 +127,7 @@ class ImageApiController extends AbstractController
     /**
      * @Route("/{id}", name="image_api_show", methods={"GET"})
      */
-    public function show(Image $image): Response
+    public function show(Image $image): JsonResponse
     {
         return $this->json($image);
     }
@@ -135,29 +135,31 @@ class ImageApiController extends AbstractController
     /**
      * @Route("/{id}/edit", name="image_api_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Image $image, SluggerInterface $slugger): Response
+    public function edit(Request $request, Image $image, SluggerInterface $slugger, EntityManagerInterface $entityManager): JsonResponse
     {
+        $response = new JsonResponse();
         $origPath = $image->getPath();
+        $parameters = $request->request->all();
+        $files = $request->files->all();
+        $data = array_replace_recursive($parameters, $files);
         $form = $this->createForm(ImageEditType::class, $image);
         $form->handleRequest($request);
+        $form->submit($data);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             $errors = $this->checkTags($image);
             if (!empty($errors)) {
-                return $this->render('admin/image/edit.html.twig', [
-                    'errors' => $errors,
-                    'image' => $image,
-                    'form' => $form->createView(),
-                ]);
+                throw new BadRequestHttpException($form->getErrors(true, true)->current()->getMessage());
+
             }
-            // @fixme later with DTO and deserialization
+
             if ($image->getPath() === '# % & { } \\ / $ ! \' \" : @ < > * ? + ` | =') {
                 $image->setPath($origPath);
             } else {
                 $image->setPath($this->uploadImageWithSecureName($form, $slugger));
             }
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager->flush();
             return $this->redirectToRoute('image_index');
         }
 
@@ -183,10 +185,9 @@ class ImageApiController extends AbstractController
     /**
      * @Route("/{id}", name="image_api_delete", methods={"POST"})
      */
-    public function delete(Request $request, Image $image, ProductRepository $productRepository): Response
+    public function delete(Request $request, Image $image, ProductRepository $productRepository, EntityManagerInterface $entityManager): JsonResponse
     {
         if ($this->isCsrfTokenValid('delete' . $image->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
             $this->deleteImageFromProducts($image, $productRepository);
             $filesystem = new Filesystem();
             $gallery = $this->getParameter('gallery_path');
