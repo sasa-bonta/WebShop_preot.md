@@ -6,9 +6,10 @@ namespace App\Controller\Api;
 use App\Entity\CartItem;
 use App\Repository\CartItemRepository;
 use App\Repository\ProductRepository;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -46,11 +47,11 @@ class CartApiController extends AbstractController
 
         if ($cartItemRepository->add($this->getUserId(), $productRepository->findOneBy(["code" => $productCode]))) {
             $data = ["status" => 200, "description" => "ok", "message" => "item added to cart"];
-            $response->setStatusCode(JsonResponse::HTTP_OK);
+            $response->setStatusCode(Response::HTTP_OK);
             $response->setData($data);
         } else {
             $data = ["status" => 200, "description" => "ok", "message" => "item out of stock"];
-            $response->setStatusCode(JsonResponse::HTTP_OK);
+            $response->setStatusCode(Response::HTTP_OK);
             $response->setData($data);
         }
 
@@ -65,7 +66,7 @@ class CartApiController extends AbstractController
         $response = new JsonResponse();
         $cartItemRepository->delete($cartItem);
         $data = ["status" => 200, "description" => "ok", "message" => "item deleted"];
-        $response->setStatusCode(JsonResponse::HTTP_OK);
+        $response->setStatusCode(Response::HTTP_OK);
         $response->setData($data);
 
         return $response;
@@ -80,11 +81,11 @@ class CartApiController extends AbstractController
 
         if ($cartItemRepository->addOneItem($this->getUserId(), $productRepository->findOneBy(['code' => $productCode]))) {
             $data = ["status" => 200, "description" => "ok", "message" => "amount increased"];
-            $response->setStatusCode(JsonResponse::HTTP_OK);
+            $response->setStatusCode(Response::HTTP_OK);
             $response->setData($data);
         } else {
             $data = ["status" => 200, "description" => "ok", "message" => "item out of stock"];
-            $response->setStatusCode(JsonResponse::HTTP_OK);
+            $response->setStatusCode(Response::HTTP_OK);
             $response->setData($data);
         }
 
@@ -100,11 +101,11 @@ class CartApiController extends AbstractController
 
         if ($cartItemRepository->deleteOneItem($productCode, $this->getUserId())) {
             $data = ["status" => 200, "description" => "ok", "message" => "amount decreased"];
-            $response->setStatusCode(JsonResponse::HTTP_OK);
+            $response->setStatusCode(Response::HTTP_OK);
             $response->setData($data);
         } else {
             $data = ["status" => 200, "description" => "ok", "message" => "amount cannot be 0"];
-            $response->setStatusCode(JsonResponse::HTTP_OK);
+            $response->setStatusCode(Response::HTTP_OK);
             $response->setData($data);
         }
 
@@ -124,15 +125,15 @@ class CartApiController extends AbstractController
 
         if ($result === 1) {
             $data = ["status" => 200, "description" => "ok", "message" => "amount introduced correctly"];
-            $response->setStatusCode(JsonResponse::HTTP_OK);
+            $response->setStatusCode(Response::HTTP_OK);
             $response->setData($data);
         } elseif ($result === 0) {
             $data = ["status" => 200, "description" => "ok", "message" => "amount should be greater than 0"];
-            $response->setStatusCode(JsonResponse::HTTP_OK);
+            $response->setStatusCode(Response::HTTP_OK);
             $response->setData($data);
         } else {
             $data = ["status" => 200, "description" => "ok", "message" => "amount is greater than the stock quantity"];
-            $response->setStatusCode(JsonResponse::HTTP_OK);
+            $response->setStatusCode(Response::HTTP_OK);
             $response->setData($data);
         }
 

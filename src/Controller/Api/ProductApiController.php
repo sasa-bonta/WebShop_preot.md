@@ -68,7 +68,7 @@ class ProductApiController extends AbstractController
             $entityManager->persist($product);
             $entityManager->flush();
 
-            $response->setStatusCode(JsonResponse::HTTP_CREATED);
+            $response->setStatusCode(Response::HTTP_CREATED);
             $response->setData($data);
             return $response;
         } else {
@@ -116,7 +116,7 @@ class ProductApiController extends AbstractController
             $entityManager->flush();
 
             $data = ["status" => 200, "description" => "ok", "message" => "the product is updated"];
-            $response->setStatusCode(JsonResponse::HTTP_OK);
+            $response->setStatusCode(Response::HTTP_OK);
             $response->setData($data);
             return $response;
         } else {
@@ -131,7 +131,7 @@ class ProductApiController extends AbstractController
     {
         $response = new JsonResponse();
         $productRepository->delete($product);
-        $response->setStatusCode(JsonResponse::HTTP_OK);
+        $response->setStatusCode(Response::HTTP_OK);
         $data = ["status" => 200, "description" => "ok", "message" => "the product is deleted"];
         $response->setData($data);
         return $response;
